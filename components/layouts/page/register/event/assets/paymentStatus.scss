@@ -1,0 +1,537 @@
+.paymentstatus {
+    background: white;
+
+    .summery-paid {
+        td {
+            text-align: right;
+            padding: 10px;
+            color: #43946C;
+            font-family: Acumin-Pro;
+
+            &:last-child {
+                text-align: left;
+            }
+        }
+    }
+
+    .summery-balance {
+        td {
+            text-align: right;
+            padding: 10px;
+            color: #B80909;
+            font-family: Acumin-Pro;
+
+            &:last-child {
+                text-align: left;
+            }
+        }
+    }
+
+    .save {
+        background: #5C3BCD;
+        color: white;
+        border: 0px;
+        padding: 7px 36px;
+        margin-left: 10px;
+        border-radius: 50px;
+    }
+
+    .tableCaption {
+        padding: 15px 10px;
+        border-top-right-radius: 8px;
+        border-top-left-radius: 8px;
+        background: #5C3BCD;
+        align-items: center;
+        font-family: Acumin-Pro;
+
+        h3 {
+            font-size: 1.2rem;
+            color: white;
+            margin: 0px;
+
+            span {
+                display: block;
+                font-size: .8rem;
+                font-weight: 100;
+                font-family: Acumin;
+            }
+        }
+
+        span {
+            font-size: 1.2rem;
+            color: white;
+            margin: 0px;
+        }
+    }
+
+    table {
+        thead {
+            border-bottom: 1px solid #efefef;
+        }
+
+        th {
+            padding: 8px 10px;
+            border-bottom: 1px solid #DCDCDC;
+            font-family: Acumin-Pro;
+        }
+
+        .datepicker {
+            width: 120px;
+        }
+
+        input,
+        textarea {
+            border: 0px;
+            font-size: 1rem !important;
+            align-items: center;
+            width: 100% !important;
+
+        }
+
+        textarea {
+            height: 40px !important;
+        }
+
+        td {
+            padding: 0px;
+            border-bottom: 1px solid #DCDCDC;
+        }
+
+    }
+}
+
+.paymentStatus-widget {
+    background: white;
+    padding: 15px;
+    display: flex;
+    border-radius: 5px;
+    width: 100%;
+    flex-wrap: wrap;
+    .course-pay {
+        width: 100%;
+        display: flex;
+        gap: 15px;
+        min-width: 270px;
+    }
+
+    .main-body {
+        padding: 20px;
+        border-radius: 10px;
+
+        &.bg-green {
+            background: #43946C;
+        }
+
+        &.bg-red {
+            background: #B80909;
+        }
+
+        &.bg-orange {
+            background: #EF6B0C;
+        }
+
+        color: white;
+
+        h5 {
+            font-family: 'Acumin' !important;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: normal;
+        }
+
+        h4 {
+            color: white;
+            font-size: 1.6rem;
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+
+        p {
+            text-align: left;
+            font-size: .8rem;
+        }
+    }
+
+    .footer-body {
+        p {
+            text-align: left;
+            font-size: .8rem;
+        }
+    }
+
+    .circle-green {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: #43946C;
+    }
+
+    .circle-red {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: #B80909;
+    }
+}
+
+.title-blacked {
+    padding: 5px 0px;
+    color: black;
+    font-family: "Acumin";
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 7px;
+    align-items: center;
+
+    .count {
+        background: black;
+        color: white;
+        border-radius: 50%;
+        display: inline-block;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 28px;
+        height: 28px;
+        font-size: .8rem;
+    }
+
+    border-radius: 7px;
+}
+
+.printbadge-widget {
+    &.Registered {
+        background: #EF6B0C;
+
+        h5,
+        p {
+            color: white;
+        }
+    }
+
+    &.Conformed {
+        background: #43946C;
+
+        h5,
+        p {
+            color: white;
+        }
+    }
+
+    &.Cancelled {
+        background: #B80909;
+
+        h5,
+        p {
+            color: white;
+        }
+    }
+
+    &.Hold {
+        background: #F3B53E;
+    }
+
+    background: white;
+    padding: 25px;
+    border-radius: 5px;
+    min-height: 135px;
+    h5 {
+        font-family: 'Acumin' !important;
+        color: black;
+        font-size: 1.1rem;
+        font-weight: normal;
+    }
+
+    p {
+        text-align: left;
+        color: black;
+        font-size: 1.4rem;
+        font-family: 'Acumin-bold' !important;
+    }
+
+    table {
+        tr {
+            border-bottom: 1px solid #cfcfcf;
+            &:last-child{
+                border-bottom: 0px;
+            }
+            td {
+                padding: 5px 0px;
+                .badge{
+                    padding: 8px 10px;
+                    border-radius: 3px !important;
+                }
+            }
+        }
+    }
+
+    button,
+    a {
+        background: black;
+        color: white;
+        display: block;
+        padding: 10px 15px;
+        border-radius: 15px;
+        text-align: center;
+    }
+}
+
+.summery-registration {
+    display: flex;
+    flex-direction: initial;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: stretch;
+    gap: 20px;
+}
+
+.feedback-link-widget {
+    background: white;
+    width: 100%;
+    padding: 25px 15px;
+    border-radius: 30px;
+
+    a {
+        background: #efefef;
+        padding: 13px 12px;
+        width: 80%;
+        display: inline-block;
+
+    }
+
+    .copy {
+        background: white;
+        padding: 10px;
+        width: 45px;
+        height: 45px;
+        display: inline-block;
+        box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.18);
+        display: inline-flex;
+        justify-content: center;
+        border-radius: 10px;
+        align-items: center;
+        margin-left: 10px;
+    }
+}
+
+.seatConformationprint {
+    button {
+
+        background: #43946C;
+        color: white;
+        width: 100%;
+        border: 0px;
+        padding: 15px 10px;
+        border-radius: 10px;
+    }
+
+}
+
+.certificatePrints {
+    button {
+
+        background: #F3B53E;
+        color: black;
+        width: 100%;
+        border: 0px;
+        padding: 15px 10px;
+        border-radius: 10px;
+    }
+
+}
+
+.bg-currency {
+    background: #5C3BCD !important;
+}
+.qrcodeReader{
+    width: 100%;
+}
+.attendance {
+    background: white;
+    border-radius: 5px;
+    padding: 10px;
+    height: 600px;
+    overflow: auto;
+  
+    .attendancetitle {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        position: relative;
+    }
+
+    .totalHours {
+        .cirle-total {
+            width: 131px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: end;
+            position: absolute;
+            right: 0;
+            z-index: 999;
+            text-align: center;
+
+            .hours {
+                font-size: 2rem;
+                display: block;
+                width: 100%;
+                line-height: 1;
+                font-weight: bold;
+                text-align: right;
+            }
+
+            .hours-holder {
+                width: 100%;
+            }
+
+            .hoursText {
+                display: block;
+                text-align: right;
+            }
+        }
+    }
+
+    ul {
+        margin-top: 40px;
+        padding: 0px;
+        list-style: none;
+
+        h5 {
+            width: 100%;
+            border-bottom: 1px solid black;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+        }
+    }
+
+    table {
+        width: 100%;
+
+        tr {
+            border-bottom: 1px solid #ccc !important;
+
+            td {
+                padding: 5px 0px;
+
+                .checkin {
+                    background: black;
+                    color: white;
+                    padding: 6px 15px;
+                    display: inline-block;
+                    border-radius: 3px;
+                }
+
+                .checkout {
+                    background: black;
+                    color: white;
+                    padding: 6px 15px;
+                    display: inline-block;
+                    border-radius: 3px;
+                }
+            }
+        }
+    }
+}
+
+.workshop-payment {
+    list-style: none;
+    margin: 0px;
+    margin-top: 10px;
+    padding: 0px;
+    display: block;
+    height: 250px;
+    align-items: baseline;
+    overflow: auto;
+    position: relative;
+
+    .title {
+        padding-left: 65px;
+        display: inline-block;
+        height: 53px;
+        text-overflow: ellipsis;
+    }
+
+    li {
+        width: 100%;
+        margin-bottom: 10px;
+        position: relative;
+    }
+
+    .num {
+        position: absolute;
+        width: 35px;
+        height: 35px;
+        justify-content: center;
+        background: black;
+        font-family: 'Acumin-bold';
+        border-radius: 8px;
+        color: white;
+        display: flex;
+        align-items: center;
+        left: 15px;
+        top: 15px;
+    }
+
+    .summery {
+        width: 100%;
+
+        span {
+            display: inline-block;
+        }
+
+        .balance {
+            span {
+                color: #B80909;
+            }
+        }
+
+        .balance,
+        .paid {
+            color: #898989;
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 2px;
+            line-height: 1;
+        }
+    }
+
+    .heading {
+        span {
+            font-weight: bold;
+        }
+    }
+
+    li {
+        border: 1px solid #cfcfcf;
+        display: block;
+        border-radius: 5px;
+        background: white;
+        width: 100%;
+        gap: 10px;
+        align-items: center;
+        padding: 13px;
+        justify-content: space-between;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .iq-navbar{
+        display: none;
+    }
+    .backButton-innerpage{
+        display: none;
+    }
+    .input-validate{
+        width: 100%;
+    }
+}
+.searcDelegate{
+    background: black;
+    border: 0px;
+    border-radius: 30px;
+    color: white;
+    padding: 10px 30px;
+}

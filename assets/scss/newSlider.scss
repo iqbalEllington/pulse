@@ -1,0 +1,76 @@
+.el-dashbaord {
+    background: #1E1E20;
+    display: flex;
+    min-width: 100%;
+    min-height: 100vh;
+}
+.navbar-brand{
+    margin: auto;
+}
+.sidebar-black {
+    .my-scrollbar {
+        padding: 0px;
+    }
+
+    background: #000;
+
+    .logo-title {
+        color: white !important;
+    }
+    .sidebar-header {
+        border: 0px !important;
+        margin-bottom: 40px;
+    }
+
+    .menu-item {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        justify-content: center;
+
+        span {
+            display: block;
+            width: 100%;
+            text-align: center;
+            font-size: .8rem;
+            line-height: 1;
+            margin-bottom: 20px;
+        }
+
+        a {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        svg {
+            font-size: 35px;
+            padding-bottom: 10px;
+            color: white;
+        }
+
+        &.marketing {
+
+            span,
+            svg {
+                color: #A9DFD8 !important;
+            }
+        }
+
+        &.property {
+
+            span,
+            svg {
+                color: #9E856F !important;
+            }
+        }
+        &.leaders {
+
+            span,
+            svg {
+                color: #FF9191 !important;
+            }
+        }
+    }
+}

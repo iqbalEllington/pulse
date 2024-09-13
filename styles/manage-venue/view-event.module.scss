@@ -1,0 +1,83 @@
+.A {
+  background-color: #1f7c9d;
+  font-size: 35px;
+  text-align: center;
+  padding: 1rem;
+  color: black;
+}
+.B {
+  background-color: #2d4c4c;
+  font-size: 35px;
+  text-align: center;
+  padding: 1rem;
+  color: black;
+}
+.C {
+  background-color: #2d3835;
+  font-size: 35px;
+  text-align: center;
+  padding: 1rem;
+  color: black;
+}
+.D {
+  background-color: #245648;
+  font-size: 35px;
+  text-align: center;
+  padding: 1rem;
+  color: black;
+}
+
+.Box {
+  display: grid;
+  grid-template-columns: 25% 25%;
+}
+
+// /////////////
+
+.Boxtwo {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.COLOR-A {
+  background-color: #1f7c9d;
+  font-size: 35px;
+  text-align: center;
+  padding: 1rem;
+  color: black;
+}
+.COLOR-B {
+  background-color: #2d4c4c;
+  font-size: 35px;
+  text-align: center;
+  padding: 1rem;
+  color: black;
+}
+.COLOR-C {
+  background-color: #2d3835;
+  font-size: 35px;
+  text-align: center;
+  padding: 1rem;
+  color: black;
+}
+.COLOR-D {
+  background-color: #245648;
+  font-size: 35px;
+  text-align: center;
+  padding: 1rem;
+  color: black;
+}
+.COLOR-E {
+  background-color: rgb(98, 9, 133);
+  font-size: 35px;
+  text-align: center;
+  padding: 1rem;
+  color: black;
+}
+.COLOR-F {
+  background-color: red;
+  font-size: 35px;
+  text-align: center;
+  padding: 1rem;
+  color: black;
+}

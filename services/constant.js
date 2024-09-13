@@ -1,0 +1,14 @@
+export const SERVER_SALES="Sale";
+export const SERVER_LETTINGS="For letting - Live";
+export const WEBSITE_SALES="sales";
+export const WEBSITE_LETTINGS="lettings";
+export const IMAGEURL_TEMP="https://property.allsoppandallsopp.com/public/temp/";
+export const IMAGEURL_MID="https://property.allsoppandallsopp.com/public/mid/";
+export const IMAGEURL_LARGE="https://property.allsoppandallsopp.com/public/temp/";
+export const DATE_ASC='date-asc';
+export const DATE_DSC='date-desc';
+export const PRICE_ASC='price-asc';
+export const PRICE_DSC='price-desc';
+export const BED_ASC='bed-asc';
+export const BED_DSC='bed-desc';
+export const DEFAULT_SEARCH_COUNT=21

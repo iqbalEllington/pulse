@@ -1,0 +1,199 @@
+footer {
+  background-color: $default_background;
+  padding: 60px 0 30px;
+  .footer-bottom{
+    p{
+      color: $primary_color;
+      font-weight: 100;
+      font-size: .8rem;
+    }
+  }
+  .container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    .first_content {
+      width: 350px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      .social_media {
+        display: flex;
+        justify-content: flex-start;
+        a{
+          margin-bottom: 20px;
+          &:hover{
+            text-decoration: none !important;
+          }
+        }
+        i {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 50px;
+          height: 50px;
+          margin-right: 10px;
+          border: $primary_border;
+          border-radius: 50%;
+          background-color: transparent;
+          color: $primary_color;
+          font-size: 21px;
+          transition: $transition;
+          &:hover {
+            border: $primary_border;
+            background-color: $primary_background;
+            color: $white_color;
+          }
+        }
+      }
+      .terms_conditions {
+        margin-top: 30px;
+        p {
+          font-size: 13px;
+          font-weight: 100;
+          margin: 0;
+        }
+      }
+    }
+    .accordion-item{
+      background: transparent;
+    }
+    .accordion-body{
+      padding: 0px !important;
+    }
+    .uk-accordion-title{
+      background-color: transparent !important;
+    }
+    .last_content {
+      > ul {
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        li {
+          margin-top: 0;
+          margin-left: 50px;
+          a.uk-accordion-title {
+            color: $primary_color;
+            font-size: 1rem;
+            font-weight: 400;
+            // pointer-events: none;
+          }
+          .uk-accordion-title::before {
+            display: none;
+          }
+          .uk-accordion-content {
+            margin-top: 5px;
+            > ul {
+              display: flex;
+              flex-direction: column;
+              align-items: flex-start;
+              justify-content: flex-start;
+              li {
+                font-weight: 100;
+                font-size: .9rem;
+                margin-left: 0;
+                margin-bottom: 5px;
+                a{
+                color: $primary_color;
+                transition: .3s all ease-in;
+                transform: .3s all ease-in;
+                &:hover{
+                  font-weight: 300;
+                }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@media only screen and (min-width: 975px) {
+  footer .container .last_content > ul li .uk-accordion-content {
+    display: flow-root !important;
+  }
+  
+}
+@media only screen and (max-width: 1200px) {
+  footer .container .last_content > ul li{
+    margin-left: 30px;
+  }
+}
+@media only screen and (max-width: 974px) {
+  footer .container {
+    flex-direction: column-reverse;
+  }
+  footer .container .last_content {
+    margin-bottom: 50px;
+    width: 100%;
+    > ul {
+      width: 100%;
+      li {
+        margin-left: 0;
+        margin-right: 30px;
+        // width: 30%;
+      }
+    }
+  }
+  footer .first_content {
+    max-width: 100%;
+  }
+  footer .container .last_content > ul li a {
+    pointer-events: unset;
+  }
+  footer .uk-accordion-title::before {
+    display: block !important;
+  }
+  footer .container .first_content .social_media
+  {
+    
+    flex-wrap: wrap;
+    align-items: center;
+    i {
+      width: 36px;
+      height: 37px;
+      font-size: 14px;
+    }
+  } 
+}
+@media only screen and (max-width: 600px) {
+  footer{
+    padding: 30px 0;
+  }
+  footer .container .last_content {
+    margin-bottom: 20px;
+  }
+  footer{
+    .first_content{
+      margin-bottom: 0px;
+    }
+  }
+  footer .container .last_content ul {
+    flex-direction: column;
+    width: 100%;
+  }
+  footer .container .last_content > ul li {
+    width: 100%;
+    margin-right: 0;
+  }
+  footer .container .first_content .terms_conditions{
+    margin-top: 0px;
+  }
+}
+@media only screen and (min-width: 600px) {
+  footer{
+    .accordion-button{
+      &::after{
+        display: none !important;
+      }
+    }
+    .collapse:not(.show){
+      display: block;
+    }
+    .first_content{
+      margin: 0px;
+    }
+  }
+}

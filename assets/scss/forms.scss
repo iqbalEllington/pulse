@@ -1,0 +1,76 @@
+.event-form {
+    label {
+        display: block;
+        color: black;
+        font-size: 1.1rem;
+    }
+
+    .z-index {
+        z-index: 999;
+    }
+
+    input {
+        padding: 10px 15px;
+        height: 45px;
+        display: block;
+        width: 100%;
+        border: 1px solid black;
+        border-radius: 8px;
+        &.error{
+            border: 2px soliD #BE1111;
+        }
+    }
+
+    .no-padding-input {
+        input {
+            height: 30px;
+
+        }
+    }
+
+}
+
+.intl-tel-input {
+    width: 100%;
+}
+
+textarea {
+    width: 100%;
+    padding: 10px 10px !important;
+    height: 70px !important;
+    border-radius: 10px !important;
+    border: 1px solid $body-bg-black;
+
+    &.error {
+        border: 2px soliD #BE1111;
+    }
+}
+
+.table-payment {
+    table {
+        padding: 15px;
+
+        tr {
+
+            td,
+            th {
+                padding: 10px !important;
+                border-right: 1px solid #efefef;
+            }
+
+            height: 60px;
+            border-bottom: 1px solid #efefef;
+        }
+
+        border: 1px solid #efefef;
+        width: 100%;
+    }
+}
+.errorselect{
+    border: 2px solid #BE1111;
+}
+.eroorField {
+    input {
+        border: 3px dashed #a71616 !important;
+    }
+  }

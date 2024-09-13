@@ -1,0 +1,39 @@
+.absolute-right {
+  position: fixed;
+  height: 100%;
+  right: 0;
+  bottom: 0;
+}
+.map-switcher {
+  position: fixed;
+  right: 20px;
+  list-style: none;
+  top: 140px;
+  width: 100px;
+  li {
+    display: block;
+    width: 100%;
+    float: left;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 10px;
+    margin-bottom: 2px;
+  }
+}
+
+.get-direction{
+  position: absolute;
+  background: #fff;
+  z-index: 999;
+  left: 15px;
+  top: 10px;
+  border-radius: 8px;
+  text-align: center;
+  padding: 3px 18px;
+  line-height: 40px;
+  color: $primary_color;
+  text-decoration: none;
+  &:hover{
+    text-decoration: none;
+  }
+}

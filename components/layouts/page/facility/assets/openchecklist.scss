@@ -1,0 +1,348 @@
+.openCheckList {
+    .bg-l-blue {
+        background: #eaf1fb;
+        color: #2B4160;
+    }
+
+    .bg-l-violet {
+        background: #bbbcea;
+        color: #373065;
+    }
+
+    .bg-l-violet-dk {
+        background: #373065;
+        color: #fff;
+    }
+
+    .bg-l-yellow {
+        background: #FFF5EE;
+        color: #E59E60;
+    }
+
+    .bg-black {
+        background: #1A1A1A;
+        color: #fff;
+    }
+
+    .bg-green {
+        background: #1E8169 !important;
+    }
+
+    .ml-5 {
+        margin-left: 5px;
+    }
+
+    .labelstyle {
+        padding: 6px 8px;
+        border-radius: 4px;
+        font-weight: 600;
+    }
+
+    .bg-at-red {
+        background: #7C001F;
+        color: white;
+    }
+
+    .atachments {
+        input {
+            display: none;
+        }
+
+        align-items: center;
+        padding: 8px 16px;
+        border: 1px solid #7C001F;
+        color: white;
+        margin-left: 0px;
+        cursor: pointer;
+        border-radius: 4px;
+        width: 190px;
+        display: inline-block;
+    }
+
+    .bottom-closing-table {
+        list-style: none;
+        display: block;
+
+        li {
+            margin-top: 10px;
+
+            textarea {
+                height: 100px;
+                width: 100%;
+            }
+        }
+    }
+
+    .modernchecklist {
+        display: block;
+        position: relative;
+        padding-left: 35px;
+        cursor: pointer;
+        font-size: 22px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    /* Hide the browser's default checkbox */
+    .modernchecklist input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+    }
+
+    /* Create a custom checkbox */
+    .checkmark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 25px;
+        width: 25px;
+        background-color: #eee;
+    }
+
+    /* On mouse-over, add a grey background color */
+    .modernchecklist:hover input~.checkmark {
+        background-color: #ccc;
+    }
+
+    /* When the checkbox is checked, add a blue background */
+    .modernchecklist input:checked~.checkmark {
+        background-color: #1E8169;
+    }
+
+    textarea {
+        resize: none;
+        border-radius: 4px;
+        padding: 5px 10px;
+        height: 40px;
+    }
+
+    /* Create the checkmark/indicator (hidden when not checked) */
+    .checkmark:after {
+        content: "";
+        position: absolute;
+        display: none;
+    }
+
+    /* Show the checkmark when checked */
+    .modernchecklist input:checked~.checkmark:after {
+        display: block;
+    }
+
+    /* Style the checkmark/indicator */
+    .modernchecklist .checkmark:after {
+        left: 9px;
+        top: 3px;
+        width: 8px;
+        height: 15px;
+        border: solid white;
+        border-width: 0 3px 3px 0;
+        transform: rotate(45deg);
+    }
+
+    .datepicker-input {
+        padding: 6px 20px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+    }
+
+    .filterbar {
+        display: block;
+        margin-top: 20px;
+        display: flex;
+        flex-wrap: nowrap;
+
+        .filterSearch {
+            border: 1px solid #ccc;
+            background: white;
+            border-radius: 5px;
+            width: 250px;
+            position: relative;
+
+            .svg {
+                background: white;
+                position: absolute;
+                width: 39px;
+                height: 29px;
+                padding: 7px;
+                vertical-align: middle;
+                margin-left: 6px;
+                float: left;
+                padding-top: 0px;
+                right: 3px;
+                top: 7px;
+                color: #7C001F;
+            }
+        }
+
+        .searchbar {
+            border: 1px solid #ccc;
+            background: white;
+            border-radius: 5px;
+            overflow: hidden;
+
+            svg {
+                height: 35px;
+                width: 18px;
+                margin-left: 6px;
+                float: left;
+                padding-top: 0px;
+                color: $blue;
+            }
+
+            input {
+                width: 190px;
+                border: 0px;
+                height: 35px;
+                padding: 3px 13px;
+            }
+        }
+
+        .filteropener {
+
+            cursor: pointer;
+            margin-left: 10px;
+            background: white;
+            border: 1px solid #ccc;
+            width: 86px;
+            text-align: center;
+            border-radius: 6px;
+            height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: $blue;
+
+            svg {
+                margin-right: 5px;
+            }
+        }
+    }
+
+    .filter {
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: flex-end;
+        justify-content: flex-end;
+
+        &>div {
+            width: auto;
+
+            .form-group {
+                min-width: 170px
+            }
+        }
+    }
+
+    .card-body {
+        padding-top: 0px;
+        padding-left: 10px;
+        padding-right: 10px;
+
+        table {
+            thead {
+                tr {
+                    background: transparent;
+                    border-bottom: 1px solid #ccc !important;
+
+                    th {
+                        background: #fff;
+                        border-bottom-color: #ccc !important;
+                        cursor: pointer;
+                    }
+                }
+
+                background: transparent;
+                border-bottom: 1px solid #ccc;
+            }
+
+            td {
+                white-space: break-spaces;
+                color: black;
+
+                .flex-btns {
+                    display: flex;
+                    flex-wrap: wrap;
+                }
+
+                .good {
+                    background: rgba(234, 251, 231);
+                    padding: 4px 8px;
+                    border-radius: 4px;
+                    color: rgb(47, 104, 70);
+                    font-weight: 600;
+                }
+
+                .notgood {
+                    background: #dc4f70;
+                    padding: 4px 8px;
+                    border-radius: 4px;
+                    color: #db075f;
+                    font-weight: 600;
+                }
+            }
+        }
+    }
+}
+
+.backButton-innerpage {
+    border: 0px;
+    color: black;
+    background: transparent;
+
+    svg {
+        color: black;
+    }
+}
+
+.page-header {
+
+    .page-title {
+        font-size: 1.8rem;
+        margin-top: 10px;
+        font-weight: bold;
+        margin-bottom: 0px;
+        text-transform: capitalize;
+    }
+
+    .create-button {
+        align-items: flex-end;
+        display: flex;
+        justify-content: flex-end;
+
+        a,
+        button {
+
+            background: $body-bg-black;
+            -webkit-box-align: center;
+            align-items: center;
+            padding: 13px 25px;
+            box-shadow: 10px 10px 51px -15px rgba(189, 189, 189, 0.77);
+            -webkit-box-shadow: 10px 10px 51px -15px rgba(189, 189, 189, 0.77);
+            -moz-box-shadow: 10px 10px 51px -15px rgba(189, 189, 189, 0.77);
+            border: 0px !important;
+            color: white;
+            float: right;
+            cursor: pointer;
+            border-radius: 26px;
+            margin-left: 10px;
+            transition: all .5s;
+            svg {
+                margin-right: 5px;
+            }
+
+            &.success {
+                background: #009B4D;
+                position: fixed;
+                z-index: 999;
+                box-shadow: -2px 4px 9px -3px rgba(98, 98, 98, 0.56);
+                -webkit-box-shadow: -2px 4px 9px -3px rgba(98, 98, 98, 0.56);
+                -moz-box-shadow: -2px 4px 9px -3px rgba(98, 98, 98, 0.56);
+            }
+        }
+    }
+}

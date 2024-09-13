@@ -1,0 +1,199 @@
+@import "./contact-details.scss";
+.offices {
+  .title {
+    text-align: center;
+    width: 750px;
+    max-width: 100%;
+    margin: 30px auto;
+    span {
+      font-weight: 400;
+      font-size: 18px;
+      color: $gray;
+    }
+    h3 {
+      font-weight: 500;
+      font-size: 40px;
+      color: $primary_color;
+      margin: 15px auto 0;
+    }
+  }
+  .offices_content {
+    margin-top: 30px;
+    margin-bottom: 50px;
+    .office_item {
+      display: flex;
+      justify-content: flex-start;
+      align-items: flex-start;
+      padding: 30px 0;
+      gap: 0 30px;
+      border-bottom: 1px solid #e2e5ea;
+      height: auto;
+      &:first-child {
+        border-top: 1px solid #e2e5ea;
+      }
+      .office_name {
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        height: 100%;
+        width: 35%;
+        img {
+          height: 100%;
+          width: 96px;
+          margin-right: 22px;
+          border-radius: 8px;
+        }
+        a {
+          color: $primary_color;
+          font-size: 24px;
+          font-family: "Lexend Deca";
+          font-weight: 400;
+          width: 100%;
+          line-height: 1.2;
+          display: block;
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+        span {
+          color: $primary_color;
+          font-size: 14px;
+          font-weight: 100;
+          font-family: "Lexend Deca";
+        }
+      }
+      .office_adress {
+        height: 100%;
+        width: 35%;
+        h4 {
+          font-family: "Lexend Deca";
+          font-weight: 400;
+          font-size: 16px;
+          color: $primary_color;
+          margin: 0;
+        }
+        p {
+          color: $primary_color;
+          font-size: 14px;
+          font-weight: 100;
+          font-family: "Lexend Deca";
+          margin: 0;
+        }
+      }
+      .office_phone {
+        height: 100%;
+        width: 20%;
+        p,
+        h4 {
+          font-family: "Lexend Deca";
+          font-weight: 400;
+          font-size: 16px;
+          color: $primary_color;
+          margin: 0;
+        }
+        p {
+          font-weight: 100;
+        }
+      }
+      a{
+        width: 15%;
+      }
+      .view_office {
+        width: 100%;
+        padding: 12px;
+        border-color: $primary_color;
+      }
+    }
+  }
+}
+@media only screen and (min-width: 975px) and (max-width: 1300px) {
+  .offices .offices_content .office_item a{
+    width: 25%;
+  }
+}
+@media only screen and (min-width: 601px) and (max-width: 975px) {
+  .offices .title span {
+    font-size: 18px;
+  }
+  .offices .title h3 {
+    font-size: 32px;
+  }
+  .offices .offices_content .office_item {
+    justify-content: space-between;
+    .office_phone,
+    .office_adress {
+      display: none;
+    }
+    .office_name {
+      width: max-content;
+    }
+    .view_office {
+      width: max-content;
+      padding: 12px 35px;
+    }
+  }
+  .offices .offices_content .office_item a{
+    width: 25%;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .offices .offices_content .office_item a{
+    width: 100%;
+  }
+  .offices {
+    padding-bottom: 0;
+    .offices_content {
+      margin-bottom: 0;
+      .office_item:last-child {
+        border-bottom: 0;
+      }
+    }
+  }
+
+  .offices .title span {
+    font-size: 14px;
+  }
+  .offices .title h3 {
+    font-size: 20px;
+  }
+  .offices .offices_content .office_item {
+    flex-direction: column;
+    height: max-content;
+    .office_adress,
+    .office_phone,
+    .office_name {
+      flex-direction: column;
+      width: 100%;
+    }
+    .view_office {
+      width: 100%;
+      text-align: center;
+    }
+    .office_name {
+      img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+      }
+      div {
+        margin-block: 20px;
+        a {
+          font-size: 16px;
+        }
+        span {
+          font-size: 12px;
+        }
+      }
+    }
+    .office_phone,
+    .office_adress {
+      margin-bottom: 20px;
+      h4 {
+        font-size: 14px;
+      }
+      p {
+        font-size: 12px;
+      }
+    }
+  }
+}

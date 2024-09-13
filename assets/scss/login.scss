@@ -1,0 +1,155 @@
+.login-content {
+
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    input:-webkit-autofill:active {
+        -webkit-box-shadow: 0 0 0 30px black inset !important;
+        color: white !important;
+        -webkit-text-fill-color: white;
+    }
+
+    .invalid {
+        padding-top: 20px;
+        color: #A70A2F;
+    }
+
+    .min-h-500 {
+        min-height: 700px;
+    }
+
+    a {
+        color: black;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    .login-form {
+        align-items: center;
+        display: flex;
+        justify-content: center;
+    }
+
+    label {
+        font-family: Acumin-Pro;
+    }
+
+    button {
+        border-radius: 25px;
+    }
+
+    .form-control {
+        border: 1px solid #1aa053;
+        border-radius: 20px;
+        height: 40px;
+    }
+
+    .form-control:focus {
+        border-color: #1aa053;
+    }
+
+    .bottom-banner {
+        position: absolute;
+        bottom: 0px;
+        background: linear-gradient(180deg, rgba(217, 217, 217, 0.00) 0%, rgba(217, 217, 217, 0.80) 51.04%, #D9D9D9 100%);
+        width: 100%;
+        left: 0;
+        height: 240px;
+        text-align: left;
+
+        h1 {
+            font-size: 2rem;
+            text-align: left;
+            width: 100%;
+        }
+
+        p {
+            font-size: 1rem;
+            text-align: left;
+            width: 100%;
+        }
+    }
+
+    .gradient-main {
+        width: 105%;
+        height: auto !important;
+    }
+
+    .auth-card {
+        display: flex;
+        align-items: center;
+
+        h3 {
+            font-size: 18px;
+        }
+
+        img {
+            width: 180px;
+            display: inherit;
+        }
+
+
+        /* For browsers using ::autofill */
+        input::autofill {
+            background-color: black !important;
+            background: black !important;
+            color: white !important;
+            background-clip: content-box;
+        }
+      
+        .card-body {
+            width: 490px;
+            min-width: 80%;
+            background: transparent;
+            // border: 1px solid #efefef;
+            border-radius: 30px;
+            color: white;
+            text-align: left;
+            // background: #181818;
+            // padding: 70px;
+            // border: 1px solid #717171;
+
+            p {
+                text-align: left;
+                color: #9E856F;
+                font-size: 14px;
+            }
+        }
+        .el-login{
+            border-radius: 8px;
+            padding-top: 8px;
+            padding-bottom: 8px;
+            color: #111 !important;
+        }
+        form {
+            input[type=email],
+            input[type=password] {
+                background: #111111 !important;
+                border: 1px solid #303033 !important;
+                height: 50px;
+                border-radius: 5px;
+                color: white !important;
+            }
+        }
+
+    }
+
+    .login-footer {
+        border-top: 1px solid #efefef;
+        padding-top: 15px;
+    }
+
+    .card-transparent {
+        background: transparent !important;
+    }
+
+    .bg-lg-gray {
+        background: #f4f6f9;
+    }
+
+    .bg-lg-black {
+        background: #111111;
+    }
+}
