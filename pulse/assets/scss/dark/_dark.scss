@@ -1,0 +1,16 @@
+// Main
+
+$body-bg-black: #151824;
+$card-bg: #222738;
+$border-color: #30384f;
+$secondary: #5c6ca5;
+$dark: #60658a;
+$menu-color: #d7dbdf;
+
+$theme-colors: map-merge($theme-colors,
+    ("secondary": $secondary,
+    ));
+
+$alert-bg-scale: 60%;
+$alert-border-scale: 0%;
+$alert-color-scale: 80%;

@@ -1,0 +1,184 @@
+.nav-tabs .nav-link.active {
+  background: transparent !important;
+  border-bottom: 1px solid $body-color !important;
+  border-radius: 0 !important;
+}
+.nav-tabs .nav-link {
+  color: #222 !important;
+}
+
+.invalid {
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 0.816em;
+  color: #c03221;
+}
+
+.manage-form {
+  background: #fff;
+  height: 50vh;
+  padding: 20px;
+  overflow: auto;
+  border-radius: 8px;
+  box-shadow: 0px 0px 5px 2px #708fc230;
+}
+.manage-form .nav.nav-pills {
+  border-radius: 8px;
+}
+.content-inner .nav-pills .nav-link.active,
+.content-inner .nav-pills .show > .nav-link {
+  border-radius: 5px !important;
+  background: transparent;
+  color: $body-color;
+}
+.content-inner .accordion-body {
+  background-color: #fff;
+}
+.content-inner .accordion-item {
+  background: transparent;
+}
+.content-inner .nav-pills .nav-link {
+  color: #222;
+}
+.content-inner .accordion-button:not(.collapsed) {
+  color: #000 !important;
+}
+
+.content-inner .accordion-body {
+  color: #777;
+}
+.create_venue .form-group {
+  padding-bottom: 7px;
+}
+.side-content ul {
+  list-style: none;
+  border: 1px solid #eee;
+  padding: 20px;
+}
+.side-content ul li {
+  padding: 10px;
+  border: 1px solid #eee;
+  margin-bottom: 10px;
+}
+.right-side {
+  padding: 0px 0;
+  border-right: 1px solid #eee;
+  border-top: 1px solid #eee;
+  border-left: 1px solid #eee;
+}
+.right-side ul {
+  padding: 0;
+  list-style: none;
+}
+.right-side ul li {
+  border-bottom: 1px solid #eee;
+  padding: 10px 15px;
+  margin-bottom: 10px;
+}
+
+.right-side ul li h2 {
+  font-size: 16px;
+  width: 33%;
+  margin: 0;
+  color: #777;
+}
+input:focus {
+  outline: none;
+}
+
+.right-side ul li p {
+  font-size: 14px;
+  width: 67%;
+  margin: 0;
+  font-weight: 400;
+}
+.title {
+  font-size: 24px;
+}
+
+.right-side ul li p {
+  font-size: 16px;
+  width: 72%;
+  margin: 0;
+  color: #777;
+}
+
+.right-side ul li p span {
+  background: #eee;
+  padding: 4px 8px;
+  border-radius: 8px;
+  margin: 4px 5px;
+  color: #222;
+  display: inline-block;
+}
+
+button.view-maps {
+  background: #3a57e9;
+  color: #fff;
+  border: none;
+  padding: 3px 10px;
+  border-radius: 8px;
+}
+button.view-maps.no {
+  background: transparent;
+  border: 1px solid #3a57e9;
+  color: #3a57e9;
+}
+
+.term-up ul {
+  padding: 0;
+  list-style: none;
+  display: flex;
+}
+.term-up ul li {
+  width: 33%;
+}
+.term-up ul li span {
+  background: #ccc;
+  padding: 5px 10px;
+  color: #777;
+  border-radius: 10px;
+}
+.closer-day {
+  display: flex;
+  justify-content: space-between;
+}
+.layouts {
+  border: 1px solid #333;
+  width: 20px;
+  height: 20px;
+  position: relative;
+}
+span.leyout-span {
+  width: 8px;
+  height: 8px;
+  background: #000;
+  display: inline-block;
+  position: absolute;
+}
+span.bg-grey {
+  background: #ccc;
+  padding: 4px 5px;
+  border-radius: 5px;
+  color: #333;
+  margin-right: 5px;
+}
+
+.fc .fc-scrollgrid-section,
+.fc .fc-scrollgrid-section table,
+.fc .fc-scrollgrid-section > td {
+  width: 100% !important;
+}
+.showa-form {
+  align-items: center;
+}
+.showa-form input {
+  max-width: 100px;
+  margin: 0 10px;
+}
+.table-checks td {
+  border: 1px solid #eee;
+}
+td.activecheck {
+  background: #3857e763 !important;
+}

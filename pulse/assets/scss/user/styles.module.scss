@@ -1,0 +1,16 @@
+.search ul {
+  list-style: none;
+  border: 1px solid #eee;
+  padding: 8px 0;
+  border-radius: 5px;
+  height: 200px;
+  overflow: auto;
+}
+.search ul li {
+  border-bottom: 1px solid #eee;
+  padding: 6px;
+  margin-bottom: 5px;
+}
+.search ul li:last-child {
+  border-bottom: 0;
+}

@@ -1,0 +1,16 @@
+.tree {
+    color: var(--bs-primary-shade-80);
+
+    .tree-node-group {
+        list-style: none;
+
+        .tree-leaf-list-item {
+            list-style: circle;
+            margin-left: 1.5rem;
+        }
+
+        .tree-node {
+            margin-left: unset !important;
+        }
+    }
+}

@@ -1,0 +1,273 @@
+.form-add-event {
+    .emailtemplatesselected {
+        .selected {
+            background: #009B4D20;
+            padding: 10px 15px;
+            border: 1px solid #009B4D;
+            margin-top: 10px;
+            float: left;
+        }
+    }
+
+    .feestructure {
+        display: none;
+
+        &.active {
+            display: block;
+        }
+    }
+
+    .react-datepicker-wrapper {
+        width: 100%;
+    }
+
+    .date-holder {
+        border: 1px solid black;
+        border-radius: 12px;
+        overflow: auto;
+    }
+
+    .delete {
+        color: #A70A2F !important;
+        display: block;
+        border-bottom: 1px solid #A70A2F;
+    }
+
+    font-family: Acumin;
+
+    textarea {
+        width: 90%;
+        padding-left: 15px !important;
+        font-size: 1.2rem !important;
+    }
+
+    .d-center {
+        align-items: center;
+    }
+
+    .radio-button {
+        label {
+            input {
+                width: 60px;
+            }
+
+            display: flex;
+            font-size: 1.2rem;
+            justify-content: left;
+            align-items: center;
+
+            span {
+                display: block;
+                // width: 120px;
+            }
+        }
+
+    }
+
+    .eventype {
+        display: flex;
+        gap: 25px;
+
+        .form-check {
+            padding-left: 0px;
+
+            input {
+                display: none;
+            }
+
+            label {
+                width: 187px;
+                height: 145px;
+                border: 1px solid #474747;
+                border-radius: 25px;
+                text-align: left;
+                font-size: 1.2rem;
+                color: black;
+                padding: 21px;
+                padding-top: 23px;
+                line-height: 1.2;
+                display: flex;
+                flex-wrap: wrap;
+                align-items: self-end;
+
+                span {
+                    width: 100%;
+                    display: block;
+                }
+
+                svg {
+                    font-size: 3.4rem;
+                    clear: both;
+                    text-align: left;
+                    display: flex;
+                    padding-bottom: 10px;
+                }
+            }
+
+            .form-check-input-type:checked+.form-check-label-type {
+                border: 2px solid black;
+            }
+        }
+    }
+
+    .feebox {
+        list-style: none;
+        padding: 0px;
+        margin: 0px;
+        width: 90%;
+        // border: 1px solid black;
+
+        .addmore {
+            border: 0px;
+            background: transparent;
+            border-bottom: 1px solid black;
+            margin-top: 20px;
+        }
+
+        li {
+            .feestructure {
+                border-top: 1px solid black;
+                background: #F6F6F4;
+                padding: 20px 20px;
+
+                table {
+                    width: 100%;
+
+                    tr {
+                        th {
+                            border: 1px solid black;
+                            padding: 10px;
+                        }
+
+                        td {
+                            border: 0px;
+                            padding: 0px;
+
+                            input {
+
+                                border: 1px solid black;
+                                padding: 15px;
+                                border-radius: 0px;
+                            }
+                        }
+                    }
+                }
+            }
+
+            &.flex-wrap {
+                gap: 0px;
+                width: 100%;
+                display: flex;
+                flex: 1;
+                align-items: center;
+            }
+
+            margin-bottom: 10px;
+
+            border: 1px solid black;
+            display: flex;
+            gap: 20px;
+
+            .dropdown-basic {
+                button {
+                    border: 0px !important;
+                }
+            }
+
+            .form-group {
+
+                height: 47px;
+
+                input {
+                    border: 0px;
+                }
+
+                border-right: 1px solid black;
+
+                &:last-child,
+                .no-border {
+                    border-right: 0px;
+                }
+
+                border-radius: 0px;
+                margin: 0px;
+
+                &.no-border {
+                    border: 0px;
+                }
+            }
+
+            button {
+                background: transparent;
+                border: 0px;
+                color: black;
+                padding: 10px;
+                display: block;
+
+                &.centered-flex {
+                    display: flex;
+                    height: 30px;
+                }
+            }
+        }
+    }
+
+    .showsummery {
+        padding: 1.5rem;
+
+        h1 {
+            text-align: left !important;
+            width: 100%;
+            font-size: 1.4rem;
+
+            span {
+                padding-bottom: 1rem;
+                display: block;
+                width: 100%;
+                font-size: 1rem;
+                text-align: left;
+            }
+        }
+
+    }
+}
+
+.special-action {
+    background: black;
+    color: white;
+    padding: 8px 15px;
+    border: 0px;
+    border-radius: 16px;
+}
+
+.registration {
+    li {
+        list-style: none;
+        display: flex;
+        gap: 10px;
+        position: relative;
+        flex-wrap: wrap ;
+        .close{
+            border: 0px;
+            background: transparent;
+            position: absolute;
+            right: 10px;
+            top: 15px;
+            padding: 0px;
+            border-bottom: 2px solid black;
+        }
+    }
+
+    list-style: none;
+   
+}
+@media print{
+    .card,.card-body{
+        margin: 0;
+        background: transparent !important;
+        box-shadow: none !important;
+    }
+}
+@page {
+    margin: 0;
+}

@@ -1,0 +1,37 @@
+.q-box {
+    width: auto;
+    height: auto;
+    display: inline-block;
+    padding: 2rem;
+    border: 1px solid #ccc;
+    margin-right: auto;
+    margin-left: auto;
+    left: auto;
+    right: auto;
+}
+.search-suggestion-area {
+    background: #fff;
+    padding: 30px;
+    margin-top: 2px;
+    border-bottom: 1px solid #efefef;
+    border-left: 1px solid #efefef;
+    border-right: 1px solid #efefef;
+    box-shadow: -3px 6px 12px -2px rgba(0,0,0,0.22);
+-webkit-box-shadow: -3px 6px 12px -2px rgba(0,0,0,0.22);
+-moz-box-shadow: -3px 6px 12px -2px rgba(0,0,0,0.22);
+}
+.search-suggestion {
+    padding: 10px 0px;
+}
+.form-check {
+    border: 1px solid #efefef;
+    padding: 20px 30px;
+    margin-bottom: 20px;
+    input {
+        display: none;
+    }
+    .form-check-input:checked + label {
+        font-weight: bold;
+        color: #f00;
+    }
+}

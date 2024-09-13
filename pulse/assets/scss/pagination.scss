@@ -1,0 +1,46 @@
+.pagination{
+    .paginate,.active{
+        width: 35px;
+        height: 35px;
+        line-height: 35px;
+        text-align: center;
+        display: inline-block;
+        margin: 6px;
+        border: 1px solid black;
+        color:black;
+    }
+    .active{
+        background: black;
+        color: white;
+    }
+    .previous{
+        width: 35px;
+        height: 35px;
+        line-height: 35px;
+        text-align: center;
+        display: inline-block;
+        margin: 6px;
+        border: 1px solid black;
+        color:black;
+    }
+    .lastpage{
+        width: 35px;
+        height: 35px;
+        line-height: 35px;
+        text-align: center;
+        display: inline-block;
+        margin: 6px;
+        border: 1px solid black;
+        color:black; 
+    }
+    .next{
+        width: 35px;
+        height: 35px;
+        line-height: 35px;
+        text-align: center;
+        display: inline-block;
+        margin: 6px;
+        border: 1px solid black;
+        color:black;
+    }
+}

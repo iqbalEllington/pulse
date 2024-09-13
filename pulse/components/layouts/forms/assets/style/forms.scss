@@ -1,0 +1,790 @@
+.book_valuation .formValuation,
+.book_valuation-contact {
+  label {
+    display: none;
+  }
+
+  .intl-tel-input,
+  .select2 {
+    :focus-visible {
+      outline: none;
+    }
+
+    .selected-flag {
+      width: 62px !important;
+      border-top-left-radius: 24px;
+      border-bottom-left-radius: 24px;
+      margin: 0;
+      padding: 0;
+    }
+
+    width: 100%;
+
+    input {
+      padding: 16px 30px;
+      padding-left: 70px !important;
+      border: 0px solid #e8e5ea;
+      border-radius: 64px;
+      color: #3e4861;
+      width: 100%;
+      font-size: 1rem;
+    }
+  }
+
+  .select3 {
+    :focus-visible {
+      outline: none;
+    }
+
+    .selected-flag {
+      width: 62px !important;
+      border-top-left-radius: 24px;
+      border-bottom-left-radius: 24px;
+      margin: 0;
+      padding: 0;
+    }
+
+    width: 100%;
+
+    input {
+      padding: 16px 30px;
+      padding-left: 70px !important;
+      border: 0px solid #e8e5ea;
+      border-radius: 64px;
+      color: #3e4861;
+      width: 100%;
+      font-size: 1rem;
+    }
+  }
+
+  &::placeholder {
+    font-size: .8rem;
+    font-weight: 100;
+    color: $primary_color_grayed;
+  }
+}
+
+.home-book-valuation {
+  form>div {
+    margin-bottom: 10px;
+  }
+}
+
+.formfields {
+  position: relative;
+
+  &.error {
+    input {
+      border: 1px solid #a71616 !important;
+    }
+  }
+}
+
+.formError {
+  position: relative;
+  display: none !important;
+
+  &.error {
+    display: block !important;
+    padding-bottom: 20px;
+    font-size: 1.2rem;
+    color: #a71616;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+.formfields {
+  &.error {
+    margin-bottom: 15px !important;
+  }
+}
+
+.formError {
+  &.error {
+    margin-bottom: 0 !important;
+  }
+}
+
+.error {
+  position: relative;
+  border-radius: 10px;
+  text-align: left;
+}
+
+.form_container {
+  min-height: calc(100vh - 87px);
+  padding: 30px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: #e3ecee;
+
+  .form_content {
+    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2), 0px 1px 2px rgba(0, 0, 0, 0.06),
+      0px 4px 8px rgba(0, 0, 0, 0.06);
+    border-radius: 8px;
+    padding: 30px 50px;
+    background-color: $white_background;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+    width: 700px;
+
+    h3 {
+      color: $primary_color;
+      font-size: 40px;
+      font-weight: 600;
+      margin: 0;
+    }
+
+    p {
+      color: $primary_color;
+      font-weight: 300;
+      font-size: 18px;
+      margin-top: 15px;
+
+      span {
+        font-weight: 500;
+      }
+    }
+
+    form {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      flex-direction: column;
+      width: 100%;
+      margin-top: 15px;
+
+      &>div {
+        width: 100%;
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        flex-direction: column;
+        margin-bottom: 30px;
+
+        label {
+          display: none;
+          font-weight: 300;
+          font-size: 14px;
+          color: $primary_color;
+          margin-bottom: 0px;
+        }
+
+        input {
+          border: 1px solid $gray_two;
+          border-radius: 64px;
+          color: $primary_color;
+          width: 100%;
+        }
+      }
+
+      .react-datepicker {
+        border: 0px;
+        padding: 15px;
+        box-shadow: 0px 0px 1px rgb(0 0 0 / 20%), 0px 1px 2px rgb(0 0 0 / 6%),
+          0px 4px 8px rgb(0 0 0 / 6%);
+
+        .react-datepicker {
+          background: $white_background;
+        }
+
+        .react-datepicker__navigation {
+          position: absolute;
+          z-index: 99;
+          top: 26px;
+        }
+
+        .react-datepicker__navigation-icon {
+          &::before {
+            top: 10px;
+          }
+        }
+
+        .react-datepicker__current-month {
+          padding-top: 10px;
+          padding-bottom: 10px;
+          font-weight: 300;
+        }
+
+        .react-datepicker__header {
+          border: 0px;
+          background: $white_background;
+        }
+
+        .react-datepicker__triangle {
+          &::after {
+            transform: translate3d(50px, 0px, 0px);
+            // background: $white_background;
+            border-color: $white_color;
+          }
+
+          &::before {
+            transform: translate3d(50px, 0px, 0px);
+            background: $white_background;
+            border-color: $white_color;
+          }
+        }
+      }
+
+      >button,
+      .submit-btn {
+        margin-bottom: 10px;
+        width: 100%;
+      }
+
+      p {
+        font-weight: 300;
+        font-size: 12px;
+        color: $primary_color;
+      }
+    }
+  }
+
+
+
+  .award_content {
+    padding: 40px 0;
+    color: $primary_color;
+    font-size: 14px;
+    font-weight: 300;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: max-content;
+
+    svg {
+      margin-right: 20px;
+    }
+  }
+
+  .thankyou {
+    color: $primary_color;
+  }
+}
+
+.payment-summery {
+  display: block;
+  width: 85%;
+  margin: auto;
+  padding: 30px 0px;
+  tbody{
+    width: 100%;
+    display: block;
+  }
+
+  tr {
+    display: flex;
+    padding-bottom: 30px;
+    color: $primary_color;
+    justify-content: space-between;
+
+    td {
+      font-size: 1.3rem;
+      text-align: left;
+    }
+  }
+
+  .total {
+    border-top: 1px solid $gray_two;
+    padding-top: 30px;
+  }
+}
+
+.back_btn.payment-form {
+  border: 0;
+  outline: 0;
+  background-color: transparent;
+  font-size: 14px;
+  font-weight: 100;
+  color: #3e4861;
+  position: absolute;
+  top: 30px;
+  left: 30px;
+  display: block;
+}
+
+@media screen and (max-width: 768px) {
+  .form_container .form_content {
+    width: calc(100% - 30px);
+    padding: 15px 45px;
+  }
+
+  .form_container .form_content h3 {
+    font-size: 32px;
+  }
+
+  .form_container .award_content {
+    flex-direction: column;
+
+    svg {
+      margin-bottom: 15px;
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .form_container .form_content {
+    width: calc(100%);
+    padding: 15px 25px;
+  }
+  .payment-form{
+    h3{
+      font-size: 2rem !important;
+    }
+  }
+  
+  .form_container .form_content {
+    width: 96%;
+    padding: 50px 25px;
+    margin: auto;
+}
+  .payment-summery {
+    display: block;
+    width: 100%;
+    margin: auto;
+    padding: 30px 0px;
+  
+    tr {
+      display: flex;
+      padding-bottom: 30px;
+      color: $primary_color;
+      justify-content: space-between;
+  
+      td {
+        font-size: 1rem;
+        text-align: left;
+      }
+    }
+  
+    .total {
+      border-top: 1px solid $gray_two;
+      padding-top: 30px;
+    }
+  }
+  .form_container .form_content h3 {
+    font-size: 20px;
+  }
+
+  .form_container .form_content p {
+    font-size: 14px;
+  }
+
+  .form_container .form_content form .form_container .award_content {
+    flex-direction: column;
+
+    svg {
+      margin-bottom: 15px;
+    }
+  }
+
+  .form_container .form_content form {
+    &>div {
+      margin-bottom: 15px;
+    }
+
+    button {
+      margin-top: 10px;
+    }
+  }
+}
+
+// form success
+.form_csuccess_ontainer {
+  display: grid;
+  place-items: center;
+
+  .form_content {
+    background: #ffffff;
+    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2), 0px 1px 2px rgba(0, 0, 0, 0.06),
+      0px 4px 8px rgba(0, 0, 0, 0.06);
+    border-radius: 8px;
+    width: 100%;
+    max-width: 600px;
+    padding: 30px 40px;
+
+    h5 {
+      font-size: 1.5rem;
+      font-weight: 500;
+      color: $primary_color;
+      margin-bottom: 0;
+    }
+
+    p {
+      font-size: 16px;
+      font-weight: 100;
+      margin-top: 30px;
+      color: $primary_color;
+      border-bottom: 1px solid #e2e5ea;
+      padding-bottom: 30px;
+    }
+
+    button {
+      width: 100%;
+      background: $primary_color;
+    }
+  }
+
+  &.centered-noshadow {
+    .form_content {
+      box-shadow: none;
+      border: 1px solid #efefef;
+      text-align: center;
+    }
+  }
+}
+
+@media screen and (max-width: 974px) {
+  .form_csuccess_ontainer .form_content {
+    width: 400px;
+
+    h5 {
+      font-size: 20px;
+    }
+
+    p {
+      font-size: 14px;
+      padding: 0 8px 30px;
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .form_csuccess_ontainer .form_content {
+    width: 95%;
+  }
+}
+
+.full-form,
+.book_valuation-contact,
+.with-label {
+  label {
+    display: block !important;
+    padding-bottom: 14px;
+  }
+
+  .default_btn {
+    background: $primary_background  !important;
+    color: #ffffff !important;
+  }
+}
+
+.fullwidthforms {
+  position: relative;
+  .eroorField {
+    margin-bottom: 15px;
+  }
+
+  .intl-tel-input {
+    width: 100%;
+
+    input {
+      padding: 12px;
+      padding-left: 70px !important;
+      border-radius: 64px;
+      color: #3e4861;
+      width: 100%;
+
+      &::placeholder {
+        font-size: .8rem;
+        color: $primary_color_grayed;
+      }
+    }
+
+    .selected-flag {
+      width: 62px !important;
+      border-top-left-radius: 24px;
+      border-bottom-left-radius: 24px;
+      margin: 0;
+      padding: 0;
+    }
+  }
+
+  .select2 {
+
+    >div:first-of-type {
+      padding: 9px 17px;
+      border-radius: 60px;
+      border: 1px solid #e8e5ea;
+      box-shadow: none !important;
+    }
+
+    >div:nth-of-type(2) {
+      border-radius: 15px !important;
+      box-shadow: none;
+      box-shadow: 0px 0px 1px rgb(0 0 0 / 20%), 0px 1px 2px rgb(0 0 0 / 6%), 0px 4px 8px rgb(0 0 0 / 6%);
+    }
+
+    * {
+      font-size: 1rem;
+      text-align: left;
+    }
+  }
+
+  .select3 {
+    >div:first-of-type {
+      padding: 9px 17px;
+      border-radius: 60px;
+      border: 1px solid #e8e5ea;
+      box-shadow: none !important;
+    }
+
+    >div:nth-of-type(2) {
+      border-radius: 15px !important;
+      box-shadow: none;
+      box-shadow: 0px 0px 1px rgb(0 0 0 / 20%), 0px 1px 2px rgb(0 0 0 / 6%), 0px 4px 8px rgb(0 0 0 / 6%);
+    }
+    * {
+      font-size: 1rem;
+      text-align: left;
+    }
+  }
+}
+
+.select-placeholder-text {
+  font-size: .8rem !important;
+  color: $primary_color;
+  opacity: .5;
+}
+
+.no-label label {
+  display: none !important;
+}
+
+input[type=file]::-webkit-file-upload-button,
+input[type=file].invalid::-webkit-file-upload-button,
+input[type=file].valid::-webkit-file-upload-button {
+  color: #fff;
+  border: 0;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  border-radius: 3px;
+  font-weight: 100;
+  background: #0c203c url(/icons/upload.svg) 15px center no-repeat;
+  outline: none;
+  margin-right: 15px;
+  padding: 15px 10px 15px 48px;
+}
+
+input[type=file] {
+  padding: 0px !important
+}
+
+textarea {
+  background-color: transparent;
+  padding: 15px;
+  border-radius: 30px;
+  color: $primary_color;
+  font-size: 14px;
+  font-weight: 300;
+  border: 1px solid #e8e5ea;
+  transition: $transition;
+  width: 100%;
+  height: 50px;
+}
+
+textarea {
+  height: 100px;
+  resize: none;
+  border-radius: 18px;
+  background-color: white;
+}
+
+.white_input {
+  background-color: white;
+  padding: 16px 30px;
+  border-radius: 30px;
+  color: $primary_color;
+  font-size: 1rem;
+  font-weight: 300;
+  border: 0px;
+  transition: $transition;
+  width: max-content;
+  outline: 0;
+}
+
+.eroorField {
+  input {
+    border-color: #a71616 !important;
+  }
+}
+
+
+.register-success {
+  .form_content {
+    background: transparent;
+    box-shadow: none;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 600px;
+    padding: 30px 40px;
+  }
+}
+
+.stripePayment {
+  form>div {
+    align-items: center !important;
+    justify-content: stretch !important;
+  }
+
+  * {
+    font-family: 'Lexend Deca' !important;
+  }
+
+  button {
+    color: #fff;
+    border: 0;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -ms-border-radius: 3px;
+    border-radius: 3px;
+    font-weight: 100;
+    background: $primary_color;
+    border-radius: 13px;
+    outline: none;
+    margin-right: 15px;
+    padding: 14px;
+    width: 200px !important;
+  }
+}
+
+input {
+  color: $primary_color  !important;
+}
+
+.select2>div>div>div,
+.select3>div>div>div {
+  color: $primary_color;
+}
+
+input::placeholder,
+.select2 div:first-child,
+.select3 div:first-child {
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.select2 div:last-child,
+.select3 div:last-child {
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+input::placeholder, textarea::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: $primary_color;
+  opacity: .5;
+  font-weight: 100;
+  font-size: .8rem;
+}
+
+input:-ms-input-placeholder, textarea::placeholder:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: $primary_color;
+  font-weight: 100;
+  opacity: .5;
+  font-size: .8rem;
+}
+
+input::-ms-input-placeholder, textarea::placeholder::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: $primary_color;
+  font-weight: 100;
+  opacity: .5;
+  font-size: .8rem;
+}
+
+.react-autosuggest__container {
+  width: 100%;
+  position: relative;
+
+  .react-autosuggest__suggestions-container--open {
+    position: absolute;
+    width: 100%;
+    max-height: 400px;
+    height: auto;
+    overflow: auto;
+    background: white;
+    text-align: left;
+    box-shadow: 0 0 1px rgb(0 0 0 / 20%), 0 1px 2px rgb(0 0 0 / 6%), 0 4px 8px rgb(0 0 0 / 6%);
+    padding: 15px 5px;
+    border-radius: 8px;
+
+    li {
+      padding: 5px 10px;
+
+      &:hover {
+        background: #e3effa;
+      }
+    }
+  }
+}
+
+
+
+.spin-white-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center !important;
+  z-index: 999;
+  background: rgba(255, 255, 255, .8);
+  justify-content: center;
+
+  img {
+    width: 120px;
+  }
+}
+
+.spin-gray-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center !important;
+  z-index: 999;
+  background: #e3ecee89;
+  justify-content: center;
+
+  img {
+    width: 120px;
+  }
+}
+
+.loader-availability {
+  position: absolute;
+  margin-top: 45px;
+  margin-right: 28px;
+  display: flex;
+  right: 0;
+
+  img {
+    width: 40px;
+  }
+}
+
+.formSubmitting {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 15px;
+
+  img {
+    width: 150px;
+  }
+}
+.error-payment{
+color: #a71616 !important;
+font-weight: 200;
+font-size: 1.2rem;
+margin-top: 10px;
+}

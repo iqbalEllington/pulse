@@ -1,0 +1,72 @@
+@font-face {
+    font-family: Acumin-Pro;
+    src: url("../fonts/ellington-font/Acumin-Pro-Light.ttf");
+}
+
+@font-face {
+    font-family: Acumin;
+    src: url("../fonts/ellington-font/Acumin-Pro.otf");
+}
+
+@font-face {
+    font-family: inter;
+    src: url("../fonts/Inter/static/Inter-Regular.ttf");
+}
+@font-face {
+    font-family: interbold;
+    src: url("../fonts/Inter/static/Inter-Bold.ttf");
+}
+*{
+    transition: margin-left 0.3s ease,
+        border 0.3s ease;
+}
+body {
+    font-family: inter;
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-family: Acumin-Pro;
+    }
+
+    // .bg-gray {
+    //     background: #F6F6F4;
+    // }
+
+    .b-bottom {
+        border-bottom: 1px solid #F6F6F4;
+    }
+    .theme-button-trans{
+        background: transparent;
+        color: black;
+        border: 1px solid black;
+        border-radius: 25px;
+        &:active, &:hover, &:focus{
+            background: transparent;
+            color: black;
+            border: 1px solid black;
+            border-radius: 25px;
+        }
+    }
+}
+
+.donut-ring {
+    stroke: #EBEBEB;
+}
+
+.donut-segment-2 {
+    stroke: green;
+    // animation: donut 1s;
+}
+
+@keyframes donut {
+    0% {
+        stroke-dasharray: 0, 100;
+    }
+    100% {
+        stroke-dasharray: 25, 75;
+    }
+}
