@@ -48,15 +48,30 @@
             h4 {
                 font-size: .9rem;
                 color: black;
+                font-family: Acumin;
                 font-weight: bold;
+                display: block;
+                margin-bottom: 0px;
             }
 
             span {
-                font-size: 2.5rem;
+                font-size: 1.5rem;
                 font-weight: bold;
+                font-family: inter;
                 line-height: 1;
+                display: block;
             }
+           
         }
+        .black{
+            background: black !important;
+            *{
+                color: white;
+            }
+            span,h4{
+                color: white;
+            }
+        } 
     }
 
     .chart-container {
@@ -76,4 +91,5 @@
     .circle-svg {
         transition: stroke-dashoffset 0.3s ease;
     }
+
 }

@@ -27,7 +27,7 @@ const ProductAccountSetting = ({ router }, props) => {
   }, [])
   return (
     <>
-      <div className="wishbanner pb">
+      <div className="wishbanner pb row w-100">
         <div className="container-fluid">
           <div className="row">
             <div className="col-lg-3 offset-lg-1">

@@ -1,11 +1,19 @@
 @font-face {
-    font-family: Acumin-Pro;
+    font-family: AcuminPro;
     src: url("../fonts/ellington-font/Acumin-Pro-Light.ttf");
 }
 
 @font-face {
     font-family: Acumin;
     src: url("../fonts/ellington-font/Acumin-Pro.otf");
+}
+@font-face {
+    font-family: AcuminBold;
+    src: url("../fonts/ellington-font/AcuminProSemibold.ttf");
+}
+@font-face {
+    font-family: AcuminBlack;
+    src: url("../fonts/ellington-font/FontsFree-Net-Acumin-Pro-Black.ttf");
 }
 
 @font-face {
@@ -20,6 +28,24 @@
     transition: margin-left 0.3s ease,
         border 0.3s ease;
 }
+.fg-dgreen{
+    color: #00A171 !important; 
+}
+.fg-lpink{
+    color: #FF9191 !important;
+}
+.bg-dgreen{
+    background: #00A171 !important; 
+}
+.bg-lpink{
+    background: #FF9191 !important;
+}
+.fg-white{
+    color: white;
+}
+.fg-green{
+    color: #C9FFCE;
+}
 body {
     font-family: inter;
 
@@ -29,7 +55,7 @@ body {
     h4,
     h5,
     h6 {
-        font-family: Acumin-Pro;
+        font-family: AcuminPro;
     }
 
     // .bg-gray {
@@ -53,20 +79,3 @@ body {
     }
 }
 
-.donut-ring {
-    stroke: #EBEBEB;
-}
-
-.donut-segment-2 {
-    stroke: green;
-    // animation: donut 1s;
-}
-
-@keyframes donut {
-    0% {
-        stroke-dasharray: 0, 100;
-    }
-    100% {
-        stroke-dasharray: 25, 75;
-    }
-}

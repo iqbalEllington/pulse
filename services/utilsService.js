@@ -1,7 +1,8 @@
 import moment from "moment";
-export function covertToCurrency(baseCurrency, toCurrency, Amount = 0) {
+export function covertToCurrency(Amount = 0, withsymbol=true,baseCurrency="AED", toCurrency="AED") {
   if (typeof parseFloat(Amount) != "number" || Amount == undefined || Amount == NaN) {
     Amount = 0;
+    
     return new Intl.NumberFormat("AED", {
       style: "currency",
       roundingMode: "ceil",
@@ -10,6 +11,15 @@ export function covertToCurrency(baseCurrency, toCurrency, Amount = 0) {
       currency: toCurrency
     }).format(Amount);
   } else {
+    if(withsymbol==false){
+      return new Intl.NumberFormat("AED", {
+        // style: "currency",
+        roundingMode: "ceil",
+        maximumFractionDigits: 0,
+        minimumFractionDigits: 0,
+        currency: toCurrency
+      }).format(Amount);
+    }else{
     return new Intl.NumberFormat("AED", {
       style: "currency",
       roundingMode: "ceil",
@@ -17,6 +27,7 @@ export function covertToCurrency(baseCurrency, toCurrency, Amount = 0) {
       minimumFractionDigits: 0,
       currency: toCurrency
     }).format(Amount);
+  }
   }
 
 

@@ -4,7 +4,7 @@ import "react-intl-tel-input/dist/main.css";
 import CheckoutForm from "./checkout";
 import CheckoutFormHH from "./checkout-hh";
 
-covertToCurrency
+
 import Link from "next/link";
 import Autosuggests from "../autosuggests";
 import { covertToCurrency } from "../../../../services/utilsService";

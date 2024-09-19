@@ -1,0 +1,22 @@
+.donut {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .indicator{
+        position: absolute;
+        font-size: 1.8rem;
+        font-weight: bold;
+    }
+  
+    .donut-segment-2 {
+        
+        animation: donut 1s;
+    }
+
+    @keyframes donut {
+        0% {
+            stroke-dasharray: 0, 100;
+        }
+    }
+}

@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './CircleChart.module.scss'; // Import the scoped styles
 
-const CircleChart = ({ percentage, color, size }) => {
+const CircleChart = ({ percentage, color, size, kpiText, bodyColor, kpiValue }) => {
     const radius = 90; // Radius of the main circle
     const circumference = 2 * Math.PI * radius; // Circumference of the circle
 
@@ -58,21 +58,31 @@ const CircleChart = ({ percentage, color, size }) => {
                     )}
                 </svg>
 
-                <div className={styles['content']}>
+                <div className={styles['content'] + " " + styles[bodyColor]}>
                     <div>
-                        <h4>Outstanding</h4>
-                        <span>30%</span>
+                        <h4>{kpiText}</h4>
+                        <span>{kpiValue?.total}</span>
                     </div>
                 </div>
                 <div
                     className={styles["hoverlabel"]}
-                    style={{
-                        position: "absolute",
-                        left: `${endX}px`, // Adjust the position dynamically
-                        top: `${endY}px`, // Adjust the position dynamically
-                    }}
+                    style={
+                        (percentage > 60) ?
+                            {
+                                position: "absolute",
+                                left: `${endX}px`, // Adjust the position dynamically
+                                top: `${endY}px`,
+                                // Adjust the position dynamically
+                            } : {
+                                position: "absolute",
+                                right: `${endX}px`, // Adjust the position dynamically
+                                top: `${endY}px`,
+                                // Adjust the position dynamically
+                            }
+
+                    }
                 >
-                    234 Sold (34%) {/* Show the percentage value */}
+                    {kpiValue?.value1?.value} Sold ( {Math.round(kpiValue?.value1?.value * 100 / kpiValue?.total)}% ){/* Show the percentage value */}
                 </div>
             </div>
         </div>

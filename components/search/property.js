@@ -13,7 +13,7 @@ const SearchProperty = (props) => {
     const [keyword, SetKeyowrd] = useState(null)
     const [isfocus, Setisfocus] = useState(false)
     const [loading, setIsLoading] = useState(false)
-    const [ELproperties, setELproperties] = useState(false);
+    const [property, setproperty] = useState(false);
     async function getProperties(value) {
         var response;
         if (value != false) {
@@ -24,7 +24,7 @@ const SearchProperty = (props) => {
         var data = []
         if (await response?.status === 200) {
             setIsLoading(false)
-            setELproperties(response.data)
+            setproperty(response.data)
         } else if (response?.status === 401) {
             toast("Unauthorize access please re-login.");
         } else {
@@ -37,7 +37,7 @@ const SearchProperty = (props) => {
     return (<div className="searchbar">
         <div className="search-input">
             <input onFocus={() => Setisfocus(true)} onChange={(e) => filterSearch(e.target.value)} placeholder="Search" type="text" />
-            <span>Properties {ELproperties?.data?.length}</span>
+            <span>Properties {property?.data?.length}</span>
             <IoSearch />
         </div>
         {(keyword || isfocus) &&
@@ -46,18 +46,18 @@ const SearchProperty = (props) => {
                     <span className="close" onClick={() => Setisfocus(false)}>
                         <MdClose />
                     </span>
-                    {ELproperties?.data?.map((property) => {
+                    {property?.data?.map((property) => {
                         return <div className="property-list">
-                            <div className="search-l-body">
-                                <div className="imageholder"><img src={process.env.NEXT_PUBLIC_IMAGE_URL + property.attributes.featuredImage.data.attributes.url}></img></div>
+                            <div className="search-l-body" onClick={()=>{props.activateProeprty(property.id),props.setloop(false),Setisfocus(false),SetKeyowrd("")}}>
+                                <div className="imageholder"><img src={process.env.NEXT_PUBLIC_IMAGE_URL + (property.attributes?.featuredImage?.data?.attributes?.url ? property.attributes?.featuredImage?.data?.attributes?.url: "/uploads/iamgenotfound_804b50e730.jpg")}></img></div>
                                 <div className="titles">
                                     <div>
-                                        <h3>{property.attributes.name}</h3>
-                                        <p>{property.attributes.location}</p>
+                                        <h3>{property.attributes.name.toLowerCase()}</h3>
+                                        <p>{(property?.attributes?.emirates != null ? property?.attributes?.emirates : "UAE") + " " + (property?.attributes?.city != null ? property?.attributes?.city : "")}</p>
                                     </div>
                                     <div className="kpi">
-                                        <span> Units: {property.attributes.totalUnits}</span>
-                                        <span> Sold : {property.attributes.availableUnitsArea}</span>
+                                        <span> Total Units: {property.attributes.totalUnits}</span>
+                                        <span className={(property.attributes.totalUnits>0 && property.attributes.availableUnits == 0) &&"bg-dgreen"}> Units Available : {property.attributes.availableUnits}</span>
                                     </div>
                                 </div>
                                 <div className="summery">
