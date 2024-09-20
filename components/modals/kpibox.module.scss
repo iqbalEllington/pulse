@@ -11,12 +11,13 @@
         }
         .box-header{
             background: #2A2A2B;
-            padding: 7px 15px;
+            padding: 13px 15px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             h3{
                 margin: 0px;
+                padding-top: 3px;
                 height: 100%;
                 display: inline-block;
                 align-items: center;
@@ -29,11 +30,11 @@
 .kpi-box-light {
     background: #EDEAE3;
     border-radius: 8px;
-    overflow: auto;
+    overflow: hidden;
     .kpiBox{
         .box-header{
             background: #FCF5E8;
-            padding: 7px 15px;
+            padding: 13px 15px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -47,6 +48,7 @@
                 color: black;
                 font-family: AcuminBold;
                 font-size: 1.3rem;
+                padding: 0px;
             }
         }
     }
