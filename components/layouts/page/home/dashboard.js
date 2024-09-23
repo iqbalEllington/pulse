@@ -42,7 +42,7 @@ const index = ({ router }, props) => {
     if (id != false) {
       response = await getRequest({ API: API_URLS.GET_PROPERTIES + '?populate[]=featuredImage&populate[]=latestImages&filters[id]=' + id + '&sort=id:desc' });
     } else {
-      response = await getRequest({ API: API_URLS.GET_PROPERTIES + '?populate[]=featuredImage&sort=id:desc' });
+      response = await getRequest({ API: API_URLS.GET_PROPERTIES + '?populate[]=featuredImage&populate[]=latestImages&sort=id:desc' });
     }
     var data = []
     if (await response?.status === 200) {
@@ -318,9 +318,8 @@ const index = ({ router }, props) => {
                         </Kpibox>
                       </div>
                     </div>
-                    <div className="right-d-t mt-3 pl-0">
+                    <div className="right-d-t mt-4 pl-0">
                       <div className="imagebar">
-                        {/* {JSON.stringify(ELproperties?.attributes.latestImages)} */}
                         <Imageslider images={ELproperties?.attributes?.latestImages} />
                       </div>
                       <div className="mt-3 grapgh-elb">
