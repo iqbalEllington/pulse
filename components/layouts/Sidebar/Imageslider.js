@@ -33,7 +33,7 @@ export function Imageslider(props) {
             ) :
             <Slider {...settings} >
                 <div className="col-12 image-content">
-                    <img src={process.env.NEXT_PUBLIC_IMAGE_URL + '/uploads/iamgenotfound_804b50e730.jpg'}
+                    <img src={process.env.NEXT_PUBLIC_IMAGE_URL + '/uploads/imagenotfound_2b380da6d1.jpg'}
                         alt=""
                     />
                 </div>

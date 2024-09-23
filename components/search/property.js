@@ -49,7 +49,7 @@ const SearchProperty = (props) => {
                     {property?.data?.map((property) => {
                         return <div className="property-list">
                             <div className="search-l-body" onClick={()=>{props.activateProeprty(property.id),props.setloop(false),Setisfocus(false),SetKeyowrd("")}}>
-                                <div className="imageholder"><img src={process.env.NEXT_PUBLIC_IMAGE_URL + (property.attributes?.featuredImage?.data?.attributes?.url ? property.attributes?.featuredImage?.data?.attributes?.url: "/uploads/iamgenotfound_804b50e730.jpg")}></img></div>
+                                <div className="imageholder"><img src={process.env.NEXT_PUBLIC_IMAGE_URL + (property.attributes?.featuredImage?.data?.attributes?.url ? property.attributes?.featuredImage?.data?.attributes?.url: "/uploads/imagenotfound_2b380da6d1.jpg")}></img></div>
                                 <div className="titles">
                                     <div>
                                         <h3>{property.attributes.name.toLowerCase()}</h3>
