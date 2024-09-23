@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import CircleChart from "components/modals/circlechart";
 import Semicircelpie from "components/modals/Semicircelpie";
 import Kpibox from "components/modals/kpibox";
-import Imageslider from "components/layouts/Sidebar/imageslider";
+import Imageslider from "components/layouts/Sidebar/Imageslider";
 import LineProgress from "components/modals/LineProgress";
 import { FaArrowDown } from "react-icons/fa6";
 import { FaArrowUp, FaPlay } from "react-icons/fa";
