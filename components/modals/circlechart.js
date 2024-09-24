@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './CircleChart.module.scss'; // Import the scoped styles
+import { covertToCurrency } from "/services/utilsService";
 
 const CircleChart = ({ percentage, color, size, kpiText, bodyColor, kpiValue }) => {
     const radius = 90; // Radius of the main circle
@@ -12,7 +13,19 @@ const CircleChart = ({ percentage, color, size, kpiText, bodyColor, kpiValue }) 
     const angle = (percentage / 100) * 2 * Math.PI - Math.PI / 2; // Angle for endpoint
     const endX = 100 + radius * Math.cos(angle); // X coordinate for endpoint
     const endY = 100 + radius * Math.sin(angle); // Y coordinate for endpoint
-
+    const [animationclass,setAnimationclass]=useState("");
+    useEffect(()=>{
+        setAnimationclass("")
+        setTimeout(() => setAnimationclass("circle-animated"), 300);
+        // setInterval(() => {
+        //     setAnimationclass("")
+        //     // You can add your function logic here
+        //   }, 6000);
+        // setInterval(() => {
+        //     setAnimationclass("circle-animated")
+        //     // You can add your function logic here
+        //   }, 6100);
+    },[percentage])
     return (
         <div className={styles['circleChart']} style={{ width: size.Width, height: size.Height }}>
             <div className={styles['circle']}>
@@ -38,6 +51,7 @@ const CircleChart = ({ percentage, color, size, kpiText, bodyColor, kpiValue }) 
                         cx="100"
                         cy="100"
                         r={radius}
+                        className={styles[animationclass]}
                         fill="none"
                         stroke={color}
                         strokeWidth="3"
@@ -61,7 +75,7 @@ const CircleChart = ({ percentage, color, size, kpiText, bodyColor, kpiValue }) 
                 <div className={styles['content'] + " " + styles[bodyColor]}>
                     <div>
                         <h4>{kpiText}</h4>
-                        <span>{kpiValue?.total}</span>
+                        <span  style={kpiValue.isamount==true? {fontSize:".7rem"}: {} }>{kpiValue?.total}</span>
                     </div>
                 </div>
                 <div
@@ -82,7 +96,7 @@ const CircleChart = ({ percentage, color, size, kpiText, bodyColor, kpiValue }) 
 
                     }
                 >
-                    {kpiValue?.value1?.value} Sold ( {Math.round(kpiValue?.value1?.value * 100 / kpiValue?.total)}% ){/* Show the percentage value */}
+                    {(kpiValue.isamount==true) ?  covertToCurrency(kpiValue?.value1?.value) + " " + kpiValue?.value1?.unit + " " + (kpiValue?.total > 0  ? "(" + Math.round(kpiValue?.value1?.value * 100 / kpiValue?.total)+"%" :" 0%") + ")": kpiValue?.value1?.value + " " +kpiValue?.value1?.unit + " " + (kpiValue?.total > 0  ? "(" + Math.round(kpiValue?.value1?.value * 100 / kpiValue?.total)+"%" :" 0%") + ")"}
                 </div>
             </div>
         </div>

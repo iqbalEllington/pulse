@@ -11,6 +11,7 @@ export function covertToCurrency(Amount = 0, withsymbol=true,baseCurrency="AED",
       currency: toCurrency
     }).format(Amount);
   } else {
+    
     if(withsymbol==false){
       return new Intl.NumberFormat("AED", {
         // style: "currency",

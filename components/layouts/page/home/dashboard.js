@@ -204,17 +204,21 @@ const index = ({ router }, props) => {
                       <Kpibox title="Units" withhead={true} theme="light">
                         <div className="vis-data">
                           <div className="p-4">
-                            <CircleChart kpiText="Total Units" size={{ Width: "150px", Height: "150px" }} percentage={Math.round(ELproperties?.attributes?.soldUnits * 100 / ELproperties?.attributes?.totalUnits)} kpiValue={{
+                            <CircleChart kpiText="Total Units" size={{ Width: "150px", Height: "150px" }} 
+                            
+                            percentage={Math.round(ELproperties?.attributes?.soldUnits * 100 / ELproperties?.attributes?.totalUnits)} kpiValue={{
                               total: ELproperties?.attributes?.totalUnits,
                               value1: {
-                                "unit": "Sold",
+                                "unit": "Sold Units",
                                 "value": ELproperties?.attributes?.soldUnits
                               },
                               value2: {
                                 "unit": "Available",
                                 "value": ELproperties?.attributes?.availableUnits
-                              }
-                            }} color="#000" />
+                              },
+                              isamount: false
+                            }}
+                              color="#00A171" />
                           </div>
                           <div className="data-summery">
                             <div>
@@ -242,8 +246,9 @@ const index = ({ router }, props) => {
                               value2: {
                                 "unit": "SPA Executed",
                                 "value": ELproperties?.attributes?.SalesProgressionExecuted
-                              }
-                            }} size={{ Width: "150px", Height: "150px" }} percentage={30} color="#000" />
+                              },
+                              isamount: false
+                            }} size={{ Width: "150px", Height: "150px" }} percentage={ELproperties?.attributes?.SalesProgressionSigned * 100 / ELproperties?.attributes?.SalesProgressionGenerated} color="#00A171" />
                           </div>
                           <div className="data-summery">
                             <div>
@@ -254,7 +259,7 @@ const index = ({ router }, props) => {
                             </div>
                             <div>
                               <h3>SPA Executed</h3>
-                              <span className="fg-lpink">{ELproperties?.attributes?.SalesProgressionExecuted} <b>( {(ELproperties?.attributes?.SalesProgressionExecuted * 100 / ELproperties?.attributes?.SalesProgressionGenerated).toFixed(2)}%  )</b></span>
+                              <span className="fg-lpink">{ELproperties?.attributes?.SalesProgressionExecuted} <b>(  {ELproperties?.attributes?.SalesProgressionExecuted > 0 ? (ELproperties?.attributes?.SalesProgressionExecuted * 100 / ELproperties?.attributes?.SalesProgressionGenerated).toFixed(2) + "%" : "0%"} )</b></span>
                             </div>
                           </div>
                         </div>
@@ -265,25 +270,26 @@ const index = ({ router }, props) => {
                         <div className="vis-data">
                           <div className="p-4">
                             <CircleChart kpiText="Total Due" kpiValue={{
-                              total: covertToCurrency(Math.round(ELproperties?.attributes?.DpOutstandingCount), false),
+                              total: ELproperties?.attributes?.DpAmountPaidCount + ELproperties?.attributes?.soldUnits - ELproperties?.attributes?.DpAmountPaidCount,
                               value1: {
                                 "unit": "DP Paid",
                                 "value": ELproperties?.attributes?.DpAmountPaidCount
                               },
                               value2: {
                                 "unit": "DP Outstanding",
-                                "value": (ELproperties?.attributes?.soldUnits - ELproperties?.attributes?.DpAmountPaidCount)
-                              }
-                            }} size={{ Width: "150px", Height: "150px" }} percentage={30} color="#000" />
+                                "value": (ELproperties?.attributes?.soldUnits - ELproperties?.attributes?.DpOutstandingCount)
+                              },
+                              isamount: false
+                            }} size={{ Width: "150px", Height: "150px" }} percentage={ELproperties?.attributes?.DpAmountPaidCount * 100 / (Math.round(ELproperties?.attributes?.DpAmountPaidCount + (ELproperties?.attributes?.soldUnits - ELproperties?.attributes?.DpAmountPaidCount)))} color="#00A171" />
                           </div>
                           <div className="data-summery">
                             <div>
                               <h3>DP Collected</h3>
-                              <span className="fg-dgreen">{ELproperties?.attributes?.DpAmountPaidCount} <b>(43%)</b></span>
+                              <span className="fg-dgreen">{ELproperties?.attributes?.DpAmountPaidCount} <b>({Math.round(ELproperties?.attributes?.DpAmountPaidCount * 100 / (Math.round(ELproperties?.attributes?.DpAmountPaidCount + (ELproperties?.attributes?.soldUnits - ELproperties?.attributes?.DpAmountPaidCount))))})%</b></span>
                             </div>
                             <div>
                               <h3>DP Outstanding</h3>
-                              <span className="fg-lpink">{ELproperties?.attributes?.soldUnits - ELproperties?.attributes?.DpAmountPaidCount} <b>(43%)</b></span>
+                              <span className="fg-lpink">{ELproperties?.attributes?.soldUnits - ELproperties?.attributes?.DpAmountPaidCount} <b>({Math.round((ELproperties?.attributes?.soldUnits - ELproperties?.attributes?.DpAmountPaidCount) * 100 / (Math.round(ELproperties?.attributes?.DpAmountPaidCount + (ELproperties?.attributes?.soldUnits - ELproperties?.attributes?.DpAmountPaidCount))))})%</b></span>
                             </div>
                           </div>
                         </div>
@@ -316,7 +322,22 @@ const index = ({ router }, props) => {
                               </div>
                             </div>
                             <div className="p-3">
-                              <CircleChart kpiText="Outstanding" size={{ Width: "150px", Height: "150px" }} percentage={70} color="#C9FFCE" bodyColor="black" />
+                              <CircleChart
+                                kpiText="Total Due" kpiValue={{
+                                  total: Math.round(ELproperties?.attributes?.totalDue),
+                                  value1: {
+                                    "unit": "Collection",
+                                    "value": ELproperties?.attributes?.total_collection
+                                  },
+                                  value2: {
+                                    "unit": "DP Outstanding",
+                                    "value": ELproperties?.attributes?.total_outstanding
+                                  },
+                                  isamount: true
+                                }} bodyColor="black" size={{ Width: "150px", Height: "150px" }} percentage={ELproperties?.attributes?.total_collection * 100 / ELproperties?.attributes?.totalDue} color="#00A171"
+
+                              />
+                              {/* kpiText="Outstanding" size={{ Width: "150px", Height: "150px" }} percentage={70} color="#00A171" bodyColor="black"  */}
                             </div>
                           </div>
                         </Kpibox>
@@ -329,7 +350,7 @@ const index = ({ router }, props) => {
                             <div className="data-summery">
                               <div>
                                 <h3>Due</h3>
-                                <span className="fg-white">{covertToCurrency(ELproperties?.attributes?.DPamountDue, false)} <b>{Math.round(getpercentage(ELproperties?.attributes?.DPamountDue, ELproperties?.attributes?.totalDue))}% of sold value</b></span>
+                                <span className="fg-white">{covertToCurrency(Math.round(ELproperties?.attributes?.DPamountDue), false)} <b>{Math.round(getpercentage(ELproperties?.attributes?.DPamountDue, ELproperties?.attributes?.totalDue))}% of sold value</b></span>
                               </div>
                               <div className="mt-2">
                                 <h3 className="fg-dgreen">Collection</h3>
@@ -341,7 +362,22 @@ const index = ({ router }, props) => {
                               </div>
                             </div>
                             <div className="p-3">
-                              <CircleChart kpiText="Outstanding" size={{ Width: "150px", Height: "150px" }} percentage={50} color="#C9FFCE" bodyColor="black" />
+                            <CircleChart
+                                kpiText="Total Due" kpiValue={{
+                                  total: Math.round(ELproperties?.attributes?.DPamountDue),
+                                  value1: {
+                                    "unit": "Collection",
+                                    "value": ELproperties?.attributes?.DPamountCollection
+                                  },
+                                  value2: {
+                                    "unit": "DP Outstanding",
+                                    "value": ELproperties?.attributes?.DPamountOutstanding
+                                  },
+                                  isamount: true
+                                }} bodyColor="black" size={{ Width: "150px", Height: "150px" }} percentage={ELproperties?.attributes?.total_collection * 100 / ELproperties?.attributes?.totalDue} color="#00A171"
+
+                              />
+                              {/* <CircleChart kpiText="Outstanding" size={{ Width: "150px", Height: "150px" }} percentage={50} color="#00A171" bodyColor="black" /> */}
                             </div>
                           </div>
                         </Kpibox>

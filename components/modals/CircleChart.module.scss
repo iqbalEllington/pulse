@@ -1,12 +1,16 @@
 .circleChart {
-    transition: opacity 0.3s ease, z-index 0s 0.3s; /* Smooth fade-in */
+    transition: opacity 0.3s ease, z-index 0s 0.3s;
+
+    /* Smooth fade-in */
     .hoverlabel {
-        background: black;
+        background: #1E1E20;
         color: white;
         font-size: .7rem;
-        padding: 3px 10px;
+        padding: 14px 12px;
         border-radius: "3px";
         opacity: 0;
+        border: 1px solid #2A2A2B;
+        border-radius: 10px;
         transition: opacity 0.3s ease, z-index 0s 0.3s;
     }
 
@@ -14,7 +18,8 @@
         .hoverlabel {
             z-index: 999;
             opacity: 1;
-            transition: opacity 0.3s ease, z-index 0s 0s; /* On hover, z-index changes immediately */
+            transition: opacity 0.3s ease, z-index 0s 0s;
+            /* On hover, z-index changes immediately */
         }
     }
 
@@ -61,17 +66,21 @@
                 line-height: 1;
                 display: block;
             }
-           
+
         }
-        .black{
+
+        .black {
             background: black !important;
-            *{
+
+            * {
                 color: white;
             }
-            span,h4{
+
+            span,
+            h4 {
                 color: white;
             }
-        } 
+        }
     }
 
     .chart-container {
@@ -89,7 +98,16 @@
     }
 
     .circle-svg {
-        transition: stroke-dashoffset 0.3s ease;
+        transition: stroke-dashoffset 4s ease;
+        
+    }
+    .circle-animated{
+        animation: fillings 3s;
+    }
+    @keyframes fillings {
+        0% {
+            stroke-dasharray: 0, 100;
+        }
     }
 
 }
