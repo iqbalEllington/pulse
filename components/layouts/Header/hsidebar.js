@@ -92,20 +92,19 @@ const Hsidebar = memo((props) => {
       >
         <div className={"menuActive active"}>
 
-          <div className="sidebar-header d-flex align-items-center justify-content-start">
-            <Link legacyBehavior href="/dashbaord">
+     <div className="sidebar-header d-flex align-items-center justify-content-start"> 
+            <Link legacyBehavior href="/dashboard">
               <a className="navbar-brand">
                 <img src="/images/ellington-logo-Vector.svg" />
               </a>
             </Link>
-          </div>
-          <div
+          </div> 
+          {/* <div
             className="pt-0  my-scrollbar sidebar-body data-scrollbar"
             data-scroll="1"
             id="my-scrollbar"
           >
-            {/* sidebar-list class to be added after replace css */}
-            <div className="sidebar-list navbar-collapse" id="sidebar">
+            <div className="sidebar-list navbar-collapse" id="sidebar"> */}
               {/* <div
                 className={"header-toogler"}
                 data-toggle="sidebar"
@@ -116,7 +115,7 @@ const Hsidebar = memo((props) => {
 
                 <span style={{ color: "white" }}>Expand Menu</span>
               </div> */}
-              <div
+              {/* <div
                 className={"menu-item"}
                 data-toggle="sidebar"
                 data-active="true"
@@ -159,7 +158,7 @@ const Hsidebar = memo((props) => {
 
                   <span style={{ color: "white" }}>Leader <br/>Board</span>
                 </Link>
-              </div>
+              </div> */}
 
               {/* <div className="quick-links">
 
@@ -196,8 +195,8 @@ const Hsidebar = memo((props) => {
       </Fragment>
     </div> */}
               {/* <HverticalNav menus={data.menus} /> */}
-            </div>
-          </div>
+            {/* </div> */}
+          {/* </div> */}
           <div className="sidebar-footer"></div>
         </div>
         {props.menus.length > 0 &&

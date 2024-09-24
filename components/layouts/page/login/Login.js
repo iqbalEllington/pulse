@@ -19,6 +19,8 @@ import FormError from "../../../errors/FormError";
 import Cookies from "js-cookie";
 import { updateAuthToken, updateAuthToken2 } from "helper/api";
 import { toast } from "react-toastify";
+import { FaEye } from "react-icons/fa";
+import { FaEyeSlash } from "react-icons/fa";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -54,6 +56,11 @@ const Login = () => {
       }
     }));
   };
+  const [showPassword, setShowPassword] = useState(false);
+  const togglePasswordVisibility = () => {
+    setShowPassword((prevShowPassword) => !prevShowPassword);
+  };
+
   const router = useRouter();
   if (isLogging === true) {
     dispatch(emptyDispatch());
@@ -64,7 +71,7 @@ const Login = () => {
         <div className="wrapper">
           <section className="login-content">
             <Row className="d-flex bg-lg-black vh-100 min-h-500">
-              <Col className="p-relative" style={{ "background": "url(/images/ellingtonlogo.svg)", "position": "relative", "backgroundRepeat": "repeat" }}>
+              <Col className="p-relative bg-login" style={{ "background": "url(/images/ellingtonlogo.svg)", "position": "relative", "backgroundRepeat": "repeat" }}>
                 {/* <div className="bottom-banner">
                   <div className="p-5">
                     <h1 className="pt-5">
@@ -134,11 +141,12 @@ const Login = () => {
 
                           <Form.Group controlId="formBasicPassword" className="pt-4">
                             <Form.Label>Password</Form.Label>
+                            <div className="formgroup">
                             <Form.Control
                               autocorrect="off"
                               spellcheck="false"
                               autocomplete="off"
-                              type="password"
+                              type={showPassword ? 'text' : 'password'}
                               placeholder="Enter Password"
                               name="password"
                               // value={loginInpiut && loginInpiut.password}
@@ -154,6 +162,9 @@ const Login = () => {
                               className={`form-control ${errors.password ? "is-invalid" : ""
                                 }`}
                             />
+                           <button onClick={(e)=>{togglePasswordVisibility(),e.preventDefault()}} className="eye-icon">  {showPassword ?   <FaEye/> : <FaEyeSlash/>}
+                           </button>
+                           </div>
                             {errors.password &&
                               errors.password.type === "required" && (
                                 <FormError error="Password is empty" />
@@ -168,7 +179,7 @@ const Login = () => {
                               <a className="col-12 d-block">
                                 {" "}
                                 <Button variant="success" className="col-12 bg-white el-login" type="submit">
-                                  Sign In
+                                Sign in to Pulse
                                 </Button>
                               </a>
                             )}
@@ -186,7 +197,7 @@ const Login = () => {
                                     role="status"
                                     aria-hidden="true"
                                   ></span>{" "}
-                                  Sign in to Pulse
+                                 Loading... 
                                 </Button>
                               </a>
                             )}

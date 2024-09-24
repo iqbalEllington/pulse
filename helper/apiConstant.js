@@ -18,5 +18,6 @@ export const API_URLS = {
 
 
 
-  GET_PROPERTIES:'api/properties'
+  GET_PROPERTIES:'api/properties',
+  GET_USER:'api/users/me'
 };

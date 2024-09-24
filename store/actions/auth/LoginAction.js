@@ -27,14 +27,14 @@ export const loginAction = (loginData, callback) => (dispatch) => {
     loginMessage: "",
     isLoading: true,
   };
-  const URL = `${process.env.NEXT_PUBLIC_API_SERVER_URL}api/auth/local`;
+  const URL = `${process.env.NEXT_PUBLIC_API_SERVER_URL}api/auth/local?populate[]=profilePhoto`;
   try {
     const options = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(loginData)
     };
-    fetch(`${process.env.NEXT_PUBLIC_API_SERVER_URL}api/auth/local`, options)
+    fetch(`${process.env.NEXT_PUBLIC_API_SERVER_URL}api/auth/local?populate[]=profilePhoto`, options)
       .then(response => response.json())
       .then(response => {
         const data = response;
@@ -70,7 +70,7 @@ export const loginAction = (loginData, callback) => (dispatch) => {
           } else {
             showToast("error", "something Went Wrong Please try again later");
           }
-          dispatch({ type: Types.AUTH_LOGIN_CHECK, payload: false });
+          dispatch({ type: Types.AUTH_LOGIN_CHECK, payload: response });
           callback(false, false)
           return
         } else {

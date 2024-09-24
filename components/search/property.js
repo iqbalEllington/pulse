@@ -36,9 +36,12 @@ const SearchProperty = (props) => {
     }, [])
     return (<div className="searchbar">
         <div className="search-input">
+            <div className="searchbox">
             <input onFocus={() => Setisfocus(true)} onChange={(e) => filterSearch(e.target.value)} placeholder="Search" type="text" />
-            <span>Properties {property?.data?.length}</span>
             <IoSearch />
+            </div>
+            <span className="result-count">Properties {property?.data?.length}</span>
+          
         </div>
         {(keyword || isfocus) &&
             <div className={"search-result"}>

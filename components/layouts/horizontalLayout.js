@@ -29,7 +29,7 @@ function horizontalLayout(props) {
   }
   useEffect(() => {
     dispatch(getAuthData())
-    loadDefault()
+    // loadDefault()
     // console.log(props.isLogedIn, "props.isLogedIn")
     // if (props.isLogedIn == false || props.isLogedIn == undefined) {
     //   router.push("/login");
