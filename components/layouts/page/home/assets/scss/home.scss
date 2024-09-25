@@ -159,7 +159,7 @@ body {
             text-transform: capitalize;
 
             h3 {
-              padding-top: 15px;
+              // padding-top: 15px;
               font-size: 1.2rem;
               line-height: 1;
               display: block;
@@ -741,6 +741,9 @@ body {
 
 
 @media screen and (max-width:600px) {
+  .dashboard-sales .salesprops .search-result .searchlist .search-l-body{
+    gap: 7px !important;
+  }
   .dashboard-sales {
     width: 100% !important;
     .actionbar{
@@ -793,12 +796,13 @@ body {
             .kpi {
               // display: none !important;
               span{
-                background: transparent !important;
+                background: #1E1E20 !important;
+                border: 1px solid #2D2D2E !important;
                 &.bg-lpink{
                   background: #FF9191 !important;
                 }
                 &.bg-dgreen{
-                  background: #C9FFCE !important;
+                  background: #00A171 !important;
                 }
               }
             }
