@@ -60,11 +60,11 @@ const SearchProperty = (props) => {
                                     </div>
                                     <div className="kpi">
                                         <span> Total Units: {property.attributes.totalUnits}</span>
-                                        <span className={(property.attributes.totalUnits>0 && property.attributes.availableUnits == 0) &&"bg-dgreen"}> Units Available : {property.attributes.availableUnits}</span>
+                                        <span className={(property.attributes.totalUnits>0 && property.attributes.availableUnits == 0) ? "bg-dgreen" : (property.attributes.availableUnits > 50) ? "bg-lpink" : ""}> Units Available : {property.attributes.availableUnits}</span>
                                     </div>
                                 </div>
                                 <div className="summery">
-                                    <span>{property.attributes.AgeingTotal_default}</span>
+                                    <span><span className="number">{property.attributes.AgeingTotal_default}</span> Ageing Defaults</span>
                                 </div>
                             </div>
                         </div>

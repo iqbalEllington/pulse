@@ -73,23 +73,22 @@ const index = ({ router }, props) => {
     return (value * 100 / total).toFixed(2)
   }
   async function activateProeprty(id = false) {
-    if (id != false) {
-      let id = properties[propindex]['id']
+    if (id == false) {
+       id = properties[propindex]?.['id']
     }
     if (propindex > properties.length) {
       setPropIndex(0)
       return
     }
-    console.log(index, properties.length, id)
     var response;
     if (id != false) {
       response = await getRequest({ API: API_URLS.GET_PROPERTIES + '?populate[]=featuredImage&populate[]=latestImages&filters[id]=' + id + '&sort=id:desc' });
     } else {
       response = await getRequest({ API: API_URLS.GET_PROPERTIES + '?populate[]=featuredImage&populate[]=latestImages&sort=id:desc' });
     }
-    var data = []
     if (await response?.status === 200) {
       setIsLoading(false)
+      console.log(response.data?.data, "response.data?.data?response.data?.data?")
       if (response.data?.data?.[0]) {
         setELproperties(response.data?.data?.[0])
       } else {
@@ -159,7 +158,7 @@ const index = ({ router }, props) => {
                       size="40"
                       strokeWidth="2"
                       isGrowing={true}
-                      duration={7}
+                      duration={13}
                       rotation={"counterclockwise"}
                       colors={['#C9FFCE', '#9E856F']}
                       colorsTime={[0, 7]}
@@ -194,7 +193,7 @@ const index = ({ router }, props) => {
               </div>
               <div className="salesprops-body" id="salesprops-body">
                 <div className="dashboard-body-left">
-                  <div className="col-12">
+                  <div className="col-12 mob-m-10">
                     <div className="db-header">
                       <h2>{ELproperties?.attributes?.name}</h2>
                       <div className="db-hdesc">
@@ -267,7 +266,7 @@ const index = ({ router }, props) => {
                             </div>
                             <div>
                               <h3>Available Units</h3>
-                              <span className="fg-lpink">{ELproperties?.attributes?.availableUnits}<b>({Math.round(ELproperties?.attributes?.availableUnits * 100 / ELproperties?.attributes?.totalUnits)})%</b></span>
+                              <span className="fg-lpink">{ELproperties?.attributes?.availableUnits}<b>({Math.round(ELproperties?.attributes?.availableUnits * 100 / ELproperties?.attributes?.totalUnits)}%)</b></span>
                             </div>
                           </div>
                         </div>
@@ -293,13 +292,13 @@ const index = ({ router }, props) => {
                           <div className="data-summery">
                             <div>
                               <h3>SPA Signed</h3>
-                              <span className="fg-dgreen">{ELproperties?.attributes?.SalesProgressionSigned} <b>( {(ELproperties?.attributes?.SalesProgressionSigned && ELproperties?.attributes?.SalesProgressionGenerated)
+                              <span className="fg-dgreen">{ELproperties?.attributes?.SalesProgressionSigned} <b>({(ELproperties?.attributes?.SalesProgressionSigned && ELproperties?.attributes?.SalesProgressionGenerated)
                                 ? (ELproperties.attributes.SalesProgressionSigned * 100 / ELproperties.attributes.SalesProgressionGenerated).toFixed(2)
-                                : 0}% )</b></span>
+                                : 0}%)</b></span>
                             </div>
                             <div>
                               <h3>SPA Executed</h3>
-                              <span className="fg-lpink">{ELproperties?.attributes?.SalesProgressionExecuted} <b>(  {ELproperties?.attributes?.SalesProgressionExecuted > 0 ? (ELproperties?.attributes?.SalesProgressionExecuted * 100 / ELproperties?.attributes?.SalesProgressionGenerated).toFixed(2) + "%" : "0%"} )</b></span>
+                              <span className="fg-lpink">{ELproperties?.attributes?.SalesProgressionExecuted} <b>({ELproperties?.attributes?.SalesProgressionExecuted > 0 ? (ELproperties?.attributes?.SalesProgressionExecuted * 100 / ELproperties?.attributes?.SalesProgressionGenerated).toFixed(2) + "%" : "0%"})</b></span>
                             </div>
                           </div>
                         </div>
@@ -325,11 +324,11 @@ const index = ({ router }, props) => {
                           <div className="data-summery">
                             <div>
                               <h3>DP Collected</h3>
-                              <span className="fg-dgreen">{ELproperties?.attributes?.DpAmountPaidCount} <b>({Math.round(ELproperties?.attributes?.DpAmountPaidCount * 100 / (Math.round(ELproperties?.attributes?.DpAmountPaidCount + (ELproperties?.attributes?.soldUnits - ELproperties?.attributes?.DpAmountPaidCount))))})%</b></span>
+                              <span className="fg-dgreen">{ELproperties?.attributes?.DpAmountPaidCount} <b>({Math.round(ELproperties?.attributes?.DpAmountPaidCount * 100 / (Math.round(ELproperties?.attributes?.DpAmountPaidCount + (ELproperties?.attributes?.soldUnits - ELproperties?.attributes?.DpAmountPaidCount))))}%)</b></span>
                             </div>
                             <div>
                               <h3>DP Outstanding</h3>
-                              <span className="fg-lpink">{ELproperties?.attributes?.soldUnits - ELproperties?.attributes?.DpAmountPaidCount} <b>({Math.round((ELproperties?.attributes?.soldUnits - ELproperties?.attributes?.DpAmountPaidCount) * 100 / (Math.round(ELproperties?.attributes?.DpAmountPaidCount + (ELproperties?.attributes?.soldUnits - ELproperties?.attributes?.DpAmountPaidCount))))})%</b></span>
+                              <span className="fg-lpink">{ELproperties?.attributes?.soldUnits - ELproperties?.attributes?.DpAmountPaidCount} <b>({Math.round((ELproperties?.attributes?.soldUnits - ELproperties?.attributes?.DpAmountPaidCount) * 100 / (Math.round(ELproperties?.attributes?.DpAmountPaidCount + (ELproperties?.attributes?.soldUnits - ELproperties?.attributes?.DpAmountPaidCount))))}%)</b></span>
                             </div>
                           </div>
                         </div>
