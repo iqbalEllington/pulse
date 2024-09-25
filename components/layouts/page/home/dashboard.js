@@ -20,6 +20,7 @@ import { covertToCurrency } from "/services/utilsService";
 import Dropdown from 'react-bootstrap/Dropdown';
 import generatePDF, { Resolution, Margin } from 'react-to-pdf';
 import rehypeRaw from "rehype-raw";
+import Head from "next/head";
 
 const index = ({ router }, props) => {
   const [loading, setIsLoading] = useState(false)
@@ -105,7 +106,7 @@ const index = ({ router }, props) => {
   }
   async function getroeprties() {
     var response;
-    response = await getRequest({ API: API_URLS.GET_PROPERTIES + '?fields[0]=id&sort=id:desc' });
+    response = await getRequest({ API: API_URLS.GET_PROPERTIES + '?fields[0]=id&pagination[page]=1&pagination[pageSize]=100&sort=id:desc' });
     var data = []
     if (await response?.status === 200) {
       setIsLoading(false)
@@ -145,6 +146,13 @@ const index = ({ router }, props) => {
 
   return (
     <>
+    <Head>
+    {/* <meta name="viewport" content="width=device-width, initial-scale=1.0"/> */}
+    {/* <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/> */}
+    {/* <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"/> */}
+    {/* <meta name="viewport" content="device-width, initial-scale=1.0"/> */}
+    {/* <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/> */}
+    </Head>
       <div className="wishbanner pb w-100">
         <div className="container-fluid">
           <div className="row dashboard-sales">
