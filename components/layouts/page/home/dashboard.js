@@ -592,7 +592,7 @@ const index = ({ router }, props) => {
                       </Kpibox>
                     </div>
                     <div className="ai-insight">
-                      <Kpibox title="Inventory Insights" withhead={true} theme="dark" padding="0px">
+                      <Kpibox title="PulseAI"  withhead={true} theme="dark" padding="0px">
                         <ul className="ai-indicate">
                           {ELproperties?.attributes?.pulseAI &&
                           <>
