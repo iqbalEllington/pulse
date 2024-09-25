@@ -86,9 +86,9 @@ const listview = ({ router }, props) => {
     }
     var response;
     if (id != false) {
-      response = await getRequest({ API: API_URLS.GET_PROPERTIES + '?populate[]=featuredImage&populate[]=latestImages&filters[id]=' + id + '&sort=id:desc' });
+      response = await getRequest({ API: API_URLS.GET_PROPERTIES + '?populate[]=featuredImage&populate[]=latestImages&filters[id]=' + id + '&sort='+sorter });
     } else {
-      response = await getRequest({ API: API_URLS.GET_PROPERTIES + '?populate[]=featuredImage&populate[]=latestImages&sort=id:desc' });
+      response = await getRequest({ API: API_URLS.GET_PROPERTIES + '?populate[]=featuredImage&populate[]=latestImages&sort='+sorter });
     }
     if (await response?.status === 200) {
       setIsLoading(false)
@@ -106,7 +106,7 @@ const listview = ({ router }, props) => {
   }
   async function getroeprties(value = "") {
     var response;
-    response = await getRequest({ API: API_URLS.GET_PROPERTIES + '?populate[]=featuredImage&populate[]=latestImages&sort=id:desc&pagination[pageSize]=100&filters[name][$containsi]=' + value + '' });
+    response = await getRequest({ API: API_URLS.GET_PROPERTIES + '?populate[]=featuredImage&populate[]=latestImages&sort='+sorter+'&pagination[pageSize]=100&filters[name][$containsi]=' + value + '' });
     var data = []
     if (await response?.status === 200) {
       setIsLoading(false)
@@ -151,7 +151,14 @@ const listview = ({ router }, props) => {
        visibilityArrays.push(id)
        setVisibilityarray([...visibilityArrays])
   }
-  
+  const [sorter,setSorter]=useState("id:desc")
+  const tooglesort=(value)=>{
+    if(sorter==sorter+":desc"){
+      setSorter(value+":asc")
+    }else{
+      setSorter(value+":asc")
+    }
+  }
   return (
     <>
       <div className="wishbanner pb w-100">
@@ -196,16 +203,16 @@ const listview = ({ router }, props) => {
                   <th>
 
                   </th>
-                  <th>
+                  <th onClick={()=>tooglesort("name")}>
                     Project
                   </th>
-                  <th>
+                  <th onClick={()=>tooglesort("completionProgress")}>
                     Status Completion
                   </th>
                   <th>
                     Launch Month
                   </th>
-                  <th>
+                  <th onClick={()=>tooglesort("totalUnits")}>
                     Total Units
                   </th>
                   <th>
