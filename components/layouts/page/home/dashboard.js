@@ -20,7 +20,6 @@ import { covertToCurrency } from "/services/utilsService";
 import Dropdown from 'react-bootstrap/Dropdown';
 import generatePDF, { Resolution, Margin } from 'react-to-pdf';
 import rehypeRaw from "rehype-raw";
-import Head from "next/head";
 
 const index = ({ router }, props) => {
   const [loading, setIsLoading] = useState(false)
@@ -146,13 +145,6 @@ const index = ({ router }, props) => {
 
   return (
     <>
-    <Head>
-    {/* <meta name="viewport" content="width=device-width, initial-scale=1.0"/> */}
-    {/* <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/> */}
-    {/* <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"/> */}
-    {/* <meta name="viewport" content="device-width, initial-scale=1.0"/> */}
-    {/* <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/> */}
-    </Head>
       <div className="wishbanner pb w-100">
         <div className="container-fluid">
           <div className="row dashboard-sales">
@@ -502,47 +494,47 @@ const index = ({ router }, props) => {
                               <tr>
                                 <td>
                                   <h5>{ELproperties?.attributes?.totalUnits}</h5>
-                                  <span>Units</span>
+                                  <span><span className="mb-view">Total </span>Units</span>
                                   {/* <LineProgress length={100} thick={2} color="#252526" percentage={Math.round(ELproperties?.attributes?.soldUnits * 100 / ELproperties?.attributes?.totalUnits)} start="begining" /> */}
 
                                 </td>
                                 <td>
                                   <h5 className="fg-green">{ELproperties?.attributes?.soldUnits}</h5>
-                                  <span className="fg-green">Units</span>
+                                  <span className="fg-green"><span className="mb-view">Sold </span>Units</span>
                                   <LineProgress length={100} thick={2} color="#C9FFCE" percentage={Math.round(ELproperties?.attributes?.soldUnits * 100 / ELproperties?.attributes?.totalUnits)} start="begining" />
 
                                 </td>
                                 <td>
                                   <h5 className="fg-lpink">{ELproperties?.attributes?.availableUnits}</h5>
-                                  <span className="fg-lpink">Units</span>
+                                  <span className="fg-lpink"><span className="mb-view">Available </span>Units</span>
                                   <LineProgress length={100} thick={2} color="#FF9191" percentage={Math.round(ELproperties?.attributes?.availableUnits * 100 / ELproperties?.attributes?.totalUnits)} start="begining" />
                                 </td>
                                 <td>
                                   <h5>{ELproperties?.attributes?.blockedUnits}</h5>
-                                  <span>Units</span>
+                                  <span><span className="mb-view">Blocked </span>Units</span>
                                   <LineProgress length={100} thick={2} color="#FFF" percentage={Math.round(ELproperties?.attributes?.blockedUnits * 100 / ELproperties?.attributes?.totalUnits)} start="begining" />
                                 </td>
                               </tr>
                               <tr className="area">
                                 <td>
                                   <h5>{Math.round(ELproperties?.attributes?.totalUnitsArea)}</h5>
-                                  <span>Area Sqft</span>
+                                  <span><span className="mb-view">Total </span>Area Sqft</span>
                                   {/* <LineProgress length={100} thick={2} color="#252526" percentage={Math.round(ELproperties?.attributes?.soldUnits * 100 / ELproperties?.attributes?.totalUnits)} start="begining" /> */}
                                 </td>
                                 <td>
                                   <h5 className="fg-green">{Math.round(ELproperties?.attributes?.soldunitsArea)}</h5>
-                                  <span className="fg-green">Area Sqft</span>
+                                  <span className="fg-green"><span className="mb-view">Sold </span>Area Sqft</span>
                                   <LineProgress length={100} thick={2} color="#C9FFCE" percentage={Math.round(ELproperties?.attributes?.soldunitsArea * 100 / ELproperties?.attributes?.totalUnitsArea)} start="begining" />
 
                                 </td>
                                 <td>
                                   <h5 className="fg-lpink">{Math.round(ELproperties?.attributes?.availableUnitsArea)}</h5>
-                                  <span className="fg-lpink">Area Sqft</span>
+                                  <span className="fg-lpink"><span className="mb-view">Available </span>Area Sqft</span>
                                   <LineProgress length={100} thick={2} color="#FF9191" percentage={Math.round(ELproperties?.attributes?.availableUnitsArea * 100 / ELproperties?.attributes?.totalUnitsArea)} start="begining" />
                                 </td>
                                 <td>
                                   <h5>{Math.round(ELproperties?.attributes?.blockedUnitsArea)}</h5>
-                                  <span>Area Sqft</span>
+                                  <span><span className="mb-view">Blocked </span>Area Sqft</span>
                                   <LineProgress length={100} thick={2} color="#FFF" percentage={Math.round(ELproperties?.attributes?.blockedUnitsArea * 100 / ELproperties?.attributes?.totalUnitsArea)} start="begining" />
                                 </td>
                               </tr>
@@ -563,28 +555,32 @@ const index = ({ router }, props) => {
                             <tbody>
                               <tr className="amount">
                                 <td>
+                                <span className="mb-view mb-2">Original Value </span> 
                                   <h5>{covertToCurrency(ELproperties?.attributes?.unitAmountTotal_og, false)}</h5>
                                   {/* <h5 className={ELproperties?.attributes?.unitAmountTotal_og <= ELproperties?.attributes?.unitAmountTotal ? "fg-green" : "fg-lpink"}>Sold:{ELproperties?.attributes?.unitAmountTotal_og <= ELproperties?.attributes?.unitAmountTotal ? <FaArrowUp /> : <FaArrowDown />} {covertToCurrency(ELproperties?.attributes?.unitAmountTotal, false)}</h5> */}
                                   <span>{covertToCurrency((ELproperties?.attributes?.unitAmountTotal_og / ELproperties?.attributes?.totalUnitsArea), false)}/sq.ft</span>
                                 </td>
                                 <td>
-                                  <h5 className="fg-green">Sold: {covertToCurrency(ELproperties?.attributes?.soldUnitAMount, false)}</h5>
-                                  <h5> Actual: {covertToCurrency(ELproperties?.attributes?.unitAmountsSold_og, false)}</h5>
+                                  
+                                  <h5 className="fg-green">Sold: <span className="d-flex mb-view"> </span> {covertToCurrency(ELproperties?.attributes?.soldUnitAMount, false)}</h5>
+                                  <h5> <span className="d-flex mb-view mt-4"> </span>Actual: <span className="d-flex mb-view"> </span>{covertToCurrency(ELproperties?.attributes?.unitAmountsSold_og, false)}</h5>
 
 
                                   {/* <span>Sold: {covertToCurrency(ELproperties?.attributes?.unitAmountTotal,false)}</span> */}
                                 </td>
                                 <td>
-                                  <span className="fg-green" >{covertToCurrency((ELproperties?.attributes?.soldUnitAMount / ELproperties?.attributes?.soldunitsArea), false)}/sq.ft</span>
-                                  <span className="mt-1">{covertToCurrency((ELproperties?.attributes?.unitAmountTotal_og / ELproperties?.attributes?.totalUnitsArea), false)}/sq.ft</span>
+                                  <span className="fg-green" ><span className="mb-view">Sold</span>{covertToCurrency((ELproperties?.attributes?.soldUnitAMount / ELproperties?.attributes?.soldunitsArea), false)}/sq.ft</span>
+                                  <span className="mt-1"><span className="mb-view">Actual</span>{covertToCurrency((ELproperties?.attributes?.unitAmountTotal_og / ELproperties?.attributes?.totalUnitsArea), false)}/sq.ft</span>
 
                                 </td>
                                 <td>
+                                <span className="mb-view">Available</span>
                                   <h5 className="fg-lpink">{covertToCurrency(ELproperties?.attributes?.unitAmountAvailable_og, false)}</h5>
                                   {/* <h5 className={ELproperties?.attributes?.unitAmountTotal_og <= ELproperties?.attributes?.unitAmountTotal ? "fg-green" : "fg-lpink"}>Sold:{ELproperties?.attributes?.unitAmountTotal_og <= ELproperties?.attributes?.unitAmountTotal ? <FaArrowUp /> : <FaArrowDown />} {covertToCurrency(ELproperties?.attributes?.unitAmountTotal, false)}</h5> */}
 
                                 </td>
                                 <td>
+                                <span className="mb-view">Blocked</span>
                                   <h5>{covertToCurrency(ELproperties?.attributes?.unitAmountBlocked_og, false)}</h5>
                                   {/* <h5 className={ELproperties?.attributes?.unitAmountTotal_og <= ELproperties?.attributes?.unitAmountTotal ? "fg-green" : "fg-lpink"}>Sold:{ELproperties?.attributes?.unitAmountTotal_og <= ELproperties?.attributes?.unitAmountTotal ? <FaArrowUp /> : <FaArrowDown />} {covertToCurrency(ELproperties?.attributes?.unitAmountTotal, false)}</h5> */}
 

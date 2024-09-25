@@ -603,7 +603,9 @@ body {
     display: block;
   }
 }
-
+.mb-view{
+  display: none !important;
+}
 .ai-insight {
   width: 33%;
   padding: 0px;
@@ -867,7 +869,9 @@ body {
       }
     }
   }
-
+  .mb-view{
+    display: flex !important;
+  }
   .dashboard-sales .salesprops-body .dashboard-body-right .imagebar .image-content {
     height: auto;
   }
@@ -903,6 +907,7 @@ body {
       justify-content: space-around;
 
       td {
+        min-width: 50%;
         flex: 1;
       }
     }
