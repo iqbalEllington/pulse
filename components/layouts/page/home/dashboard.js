@@ -16,10 +16,50 @@ import { CountdownCircleTimer } from 'react-countdown-circle-timer'
 import moment from "moment";
 import { covertToCurrency } from "/services/utilsService";
 import Dropdown from 'react-bootstrap/Dropdown';
+import generatePDF, { Resolution, Margin } from 'react-to-pdf';
 
 const index = ({ router }, props) => {
   const [loading, setIsLoading] = useState(false)
   const [ELproperties, setELproperties] = useState(false);
+ 
+  const options = {
+    // default is `save`
+    method: 'open',
+    // default is Resolution.MEDIUM = 3, which should be enough, higher values
+    // increases the image quality but also the size of the PDF, so be careful
+    // using values higher than 10 when having multiple pages generated, it
+    // might cause the page to crash or hang.
+    resolution: Resolution.LOW,
+
+    page: {
+       // margin is in MM, default is Margin.NONE = 0
+       margin: 0,
+       // default is 'A4'
+       format: 'A4',
+       
+       // default is 'portrait'
+       orientation: 'landscape',
+    },
+    canvas: {
+       // default is 'image/jpeg' for better size performance
+       mimeType: 'image/png',
+       qualityRatio: 1
+    },
+    // Customize any value passed to the jsPDF instance and html2canvas
+    // function. You probably will not need this and things can break, 
+    // so use with caution.
+    overrides: {
+       // see https://artskydj.github.io/jsPDF/docs/jsPDF.html for more options
+       pdf: {
+          compress: true
+       },
+       // see https://html2canvas.hertzen.com/configuration for more options
+       canvas: {
+          useCORS: true
+       }
+    },
+ };
+ const getTargetElement = () => document.getElementById('salesprops-body');
 
   const differencepercentage = (actual, sold) => {
     let actualSales = actual;
@@ -110,7 +150,7 @@ const index = ({ router }, props) => {
               <SearchProperty activateProeprty={activateProeprty} setloop={setloop} />
               <div className="actionbar">
 
-                <button className="downloadPdf"> Download PDF <FaArrowDown /></button>
+                <button className="downloadPdf" onClick={() => generatePDF(getTargetElement, options)}> Download PDF <FaArrowDown /></button>
                 <div className="playpause">
                   <div onClick={() => { setloop(!loop) }}>
                     <CountdownCircleTimer
@@ -152,7 +192,7 @@ const index = ({ router }, props) => {
                   </Dropdown.Menu>
                 </Dropdown>
               </div>
-              <div className="salesprops-body">
+              <div className="salesprops-body" id="salesprops-body">
                 <div className="dashboard-body-left">
                   <div className="col-12">
                     <div className="db-header">
@@ -390,7 +430,7 @@ const index = ({ router }, props) => {
                       <div className="mt-3 grapgh-elb">
                         <Kpibox righttitle={"Ageing Total " + covertToCurrency(ELproperties?.attributes?.AgeingTotal, false)} title={"Ageing - " + ELproperties?.attributes?.AgeingTotal_default + " Defaults"} withhead={true} theme="dark" padding="0px">
 
-                          <ul className="p-3">
+                          <ul className="pt-5 p-3 pb-5">
                             <li>
                               <div >
                                 <span style={{ color: "#FFF1DF" }}>{covertToCurrency(ELproperties?.attributes?.Ageing1_30, false)}</span>
@@ -437,8 +477,8 @@ const index = ({ router }, props) => {
                       </div>
                     </div>
                   </div>
-                  <div className="col-12 row mx-0 p-0 mt-3">
-                    <div className="col-12 col-md-8 pl-0">
+                  <div className="col-12 row mx-0 p-0 mt-4">
+                    <div className="col-12 col-md-8 pl-0 pr-0-mobile">
                       <Kpibox title="Inventory Insights" withhead={true} theme="dark" padding="0px">
                         <div className="tablegraph">
                           <table>
