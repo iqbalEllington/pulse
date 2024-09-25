@@ -3,6 +3,8 @@ import { getRequest } from "helper/api";
 import React, { Component, useState, useEffect } from "react";
 // import ProfileSideBar from "../myprofile/profileSideBar";
 import { API_URLS } from "helper/apiConstant";
+import { RiShareLine, RiPrinterLine } from "react-icons/ri";
+import ReactMarkdown from "react-markdown";
 import { toast } from "react-toastify";
 import CircleChart from "components/modals/circlechart";
 import Semicircelpie from "components/modals/Semicircelpie";
@@ -17,6 +19,7 @@ import moment from "moment";
 import { covertToCurrency } from "/services/utilsService";
 import Dropdown from 'react-bootstrap/Dropdown';
 import generatePDF, { Resolution, Margin } from 'react-to-pdf';
+import rehypeRaw from "rehype-raw";
 
 const index = ({ router }, props) => {
   const [loading, setIsLoading] = useState(false)
@@ -587,7 +590,29 @@ const index = ({ router }, props) => {
                     <div className="ai-insight">
                       <Kpibox title="Inventory Insights" withhead={true} theme="dark" padding="0px">
                         <ul className="ai-indicate">
-                          <li>
+                          {ELproperties?.attributes?.pulseAI &&
+                          <>
+                          {Object.keys(ELproperties?.attributes?.pulseAI).map((key) => (
+                            <li>
+                            <div className={(ELproperties?.attributes?.pulseAI[key]?.['label'])}>
+                              <i className="circle"></i>
+                              <p>
+                              <ReactMarkdown className="rounded-frame" rehypePlugins={[rehypeRaw]} children={ELproperties?.attributes?.pulseAI[key]?.['content']}
+                    escapeHtml={true} /></p>
+                            </div>
+                          </li>
+                          ))}
+                          </>
+                        }
+                          {/* {ELproperties?.attributes?.pulseAI.map(()=>{
+                            return <li>
+                            <div className="danger">
+                              <i className="circle"></i>
+                              <p><span>50%</span> of the downpayment yet to collect</p>
+                            </div>
+                          </li>
+                          })} */}
+                          {/* <li>
                             <div className="danger">
                               <i className="circle"></i>
                               <p><span>50%</span> of the downpayment yet to collect</p>
@@ -616,7 +641,7 @@ const index = ({ router }, props) => {
                               <i cx="8" cy="8" r="8" className="circle"></i>
                               <p><span>50%</span> of the downpayment yet to collect</p>
                             </div>
-                          </li>
+                          </li> */}
                         </ul>
                       </Kpibox>
                     </div>
