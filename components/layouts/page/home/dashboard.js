@@ -20,11 +20,15 @@ import { covertToCurrency } from "/services/utilsService";
 import Dropdown from 'react-bootstrap/Dropdown';
 import generatePDF, { Resolution, Margin } from 'react-to-pdf';
 import rehypeRaw from "rehype-raw";
+import { useRouter } from "next/router";
+import Link from "next/link";
+import { FaList } from "react-icons/fa6";
 
 const index = ({ router }, props) => {
   const [loading, setIsLoading] = useState(false)
   const [ELproperties, setELproperties] = useState(false);
- 
+  const routers = useRouter();
+
   const options = {
     // default is `save`
     method: 'open',
@@ -35,34 +39,34 @@ const index = ({ router }, props) => {
     resolution: Resolution.LOW,
 
     page: {
-       // margin is in MM, default is Margin.NONE = 0
-       margin: 0,
-       // default is 'A4'
-       format: 'A4',
-       
-       // default is 'portrait'
-       orientation: 'landscape',
+      // margin is in MM, default is Margin.NONE = 0
+      margin: 0,
+      // default is 'A4'
+      format: 'A4',
+
+      // default is 'portrait'
+      orientation: 'landscape',
     },
     canvas: {
-       // default is 'image/jpeg' for better size performance
-       mimeType: 'image/png',
-       qualityRatio: 1
+      // default is 'image/jpeg' for better size performance
+      mimeType: 'image/png',
+      qualityRatio: 1
     },
     // Customize any value passed to the jsPDF instance and html2canvas
     // function. You probably will not need this and things can break, 
     // so use with caution.
     overrides: {
-       // see https://artskydj.github.io/jsPDF/docs/jsPDF.html for more options
-       pdf: {
-          compress: true
-       },
-       // see https://html2canvas.hertzen.com/configuration for more options
-       canvas: {
-          useCORS: true
-       }
+      // see https://artskydj.github.io/jsPDF/docs/jsPDF.html for more options
+      pdf: {
+        compress: true
+      },
+      // see https://html2canvas.hertzen.com/configuration for more options
+      canvas: {
+        useCORS: true
+      }
     },
- };
- const getTargetElement = () => document.getElementById('salesprops-body');
+  };
+  const getTargetElement = () => document.getElementById('salesprops-body');
 
   const differencepercentage = (actual, sold) => {
     let actualSales = actual;
@@ -77,7 +81,7 @@ const index = ({ router }, props) => {
   }
   async function activateProeprty(id = false) {
     if (id == false) {
-       id = properties[propindex]?.['id']
+      id = properties[propindex]?.['id']
     }
     if (propindex > properties.length) {
       setPropIndex(0)
@@ -91,7 +95,6 @@ const index = ({ router }, props) => {
     }
     if (await response?.status === 200) {
       setIsLoading(false)
-      console.log(response.data?.data, "response.data?.data?response.data?.data?")
       if (response.data?.data?.[0]) {
         setELproperties(response.data?.data?.[0])
       } else {
@@ -110,7 +113,9 @@ const index = ({ router }, props) => {
     if (await response?.status === 200) {
       setIsLoading(false)
       setproperties(response.data?.data)
-      setPropIndex(0)
+      if(propindex!='loading'){
+        setPropIndex(0)
+      }
     } else if (response?.status === 401) {
       toast("Unauthorize access please re-login.");
     } else {
@@ -142,7 +147,18 @@ const index = ({ router }, props) => {
     }
   }, [propindex])
 
-
+  useEffect(() => {
+    // Ensure the router is ready before accessing query parameters
+    if (routers.isReady) {
+      const { property } = routers.query; // Get the 'property' query parameter
+      if (property) {
+        activateProeprty(property); // Call with the property value
+        setloop(false)
+      } else {
+        activateProeprty(); // Call without argument if no property in the URL
+      }
+    }
+  }, [routers.isReady, routers.query]);
   return (
     <>
       <div className="wishbanner pb w-100">
@@ -151,7 +167,7 @@ const index = ({ router }, props) => {
             <div className="pl-5 salesprops">
               <SearchProperty activateProeprty={activateProeprty} setloop={setloop} />
               <div className="actionbar">
-
+                 <span className="last-updated">Latest Data as of:  {moment(ELproperties?.attributes?.LastUpdatedDate).format('DD MMM YYYY')} </span>
                 <button className="downloadPdf" onClick={() => generatePDF(getTargetElement, options)}> Download PDF <FaArrowDown /></button>
                 <div className="playpause">
                   <div onClick={() => { setloop(!loop) }}>
@@ -246,20 +262,20 @@ const index = ({ router }, props) => {
                       <Kpibox title="Units" withhead={true} theme="light">
                         <div className="vis-data">
                           <div className="p-4">
-                            <CircleChart kpiText="Total Units" size={{ Width: "150px", Height: "150px" }} 
-                            
-                            percentage={Math.round(ELproperties?.attributes?.soldUnits * 100 / ELproperties?.attributes?.totalUnits)} kpiValue={{
-                              total: ELproperties?.attributes?.totalUnits,
-                              value1: {
-                                "unit": "Sold Units",
-                                "value": ELproperties?.attributes?.soldUnits
-                              },
-                              value2: {
-                                "unit": "Available",
-                                "value": ELproperties?.attributes?.availableUnits
-                              },
-                              isamount: false
-                            }}
+                            <CircleChart kpiText="Total Units" size={{ Width: "150px", Height: "150px" }}
+
+                              percentage={Math.round(ELproperties?.attributes?.soldUnits * 100 / ELproperties?.attributes?.totalUnits)} kpiValue={{
+                                total: ELproperties?.attributes?.totalUnits,
+                                value1: {
+                                  "unit": "Sold Units",
+                                  "value": ELproperties?.attributes?.soldUnits
+                                },
+                                value2: {
+                                  "unit": "Available",
+                                  "value": ELproperties?.attributes?.availableUnits
+                                },
+                                isamount: false
+                              }}
                               color="#00A171" />
                           </div>
                           <div className="data-summery">
@@ -404,7 +420,7 @@ const index = ({ router }, props) => {
                               </div>
                             </div>
                             <div className="p-3">
-                            <CircleChart
+                              <CircleChart
                                 kpiText="Total Due" kpiValue={{
                                   total: Math.round(ELproperties?.attributes?.DPamountDue),
                                   value1: {
@@ -555,13 +571,13 @@ const index = ({ router }, props) => {
                             <tbody>
                               <tr className="amount">
                                 <td>
-                                <span className="mb-view mb-2">Original Value </span> 
+                                  <span className="mb-view mb-2">Original Value </span>
                                   <h5>{covertToCurrency(ELproperties?.attributes?.unitAmountTotal_og, false)}</h5>
                                   {/* <h5 className={ELproperties?.attributes?.unitAmountTotal_og <= ELproperties?.attributes?.unitAmountTotal ? "fg-green" : "fg-lpink"}>Sold:{ELproperties?.attributes?.unitAmountTotal_og <= ELproperties?.attributes?.unitAmountTotal ? <FaArrowUp /> : <FaArrowDown />} {covertToCurrency(ELproperties?.attributes?.unitAmountTotal, false)}</h5> */}
                                   <span>{covertToCurrency((ELproperties?.attributes?.unitAmountTotal_og / ELproperties?.attributes?.totalUnitsArea), false)}/sq.ft</span>
                                 </td>
                                 <td>
-                                  
+
                                   <h5 className="fg-green">Sold : <span className="d-flex mb-view"> </span> {covertToCurrency(ELproperties?.attributes?.soldUnitAMount, false)}</h5>
                                   <h5> <span className="d-flex mb-view mt-4"> </span>Actual: <span className="d-flex mb-view"> </span>{covertToCurrency(ELproperties?.attributes?.unitAmountsSold_og, false)}</h5>
 
@@ -574,13 +590,13 @@ const index = ({ router }, props) => {
 
                                 </td>
                                 <td>
-                                <span className="mb-view">Available</span>
+                                  <span className="mb-view">Available</span>
                                   <h5 className="fg-lpink">{covertToCurrency(ELproperties?.attributes?.unitAmountAvailable_og, false)}</h5>
                                   {/* <h5 className={ELproperties?.attributes?.unitAmountTotal_og <= ELproperties?.attributes?.unitAmountTotal ? "fg-green" : "fg-lpink"}>Sold:{ELproperties?.attributes?.unitAmountTotal_og <= ELproperties?.attributes?.unitAmountTotal ? <FaArrowUp /> : <FaArrowDown />} {covertToCurrency(ELproperties?.attributes?.unitAmountTotal, false)}</h5> */}
 
                                 </td>
                                 <td>
-                                <span className="mb-view">Blocked</span>
+                                  <span className="mb-view">Blocked</span>
                                   <h5>{covertToCurrency(ELproperties?.attributes?.unitAmountBlocked_og, false)}</h5>
                                   {/* <h5 className={ELproperties?.attributes?.unitAmountTotal_og <= ELproperties?.attributes?.unitAmountTotal ? "fg-green" : "fg-lpink"}>Sold:{ELproperties?.attributes?.unitAmountTotal_og <= ELproperties?.attributes?.unitAmountTotal ? <FaArrowUp /> : <FaArrowDown />} {covertToCurrency(ELproperties?.attributes?.unitAmountTotal, false)}</h5> */}
 
@@ -592,22 +608,22 @@ const index = ({ router }, props) => {
                       </Kpibox>
                     </div>
                     <div className="ai-insight">
-                      <Kpibox title="PulseAI"  withhead={true} theme="dark" padding="0px">
+                      <Kpibox title="PulseAI" withhead={true} theme="dark" padding="0px">
                         <ul className="ai-indicate">
                           {ELproperties?.attributes?.pulseAI &&
-                          <>
-                          {Object.keys(ELproperties?.attributes?.pulseAI).map((key) => (
-                            <li>
-                            <div className={(ELproperties?.attributes?.pulseAI[key]?.['label'])}>
-                              <i className="circle"></i>
-                              <p>
-                              <ReactMarkdown className="rounded-frame" rehypePlugins={[rehypeRaw]} children={ELproperties?.attributes?.pulseAI[key]?.['content']}
-                    escapeHtml={true} /></p>
-                            </div>
-                          </li>
-                          ))}
-                          </>
-                        }
+                            <>
+                              {Object.keys(ELproperties?.attributes?.pulseAI).map((key) => (
+                                <li>
+                                  <div className={(ELproperties?.attributes?.pulseAI[key]?.['label'])}>
+                                    <i className="circle"></i>
+                                    <p>
+                                      <ReactMarkdown className="rounded-frame" rehypePlugins={[rehypeRaw]} children={ELproperties?.attributes?.pulseAI[key]?.['content']}
+                                        escapeHtml={true} /></p>
+                                  </div>
+                                </li>
+                              ))}
+                            </>
+                          }
                           {/* {ELproperties?.attributes?.pulseAI.map(()=>{
                             return <li>
                             <div className="danger">

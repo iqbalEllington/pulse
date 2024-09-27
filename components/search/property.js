@@ -4,6 +4,8 @@ import { API_URLS } from "helper/apiConstant";
 import { IoFilterSharp, IoSearch } from "react-icons/io5"
 import { toast } from "react-toastify";
 import { MdClose } from "react-icons/md";
+import Link from "next/link";
+import { FaList } from "react-icons/fa";
 
 const SearchProperty = (props) => {
     let filterSearch = (value) => {
@@ -40,6 +42,8 @@ const SearchProperty = (props) => {
             <input onFocus={() => Setisfocus(true)} onChange={(e) => filterSearch(e.target.value)} placeholder="Search" type="text" />
             <IoSearch />
             </div>
+            <Link className="list-view" href="/dashboard/listview"><FaList/><span>List View</span></Link>
+               
             <span className="result-count">Properties {property?.data?.length}</span>
           
         </div>

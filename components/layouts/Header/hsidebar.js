@@ -92,20 +92,38 @@ const Hsidebar = memo((props) => {
       >
         <div className={"menuActive active"}>
 
-     <div className="sidebar-header d-flex align-items-center justify-content-start"> 
+          <div className="sidebar-header d-flex align-items-center justify-content-start">
             <Link legacyBehavior href="/dashboard">
               <a className="navbar-brand">
                 <img src="/images/ellington-logo-Vector.svg" />
               </a>
             </Link>
-          </div> 
+          </div>
+          {/* <div
+            className="pt-0  my-scrollbar sidebar-body data-scrollbar"
+            data-scroll="1"
+            id="my-scrollbar"
+          >
+            <div className="sidebar-list navbar-collapse" id="sidebar"> 
+              <div
+                className={"header-toogler"}
+                data-toggle="sidebar"
+                data-active="true"
+                onClick={(() => minisidebar())}
+              >
+                <HiBars3 />
+
+                <span style={{ color: "white" }}>Expand Menu</span>
+              </div>
+            </div>
+          </div> */}
           {/* <div
             className="pt-0  my-scrollbar sidebar-body data-scrollbar"
             data-scroll="1"
             id="my-scrollbar"
           >
             <div className="sidebar-list navbar-collapse" id="sidebar"> */}
-              {/* <div
+          {/* <div
                 className={"header-toogler"}
                 data-toggle="sidebar"
                 data-active="true"
@@ -115,7 +133,7 @@ const Hsidebar = memo((props) => {
 
                 <span style={{ color: "white" }}>Expand Menu</span>
               </div> */}
-              {/* <div
+          {/* <div
                 className={"menu-item"}
                 data-toggle="sidebar"
                 data-active="true"
@@ -160,7 +178,7 @@ const Hsidebar = memo((props) => {
                 </Link>
               </div> */}
 
-              {/* <div className="quick-links">
+          {/* <div className="quick-links">
 
       <Fragment>
         <Accordion as="ul" className="navbar-nav iq-main-menu">
@@ -194,8 +212,8 @@ const Hsidebar = memo((props) => {
         </Accordion>
       </Fragment>
     </div> */}
-              {/* <HverticalNav menus={data.menus} /> */}
-            {/* </div> */}
+          {/* <HverticalNav menus={data.menus} /> */}
+          {/* </div> */}
           {/* </div> */}
           <div className="sidebar-footer"></div>
         </div>

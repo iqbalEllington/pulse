@@ -21,6 +21,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import generatePDF, { Resolution, Margin } from 'react-to-pdf';
 import rehypeRaw from "rehype-raw";
 import { IoSearch } from "react-icons/io5";
+import Link from "next/link";
 
 const listview = ({ router }, props) => {
   const [loading, setIsLoading] = useState(false)
@@ -86,13 +87,12 @@ const listview = ({ router }, props) => {
     }
     var response;
     if (id != false) {
-      response = await getRequest({ API: API_URLS.GET_PROPERTIES + '?populate[]=featuredImage&populate[]=latestImages&filters[id]=' + id + '&sort='+sorter });
+      response = await getRequest({ API: API_URLS.GET_PROPERTIES + '?populate[]=featuredImage&populate[]=latestImages&filters[id]=' + id + '&sort=' + sorter });
     } else {
-      response = await getRequest({ API: API_URLS.GET_PROPERTIES + '?populate[]=featuredImage&populate[]=latestImages&sort='+sorter });
+      response = await getRequest({ API: API_URLS.GET_PROPERTIES + '?populate[]=featuredImage&populate[]=latestImages&sort=' + sorter });
     }
     if (await response?.status === 200) {
       setIsLoading(false)
-      console.log(response.data?.data, "response.data?.data?response.data?.data?")
       if (response.data?.data?.[0]) {
         // setELproperties(response.data?.data?.[0])
       } else {
@@ -106,7 +106,7 @@ const listview = ({ router }, props) => {
   }
   async function getroeprties(value = "") {
     var response;
-    response = await getRequest({ API: API_URLS.GET_PROPERTIES + '?populate[]=featuredImage&populate[]=latestImages&sort='+sorter+'&pagination[pageSize]=100&filters[name][$containsi]=' + value + '' });
+    response = await getRequest({ API: API_URLS.GET_PROPERTIES + '?populate[]=featuredImage&populate[]=latestImages&sort=' + sorter + '&pagination[pageSize]=100&filters[name][$containsi]=' + value + '' });
     var data = []
     if (await response?.status === 200) {
       setIsLoading(false)
@@ -145,18 +145,18 @@ const listview = ({ router }, props) => {
   async function filterSearch(value) {
     getroeprties(value)
   }
-  const [visibilityArray,setVisibilityarray]=useState([]);
-  async function toggleVisibility(id){
-       let visibilityArrays =visibilityArray
-       visibilityArrays.push(id)
-       setVisibilityarray([...visibilityArrays])
+  const [visibilityArray, setVisibilityarray] = useState([]);
+  async function toggleVisibility(id) {
+    let visibilityArrays = visibilityArray
+    visibilityArrays.push(id)
+    setVisibilityarray([...visibilityArrays])
   }
-  const [sorter,setSorter]=useState("id:desc")
-  const tooglesort=(value)=>{
-    if(sorter==sorter+":desc"){
-      setSorter(value+":asc")
-    }else{
-      setSorter(value+":asc")
+  const [sorter, setSorter] = useState("id:desc")
+  const tooglesort = (value) => {
+    if (sorter == sorter + ":desc") {
+      setSorter(value + ":asc")
+    } else {
+      setSorter(value + ":asc")
     }
   }
   return (
@@ -197,22 +197,25 @@ const listview = ({ router }, props) => {
               </Kpibox> */}
             </div>
             <div className="table-list">
-
+              {visibilityArray.length > 0 &&
+                <div className="col-12">
+                  <button className="filter-show-all" onClick={() => setVisibilityarray([])}>Show All Listings</button>
+                </div>
+              }
               <table>
                 <thead>
                   <th>
-
                   </th>
-                  <th onClick={()=>tooglesort("name")}>
+                  <th onClick={() => tooglesort("name")}>
                     Project
                   </th>
-                  <th onClick={()=>tooglesort("completionProgress")}>
+                  <th onClick={() => tooglesort("completionProgress")}>
                     Status Completion
                   </th>
                   <th>
                     Launch Month
                   </th>
-                  <th onClick={()=>tooglesort("totalUnits")}>
+                  <th onClick={() => tooglesort("totalUnits")}>
                     Total Units
                   </th>
                   <th>
@@ -237,13 +240,17 @@ const listview = ({ router }, props) => {
                     {/* {JSON.stringify(properties)} */}
                   </tr>
                   {properties.length && properties?.map((ELproperties, value) => {
-                    return <tr className={visibilityArray.includes(value) ? "d-none": ""}>
-                      <td> {value + 1}  
-                        <button onClick={(e)=>{toggleVisibility(value)}} className="eye-icon">  <FaEyeSlash/></button>
+                    return <tr className={visibilityArray.includes(value) ? "d-none" : ""}>
+                      <td> {value + 1}
+                        <button onClick={(e) => { toggleVisibility(value) }} className="eye-icon">  <FaEyeSlash /></button>
                       </td>
-                      <td className="image-nd-name">
-                        <div className="imageholder"><img src={(ELproperties.attributes?.featuredImage?.data?.attributes?.url ? process.env.NEXT_PUBLIC_IMAGE_URL + ELproperties.attributes?.featuredImage?.data?.attributes?.url : "https://strapi.ellington.ae/uploads/imagenotfound_2b380da6d1.jpg")}></img></div>
-                        {ELproperties?.attributes?.name}
+                      <td>
+                        <Link className="image-nd-name" href={"/dashboard?property=" + ELproperties?.id}>
+
+                          <div className="imageholder"><img src={(ELproperties.attributes?.featuredImage?.data?.attributes?.url ? process.env.NEXT_PUBLIC_IMAGE_URL + ELproperties.attributes?.featuredImage?.data?.attributes?.url : "https://strapi.ellington.ae/uploads/imagenotfound_2b380da6d1.jpg")}></img></div>
+                          {ELproperties?.attributes?.name}
+                          <button className="linkbtn">View Insignt</button>
+                        </Link>
                       </td>
                       <td>
                         {ELproperties?.attributes?.completionProgress != null ? ELproperties?.attributes?.completionProgress + "%" : "TBA"}

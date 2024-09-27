@@ -1005,7 +1005,8 @@ body {
       display: block;
     }
   }
-  .span-lpink{
+
+  .span-lpink {
     span {
       background: #ED835B;
       color: #eafff9;
@@ -1020,10 +1021,12 @@ body {
     width: 100%;
     overflow: auto;
     padding: 0px;
+
     table {
       width: 90%;
 
-    background: #141414;
+      background: #141414;
+
       th {
         font-family: Acumin;
         font-size: 1rem;
@@ -1034,7 +1037,8 @@ body {
         padding-bottom: 10px;
         border: 1px solid #252527;
       }
-      .eye-icon{
+
+      .eye-icon {
         border: 0px;
         background: transparent;
         color: white;
@@ -1045,6 +1049,7 @@ body {
         border-radius: 50%;
         margin-left: 10px;
       }
+
       tr {
         td {
           color: white;
@@ -1052,10 +1057,22 @@ body {
           padding: 7px 10px;
           text-align: left;
           font-size: .9rem;
-          &.image-nd-name{
+
+          .image-nd-name {
             display: flex;
             align-items: center;
             gap: 10px;
+
+            color: white !important;
+
+            button {
+              background: #252526;
+              border: 0px;
+              color: #cac3dd;
+              text-decoration: underline;
+              padding: 4px 8px;
+              border-radius: 8px;
+            }
           }
         }
       }
@@ -1066,5 +1083,40 @@ body {
       height: 40px;
       border-radius: 50%;
     }
+  }
+}
+
+.filter-show-all {
+  background: #161618;
+  border: 1px solid #363636 !important;
+  border: 0px;
+  color: rgb(203, 203, 203);
+  margin-bottom: 10px;
+  padding: 7px 15px;
+  border-radius: 10px;
+}
+.last-updated{
+  background: #252526;
+  color: rgb(255, 241, 223);
+  padding: 8px 10px;
+  margin-right: 10px;
+}
+
+@media screen and (max-width:600px) {
+  .dashboard-sales_list{
+    padding: 10px;
+  }
+}
+.list-view{
+  color: white;
+  margin-right: 10px;
+  display: block;
+  width: 40px;
+  text-align: center;
+  span{
+    width: 100%;
+    display: block;
+    font-size: .4rem;
+    padding: 0px !important;
   }
 }
