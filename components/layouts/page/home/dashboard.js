@@ -240,20 +240,21 @@ const index = ({ router }, props) => {
                       </div>
                     </div>
                     <div className="age">
+                     
+                      <div>
+                        <span>
+                          Completed %
+                        </span>
+                        <span className="flex-start">
+                          {ELproperties?.attributes?.completionProgress != null ? ELproperties?.attributes?.completionProgress : 0}
+                        </span>
+                      </div>
                       <div>
                         <span>
                           Age
                         </span>
                         <span>
                           {moment().diff(moment(ELproperties?.attributes?.launchDate), 'months')} Months
-                        </span>
-                      </div>
-                      <div>
-                        <span>
-                          Completed %
-                        </span>
-                        <span className="flex-end">
-                          {ELproperties?.attributes?.completionProgress != null ? ELproperties?.attributes?.completionProgress : 0}
                         </span>
                       </div>
                     </div>
@@ -324,7 +325,7 @@ const index = ({ router }, props) => {
                       </Kpibox>
                     </div>
                     <div className="col-12 mt-4">
-                      <Kpibox title="Down payments" withhead={true} theme="light">
+                      <Kpibox title="Down Payments" withhead={true} theme="light">
                         <div className="vis-data">
                           <div className="p-4">
                             <CircleChart kpiText="Total Due" kpiValue={{
@@ -337,7 +338,7 @@ const index = ({ router }, props) => {
                                 "unit": "DP Outstanding",
                                 "value": (ELproperties?.attributes?.soldUnits - ELproperties?.attributes?.DpOutstandingCount)
                               },
-                              isamount: false
+                              isamount: true
                             }} size={{ Width: "150px", Height: "150px" }} percentage={ELproperties?.attributes?.DpAmountPaidCount * 100 / (Math.round(ELproperties?.attributes?.DpAmountPaidCount + (ELproperties?.attributes?.soldUnits - ELproperties?.attributes?.DpAmountPaidCount)))} color="#00A171" />
                           </div>
                           <div className="data-summery">
@@ -557,7 +558,7 @@ const index = ({ router }, props) => {
                             </tbody>
                           </table>
                         </div>
-                        <h4 style={{ fontSize: "1rem", paddingLeft: "15px" }}>In Finance</h4>
+                        <h4 style={{ fontSize: "1rem", paddingLeft: "15px" }}>Inventory Insights in Finance</h4>
                         <div className="tablegraph footer-tablekpi">
 
                           <table>

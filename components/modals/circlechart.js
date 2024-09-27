@@ -75,7 +75,7 @@ const CircleChart = ({ percentage, color, size, kpiText, bodyColor, kpiValue }) 
                 <div className={styles['content'] + " " + styles[bodyColor]}>
                     <div>
                         <h4>{kpiText}</h4>
-                        <span  style={kpiValue.isamount==true? {fontSize:".7rem"}: {} }>{kpiValue?.total}</span>
+                        <span  style={kpiValue.isamount==true? {fontSize:".7rem"}: {} }>{covertToCurrency(kpiValue?.total,false)}</span>
                     </div>
                 </div>
                 <div
