@@ -1101,12 +1101,6 @@ body {
   padding: 8px 10px;
   margin-right: 10px;
 }
-
-@media screen and (max-width:600px) {
-  .dashboard-sales_list{
-    padding: 10px;
-  }
-}
 .list-view{
   color: white;
   margin-right: 10px;
@@ -1118,5 +1112,13 @@ body {
     display: block;
     font-size: .4rem;
     padding: 0px !important;
+  }
+}
+@media screen and (max-width:600px) {
+  .dashboard-sales_list{
+    padding: 10px;
+  }
+  .list-view{
+    display: none;
   }
 }
