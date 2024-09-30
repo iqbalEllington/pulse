@@ -223,6 +223,8 @@ const index = ({ router }, props) => {
                   </div>
                   <hr />
                   <Kpibox withhead={false} padding="15px">
+                    <div className="row">
+                    <div className="col-12 col-md-6 col-xl-12">
                     <div className="constructionstatus mt-5">
                       <div className="semipie">
                         <Semicircelpie size={{ Width: "250px", Height: "250px" }} percentage={ELproperties?.attributes?.completionProgress != null ? ELproperties?.attributes?.completionProgress : 0} pathFill='#2B2B36' lineStroke='#C9FFCE' />
@@ -258,8 +260,9 @@ const index = ({ router }, props) => {
                         </span>
                       </div>
                     </div>
-                    <hr />
-                    <div className="col-12">
+                    </div>
+                    {/* <hr /> */}
+                    <div className="col-md-6 col-12 col-xl-12">
                       <Kpibox title="Units" withhead={true} theme="light">
                         <div className="vis-data">
                           <div className="p-4">
@@ -292,7 +295,7 @@ const index = ({ router }, props) => {
                         </div>
                       </Kpibox>
                     </div>
-                    <div className="col-12  mt-4">
+                    <div className="col-md-6 col-12 col-xl-12 mt-4">
                       <Kpibox title="Sales Progression" withhead={true} theme="light">
                         <div className="vis-data">
                           <div className="p-4">
@@ -324,7 +327,7 @@ const index = ({ router }, props) => {
                         </div>
                       </Kpibox>
                     </div>
-                    <div className="col-12 mt-4">
+                    <div className="col-md-6 col-12 col-xl-12 mt-4">
                       <Kpibox title="Down Payments" withhead={true} theme="light">
                         <div className="vis-data">
                           <div className="p-4">
@@ -354,14 +357,15 @@ const index = ({ router }, props) => {
                         </div>
                       </Kpibox>
                     </div>
+                    </div>
                   </Kpibox>
                   <hr />
 
                 </div>
                 <div className="dashboard-body-right">
                   <div className="row">
-                    <div className="collectionbars">
-                      <div className="col-12 mt-4">
+                    <div className="collectionbars row m-0 p-0">
+                      <div className="col-12 col-md-6 mt-4 col-xl-12">
                         {/* <Kpibox withhead={false}> */}
                         <Kpibox title="Overall Collection" withhead={true} theme="dark" padding="0px">
                           <div className="vis-data">
@@ -401,7 +405,7 @@ const index = ({ router }, props) => {
                           </div>
                         </Kpibox>
                       </div>
-                      <div className="col-12 mt-4">
+                      <div className="col-12 col-md-6 mt-4 col-xl-12">
                         {/* <Kpibox withhead={false}> */}
                         <Kpibox title="Down payments" withhead={true} theme="dark" padding="0px">
                           <div className="vis-data">
@@ -497,7 +501,7 @@ const index = ({ router }, props) => {
                     </div>
                   </div>
                   <div className="col-12 row mx-0 p-0 mt-4">
-                    <div className="col-12 col-md-8 pl-0 pr-0-mobile">
+                    <div className="col-12 col-md-8 pl-0 pr-0-mobile width-for-md">
                       <Kpibox title="Inventory Insights" withhead={true} theme="dark" padding="0px">
                         <div className="tablegraph">
                           <table>

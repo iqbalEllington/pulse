@@ -751,9 +751,40 @@ body {
   padding-left: 0px;
 }
 
+@media (min-width: 768px) and (max-width: 1199px) {
+  .dashboard-sales .salesprops-body{
+    flex-wrap: wrap;
+    .dashboard-body-left{
+      min-width: 100%;
+    }
+  }
+  .dashboard-sales .salesprops-body .dashboard-body-right{
+    width: 100%;
+    flex-wrap: wrap;
+    .collectionbars{
+      min-width: 100%;
+    }
+  }
+  .dashboard-sales .salesprops-body .dashboard-body-right .right-d-t{
+    width: 100%;
+  }
+  .width-for-md{
+    width: 66%;
+  }
+}
 
-
-@media screen and (max-width:600px) {
+@media (min-width: 1200px) and (max-width: 1700px){
+  .dashboard-body-right{
+    width: 1150px !important;
+    .image-content{
+      min-height: 100%;
+      img{
+        min-height: 100%;
+      }
+    }
+  }
+}
+@media screen and (max-width:768px) {
   .dashboard-sales .salesprops .search-result .searchlist .search-l-body {
     gap: 7px !important;
   }
@@ -776,7 +807,9 @@ body {
   .grapgh-elb ul li div span:last-child {
     font-size: .8rem;
   }
-
+  .collectionbars{
+    min-width: 100%;
+  }
   .dashboard-sales {
     width: 100% !important;
 
