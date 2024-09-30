@@ -19,9 +19,9 @@ const SearchProperty = (props) => {
     async function getProperties(value) {
         var response;
         if (value != false) {
-            response = await getRequest({ API: API_URLS.GET_PROPERTIES + '?pagination[page]=1&pagination[pageSize]=100&populate[]=featuredImage&filters[name][$containsi]=' + value + '&sort=id:desc' });
+            response = await getRequest({ API: API_URLS.GET_PROPERTIES + '?pagination[page]=1&pagination[pageSize]=100&populate[]=featuredImage&filters[name][$containsi]=' + value + '&sort=launchDate:desc' });
         } else {
-            response = await getRequest({ API: API_URLS.GET_PROPERTIES + '?pagination[page]=1&pagination[pageSize]=100&populate[]=featuredImage&sort=id:desc' });
+            response = await getRequest({ API: API_URLS.GET_PROPERTIES + '?pagination[page]=1&pagination[pageSize]=100&populate[]=featuredImage&sort=launchDate:desc' });
         }
         var data = []
         if (await response?.status === 200) {
