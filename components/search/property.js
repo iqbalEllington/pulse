@@ -55,6 +55,7 @@ const SearchProperty = (props) => {
                     </span>
                     {property?.data?.map((property) => {
                         return <div className="property-list">
+                            <Link href={"/dashboard?property="+property.id}>
                             <div className="search-l-body" onClick={()=>{props.activateProeprty(property.id),props.setloop(false),Setisfocus(false),SetKeyowrd("")}}>
                                 <div className="imageholder"><img src={process.env.NEXT_PUBLIC_IMAGE_URL + (property.attributes?.featuredImage?.data?.attributes?.url ? property.attributes?.featuredImage?.data?.attributes?.url: "/uploads/imagenotfound_2b380da6d1.jpg")}></img></div>
                                 <div className="titles">
@@ -68,9 +69,10 @@ const SearchProperty = (props) => {
                                     </div>
                                 </div>
                                 <div className="summery">
-                                    <span><span className="number">{property.attributes.AgeingTotal_default}</span> Ageing Defaults</span>
+                                    <span style={{color:"white"}}><span className="number">{property.attributes.AgeingTotal_default}</span> Ageing Defaults</span>
                                 </div>
                             </div>
+                            </Link>
                         </div>
                     })}
                 </div>
