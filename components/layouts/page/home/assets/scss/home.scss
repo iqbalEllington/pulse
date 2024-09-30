@@ -1158,3 +1158,13 @@ body {
     display: none;
   }
 }
+
+
+@media screen and (min-width:1200px){
+  .dashboard-sales .salesprops .search-result {
+    position: absolute;
+  }
+  .dashboard-sales .salesprops .search-result .searchlist{
+    left: 0px;
+  }
+}
