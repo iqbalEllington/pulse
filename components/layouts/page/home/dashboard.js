@@ -538,24 +538,24 @@ const index = ({ router }, props) => {
                               </tr>
                               <tr className="area">
                                 <td>
-                                  <h5>{Math.round(ELproperties?.attributes?.totalUnitsArea)}</h5>
-                                  <span><span className="mb-view">Total </span>Area Sqft</span>
+                                  <h5>{covertToCurrency(Math.round(ELproperties?.attributes?.totalUnitsArea),false)}</h5>
+                                  <span><span className="mb-view">Total </span>Area Sq.ft</span>
                                   {/* <LineProgress length={100} thick={2} color="#252526" percentage={Math.round(ELproperties?.attributes?.soldUnits * 100 / ELproperties?.attributes?.totalUnits)} start="begining" /> */}
                                 </td>
                                 <td>
-                                  <h5 className="fg-green">{Math.round(ELproperties?.attributes?.soldunitsArea)}</h5>
-                                  <span className="fg-green"><span className="mb-view">Sold </span>Area Sqft</span>
+                                  <h5 className="fg-green">{covertToCurrency(Math.round(ELproperties?.attributes?.soldunitsArea),false)}</h5>
+                                  <span className="fg-green"><span className="mb-view">Sold </span>Area Sq.ft</span>
                                   <LineProgress length={100} thick={2} color="#C9FFCE" percentage={Math.round(ELproperties?.attributes?.soldunitsArea * 100 / ELproperties?.attributes?.totalUnitsArea)} start="begining" />
 
                                 </td>
                                 <td>
-                                  <h5 className="fg-lpink">{Math.round(ELproperties?.attributes?.availableUnitsArea)}</h5>
-                                  <span className="fg-lpink"><span className="mb-view">Available </span>Area Sqft</span>
+                                  <h5 className="fg-lpink">{covertToCurrency(Math.round(ELproperties?.attributes?.availableUnitsArea),false)}</h5>
+                                  <span className="fg-lpink"><span className="mb-view">Available </span>Area Sq.ft</span>
                                   <LineProgress length={100} thick={2} color="#FF9191" percentage={Math.round(ELproperties?.attributes?.availableUnitsArea * 100 / ELproperties?.attributes?.totalUnitsArea)} start="begining" />
                                 </td>
                                 <td>
-                                  <h5>{Math.round(ELproperties?.attributes?.blockedUnitsArea)}</h5>
-                                  <span><span className="mb-view">Blocked </span>Area Sqft</span>
+                                  <h5>{covertToCurrency(Math.round(ELproperties?.attributes?.blockedUnitsArea),false)}</h5>
+                                  <span><span className="mb-view">Blocked </span>Area Sq.ft</span>
                                   <LineProgress length={100} thick={2} color="#FFF" percentage={Math.round(ELproperties?.attributes?.blockedUnitsArea * 100 / ELproperties?.attributes?.totalUnitsArea)} start="begining" />
                                 </td>
                               </tr>
@@ -590,8 +590,8 @@ const index = ({ router }, props) => {
                                   {/* <span>Sold: {covertToCurrency(ELproperties?.attributes?.unitAmountTotal,false)}</span> */}
                                 </td>
                                 <td>
-                                  <span className="fg-green" ><span className="mb-view">Sold per sqft</span>{covertToCurrency((ELproperties?.attributes?.soldUnitAMount / ELproperties?.attributes?.soldunitsArea), false)}/sq.ft</span>
-                                  <span className="mt-1"><span className="mb-view d-flex mt-4">Actual per sqft</span>{covertToCurrency((ELproperties?.attributes?.unitAmountTotal_og / ELproperties?.attributes?.totalUnitsArea), false)}/sq.ft</span>
+                                  <span className="fg-green" ><span className="mb-view">Sold per sq.ft</span>{covertToCurrency((ELproperties?.attributes?.soldUnitAMount / ELproperties?.attributes?.soldunitsArea), false)}/sq.ft</span>
+                                  <span className="mt-1"><span className="mb-view d-flex mt-4">Actual per sq.ft</span>{covertToCurrency((ELproperties?.attributes?.unitAmountTotal_og / ELproperties?.attributes?.totalUnitsArea), false)}/sq.ft</span>
 
                                 </td>
                                 <td>
