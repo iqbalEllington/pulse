@@ -61,7 +61,7 @@ const SearchProperty = (props) => {
                                 <div className="titles">
                                     <div>
                                         <h3>{property.attributes.name.toLowerCase()}</h3>
-                                        <p>{(property?.attributes?.emirates != null ? property?.attributes?.emirates : "UAE") + " " + (property?.attributes?.city != null ? property?.attributes?.city : "")}</p>
+                                        <p>{(property?.attributes?.emirates != null ? property?.attributes?.emirates : "UAE") + ", " + (property?.attributes?.city != null ? property?.attributes?.area : "")}</p>
                                     </div>
                                     <div className="kpi">
                                         <span> Total Units: {property.attributes.totalUnits}</span>

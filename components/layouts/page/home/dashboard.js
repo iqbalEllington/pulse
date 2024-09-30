@@ -216,7 +216,7 @@ const index = ({ router }, props) => {
                     <div className="db-header">
                       <h2>{ELproperties?.attributes?.name}</h2>
                       <div className="db-hdesc">
-                        <span>{(ELproperties?.attributes?.emirates != null ? ELproperties?.attributes?.emirates : "UAE") + " " + (ELproperties?.attributes?.area != null ? ELproperties?.attributes?.area : "")}</span>
+                        <span>{(ELproperties?.attributes?.emirates != null ? ELproperties?.attributes?.emirates : "UAE") + ", " + (ELproperties?.attributes?.area != null ? ELproperties?.attributes?.area : "")}</span>
                         <span> Launch Month: {moment(ELproperties?.attributes?.launchDate).format('MMM YYYY')}</span>
                       </div>
                     </div>
