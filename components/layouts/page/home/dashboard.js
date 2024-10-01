@@ -143,10 +143,12 @@ const index = ({ router }, props) => {
   useEffect(() => {
     if (propindex != "loading") {
       activateProeprty()
-      getuserdata()
     }
   }, [propindex])
 
+  useEffect(()=>{
+    getuserdata()
+  },[])
   useEffect(() => {
     // Ensure the router is ready before accessing query parameters
     if (routers.isReady) {
