@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styles from './CircleChart.module.scss'; // Import the scoped styles
 import { covertToCurrency } from "/services/utilsService";
 
-const CircleChart = ({ percentage, color, size, kpiText, bodyColor, kpiValue }) => {
+const CircleChart2 = ({ percentage, color, size, kpiText, bodyColor, kpiValue }) => {
     const radius = 90; // Radius of the main circle
     const circumference = 2 * Math.PI * radius; // Circumference of the circle
 
@@ -74,8 +74,8 @@ const CircleChart = ({ percentage, color, size, kpiText, bodyColor, kpiValue }) 
 
                 <div className={styles['content'] + " " + styles[bodyColor]}>
                     <div>
-                        <h4>{kpiText}</h4>
                         <span  style={kpiValue.isamount==true? {fontSize:".7rem"}: {} }>{covertToCurrency(kpiValue?.total,false)}</span>
+                        <h4 style={{fontSize:".6rem"}}>{kpiText}</h4>
                     </div>
                 </div>
                 <div
@@ -103,4 +103,4 @@ const CircleChart = ({ percentage, color, size, kpiText, bodyColor, kpiValue }) 
     );
 };
 
-export default CircleChart;
+export default CircleChart2;

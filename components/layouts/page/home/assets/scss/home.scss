@@ -662,7 +662,8 @@ body {
         padding: 0px 0px 0px 20px;
         margin: 0px;
         align-items: center;
-        p{
+
+        p {
           padding-left: 0px !important;
         }
       }
@@ -752,38 +753,46 @@ body {
 }
 
 @media (min-width: 768px) and (max-width: 1199px) {
-  .dashboard-sales .salesprops-body{
+  .dashboard-sales .salesprops-body {
     flex-wrap: wrap;
-    .dashboard-body-left{
+
+    .dashboard-body-left {
       min-width: 100%;
     }
   }
-  .dashboard-sales .salesprops-body .dashboard-body-right{
+
+  .dashboard-sales .salesprops-body .dashboard-body-right {
     width: 100%;
     flex-wrap: wrap;
-    .collectionbars{
+
+    .collectionbars {
       min-width: 100%;
     }
   }
-  .dashboard-sales .salesprops-body .dashboard-body-right .right-d-t{
+
+  .dashboard-sales .salesprops-body .dashboard-body-right .right-d-t {
     width: 100%;
   }
-  .width-for-md{
+
+  .width-for-md {
     width: 66%;
   }
 }
 
-@media (min-width: 1200px) and (max-width: 1700px){
-  .dashboard-body-right{
+@media (min-width: 1200px) and (max-width: 1700px) {
+  .dashboard-body-right {
     width: 1150px !important;
-    .image-content{
+
+    .image-content {
       min-height: 100%;
-      img{
+
+      img {
         min-height: 100%;
       }
     }
   }
 }
+
 @media screen and (max-width:768px) {
   .dashboard-sales .salesprops .search-result .searchlist .search-l-body {
     gap: 7px !important;
@@ -807,9 +816,11 @@ body {
   .grapgh-elb ul li div span:last-child {
     font-size: .8rem;
   }
-  .collectionbars{
+
+  .collectionbars {
     min-width: 100%;
   }
+
   .dashboard-sales {
     width: 100% !important;
 
@@ -1131,59 +1142,113 @@ body {
   padding: 7px 15px;
   border-radius: 10px;
 }
-.last-updated{
+
+.last-updated {
   background: #252526;
   color: rgb(255, 241, 223);
   padding: 8px 10px;
   margin-right: 10px;
 }
-.list-view{
+
+.list-view {
   color: white;
   margin-right: 10px;
   display: block;
   width: 40px;
   text-align: center;
-  span{
+
+  span {
     width: 100%;
     display: block;
     font-size: .4rem;
     padding: 0px !important;
   }
 }
+
 @media screen and (max-width:600px) {
-  .dashboard-sales_list{
+  .dashboard-sales_list {
     padding: 10px;
   }
-  .list-view{
+
+  .list-view {
     display: none;
   }
 }
 
 
-@media screen and (min-width:1200px){
+@media screen and (min-width:1200px) {
   .dashboard-sales .salesprops .search-result {
     position: absolute;
   }
-  .dashboard-sales .salesprops .search-result .searchlist{
+
+  .dashboard-sales .salesprops .search-result .searchlist {
     left: 0px;
   }
 }
 
 /* Styling the scrollbar */
 ::-webkit-scrollbar {
-  width: 12px; /* Adjust scrollbar width */
+  width: 12px;
+  /* Adjust scrollbar width */
 }
 
 ::-webkit-scrollbar-track {
-  background: #000; /* Black background for the track */
+  background: #000;
+  /* Black background for the track */
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #333; /* Dark grey scrollbar handle */
-  border-radius: 6px; /* Rounded corners */
-  border: 3px solid #000; /* Black border */
+  background-color: #333;
+  /* Dark grey scrollbar handle */
+  border-radius: 6px;
+  /* Rounded corners */
+  border: 3px solid #000;
+  /* Black border */
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background-color: #555; /* Lighter grey when hovered */
+  background-color: #555;
+  /* Lighter grey when hovered */
+}
+
+.figure-box{
+  min-width: 300px;
+  padding: 28px;
+  display: block;
+    .title{
+      h2{ 
+        display: flex;
+        color: #141414;
+        gap: 10px;
+        font-size: 1.3rem;
+        font-weight: bold;
+        font-family: AcuminBold;
+        align-items: center;
+        span{
+          display: inline-block;
+          background: #252526;
+          width: 50px;
+          height: 50px;
+          color: white;
+          border-radius: 10px;
+          font-size: 1.6rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+      }
+    }
+    .data{
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      padding-top: 25px;
+      span{
+        display: block;
+        width: 100%;
+        font-family: AcuminBlack;
+        font-size: 2rem;
+        line-height: 1;
+      }
+    }
 }

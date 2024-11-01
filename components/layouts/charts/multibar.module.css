@@ -1,0 +1,6 @@
+.pulsechart .MuiBarLabel-root{
+    font-size: 2rem;
+    max-width: 30px;
+    line-break: anywhere;
+    white-space: break-spaces;
+}

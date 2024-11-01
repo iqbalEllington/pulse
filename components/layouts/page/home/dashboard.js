@@ -91,7 +91,7 @@ const index = ({ router }, props) => {
     if (id != false) {
       response = await getRequest({ API: API_URLS.GET_PROPERTIES + '?populate[]=featuredImage&pagination[pageSize]=100&populate[]=latestImages&filters[id]=' + id + '&launchDate=id:desc' });
     } else {
-      response = await getRequest({ API: API_URLS.GET_PROPERTIES + '?populate[]=featuredImage&pagination[pageSize]=100&populate[]=latestImages&launchDate=id:desc' });
+      response = await getRequest({ API: API_URLS.GET_PROPERTIES + '?filters[occuarance]=All Time&populate[]=featuredImage&pagination[pageSize]=100&populate[]=latestImages&launchDate=id:desc' });
     }
     if (await response?.status === 200) {
       setIsLoading(false)
@@ -108,12 +108,12 @@ const index = ({ router }, props) => {
   }
   async function getroeprties() {
     var response;
-    response = await getRequest({ API: API_URLS.GET_PROPERTIES + '?fields[0]=id&pagination[page]=1&pagination[pageSize]=100&sort=id:desc' });
+    response = await getRequest({ API: API_URLS.GET_PROPERTIES + '?fields[0]=id&pagination[page]=1&pagination[pageSize]=100&filters[occuarance]=All Time&sort=id:desc' });
     var data = []
     if (await response?.status === 200) {
       setIsLoading(false)
       setproperties(response.data?.data)
-      if(propindex!='loading'){
+      if (propindex != 'loading') {
         setPropIndex(0)
       }
     } else if (response?.status === 401) {
@@ -146,9 +146,9 @@ const index = ({ router }, props) => {
     }
   }, [propindex])
 
-  useEffect(()=>{
+  useEffect(() => {
     getuserdata()
-  },[])
+  }, [])
   useEffect(() => {
     // Ensure the router is ready before accessing query parameters
     if (routers.isReady) {
@@ -169,7 +169,7 @@ const index = ({ router }, props) => {
             <div className="pl-5 salesprops">
               <SearchProperty activateProeprty={activateProeprty} setloop={setloop} />
               <div className="actionbar">
-                 <span className="last-updated">Latest Data as of:  {moment(ELproperties?.attributes?.LastUpdatedDate).format('DD MMM YYYY')} </span>
+                <span className="last-updated">Latest Data as of:  {moment(ELproperties?.attributes?.LastUpdatedDate).format('DD MMM YYYY')} </span>
                 <button className="downloadPdf" onClick={() => generatePDF(getTargetElement, options)}> Download PDF <FaArrowDown /></button>
                 <div className="playpause">
                   <div onClick={() => { setloop(!loop) }}>
@@ -226,139 +226,139 @@ const index = ({ router }, props) => {
                   <hr />
                   <Kpibox withhead={false} padding="15px">
                     <div className="row">
-                    <div className="col-12 col-md-6 col-xl-12">
-                    <div className="constructionstatus mt-5">
-                      <div className="semipie">
-                        <Semicircelpie size={{ Width: "250px", Height: "250px" }} percentage={ELproperties?.attributes?.completionProgress != null ? ELproperties?.attributes?.completionProgress : 0} pathFill='#2B2B36' lineStroke='#C9FFCE' />
-                      </div>
+                      <div className="col-12 col-md-6 col-xl-12">
+                        <div className="constructionstatus mt-5">
+                          <div className="semipie">
+                            <Semicircelpie size={{ Width: "250px", Height: "250px" }} percentage={ELproperties?.attributes?.completionProgress != null ? ELproperties?.attributes?.completionProgress : 0} pathFill='#2B2B36' lineStroke='#C9FFCE' />
+                          </div>
 
-                      <div className="cal-box">
-                        <span className="title">
-                          ESTIMATED
-                          COMPLETION
-                        </span>
-                        <span className="date">
-                          {ELproperties?.attributes?.completionDate != null ? moment(ELproperties?.attributes?.completionDate).format('MMM YYYY') : "TBA ..."}
-                          {/* // Jun 2024 */}
-                        </span>
-                      </div>
-                    </div>
-                    <div className="age">
-                     
-                      <div>
-                        <span>
-                          Completed %
-                        </span>
-                        <span className="flex-start">
-                          {ELproperties?.attributes?.completionProgress != null ? ELproperties?.attributes?.completionProgress : 0}
-                        </span>
-                      </div>
-                      <div>
-                        <span>
-                          Age
-                        </span>
-                        <span>
-                          {moment().diff(moment(ELproperties?.attributes?.launchDate), 'months')} Months
-                        </span>
-                      </div>
-                    </div>
-                    </div>
-                    {/* <hr /> */}
-                    <div className="col-md-6 col-12 col-xl-12">
-                      <Kpibox title="Units" withhead={true} theme="light">
-                        <div className="vis-data">
-                          <div className="p-4">
-                            <CircleChart kpiText="Total Units" size={{ Width: "150px", Height: "150px" }}
+                          <div className="cal-box">
+                            <span className="title">
+                              ESTIMATED
+                              COMPLETION
+                            </span>
+                            <span className="date">
+                              {ELproperties?.attributes?.completionDate != null ? moment(ELproperties?.attributes?.completionDate).format('MMM YYYY') : "TBA ..."}
+                              {/* // Jun 2024 */}
+                            </span>
+                          </div>
+                        </div>
+                        <div className="age">
 
-                              percentage={Math.round(ELproperties?.attributes?.soldUnits * 100 / ELproperties?.attributes?.totalUnits)} kpiValue={{
-                                total: ELproperties?.attributes?.totalUnits,
+                          <div>
+                            <span>
+                              Completed %
+                            </span>
+                            <span className="flex-start">
+                              {ELproperties?.attributes?.completionProgress != null ? ELproperties?.attributes?.completionProgress : 0}
+                            </span>
+                          </div>
+                          <div>
+                            <span>
+                              Age
+                            </span>
+                            <span>
+                              {moment().diff(moment(ELproperties?.attributes?.launchDate), 'months')} Months
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                      {/* <hr /> */}
+                      <div className="col-md-6 col-12 col-xl-12">
+                        <Kpibox title="Units" withhead={true} theme="light">
+                          <div className="vis-data">
+                            <div className="p-4">
+                              <CircleChart kpiText="Total Units" size={{ Width: "150px", Height: "150px" }}
+
+                                percentage={Math.round(ELproperties?.attributes?.soldUnits * 100 / ELproperties?.attributes?.totalUnits)} kpiValue={{
+                                  total: ELproperties?.attributes?.totalUnits,
+                                  value1: {
+                                    "unit": "Sold Units",
+                                    "value": ELproperties?.attributes?.soldUnits
+                                  },
+                                  value2: {
+                                    "unit": "Available",
+                                    "value": ELproperties?.attributes?.availableUnits
+                                  },
+                                  isamount: false
+                                }}
+                                color="#00A171" />
+                            </div>
+                            <div className="data-summery">
+                              <div>
+                                <h3>Sold Units</h3>
+                                <span className="fg-dgreen">{ELproperties?.attributes?.soldUnits}<b>({Math.round(ELproperties?.attributes?.soldUnits * 100 / ELproperties?.attributes?.totalUnits)}%)</b></span>
+                              </div>
+                              <div>
+                                <h3>Available Units</h3>
+                                <span className="fg-lpink">{ELproperties?.attributes?.availableUnits}<b>({Math.round(ELproperties?.attributes?.availableUnits * 100 / ELproperties?.attributes?.totalUnits)}%)</b></span>
+                              </div>
+                            </div>
+                          </div>
+                        </Kpibox>
+                      </div>
+                      <div className="col-md-6 col-12 col-xl-12 mt-4">
+                        <Kpibox title="Sales Progression" withhead={true} theme="light">
+                          <div className="vis-data">
+                            <div className="p-4">
+                              <CircleChart kpiText="Generated" kpiValue={{
+                                total: ELproperties?.attributes?.SalesProgressionGenerated,
                                 value1: {
-                                  "unit": "Sold Units",
-                                  "value": ELproperties?.attributes?.soldUnits
+                                  "unit": "SPA Signed",
+                                  "value": ELproperties?.attributes?.SalesProgressionSigned
                                 },
                                 value2: {
-                                  "unit": "Available",
-                                  "value": ELproperties?.attributes?.availableUnits
+                                  "unit": "SPA Executed",
+                                  "value": ELproperties?.attributes?.SalesProgressionExecuted
                                 },
                                 isamount: false
-                              }}
-                              color="#00A171" />
-                          </div>
-                          <div className="data-summery">
-                            <div>
-                              <h3>Sold Units</h3>
-                              <span className="fg-dgreen">{ELproperties?.attributes?.soldUnits}<b>({Math.round(ELproperties?.attributes?.soldUnits * 100 / ELproperties?.attributes?.totalUnits)}%)</b></span>
+                              }} size={{ Width: "150px", Height: "150px" }} percentage={ELproperties?.attributes?.SalesProgressionSigned * 100 / ELproperties?.attributes?.SalesProgressionGenerated} color="#00A171" />
                             </div>
-                            <div>
-                              <h3>Available Units</h3>
-                              <span className="fg-lpink">{ELproperties?.attributes?.availableUnits}<b>({Math.round(ELproperties?.attributes?.availableUnits * 100 / ELproperties?.attributes?.totalUnits)}%)</b></span>
-                            </div>
-                          </div>
-                        </div>
-                      </Kpibox>
-                    </div>
-                    <div className="col-md-6 col-12 col-xl-12 mt-4">
-                      <Kpibox title="Sales Progression" withhead={true} theme="light">
-                        <div className="vis-data">
-                          <div className="p-4">
-                            <CircleChart kpiText="Generated" kpiValue={{
-                              total: ELproperties?.attributes?.SalesProgressionGenerated,
-                              value1: {
-                                "unit": "SPA Signed",
-                                "value": ELproperties?.attributes?.SalesProgressionSigned
-                              },
-                              value2: {
-                                "unit": "SPA Executed",
-                                "value": ELproperties?.attributes?.SalesProgressionExecuted
-                              },
-                              isamount: false
-                            }} size={{ Width: "150px", Height: "150px" }} percentage={ELproperties?.attributes?.SalesProgressionSigned * 100 / ELproperties?.attributes?.SalesProgressionGenerated} color="#00A171" />
-                          </div>
-                          <div className="data-summery">
-                            <div>
-                              <h3>SPA Signed</h3>
-                              <span className="fg-dgreen">{ELproperties?.attributes?.SalesProgressionSigned} <b>({(ELproperties?.attributes?.SalesProgressionSigned && ELproperties?.attributes?.SalesProgressionGenerated)
-                                ? (ELproperties.attributes.SalesProgressionSigned * 100 / ELproperties.attributes.SalesProgressionGenerated).toFixed(2)
-                                : 0}%)</b></span>
-                            </div>
-                            <div>
-                              <h3>SPA Executed</h3>
-                              <span className="fg-lpink">{ELproperties?.attributes?.SalesProgressionExecuted} <b>({ELproperties?.attributes?.SalesProgressionExecuted > 0 ? (ELproperties?.attributes?.SalesProgressionExecuted * 100 / ELproperties?.attributes?.SalesProgressionGenerated).toFixed(2) + "%" : "0%"})</b></span>
+                            <div className="data-summery">
+                              <div>
+                                <h3>SPA Signed</h3>
+                                <span className="fg-dgreen">{ELproperties?.attributes?.SalesProgressionSigned} <b>({(ELproperties?.attributes?.SalesProgressionSigned && ELproperties?.attributes?.SalesProgressionGenerated)
+                                  ? (ELproperties.attributes.SalesProgressionSigned * 100 / ELproperties.attributes.SalesProgressionGenerated).toFixed(2)
+                                  : 0}%)</b></span>
+                              </div>
+                              <div>
+                                <h3>SPA Executed</h3>
+                                <span className="fg-lpink">{ELproperties?.attributes?.SalesProgressionExecuted} <b>({ELproperties?.attributes?.SalesProgressionExecuted > 0 ? (ELproperties?.attributes?.SalesProgressionExecuted * 100 / ELproperties?.attributes?.SalesProgressionGenerated).toFixed(2) + "%" : "0%"})</b></span>
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      </Kpibox>
-                    </div>
-                    <div className="col-md-6 col-12 col-xl-12 mt-4">
-                      <Kpibox title="Down Payments" withhead={true} theme="light">
-                        <div className="vis-data">
-                          <div className="p-4">
-                            <CircleChart kpiText="Total Due" kpiValue={{
-                              total: ELproperties?.attributes?.DpAmountPaidCount + ELproperties?.attributes?.soldUnits - ELproperties?.attributes?.DpAmountPaidCount,
-                              value1: {
-                                "unit": "DP Paid",
-                                "value": ELproperties?.attributes?.DpAmountPaidCount
-                              },
-                              value2: {
-                                "unit": "DP Outstanding",
-                                "value": (ELproperties?.attributes?.soldUnits - ELproperties?.attributes?.DpOutstandingCount)
-                              },
-                              isamount: true
-                            }} size={{ Width: "150px", Height: "150px" }} percentage={ELproperties?.attributes?.DpAmountPaidCount * 100 / (Math.round(ELproperties?.attributes?.DpAmountPaidCount + (ELproperties?.attributes?.soldUnits - ELproperties?.attributes?.DpAmountPaidCount)))} color="#00A171" />
-                          </div>
-                          <div className="data-summery">
-                            <div>
-                              <h3>DP Collected</h3>
-                              <span className="fg-dgreen">{ELproperties?.attributes?.DpAmountPaidCount} <b>({Math.round(ELproperties?.attributes?.DpAmountPaidCount * 100 / (Math.round(ELproperties?.attributes?.DpAmountPaidCount + (ELproperties?.attributes?.soldUnits - ELproperties?.attributes?.DpAmountPaidCount))))}%)</b></span>
+                        </Kpibox>
+                      </div>
+                      <div className="col-md-6 col-12 col-xl-12 mt-4">
+                        <Kpibox title="Down Payments" withhead={true} theme="light">
+                          <div className="vis-data">
+                            <div className="p-4">
+                              <CircleChart kpiText="Total Due" kpiValue={{
+                                total: ELproperties?.attributes?.DpAmountPaidCount + ELproperties?.attributes?.soldUnits - ELproperties?.attributes?.DpAmountPaidCount,
+                                value1: {
+                                  "unit": "DP Paid",
+                                  "value": ELproperties?.attributes?.DpAmountPaidCount
+                                },
+                                value2: {
+                                  "unit": "DP Outstanding",
+                                  "value": (ELproperties?.attributes?.soldUnits - ELproperties?.attributes?.DpOutstandingCount)
+                                },
+                                isamount: true
+                              }} size={{ Width: "150px", Height: "150px" }} percentage={ELproperties?.attributes?.DpAmountPaidCount * 100 / (Math.round(ELproperties?.attributes?.DpAmountPaidCount + (ELproperties?.attributes?.soldUnits - ELproperties?.attributes?.DpAmountPaidCount)))} color="#00A171" />
                             </div>
-                            <div>
-                              <h3>DP Outstanding</h3>
-                              <span className="fg-lpink">{ELproperties?.attributes?.soldUnits - ELproperties?.attributes?.DpAmountPaidCount} <b>({Math.round((ELproperties?.attributes?.soldUnits - ELproperties?.attributes?.DpAmountPaidCount) * 100 / (Math.round(ELproperties?.attributes?.DpAmountPaidCount + (ELproperties?.attributes?.soldUnits - ELproperties?.attributes?.DpAmountPaidCount))))}%)</b></span>
+                            <div className="data-summery">
+                              <div>
+                                <h3>DP Collected</h3>
+                                <span className="fg-dgreen">{ELproperties?.attributes?.DpAmountPaidCount} <b>({Math.round(ELproperties?.attributes?.DpAmountPaidCount * 100 / (Math.round(ELproperties?.attributes?.DpAmountPaidCount + (ELproperties?.attributes?.soldUnits - ELproperties?.attributes?.DpAmountPaidCount))))}%)</b></span>
+                              </div>
+                              <div>
+                                <h3>DP Outstanding</h3>
+                                <span className="fg-lpink">{ELproperties?.attributes?.soldUnits - ELproperties?.attributes?.DpAmountPaidCount} <b>({Math.round((ELproperties?.attributes?.soldUnits - ELproperties?.attributes?.DpAmountPaidCount) * 100 / (Math.round(ELproperties?.attributes?.DpAmountPaidCount + (ELproperties?.attributes?.soldUnits - ELproperties?.attributes?.DpAmountPaidCount))))}%)</b></span>
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      </Kpibox>
-                    </div>
+                        </Kpibox>
+                      </div>
                     </div>
                   </Kpibox>
                   <hr />
@@ -540,23 +540,23 @@ const index = ({ router }, props) => {
                               </tr>
                               <tr className="area">
                                 <td>
-                                  <h5>{covertToCurrency(Math.round(ELproperties?.attributes?.totalUnitsArea),false)}</h5>
+                                  <h5>{covertToCurrency(Math.round(ELproperties?.attributes?.totalUnitsArea), false)}</h5>
                                   <span><span className="mb-view">Total </span>Area Sq.ft</span>
                                   {/* <LineProgress length={100} thick={2} color="#252526" percentage={Math.round(ELproperties?.attributes?.soldUnits * 100 / ELproperties?.attributes?.totalUnits)} start="begining" /> */}
                                 </td>
                                 <td>
-                                  <h5 className="fg-green">{covertToCurrency(Math.round(ELproperties?.attributes?.soldunitsArea),false)}</h5>
+                                  <h5 className="fg-green">{covertToCurrency(Math.round(ELproperties?.attributes?.soldunitsArea), false)}</h5>
                                   <span className="fg-green"><span className="mb-view">Sold </span>Area Sq.ft</span>
                                   <LineProgress length={100} thick={2} color="#C9FFCE" percentage={Math.round(ELproperties?.attributes?.soldunitsArea * 100 / ELproperties?.attributes?.totalUnitsArea)} start="begining" />
 
                                 </td>
                                 <td>
-                                  <h5 className="fg-lpink">{covertToCurrency(Math.round(ELproperties?.attributes?.availableUnitsArea),false)}</h5>
+                                  <h5 className="fg-lpink">{covertToCurrency(Math.round(ELproperties?.attributes?.availableUnitsArea), false)}</h5>
                                   <span className="fg-lpink"><span className="mb-view">Available </span>Area Sq.ft</span>
                                   <LineProgress length={100} thick={2} color="#FF9191" percentage={Math.round(ELproperties?.attributes?.availableUnitsArea * 100 / ELproperties?.attributes?.totalUnitsArea)} start="begining" />
                                 </td>
                                 <td>
-                                  <h5>{covertToCurrency(Math.round(ELproperties?.attributes?.blockedUnitsArea),false)}</h5>
+                                  <h5>{covertToCurrency(Math.round(ELproperties?.attributes?.blockedUnitsArea), false)}</h5>
                                   <span><span className="mb-view">Blocked </span>Area Sq.ft</span>
                                   <LineProgress length={100} thick={2} color="#FFF" percentage={Math.round(ELproperties?.attributes?.blockedUnitsArea * 100 / ELproperties?.attributes?.totalUnitsArea)} start="begining" />
                                 </td>

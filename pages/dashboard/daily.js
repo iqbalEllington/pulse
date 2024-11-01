@@ -1,12 +1,12 @@
 import HorizontalLayout from "components/layouts/horizontalLayout";
 import CreateUserGroup from "components/createUserGroup"; 
-import Listview from "components/layouts/page/home/listview";
+import DashboardDaily from "components/layouts/page/home/dashboardDaily";
 
-const EditUserGroup = () => {
+const Daily = () => {
   return (
     <HorizontalLayout>
-      <Listview/>
+      <DashboardDaily/>
     </HorizontalLayout>
   );
 };
-export default EditUserGroup;
+export default Daily;

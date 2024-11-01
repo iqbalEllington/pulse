@@ -233,6 +233,9 @@ const listview = ({ router }, props) => {
                   <th>
                     DP Amount Outstanding
                   </th>
+                  <th>
+                    Total Collection
+                  </th>
                 </thead>
                 <tbody>
                   <tr>
@@ -272,9 +275,10 @@ const listview = ({ router }, props) => {
                       </td>
                       <td>{covertToCurrency(ELproperties?.attributes?.total_outstanding)}</td>
                       <td>{covertToCurrency(ELproperties?.attributes?.DPamountOutstanding)}</td>
+                      <td>{covertToCurrency(ELproperties?.attributes?.total_collection)}</td>
+                      <td>{covertToCurrency(ELproperties?.attributes?.total_outstanding)}</td>
                     </tr>
                   })}
-
                 </tbody>
               </table>
             </div>
