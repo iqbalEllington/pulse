@@ -26,7 +26,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import { FaList } from "react-icons/fa6";
 import Linechart from "components/layouts/charts/linechart";
-import Verticalmultichart from "components/layouts/charts/Verticalmultichart";
+import Verticalmultichart from "components/layouts/charts/verticalmultichart";
 import { TbCurrencyDollar } from "react-icons/tb";
 import { FaLongArrowAltUp } from "react-icons/fa";
 
