@@ -18,15 +18,40 @@ export default function verticalmultichart() {
   const lData = [42, 24, 56, 45, 3,45, 3];
   const rData = [57, 7, 19, 16, 22,45, 3];
   const colors = ['#EDEAE3', '#D1AC8C'];
+  
   return (
+    <div>
     <BarChart
-      className={styles.pulsechart}
-      sx={(theme) => ({
-      })}
-      xAxis={[{ scaleType: 'band', data: labels }]}
+      className={"pulsecharts-bar"}
+      sx={{
+        // Target the X-axis tick labels and customize their color
+        '& .MuiChartsAxis-bottom .MuiChartsAxis-tickLabel': {
+          color: 'blue', // Replace 'blue' with your desired color
+        },
+        '& .MuiChartsAxis-bottom .MuiChartsAxis-tickLabel tspan': {
+          color: 'white', // Replace 'blue' with your desired color
+        },
+      }}
+      // sx={{
+      //   // Target the X-axis tick labels and customize their color
+      //   '& .MuiChartsAxis-bottom .MuiChartsAxis-tickLabel': {
+      //     color: 'blue', // Replace 'blue' with your desired color
+      //   },
+      // }}
+      // sx= {{
+      //   [`& .${axisClasses.directionX} .${axisClasses.label}`]: {
+      //     color: "white"
+      //   },
+      // }}
+      xAxis={[
+        { scaleType: 'band', 
+          data: labels 
+        },
+        
+      ]}
       series={[
-        { data: lData, label: 'l', id: 'l_id' },
-        { data: rData, label: 'r', id: 'r_id' },
+        { data: lData, label: 'Sales', id: 'l_id' },
+        { data: rData, label: 'Collection', id: 'r_id' },
       ]}
       barLabel={(item, context) => {
         // if ((item.value ?? 0) > 10) {
@@ -40,5 +65,11 @@ export default function verticalmultichart() {
       borderRadius={30}
 
     />
+    <div className='labels-custom'>
+      {labels.map((key, value)=>{
+        return <span style={{width:(100/labels.length + "%")}}> {labels[value]}</span>
+      })}
+    </div>
+    </div>
   );
 }

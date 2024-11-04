@@ -1,0 +1,113 @@
+.circleChart {
+    transition: opacity 0.3s ease, z-index 0s 0.3s;
+
+    /* Smooth fade-in */
+    .hoverlabel {
+        background: #1E1E20;
+        color: white;
+        font-size: .7rem;
+        padding: 14px 12px;
+        border-radius: "3px";
+        opacity: 0;
+        border: 1px solid #2A2A2B;
+        border-radius: 10px;
+        transition: opacity 0.3s ease, z-index 0s 0.3s;
+    }
+
+    &:hover {
+        .hoverlabel {
+            z-index: 999;
+            opacity: 1;
+            transition: opacity 0.3s ease, z-index 0s 0s;
+            /* On hover, z-index changes immediately */
+        }
+    }
+
+    .circle {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        svg {
+            width: 100%;
+            height: 100%;
+        }
+
+
+        .content {
+            position: absolute;
+            z-index: 99;
+            color: #fff;
+            margin: auto;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            background: #1E1E20;
+            border-radius: 50%;
+            justify-content: center;
+            width: 75%;
+            height: 75%;
+
+            h4 {
+                font-size: .9rem;
+                color: white;
+                font-family: Acumin;
+                font-weight: bold;
+                display: block;
+                margin-bottom: 0px;
+            }
+
+            span {
+                font-size: 1.5rem;
+                font-weight: bold;
+                font-family: inter;
+                line-height: 1;
+                display: block;
+            }
+
+        }
+
+        .black {
+            background: black !important;
+
+            * {
+                color: white;
+            }
+
+            span,
+            h4 {
+                color: white;
+            }
+        }
+    }
+
+    .chart-container {
+        background-color: #f9f9f9;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+    .chart-title {
+        color: #1E1E20;
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+
+    .circle-svg {
+        transition: stroke-dashoffset 4s ease;
+        
+    }
+    .circle-animated{
+        animation: fillings 3s;
+    }
+    @keyframes fillings {
+        0% {
+            stroke-dasharray: 0, 100;
+        }
+    }
+
+}

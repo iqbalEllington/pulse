@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import styles from './CircleChart.module.scss'; // Import the scoped styles
+import styles from './CircleChart2.module.scss'; // Import the scoped styles
 import { covertToCurrency } from "/services/utilsService";
 
 const CircleChart2 = ({ percentage, color, size, kpiText, bodyColor, kpiValue }) => {

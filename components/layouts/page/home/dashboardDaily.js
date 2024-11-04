@@ -14,7 +14,7 @@ import Kpibox from "components/modals/kpibox";
 import Imageslider from "components/layouts/Sidebar/Imageslider";
 import LineProgress from "components/modals/LineProgress";
 import { FaArrowDown } from "react-icons/fa6";
-import { FaArrowUp, FaPlay } from "react-icons/fa";
+import { FaArrowUp, FaLongArrowAltDown, FaPlay } from "react-icons/fa";
 import { FaPause } from "react-icons/fa";
 import { CountdownCircleTimer } from 'react-countdown-circle-timer'
 import moment from "moment";
@@ -28,6 +28,7 @@ import { FaList } from "react-icons/fa6";
 import Linechart from "components/layouts/charts/linechart";
 import Verticalmultichart from "components/layouts/charts/Verticalmultichart";
 import { TbCurrencyDollar } from "react-icons/tb";
+import { FaLongArrowAltUp } from "react-icons/fa";
 
 const DashboardDaily = ({ router }, props) => {
   const [loading, setIsLoading] = useState(false)
@@ -217,52 +218,287 @@ const DashboardDaily = ({ router }, props) => {
                   </Dropdown.Menu>
                 </Dropdown>
               </div>
-              <div className="salesprops-body" id="salesprops-body">
-                <div>
-
-                  <Kpibox title="Last 7 days" withhead={true} theme="dark">
-                    <Verticalmultichart />
-                  </Kpibox>
-                </div>
-                <div>
-                  <div className="col-md-6 col-12 col-xl-12 mt-4">
-                    <Kpibox withhead={false} theme="el-gray">
-                      <div className="figure-box">
-                        <div className="col-12 title">
-                          <h2>
-                            <span><TbCurrencyDollar /></span>
-                            Total Sales
-                          </h2>
-                        </div>
-                        <div className="data">
-                          <div>
-                            <span>
-                              AED
-                            </span>
-                            <span>
-                              140,189,748
-                            </span>
-                          </div>
-                          <div>
-                            <CircleChart2 kpiText="Generated" kpiValue={{
-                              total: ELproperties?.attributes?.SalesProgressionGenerated,
-                              value1: {
-                                "unit": "Sales",
-                                "value": ELproperties?.attributes?.SalesProgressionSigned
-                              },
-                              value2: {
-                                "unit": "Sales",
-                                "value": ELproperties?.attributes?.SalesProgressionExecuted
-                              },
-                              isamount: false
-                            }} size={{ Width: "80px", Height: "80px" }} percentage={ELproperties?.attributes?.SalesProgressionSigned * 100 / ELproperties?.attributes?.SalesProgressionGenerated} color="#000000" />
-
-                          </div>
-                        </div>
-                      </div>
+              <div className="salesDaily-body mt-5" id="salesprops-body">
+                <div className="col-12 d-flex">
+                  <div>
+                    <Kpibox title="Last 7 days" withhead={true} theme="dark">
+                      <Verticalmultichart />
                     </Kpibox>
-
                   </div>
+                  <div className="pl-3">
+                    <div className="col-12 col-xl-12 mt-0">
+                      <Kpibox withhead={false} theme="el-gray">
+                        <div className="figure-box">
+                          <div className="col-12 title">
+                            <h2>
+                              <span><TbCurrencyDollar /></span>
+                              Total Sales
+                            </h2>
+                          </div>
+                          <div className="data">
+                            <div>
+                              <span>
+                                AED
+                              </span>
+                              <span>
+                                140,189,748
+                              </span>
+                            </div>
+                            <div>
+                              <CircleChart2 kpiText="Generated" kpiValue={{
+                                total: ELproperties?.attributes?.SalesProgressionGenerated,
+                                value1: {
+                                  "unit": "Sales",
+                                  "value": ELproperties?.attributes?.SalesProgressionSigned
+                                },
+                                value2: {
+                                  "unit": "Sales",
+                                  "value": ELproperties?.attributes?.SalesProgressionExecuted
+                                },
+                                isamount: false
+                              }} size={{ Width: "80px", Height: "80px" }} percentage={ELproperties?.attributes?.SalesProgressionSigned * 100 / ELproperties?.attributes?.SalesProgressionGenerated} color="#000000" />
+
+                            </div>
+                          </div>
+                        </div>
+                      </Kpibox>
+
+                    </div>
+                    <div className="col-12 col-xl-12 mt-4">
+                      <Kpibox withhead={false} theme="el-gold">
+                        <div className="figure-box">
+                          <div className="col-12 title">
+                            <h2>
+                              <span><TbCurrencyDollar /></span>
+                              Total Collection
+                            </h2>
+                          </div>
+                          <div className="data">
+                            <div>
+                              <span>
+                                AED
+                              </span>
+                              <span>
+                                140,189,748
+                              </span>
+                            </div>
+                            <div>
+                              <CircleChart2 kpiText="Generated" kpiValue={{
+                                total: ELproperties?.attributes?.SalesProgressionGenerated,
+                                value1: {
+                                  "unit": "Sales",
+                                  "value": ELproperties?.attributes?.SalesProgressionSigned
+                                },
+                                value2: {
+                                  "unit": "Sales",
+                                  "value": ELproperties?.attributes?.SalesProgressionExecuted
+                                },
+                                isamount: false
+                              }} size={{ Width: "80px", Height: "80px" }} percentage={ELproperties?.attributes?.SalesProgressionSigned * 100 / ELproperties?.attributes?.SalesProgressionGenerated} color="#000000" />
+
+                            </div>
+                          </div>
+                        </div>
+                      </Kpibox>
+
+                    </div>
+                  </div>
+                  <div>
+                    <div className="imagebar">
+                      <Imageslider images={ELproperties?.attributes?.latestImages} />
+                    </div>
+                  </div>
+                </div>
+                <div className="col-12 mt-4">
+                  <Kpibox withhead={false} theme="dark">
+                    <table className="table-black ">
+                      <thead>
+                        <tr>
+                          <th>
+
+                          </th>
+                          <th>
+                            Collection
+                          </th>
+                          <th>
+                            Sales Value
+                          </th>
+                          <th>
+                            Avg. psft
+                          </th>
+                          <th>
+                            SPA Generated
+                          </th>
+                          <th>
+                            SPA Executed
+                          </th>
+                          <th>
+                            Unit Sold
+                          </th>
+                          <th>
+                            Registration
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>
+                            <span className="day-box">
+                              Today
+                            </span>
+                          </td>
+                          <td>
+                            <span>
+                              AED 12.12 M
+                            </span>
+                            <span>
+                              <b className="up">
+                                <FaLongArrowAltUp />
+                                10%</b> Higer than yesterday
+                            </span>
+                          </td>
+                          <td>
+                            <span>
+                              AED 12.12 M
+                            </span>
+                            <span>
+                              <b className="down">
+                                <FaLongArrowAltDown />
+                                10%</b> Lower than yesterday
+                            </span>
+                          </td>
+                          <td>
+                            <span>
+                              AED 12.12 M
+                            </span>
+                            <span>
+                              <b className="down">
+                                <FaLongArrowAltDown />
+                                10%</b> Lower than yesterday
+                            </span>
+                          </td>
+                          <td>
+                            <span>
+                              AED 12.12 M
+                            </span>
+                            <span>
+                              <b className="up">
+                                <FaLongArrowAltUp />
+                                10%</b> Higer than yesterday
+                            </span>
+                          </td>
+                          <td>
+                            <span>
+                              AED 12.12 M
+                            </span>
+                            <span>
+                              <b className="up">
+                                <FaLongArrowAltUp />
+                                10%</b> Higer than yesterday
+                            </span>
+                          </td>
+                          <td>
+                            <span>
+                              AED 12.12 M
+                            </span>
+                            <span>
+                              <b className="up">
+                                <FaLongArrowAltUp />
+                                10%</b> Higer than yesterday
+                            </span>
+                          </td>
+                          <td>
+                            <span>
+                              AED 12.12 M
+                            </span>
+                            <span>
+                              <b className="up">
+                                <FaLongArrowAltUp />
+                                10%</b> Higer than yesterday
+                            </span>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <span className="day-box">
+                              Yesterday
+                            </span>
+                          </td>
+                          <td>
+                            <span>
+                              AED 12.12 M
+                            </span>
+                            <span>
+                              <b className="up">
+                                <FaLongArrowAltUp />
+                                10%</b> Higer than yesterday
+                            </span>
+                          </td>
+                          <td>
+                            <span>
+                              AED 12.12 M
+                            </span>
+                            <span>
+                              <b className="down">
+                                <FaLongArrowAltDown />
+                                10%</b> Lower than yesterday
+                            </span>
+                          </td>
+                          <td>
+                            <span>
+                              AED 12.12 M
+                            </span>
+                            <span>
+                              <b className="down">
+                                <FaLongArrowAltDown />
+                                10%</b> Lower than yesterday
+                            </span>
+                          </td>
+                          <td>
+                            <span>
+                              AED 12.12 M
+                            </span>
+                            <span>
+                              <b className="up">
+                                <FaLongArrowAltUp />
+                                10%</b> Higer than yesterday
+                            </span>
+                          </td>
+                          <td>
+                            <span>
+                              AED 12.12 M
+                            </span>
+                            <span>
+                              <b className="up">
+                                <FaLongArrowAltUp />
+                                10%</b> Higer than yesterday
+                            </span>
+                          </td>
+                          <td>
+                            <span>
+                              AED 12.12 M
+                            </span>
+                            <span>
+                              <b className="up">
+                                <FaLongArrowAltUp />
+                                10%</b> Higer than yesterday
+                            </span>
+                          </td>
+                          <td>
+                            <span>
+                              AED 12.12 M
+                            </span>
+                            <span>
+                              <b className="up">
+                                <FaLongArrowAltUp />
+                                10%</b> Higer than yesterday
+                            </span>
+                          </td>
+                        </tr>
+                      </tbody>
+
+                    </table>
+                  </Kpibox>
                 </div>
               </div>
               {/* <Kpibox title="title" withhead={false}>
