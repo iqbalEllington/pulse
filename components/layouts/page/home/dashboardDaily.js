@@ -171,7 +171,7 @@ const DashboardDaily = ({ router }, props) => {
     <>
       <div className="wishbanner pb w-100">
         <div className="container-fluid">
-          <div className="row dashboard-sales">
+          <div className="row dashboard-sales dashboard-sales-daily">
             <div className="pl-5 salesprops">
               <SearchProperty activateProeprty={activateProeprty} setloop={setloop} />
               <div className="actionbar">
@@ -219,10 +219,10 @@ const DashboardDaily = ({ router }, props) => {
                 </Dropdown>
               </div>
               <div className="salesDaily-body mt-5" id="salesprops-body">
-                <div className="col-12 d-flex">
+                <div className="col-12 d-flex bodyrow-1">
                   <div>
                     <Kpibox title="Last 7 days" withhead={true} theme="dark">
-                      <Verticalmultichart />
+                      <Verticalmultichart data="daily-7-days" />
                     </Kpibox>
                   </div>
                   <div className="pl-3">
@@ -304,8 +304,22 @@ const DashboardDaily = ({ router }, props) => {
                     </div>
                   </div>
                   <div>
-                    <div className="imagebar">
-                      <Imageslider images={ELproperties?.attributes?.latestImages} />
+                    <div className="imagebar-single">
+                      {ELproperties?.attributes?.featuredImage?.data == null ?
+                        <img src="https://strapi.ellington.ae/uploads/imagenotfound_2b380da6d1.jpg" />
+                        :
+                        <img src={ELproperties?.attributes?.featuredImage.data} />
+                        
+                      }
+                      <div className="title">
+                        <h2>
+                          {ELproperties?.attributes?.name}
+                      
+                        </h2>
+                        <span>
+                          {ELproperties?.attributes?.community}, {ELproperties?.attributes?.city}
+                        </span>
+                      </div>
                     </div>
                   </div>
                 </div>

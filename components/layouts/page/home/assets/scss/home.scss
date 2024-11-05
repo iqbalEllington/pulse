@@ -1212,7 +1212,7 @@ body {
 }
 
 .figure-box {
-  min-width: 300px;
+  min-width: 270px;
   padding: 20px 15px 12px 20px;
   display: block;
 
@@ -1251,7 +1251,7 @@ body {
       display: block;
       width: 100%;
       font-family: AcuminBlack;
-      font-size: 2rem;
+      font-size: 1.6rem;
       line-height: 1.2;
     }
   }
@@ -1347,49 +1347,101 @@ body {
   }
 
 }
-
-.salesDaily-body {
-  .MuiChartsAxis-directionY {
-    display: none;
-  }
-  .MuiChartsLegend-root{
-    display: none;
-  }
-  .labels-custom{
-    position:  absolute;
-    display: block;
-    bottom: 1px;
-    width: 90%;
-    margin: auto;
-    margin-left: 5%;
-    bottom: 20px;
-    span{
-      display: inline-block;
-      text-align: center;
-      color: #FFF1DF;
+.dashboard-sales-daily{
+  .salesDaily-body {
+    .MuiChartsAxis-directionY {
+      display: none;
     }
-  }
-  .MuiChartsAxis-tickContainer {
-    color: white !important;
-
-    text {
-      span {
-        color: white !important;
+  
+    .bodyrow-1 {
+      gap: 20px;
+    }
+  
+    .imagebar-single {
+      height: 400px;
+      border-radius: 20px;
+      width: 250px;
+      overflow: hidden;
+      position: relative;
+  
+      img {
+        height: 100%;
+      }
+  
+      &::before {
+        content: "";
+        position: absolute;
+        background: rgb(0,0,0);
+  background: linear-gradient(8deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 31%, rgba(0,0,0,0) 89%);
+        width: 100%;
+        height: 100%;
+        bottom: 0px;
+        left: 0px;
+      }
+  
+      .title {
+        position: absolute;
+        bottom: 30px;
+        left: 0px;
+        padding-left: 30px;
+  
+        h2 {
+          font-size: 1.5rem;
+          margin: 0px;
+          padding: 0px;
+        }
+  
+        span {
+          color: white
+        }
       }
     }
-  }
-  .MuiChartsAxis-line{
-    display: none;
-  }
-  .MuiChartsAxis-directionX {
-    margin-top: 10px;
-    display: none;
-    * {
-      color: white !important;
+      .MuiChartsLegend-root {
+        display: none;
+      }
+  
+      .labels-custom {
+        position: absolute;
+        display: block;
+        bottom: 1px;
+        width: 90%;
+        margin: auto;
+        margin-left: 5%;
+        bottom: 20px;
+  
+        span {
+          display: inline-block;
+          text-align: center;
+          color: #FFF1DF;
+        }
+      }
+  
+      .MuiChartsAxis-tickContainer {
+        color: white !important;
+  
+        text {
+          span {
+            color: white !important;
+          }
+        }
+      }
+  
+      .MuiChartsAxis-line {
+        display: none;
+      }
+  
+      .MuiChartsAxis-directionX {
+        margin-top: 10px;
+        display: none;
+  
+        * {
+          color: white !important;
+        }
+  
+        .tspan {
+          color: white;
+        }
+      }
     }
-
-    .tspan {
-      color: white;
-    }
-  }
+    width: 1400px;
 }
