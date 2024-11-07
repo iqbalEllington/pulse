@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import styles from './CircleChart2.module.scss'; // Import the scoped styles
+import styles from './elcirc2.module.scss'; // Import the scoped styles
 import { covertToCurrency } from "/services/utilsService";
 
-const CircleChart2 = ({ percentage, color, size, kpiText, bodyColor, kpiValue }) => {
+const Elcirc2 = ({ percentage, color, size, kpiText, bodyColor, kpiValue }) => {
     const radius = 90; // Radius of the main circle
     const circumference = 2 * Math.PI * radius; // Circumference of the circle
 
@@ -103,4 +103,4 @@ const CircleChart2 = ({ percentage, color, size, kpiText, bodyColor, kpiValue })
     );
 };
 
-export default CircleChart2;
+export default Elcirc2;

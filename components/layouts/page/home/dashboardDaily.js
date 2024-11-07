@@ -33,7 +33,7 @@ import VerticalSignlechart from "components/layouts/charts/verticalSignlechart";
 
 import { TbCurrencyDollar } from "react-icons/tb";
 import { FaLongArrowAltUp } from "react-icons/fa";
-import CircleChart2 from "components/modals/circlechart2";
+import Elcirc2 from "components/modals/elcirc2";
 
 const DashboardDaily = ({ router }, props) => {
   const [loading, setIsLoading] = useState(false)
@@ -245,7 +245,7 @@ const DashboardDaily = ({ router }, props) => {
                               </span>
                             </div>
                             <div className="absolute-top">
-                              <CircleChart2 kpiText="Generated" kpiValue={{
+                              <Elcirc2 kpiText="Generated" kpiValue={{
                                 total: ELproperties?.attributes?.SalesProgressionGenerated,
                                 value1: {
                                   "unit": "Sales",
