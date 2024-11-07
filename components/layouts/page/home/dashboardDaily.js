@@ -8,7 +8,8 @@ import ReactMarkdown from "react-markdown";
 import { toast } from "react-toastify";
 import CircleChart from "components/modals/circlechart";
 
-import CircleChart2 from "components/modals/circlechart2";
+// import CircleChart2 from "components/modals/CircleChart2";
+
 import Semicircelpie from "components/modals/Semicircelpie";
 import Kpibox from "components/modals/kpibox";
 import Imageslider from "components/layouts/Sidebar/Imageslider";
@@ -27,8 +28,12 @@ import Link from "next/link";
 import { FaList } from "react-icons/fa6";
 import Linechart from "components/layouts/charts/linechart";
 import Verticalmultichart from "components/layouts/charts/verticalmultichart";
+
+import VerticalSignlechart from "components/layouts/charts/verticalSignlechart";
+
 import { TbCurrencyDollar } from "react-icons/tb";
 import { FaLongArrowAltUp } from "react-icons/fa";
+import CircleChart2 from "components/modals/circlechart2";
 
 const DashboardDaily = ({ router }, props) => {
   const [loading, setIsLoading] = useState(false)
@@ -220,14 +225,44 @@ const DashboardDaily = ({ router }, props) => {
               </div>
               <div className="salesDaily-body mt-5" id="salesprops-body">
                 <div className="col-12 d-flex bodyrow-1">
-                  <div>
-                    <Kpibox title="Last 7 days" withhead={true} theme="dark">
-                      <Verticalmultichart data="daily-7-days" />
-                    </Kpibox>
-                  </div>
+
+
                   <div className="pl-3">
                     <div className="col-12 col-xl-12 mt-0">
-                      <Kpibox withhead={false} theme="el-gray">
+                    <Kpibox withhead={false} theme="el-gray">
+                        <div className="figure-box-long">
+                          <div className="col-12 title">
+                            <h2>
+                              <span><TbCurrencyDollar /></span>
+                              Total Sales
+                            </h2>
+                            
+                          </div>
+                          <div className="data">
+                            <div>
+                              <span>
+                              AED 140,189,748
+                              </span>
+                            </div>
+                            <div className="absolute-top">
+                              <CircleChart2 kpiText="Generated" kpiValue={{
+                                total: ELproperties?.attributes?.SalesProgressionGenerated,
+                                value1: {
+                                  "unit": "Sales",
+                                  "value": ELproperties?.attributes?.SalesProgressionSigned
+                                },
+                                value2: {
+                                  "unit": "Sales",
+                                  "value": ELproperties?.attributes?.SalesProgressionExecuted
+                                },
+                                isamount: false
+                              }} size={{ Width: "80px", Height: "80px" }} percentage={ELproperties?.attributes?.SalesProgressionSigned * 100 / ELproperties?.attributes?.SalesProgressionGenerated} color="#000000" />
+
+                            </div>
+                          </div>
+                        </div>
+                      </Kpibox> 
+                      {/* <Kpibox withhead={false} theme="el-gray">
                         <div className="figure-box">
                           <div className="col-12 title">
                             <h2>
@@ -261,12 +296,12 @@ const DashboardDaily = ({ router }, props) => {
                             </div>
                           </div>
                         </div>
-                      </Kpibox>
+                      </Kpibox> */}
 
                     </div>
                     <div className="col-12 col-xl-12 mt-4">
                       <Kpibox withhead={false} theme="el-gold">
-                        <div className="figure-box">
+                        {/* <div className="figure-box">
                           <div className="col-12 title">
                             <h2>
                               <span><TbCurrencyDollar /></span>
@@ -298,7 +333,7 @@ const DashboardDaily = ({ router }, props) => {
 
                             </div>
                           </div>
-                        </div>
+                        </div> */}
                       </Kpibox>
 
                     </div>
@@ -309,12 +344,12 @@ const DashboardDaily = ({ router }, props) => {
                         <img src="https://strapi.ellington.ae/uploads/imagenotfound_2b380da6d1.jpg" />
                         :
                         <img src={ELproperties?.attributes?.featuredImage.data} />
-                        
+
                       }
                       <div className="title">
                         <h2>
                           {ELproperties?.attributes?.name}
-                      
+
                         </h2>
                         <span>
                           {ELproperties?.attributes?.community}, {ELproperties?.attributes?.city}
@@ -322,6 +357,21 @@ const DashboardDaily = ({ router }, props) => {
                       </div>
                     </div>
                   </div>
+
+                </div>
+                <div className="col-12 d-flex bodyrow-1">
+                  <div>
+                    <Kpibox title="Last 7 days" withhead={true} theme="dark">
+                      <VerticalSignlechart data="daily-7-days" datakey="Collection" />
+                    </Kpibox>
+                  </div>
+                  <div>
+                    <Kpibox title="Last 7 days" withhead={true} theme="dark">
+                      <VerticalSignlechart data="daily-7-days" datakey="TotalSale" />
+                    </Kpibox>
+                  </div>
+
+
                 </div>
                 <div className="col-12 mt-4">
                   <Kpibox withhead={false} theme="dark">

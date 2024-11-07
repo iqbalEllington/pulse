@@ -6,7 +6,7 @@ import { API_URLS } from "helper/apiConstant";
 import { getRequest } from "helper/api";
 
 
-export default function verticalmultichart(props) {
+export default function verticalSignlechart(props) {
   const getFormattedDate = (daysAgo = 0) => {
     const date = new Date();
     date.setDate(date.getDate() - daysAgo);
@@ -83,10 +83,16 @@ export default function verticalmultichart(props) {
           },
 
         ]}
-        series={[
-          { data: lData, label: 'Sales', id: 'l_id' },
-          { data: rData, label: 'Collection', id: 'r_id' },
-        ]}
+        if
+        series={
+          (props.datakey == "Collection") ?
+            [
+              { data: rData, label: 'Collection', id: 'r_id' },
+            ] : [
+
+              { data: lData, label: 'Sales', id: 'l_id' },
+            ]
+        }
         barLabel={(item, context) => {
           // if ((item.value ?? 0) > 10) {
           //   return 'High';
@@ -94,7 +100,7 @@ export default function verticalmultichart(props) {
           return ((item.value/1000000).toFixed(1)).toString() + "M";
         }}
         colors={colors}
-        width={800}
+        width={650}
         height={350}
         borderRadius={30}
 
