@@ -1260,8 +1260,11 @@ body {
   min-width: 320px;
   padding: 20px 15px 12px 20px;
   display: block;
+  position: relative;
   .absolute-top{
     position: absolute;
+    right: 10px;
+    top: 10px;
   }
   .title {
     h2 {
