@@ -162,8 +162,8 @@ const Login = () => {
                               className={`form-control ${errors.password ? "is-invalid" : ""
                                 }`}
                             />
-                           <button onClick={(e)=>{togglePasswordVisibility(),e.preventDefault()}} className="eye-icon">  {showPassword ?   <FaEye/> : <FaEyeSlash/>}
-                           </button>
+                           <span onClick={(e)=>{togglePasswordVisibility(),e.preventDefault()}} className="eye-icon">  {showPassword ?   <FaEye/> : <FaEyeSlash/>}
+                           </span>
                            </div>
                             {errors.password &&
                               errors.password.type === "required" && (
