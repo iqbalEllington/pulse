@@ -28,6 +28,8 @@ function MainLayout(props) {
           <link legacyBehavior rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
           <meta name="msapplication-TileColor" content="#da532c" />
           <meta name="theme-color" content="#ffffff"></meta>
+          <meta name="robots" content="noindex, nofollow"/>
+          <meta name="google-site-verification" content="zRDFZcoKtW8wwOH4a9esZtspzxQg9jmHCADf8Snn27Y" />
         </Head>
         {props.children}
         {/* </html> */}
