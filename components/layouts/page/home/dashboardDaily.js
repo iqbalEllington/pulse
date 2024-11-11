@@ -382,6 +382,8 @@ const DashboardDaily = ({ router }, props) => {
                               <CompareTableRow allOccuaranceData={allOccuaranceData} base="Last Week" isCompare={false}/>
 
                               <CompareTableRow allOccuaranceData={allOccuaranceData} base="This Month" toCompare="Last Month" isCompare={true}/>
+
+                              <CompareTableRow allOccuaranceData={allOccuaranceData} base="Last Month" isCompare={false}/>
                               <CompareTableRow allOccuaranceData={allOccuaranceData} base="This Year" isCompare={false}/>
                               <CompareTableRow allOccuaranceData={allOccuaranceData} base="All Time" isCompare={false}/>
                              </tbody>

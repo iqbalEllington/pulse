@@ -26,7 +26,7 @@ const compareTableRow = (props) => {
           givenDate.getDate() === today.getDate()
         );
       }
-      function calculatePercentageDifference(yesterday, today) {
+      function calculatePercentageDifference(today,yesterday ) {
         if (yesterday === 0) {
           return {
             status: today > 0 ? "up" : today < 0 ? "down" : "no change",
@@ -40,7 +40,7 @@ const compareTableRow = (props) => {
     
         return {
           status: status,
-          percentage: percentageChange.toFixed(2)
+          percentage: percentageChange.toFixed(0)
         };
       }
     const allOccuaranceData=props.allOccuaranceData
