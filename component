@@ -1,0 +1,35 @@
+<Kpibox withhead={false} theme="el-gray">
+                        <div className="figure-box">
+                          <div className="col-12 title">
+                            <h2>
+                              <span><TbCurrencyDollar /></span>
+                              Total Sales
+                            </h2>
+                          </div>
+                          <div className="data">
+                            <div>
+                              <span>
+                                AED
+                              </span>
+                              <span>
+                                140,189,748
+                              </span>
+                            </div>
+                            <div>
+                              <CircleChart2 kpiText="Generated" kpiValue={{
+                                total: ELproperties?.attributes?.SalesProgressionGenerated,
+                                value1: {
+                                  "unit": "Sales",
+                                  "value": ELproperties?.attributes?.SalesProgressionSigned
+                                },
+                                value2: {
+                                  "unit": "Sales",
+                                  "value": ELproperties?.attributes?.SalesProgressionExecuted
+                                },
+                                isamount: false
+                              }} size={{ Width: "80px", Height: "80px" }} percentage={ELproperties?.attributes?.SalesProgressionSigned * 100 / ELproperties?.attributes?.SalesProgressionGenerated} color="#000000" />
+
+                            </div>
+                          </div>
+                        </div>
+                      </Kpibox>

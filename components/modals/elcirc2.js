@@ -74,7 +74,7 @@ const Elcirc2 = ({ percentage, color, size, kpiText, bodyColor, kpiValue }) => {
 
                 <div className={styles['content'] + " " + styles[bodyColor]}>
                     <div>
-                        <span  style={kpiValue.isamount==true? {fontSize:".7rem"}: {} }>{covertToCurrency(kpiValue?.total,false)}</span>
+                        <span  style={{fontSize:".8rem"} }>{covertToCurrency(kpiValue?.total,false)}%</span>
                         <h4 style={{fontSize:".6rem"}}>{kpiText}</h4>
                     </div>
                 </div>

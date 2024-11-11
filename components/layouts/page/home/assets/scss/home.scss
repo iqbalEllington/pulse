@@ -1257,7 +1257,8 @@ body {
   }
 }
 .figure-box-long {
-  min-width: 320px;
+  min-width: 390px;
+  max-width: 100%;
   padding: 20px 15px 12px 20px;
   display: block;
   position: relative;
@@ -1341,6 +1342,7 @@ body {
   tbody {
     tr {
       td {
+        height: 60px;
         &:first-child {
           border-top-left-radius: 10px;
           border-bottom-left-radius: 10px;
@@ -1359,12 +1361,13 @@ body {
           display: block;
           clear: both;
 
-          &:first-child {
+          &.baseValue {
             font-family: AcuminBold;
             color: white;
+            font-size: 1.4rem;
           }
 
-          &:last-child {
+          &.Comparealue {
             color: white;
             font-size: .7rem;
 
@@ -1397,24 +1400,42 @@ body {
 
 }
 .dashboard-sales-daily{
+  .actionbar{
+      position: relative;
+    top: unset;
+    justify-content: end;
+  }
+  .header{
+    display: flex;
+    gap: 10px;
+    height: 150px;
+    justify-content: stretch;
+    div{
+      &:first-child,&:nth-child(2){
+        flex: 0 1 auto; 
+      }
+    }
+    
+  }
   .salesDaily-body {
     .MuiChartsAxis-directionY {
       display: none;
     }
   
-    .bodyrow-1 {
+    .bodyrow-1,.bodyrow-2 {
       gap: 20px;
     }
   
     .imagebar-single {
-      height: 400px;
+      height: auto;
       border-radius: 20px;
-      width: 250px;
+      width: auto;
       overflow: hidden;
       position: relative;
+      flex: 1;
   
       img {
-        height: 100%;
+        width: 100%;
       }
   
       &::before {
@@ -1437,6 +1458,7 @@ body {
         h2 {
           font-size: 1.5rem;
           margin: 0px;
+          text-transform: capitalize;
           padding: 0px;
         }
   
@@ -1493,4 +1515,39 @@ body {
       }
     }
     width: 1400px;
+}
+
+
+@media screen and (max-width:800px) {
+  .dashboard-sales-daily{
+    width: 100%;
+      .header{
+        flex-wrap: wrap;
+        height: auto;
+      }
+      .bodyrow-2{
+        flex-wrap: wrap;
+        overflow: auto;
+      }
+      .over-scroll{
+        overflow: auto;
+      }
+      .table-black tbody tr td:first-child{
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+        position: absolute;
+        width: 93px;
+        padding: 5px;
+        height: 61px;
+        display: flex;
+      }
+      .table-black thead tr th:first-child{
+        padding-left: 80px;
+      }
+      .table-black tbody tr td .day-box{
+        font-size: .6rem;
+        width: 80px;
+        border-radius: 4px;
+      }
+  }
 }

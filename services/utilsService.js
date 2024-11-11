@@ -33,6 +33,40 @@ export function covertToCurrency(Amount = 0, withsymbol=true,baseCurrency="AED",
 
 
 }
+export function covertToMIllion(Amount = 0, withsymbol=true,baseCurrency="AED", toCurrency="AED") {
+  if (typeof parseFloat(Amount) != "number" || Amount == undefined || Amount == NaN) {
+    Amount = 0;
+    
+    return new Intl.NumberFormat("AED", {
+      style: "currency",
+      maximumFractionDigits: 2,
+      roundingMode: "ceil",
+      maximumFractionDigits: 2,
+      currency: toCurrency
+    }).format(Amount);
+  } else {
+    
+    if(withsymbol==false){
+      return new Intl.NumberFormat("AED", {
+        // style: "currency",
+        maximumFractionDigits: 2,
+        maximumFractionDigits: 2,
+        currency: toCurrency
+      }).format(Amount);
+    }else{
+    const truncatedAmount = Math.trunc(Amount * 100) / 100;
+
+    return new Intl.NumberFormat("AED", {
+      style: "currency",
+      maximumFractionDigits: 2,
+      maximumFractionDigits: 2,
+      currency: toCurrency
+    }).format(truncatedAmount);
+  }
+  }
+
+
+}
 export function getDateFromToday(days) {
   const day = moment().add(days, "days");
   return day
