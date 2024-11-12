@@ -216,10 +216,10 @@ const index = ({ router }, props) => {
                 <div className="dashboard-body-left">
                   <div className="col-12 mob-m-10">
                     <div className="db-header">
-                      <h2>{ELproperties?.attributes?.name}</h2>
+                      <h2>{ELproperties?.attributes?.name =="all project" ? "All Projects": ELproperties?.attributes?.name}</h2>
                       <div className="db-hdesc">
                         <span>{(ELproperties?.attributes?.emirates != null ? ELproperties?.attributes?.emirates : "UAE") + ", " + (ELproperties?.attributes?.area != null ? ELproperties?.attributes?.area : "")}</span>
-                        <span> Launch Month: {moment(ELproperties?.attributes?.launchDate).format('MMM YYYY')}</span>
+                       {ELproperties?.attributes?.name!="all project" && <span> Launch Month: {moment(ELproperties?.attributes?.launchDate).format('MMM YYYY')}</span>}
                       </div>
                     </div>
                   </div>
