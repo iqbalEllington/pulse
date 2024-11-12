@@ -338,12 +338,12 @@ const DashboardDaily = ({ router }, props) => {
                 <div className="col-12 d-flex bodyrow-2">
                   <div>
                     <Kpibox title="Sales - Last 7 days" withhead={true} theme="dark">
-                      <VerticalSignlechart data="daily-7-days" theme="light" datakey="TotalSale" />
+                      <VerticalSignlechart data="daily-7-days" theme="light" datakey="TotalSale"  project={ELproperties?.attributes?.name}/>
                     </Kpibox>
                   </div>
                   <div>
                     <Kpibox title="Collection - Last 7 days" withhead={true} theme="dark">
-                      <VerticalSignlechart data="daily-7-days" theme="gold" datakey="Collection" />
+                      <VerticalSignlechart data="daily-7-days" theme="gold" datakey="Collection" project={ELproperties?.attributes?.name} />
                     </Kpibox>
                   </div>
                 </div>

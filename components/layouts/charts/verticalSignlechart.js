@@ -32,14 +32,13 @@ export default function verticalSignlechart(props) {
     var url;
     if (props.data == "daily-7-days") {
       // getroeprties()
-      url = API_URLS.GET_PROPERTIES + '?filters[name][$containsi]=all project&pagination[page]=1&filters[occuarance][$in][0]=zero&filters[occuarance][$in][1]=one&filters[occuarance][$in][2]=two&filters[occuarance][$in][3]=three&filters[occuarance][$in][4]=four&filters[occuarance][$in][5]=five&filters[occuarance][$in][6]=six=seven&pagination[pageSize]=1000&&sort=id:desc'
+      url = API_URLS.GET_PROPERTIES + '?filters[name][$containsi]='+props.project+'&pagination[page]=1&filters[occuarance][$in][0]=zero&filters[occuarance][$in][1]=one&filters[occuarance][$in][2]=two&filters[occuarance][$in][3]=three&filters[occuarance][$in][4]=four&filters[occuarance][$in][5]=five&filters[occuarance][$in][6]=six=seven&pagination[pageSize]=1000&&sort=id:desc'
     }
     var response;
     response = await getRequest({ API: url });
     var data = []
     if (await response?.status === 200) {
       var ldata = []
-      console.log("response.data", response.data)
       var rdata = []
       response.data?.data.map((value, key) => {
         ldata.push(value.attributes.soldUnitAMount)
@@ -57,8 +56,7 @@ export default function verticalSignlechart(props) {
   }
   useEffect(() => {
     getData()
-
-  }, [])
+  }, [props.project])
   return (
     <div style={{ pointerEvents: 'none' }}>
       {rData.length > 0 &&
