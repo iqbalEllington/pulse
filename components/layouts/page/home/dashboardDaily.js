@@ -322,7 +322,7 @@ const DashboardDaily = ({ router }, props) => {
                       }
                       <div className="title">
                         <h2>
-                          {ELproperties?.attributes?.name}
+                          {ELproperties?.attributes?.name == "all project" ? "All Projects":ELproperties?.attributes?.name}
 
                         </h2>
                         <span>
