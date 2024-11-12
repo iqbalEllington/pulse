@@ -317,7 +317,7 @@ const DashboardDaily = ({ router }, props) => {
                       {ELproperties?.attributes?.featuredImage?.data == null ?
                         <img src="https://strapi.ellington.ae/uploads/imagenotfound_2b380da6d1.jpg" />
                         :
-                        <img src={ELproperties?.attributes?.featuredImage.data.url} />
+                        <img src={ELproperties?.attributes?.featuredImage?.data?.attributes.url} />
 
                       }
                       <div className="title">
