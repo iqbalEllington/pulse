@@ -105,7 +105,13 @@ const compareTableRow = (props) => {
             </td>
             <td>
                 <span className="baseValue">
-                    {(allOccuaranceData?.[props.base]?.attributes?.priceprsqftSold == null ? "0.00" : allOccuaranceData?.[props.base]?.attributes?.priceprsqftSold)}
+                    {allOccuaranceData?.[props.base]?.attributes?.soldUnitAMount > 0 ?
+                    <>
+                {covertToCurrency((allOccuaranceData?.[props.base]?.attributes?.soldUnitAMount / allOccuaranceData?.[props.base]?.attributes?.soldunitsArea), false)}/sq.ft
+                </>:
+                "0.00"
+}
+                {/* {(allOccuaranceData?.[props.base]?.attributes?.priceprsqftSold == null ? "0.00" : allOccuaranceData?.[props.base]?.attributes?.priceprsqftSold)} */}
                 </span>
                 {props.isCompare &&
                 <span className="Comparealue">

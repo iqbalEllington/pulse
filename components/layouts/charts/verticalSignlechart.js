@@ -60,9 +60,10 @@ export default function verticalSignlechart(props) {
 
   }, [])
   return (
-    <div>
+    <div style={{ pointerEvents: 'none' }}>
       {rData.length > 0 &&
         <BarChart
+          
           className={"pulsecharts-bar"}
           sx={{
             // Target the X-axis tick labels and customize their color
@@ -106,6 +107,8 @@ export default function verticalSignlechart(props) {
             // }
             return ((item.value / 1000000).toFixed(1)).toString() + "M";
           }}
+          tooltip={{ enabled: false }} 
+          disableInteractions
           colors={colors}
           width={650}
           height={350}

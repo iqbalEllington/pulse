@@ -119,28 +119,33 @@ const DashboardDaily = ({ router }, props) => {
   const getpercentage = (value, total) => {
     return (value * 100 / total).toFixed(2)
   }
-  async function activateProeprty(id = false) {
-    if (id == false) {
-      var response;
+  async function activateProeprty(property = false) {
+    var propertyName;
+    if (property == false) {
       var propertyName = "all project"
-      response = await getRequest({ API: API_URLS.GET_PROPERTIES + '?populate[]=featuredImage&pagination[pageSize]=100&populate[]=latestImages&filters[name][$containsi]=' + propertyName });
-      if (await response?.status === 200) {
-        setIsLoading(false)
-        var alldata = {};
-        response.data?.data?.map((values, key) => {
-          console.log(values?.attributes?.occuarance)
-          if (values?.attributes?.occuarance != undefined) {
-            alldata[values?.attributes?.occuarance] = values
-          }
-        })
-        setELproperties(alldata["All Time"])
-        setAllOccuaranceData(alldata)
-      } else if (response?.status === 401) {
-        toast("Unauthorize access please re-login.");
-      } else {
-        toast(response?.data?.error || "Some thing went wrong.");
-      }
+    } else {
+      var propertyName = property
     }
+    var response;
+
+    response = await getRequest({ API: API_URLS.GET_PROPERTIES + '?populate[]=featuredImage&pagination[pageSize]=100&populate[]=latestImages&filters[name][$containsi]=' + propertyName });
+    if (await response?.status === 200) {
+      setIsLoading(false)
+      var alldata = {};
+      response.data?.data?.map((values, key) => {
+        console.log(values?.attributes?.occuarance)
+        if (values?.attributes?.occuarance != undefined) {
+          alldata[values?.attributes?.occuarance] = values
+        }
+      })
+      setELproperties(alldata["All Time"])
+      setAllOccuaranceData(alldata)
+    } else if (response?.status === 401) {
+      toast("Unauthorize access please re-login.");
+    } else {
+      toast(response?.data?.error || "Some thing went wrong.");
+    }
+
 
     // else {
     //   var response;
@@ -219,12 +224,12 @@ const DashboardDaily = ({ router }, props) => {
         <div className="container-fluid">
           <div className="row dashboard-sales dashboard-sales-daily">
             <div className="pl-5 salesprops">
-              {/* <SearchProperty activateProeprty={activateProeprty} setloop={setloop} /> */}
-              <div className="col-12 row p-relative row ">
+              <SearchProperty from="daily" activateProeprty={activateProeprty} setloop={setloop} />
+           
+             <div className="col-12 row p-relative row ">
                 <div className="actionbar">
                   <span className="last-updated">Latest Data as of:  {moment(ELproperties?.attributes?.LastUpdatedDate).format('DD MMM YYYY')} </span>
-                  <button className="downloadPdf" onClick={() => generatePDF(getTargetElement, options)}> Download PDF <FaArrowDown /></button>
-
+                
                   <Dropdown className="profile-user">
                     <Dropdown.Toggle id="dropdown-basic">
                       <div className="profile-image-holder">
@@ -376,17 +381,17 @@ const DashboardDaily = ({ router }, props) => {
                         </thead>
                         {/* {JSON.stringify(allOccuaranceData["Today"]["attributes"])} */}
                         <tbody>
-                              <CompareTableRow allOccuaranceData={allOccuaranceData} base="Today" toCompare="Yesterday" isCompare={true}/>
-                              <CompareTableRow allOccuaranceData={allOccuaranceData} base="Yesterday" isCompare={false}/>
-                              <CompareTableRow allOccuaranceData={allOccuaranceData} base="This Week" toCompare="Last Week" isCompare={true}/>
-                              <CompareTableRow allOccuaranceData={allOccuaranceData} base="Last Week" isCompare={false}/>
+                          <CompareTableRow allOccuaranceData={allOccuaranceData} base="Today" toCompare="Yesterday" isCompare={true} />
+                          <CompareTableRow allOccuaranceData={allOccuaranceData} base="Yesterday" isCompare={false} />
+                          <CompareTableRow allOccuaranceData={allOccuaranceData} base="This Week" toCompare="Last Week" isCompare={true} />
+                          <CompareTableRow allOccuaranceData={allOccuaranceData} base="Last Week" isCompare={false} />
 
-                              <CompareTableRow allOccuaranceData={allOccuaranceData} base="This Month" toCompare="Last Month" isCompare={true}/>
+                          <CompareTableRow allOccuaranceData={allOccuaranceData} base="This Month" toCompare="Last Month" isCompare={true} />
 
-                              <CompareTableRow allOccuaranceData={allOccuaranceData} base="Last Month" isCompare={false}/>
-                              <CompareTableRow allOccuaranceData={allOccuaranceData} base="This Year" isCompare={false}/>
-                              <CompareTableRow allOccuaranceData={allOccuaranceData} base="All Time" isCompare={false}/>
-                             </tbody>
+                          <CompareTableRow allOccuaranceData={allOccuaranceData} base="Last Month" isCompare={false} />
+                          <CompareTableRow allOccuaranceData={allOccuaranceData} base="This Year" isCompare={false} />
+                          <CompareTableRow allOccuaranceData={allOccuaranceData} base="All Time" isCompare={false} />
+                        </tbody>
                       </table>
                     </div>
                   </Kpibox>

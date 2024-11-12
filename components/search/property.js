@@ -12,6 +12,7 @@ const SearchProperty = (props) => {
         getProperties(value);
         SetKeyowrd(value);
     }
+
     const [keyword, SetKeyowrd] = useState(null)
     const [isfocus, Setisfocus] = useState(false)
     const [loading, setIsLoading] = useState(false)
@@ -33,8 +34,12 @@ const SearchProperty = (props) => {
             toast(response?.data?.error || "Some thing went wrong.");
         }
     }
+    const [from,setFrom]=useState(false)
     useEffect(() => {
         getProperties("")
+        if(props.from!=undefined){
+            setFrom(props.from)
+        }
     }, [])
     return (<div className="searchbar">
         <div className="search-input">
@@ -45,7 +50,7 @@ const SearchProperty = (props) => {
             <Link className="list-view" href="/dashboard/listview"><FaList/><span>List View</span></Link>
                
             <span className="result-count">Properties {property?.data?.length}</span>
-          
+            
         </div>
         {(keyword || isfocus) &&
             <div className={"search-result"}>
@@ -55,8 +60,8 @@ const SearchProperty = (props) => {
                     </span>
                     {property?.data?.map((property) => {
                         return <div className="property-list">
-                            <Link href={"/dashboard?property="+property.id}>
-                            <div className="search-l-body" onClick={()=>{props.activateProeprty(property.id),props.setloop(false),Setisfocus(false),SetKeyowrd("")}}>
+                            <Link href={"/dashboard"+(from!=false ? "/"+ from + "?property="+property.attributes.name : "?property="+property.id)}>
+                            <div className="search-l-body" onClick={()=>{props.activateProeprty(from==false ? property.id :property.attributes.name ),props.setloop(false),Setisfocus(false),SetKeyowrd("")}}>
                                 <div className="imageholder"><img src={process.env.NEXT_PUBLIC_IMAGE_URL +(property.attributes?.featuredImage?.data?.attributes?.url ? property.attributes?.featuredImage?.data?.attributes?.formats?.small?.url: "/uploads/small_imagenotfound_2b380da6d1.jpg")}></img></div>
                                 <div className="titles">
                                     <div>
@@ -78,6 +83,11 @@ const SearchProperty = (props) => {
                 </div>
             </div>
         }
+           <Link href={from=="daily" ? "/dashboard":"/dashboard/daily"}>
+              <button className="switchReport">
+              Switch to {from=="daily" ? "Collection Dashboard":"All-in-One Dashboard"}
+              </button>
+                </Link> 
     </div>)
 }
 export default SearchProperty

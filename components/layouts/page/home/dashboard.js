@@ -168,7 +168,7 @@ const index = ({ router }, props) => {
           <div className="row dashboard-sales">
             <div className="pl-5 salesprops">
               <SearchProperty activateProeprty={activateProeprty} setloop={setloop} />
-              <div className="actionbar">
+            <div className="actionbar">
                 <span className="last-updated">Latest Data as of:  {moment(ELproperties?.attributes?.LastUpdatedDate).format('DD MMM YYYY')} </span>
                 <button className="downloadPdf" onClick={() => generatePDF(getTargetElement, options)}> Download PDF <FaArrowDown /></button>
                 <div className="playpause">
@@ -304,21 +304,21 @@ const index = ({ router }, props) => {
                               <CircleChart kpiText="Generated" kpiValue={{
                                 total: ELproperties?.attributes?.SalesProgressionGenerated,
                                 value1: {
-                                  "unit": "SPA Signed",
-                                  "value": ELproperties?.attributes?.SalesProgressionSigned
+                                  "unit": "SPA Generated",
+                                  "value": ELproperties?.attributes?.SalesProgressionGenerated
                                 },
                                 value2: {
                                   "unit": "SPA Executed",
                                   "value": ELproperties?.attributes?.SalesProgressionExecuted
                                 },
                                 isamount: false
-                              }} size={{ Width: "150px", Height: "150px" }} percentage={ELproperties?.attributes?.SalesProgressionSigned * 100 / ELproperties?.attributes?.SalesProgressionGenerated} color="#00A171" />
+                              }} size={{ Width: "150px", Height: "150px" }} percentage={ELproperties?.attributes?.SalesProgressionGenerated * 100 / ELproperties?.attributes?.SalesProgressionGenerated} color="#00A171" />
                             </div>
                             <div className="data-summery">
                               <div>
-                                <h3>SPA Signed</h3>
-                                <span className="fg-dgreen">{ELproperties?.attributes?.SalesProgressionSigned} <b>({(ELproperties?.attributes?.SalesProgressionSigned && ELproperties?.attributes?.SalesProgressionGenerated)
-                                  ? (ELproperties.attributes.SalesProgressionSigned * 100 / ELproperties.attributes.SalesProgressionGenerated).toFixed(2)
+                                <h3>SPA Generated</h3>
+                                <span className="fg-dgreen">{ELproperties?.attributes?.SalesProgressionGenerated} <b>({(ELproperties?.attributes?.SalesProgressionSigned && ELproperties?.attributes?.SalesProgressionGenerated)
+                                  ? (ELproperties.attributes.SalesProgressionGenerated * 100 / ELproperties.attributes.SalesProgressionGenerated).toFixed(2)
                                   : 0}%)</b></span>
                               </div>
                               <div>
