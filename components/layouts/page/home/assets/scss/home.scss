@@ -722,6 +722,7 @@ body {
   display: inline-flex;
   align-items: center;
   width: auto;
+
   button {
     background: #9E856F;
     color: white;
@@ -1410,6 +1411,7 @@ body {
   .actionbar {
     justify-content: end;
   }
+
   .header {
     display: flex;
     gap: 10px;
@@ -1534,12 +1536,13 @@ body {
 @media screen and (max-width:800px) {
   .dashboard-sales-daily {
     width: 100%;
+
     .salesDaily-body {
-      h3{
+      h3 {
         font-size: 1.3rem !important;
       }
     }
-    
+
     .header {
       flex-wrap: wrap;
       height: auto;
@@ -1553,7 +1556,24 @@ body {
 
     .bodyrow-2 {
       flex-wrap: wrap;
+      border-radius: 10px;
       overflow: auto;
+
+      &::-webkit-scrollbar {
+        height: 35px;
+        margin: 5px; 
+      }
+
+      &::-webkit-scrollbar-track {
+        background: black;
+        margin: 5px; 
+        /* Track color */
+      }
+
+      ::-webkit-scrollbar-thumb {
+        border-radius: 20px;
+        margin: 5px; 
+      }
     }
 
     .over-scroll {

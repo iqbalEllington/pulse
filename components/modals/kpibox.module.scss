@@ -3,6 +3,9 @@
     background: #252526;
     border: 1px solid #303033;
     padding: 15px;
+    @media screen and (max-width: 800px) {
+        border-radius: 10px; 
+    }
     .kpiBox{
         .box{
             width: 100%;
