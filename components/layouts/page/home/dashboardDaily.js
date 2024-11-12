@@ -383,10 +383,10 @@ const DashboardDaily = ({ router }, props) => {
                         <tbody>
                           <CompareTableRow allOccuaranceData={allOccuaranceData} base="Today" toCompare="Yesterday" isCompare={true} />
                           <CompareTableRow allOccuaranceData={allOccuaranceData} base="Yesterday" isCompare={false} />
-                          <CompareTableRow allOccuaranceData={allOccuaranceData} base="This Week" toCompare="Last Week Till Today" isCompare={true} />
+                          <CompareTableRow allOccuaranceData={allOccuaranceData} base="This Week" toCompare="Last Week Same Day" isCompare={true} />
                           <CompareTableRow allOccuaranceData={allOccuaranceData} base="Last Week" isCompare={false} />
 
-                          <CompareTableRow allOccuaranceData={allOccuaranceData} base="This Month" toCompare="Last Month Till Today" isCompare={true} />
+                          <CompareTableRow allOccuaranceData={allOccuaranceData} base="This Month" toCompare="Last Month Same Day" isCompare={true} />
 
                           <CompareTableRow allOccuaranceData={allOccuaranceData} base="Last Month" isCompare={false} />
                           <CompareTableRow allOccuaranceData={allOccuaranceData} base="This Year" isCompare={false} />
