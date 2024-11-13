@@ -85,7 +85,7 @@ const compareTableRow = (props) => {
                 <span className="Comparealue">
                     {calculatePercentageDifference(allOccuaranceData?.[props.base]?.attributes?.soldUnitAMount, allOccuaranceData?.[props.toCompare]?.attributes?.soldUnitAMount).status == "up" &&
                         <><b className="up">
-                            <FaLongArrowAltDown />
+                            <FaLongArrowAltUp />
                             {calculatePercentageDifference(allOccuaranceData?.[props.base]?.attributes?.soldUnitAMount, allOccuaranceData?.[props.toCompare]?.attributes?.soldUnitAMount).percentage} %</b> Higher than {props.toCompare}
                         </>
                     }
@@ -117,7 +117,7 @@ const compareTableRow = (props) => {
                 <span className="Comparealue">
                     {calculatePercentageDifference(allOccuaranceData?.[props.base]?.attributes?.priceprsqftSold, allOccuaranceData?.[props.toCompare]?.attributes?.priceprsqftSold).status == "up" &&
                         <><b className="up">
-                            <FaLongArrowAltDown />
+                            <FaLongArrowAltUp />
                             {calculatePercentageDifference(allOccuaranceData?.[props.base]?.attributes?.priceprsqftSold, allOccuaranceData?.[props.toCompare]?.attributes?.priceprsqftSold).percentage} %</b> Higher than {props.toCompare}
                         </>
                     }
@@ -143,7 +143,7 @@ const compareTableRow = (props) => {
                 <span className="Comparealue">
                     {calculatePercentageDifference(allOccuaranceData?.[props.base]?.attributes?.SalesProgressionGenerated, allOccuaranceData?.[props.toCompare]?.attributes?.priceprsqftSold).SalesProgressionGenerated == "up" &&
                         <><b className="up">
-                            <FaLongArrowAltDown />
+                            <FaLongArrowAltUp />
                             {calculatePercentageDifference(allOccuaranceData?.[props.base]?.attributes?.SalesProgressionGenerated, allOccuaranceData?.[props.toCompare]?.attributes?.priceprsqftSold).SalesProgressionGenerated} %</b> Higher than {props.toCompare}
                         </>
                     }
@@ -169,7 +169,7 @@ const compareTableRow = (props) => {
                 <span className="Comparealue">
                     {calculatePercentageDifference(allOccuaranceData?.[props.base]?.attributes?.SalesProgressionExecuted, allOccuaranceData?.[props.toCompare]?.attributes?.priceprsqftSold).SalesProgressionExecuted == "up" &&
                         <><b className="up">
-                            <FaLongArrowAltDown />
+                            <FaLongArrowAltUp />
                             {calculatePercentageDifference(allOccuaranceData?.[props.base]?.attributes?.SalesProgressionExecuted, allOccuaranceData?.[props.toCompare]?.attributes?.priceprsqftSold).SalesProgressionExecuted} %</b> Higher than {props.toCompare}
                         </>
                     }
@@ -195,7 +195,7 @@ const compareTableRow = (props) => {
                 <span className="Comparealue">
                     {calculatePercentageDifference(allOccuaranceData?.[props.base]?.attributes?.soldUnits, allOccuaranceData?.[props.toCompare]?.attributes?.priceprsqftSold).soldUnits == "up" &&
                         <><b className="up">
-                            <FaLongArrowAltDown />
+                            <FaLongArrowAltUp />
                             {calculatePercentageDifference(allOccuaranceData?.[props.base]?.attributes?.soldUnits, allOccuaranceData?.[props.toCompare]?.attributes?.priceprsqftSold).soldUnits} %</b> Higher than {props.toCompare}
                         </>
                     }
