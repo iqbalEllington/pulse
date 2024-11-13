@@ -59,7 +59,7 @@ const compareTableRow = (props) => {
                 <span className="Comparealue">
                     {calculatePercentageDifference(allOccuaranceData?.[props.base]?.attributes?.recieptCollection, allOccuaranceData?.[props.toCompare]?.attributes?.recieptCollection).status == "up" &&
                         <><b className="up">
-                            <FaLongArrowAltDown />
+                            <FaLongArrowAltUp />
                             {calculatePercentageDifference(allOccuaranceData?.[props.base]?.attributes?.recieptCollection, allOccuaranceData?.[props.toCompare]?.attributes?.recieptCollection).percentage} %</b> Higher than {props.toCompare}
                         </>
                     }
