@@ -780,6 +780,12 @@ body {
   .width-for-md {
     width: 66%;
   }
+  .dashboard-sales{
+      width: 100%;
+  }
+  .actionbar{
+    top: 100px;
+  }
 }
 
 @media (min-width: 1200px) and (max-width: 1700px) {
