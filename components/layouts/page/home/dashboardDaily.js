@@ -260,7 +260,7 @@ const DashboardDaily = ({ router }, props) => {
                         <div className="data">
                           <div>
                             <span>
-                              {ELproperties?.attributes?.soldUnitAMount > 1000000000 ? covertToMIllion(ELproperties?.attributes?.soldUnitAMount / 1000000000) + "B" : covertToMIllion(ELproperties?.attributes?.soldUnitAMount / 100000000) + "M"}
+                              {ELproperties?.attributes?.soldUnitAMount > 1000000000 ? covertToMIllion(ELproperties?.attributes?.soldUnitAMount / 1000000000) + "B" : covertToMIllion(ELproperties?.attributes?.soldUnitAMount / 1000000) + "M"}
                             </span>
                           </div>
                           <div className="absolute-top">
