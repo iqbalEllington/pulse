@@ -258,8 +258,9 @@ const index = ({ router }, props) => {
                               Age
                             </span>
                             <span>
-                              {moment().diff(moment(ELproperties?.attributes?.launchDate), 'months')} Months
-                            </span>
+                            {moment().diff(moment(ELproperties?.attributes?.launchDate), 'months') < 12 ? `${moment().diff(moment(ELproperties?.attributes?.launchDate), 'months')} months` : `${(moment().diff(moment(ELproperties?.attributes?.launchDate), 'months') / 12).toFixed(1)} years`}
+
+                              </span>
                           </div>
                         </div>
                       </div>

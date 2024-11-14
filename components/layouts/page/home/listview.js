@@ -87,9 +87,9 @@ const listview = ({ router }, props) => {
     }
     var response;
     if (id != false) {
-      response = await getRequest({ API: API_URLS.GET_PROPERTIES + '?populate[]=featuredImage&populate[]=latestImages&filters[id]=' + id + '&sort=' + sorter });
+      response = await getRequest({ API: API_URLS.GET_PROPERTIES + '?filters[occuarance]=All Time&populate[]=featuredImage&populate[]=latestImages&filters[id]=' + id + '&sort=' + sorter });
     } else {
-      response = await getRequest({ API: API_URLS.GET_PROPERTIES + '?populate[]=featuredImage&populate[]=latestImages&sort=' + sorter });
+      response = await getRequest({ API: API_URLS.GET_PROPERTIES + '?filters[occuarance]=All Time&populate[]=featuredImage&populate[]=latestImages&sort=' + sorter });
     }
     if (await response?.status === 200) {
       setIsLoading(false)
@@ -106,7 +106,7 @@ const listview = ({ router }, props) => {
   }
   async function getroeprties(value = "") {
     var response;
-    response = await getRequest({ API: API_URLS.GET_PROPERTIES + '?populate[]=featuredImage&populate[]=latestImages&sort=' + sorter + '&pagination[pageSize]=100&filters[name][$containsi]=' + value + '' });
+    response = await getRequest({ API: API_URLS.GET_PROPERTIES + '?filters[occuarance]=All Time&populate[]=featuredImage&populate[]=latestImages&sort=' + sorter + '&pagination[pageSize]=100&filters[name][$containsi]=' + value + '' });
     var data = []
     if (await response?.status === 200) {
       setIsLoading(false)
