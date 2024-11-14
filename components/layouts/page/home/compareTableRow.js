@@ -115,19 +115,19 @@ const compareTableRow = (props) => {
                 </span>
                 {props.isCompare &&
                 <span className="Comparealue">
-                    {calculatePercentageDifference(allOccuaranceData?.[props.base]?.attributes?.priceprsqftSold, allOccuaranceData?.[props.toCompare]?.attributes?.priceprsqftSold).status == "up" &&
+                    {calculatePercentageDifference((allOccuaranceData?.[props.base]?.attributes?.soldUnitAMount / allOccuaranceData?.[props.base]?.attributes?.soldunitsArea), (allOccuaranceData?.[props.toCompare]?.attributes?.soldUnitAMount / allOccuaranceData?.[props.toCompare]?.attributes?.soldunitsArea)).status == "up" &&
                         <><b className="up">
                             <FaLongArrowAltUp />
-                            {calculatePercentageDifference(allOccuaranceData?.[props.base]?.attributes?.priceprsqftSold, allOccuaranceData?.[props.toCompare]?.attributes?.priceprsqftSold).percentage} %</b> Higher than {props.toCompare}
+                            {calculatePercentageDifference((allOccuaranceData?.[props.base]?.attributes?.soldUnitAMount / allOccuaranceData?.[props.base]?.attributes?.soldunitsArea), (allOccuaranceData?.[props.toCompare]?.attributes?.soldUnitAMount / allOccuaranceData?.[props.toCompare]?.attributes?.soldunitsArea)).percentage} %</b> Higher than {props.toCompare}
                         </>
                     }
-                    {calculatePercentageDifference(allOccuaranceData?.[props.base]?.attributes?.priceprsqftSold, allOccuaranceData?.[props.toCompare]?.attributes?.priceprsqftSold).status == "down" &&
+                    {calculatePercentageDifference((allOccuaranceData?.[props.base]?.attributes?.soldUnitAMount / allOccuaranceData?.[props.base]?.attributes?.soldunitsArea), (allOccuaranceData?.[props.toCompare]?.attributes?.soldUnitAMount / allOccuaranceData?.[props.toCompare]?.attributes?.soldunitsArea)).status == "down" &&
                         <><b className="down">
                             <FaLongArrowAltDown />
-                            {calculatePercentageDifference(allOccuaranceData?.[props.base]?.attributes?.priceprsqftSold, allOccuaranceData?.[props.toCompare]?.attributes?.priceprsqftSold).percentage} %</b> Lower than {props.toCompare}
+                            {calculatePercentageDifference((allOccuaranceData?.[props.base]?.attributes?.soldUnitAMount / allOccuaranceData?.[props.base]?.attributes?.soldunitsArea), (allOccuaranceData?.[props.toCompare]?.attributes?.soldUnitAMount / allOccuaranceData?.[props.toCompare]?.attributes?.soldunitsArea)).percentage} %</b> Lower than {props.toCompare}
                         </>
                     }
-                    {calculatePercentageDifference(allOccuaranceData?.[props.base]?.attributes?.priceprsqftSold, allOccuaranceData?.[props.toCompare]?.attributes?.priceprsqftSold).status == "no change" &&
+                    {calculatePercentageDifference((allOccuaranceData?.[props.base]?.attributes?.soldUnitAMount / allOccuaranceData?.[props.base]?.attributes?.soldunitsArea), (allOccuaranceData?.[props.toCompare]?.attributes?.soldUnitAMount / allOccuaranceData?.[props.toCompare]?.attributes?.soldunitsArea)).status == "no change" &&
                         <><b className="no-change">
                         </b> Same as {props.toCompare}
                         </>
