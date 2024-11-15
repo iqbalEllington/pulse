@@ -122,31 +122,65 @@ const DashboardDaily = ({ router }, props) => {
   async function activateProeprty(property = false) {
     var propertyName;
     if (property == false) {
-      var propertyName = "all project"
+      var response3;
+      response3 = await getRequest({ API: API_URLS.GET_PROPERTIES + '?filters[name][$eq]=' + 'all project' });
+      console.log("response3",response3)
+      if (await response3?.status == 200) {
+         propertyName = response3.data?.data[0]?.id
+      }else{
+         propertyName = "All project"
+      }
     } else {
-      var propertyName = property
+       propertyName = property
     }
     var response;
 
-    response = await getRequest({ API: API_URLS.GET_PROPERTIES + '?populate[]=featuredImage&pagination[pageSize]=100&populate[]=latestImages&filters[name][$containsi]=' + propertyName });
+    response = await getRequest({ API: API_URLS.GET_PROPERTIES + '?populate[]=featuredImage&pagination[pageSize]=100&populate[]=latestImages&filters[id][$eq]=' + propertyName });
     if (await response?.status === 200) {
+    var occuarance=[
+      "All Time",
+      "This Year",
+      "Last Month",
+      "This Month",
+      "Last Week",
+      "This Week",
+      "Yesterday",
+      "Today",
+      "zero",
+      "one",
+      "two",
+      "three",
+      "four",
+      "five",
+      "six",
+      "seven",
+      "Last Week Same Day",
+      "Last Month Same Day"
+    ]
+    let containString="";
+    occuarance.map((key, val)=>{
+      containString+="&filters[$or]["+val+"][name][$containsi]="+response?.data?.data[0]?.attributes?.name+" "+key
+    })
+    containString+="&filters[$or]["+occuarance.length+"][id][$eq]="+propertyName
+    var response2;
+    response2 = await getRequest({ API: API_URLS.GET_PROPERTIES + '?populate[]=featuredImage&pagination[pageSize]=100&populate[]=latestImages'+ containString});
+    if (await response2?.status === 200) {
       setIsLoading(false)
       var alldata = {};
-      response.data?.data?.map((values, key) => {
-        console.log(values?.attributes?.occuarance)
+      response2.data?.data?.map((values, key) => {
         if (values?.attributes?.occuarance != undefined) {
           alldata[values?.attributes?.occuarance] = values
         }
       })
       setELproperties(alldata["All Time"])
       setAllOccuaranceData(alldata)
-    } else if (response?.status === 401) {
+    } else if (response2?.status === 401) {
       toast("Unauthorize access please re-login.");
     } else {
       toast(response?.data?.error || "Some thing went wrong.");
     }
 
-
+  }
     // else {
     //   var response;
     //   if (id != false) {
@@ -204,27 +238,28 @@ const DashboardDaily = ({ router }, props) => {
 
   useEffect(() => {
     getuserdata()
-    activateProeprty()
+    // activateProeprty(false)
   }, [])
-  // useEffect(() => {
-  //   // Ensure the router is ready before accessing query parameters
-  //   if (routers.isReady) {
-  //     const { property } = routers.query; // Get the 'property' query parameter
-  //     if (property) {
-  //       activateProeprty(property); // Call with the property value
-  //       setloop(false)
-  //     } else {
-  //       activateProeprty(); // Call without argument if no property in the URL
-  //     }
-  //   }
-  // }, [routers.isReady, routers.query]);
+  useEffect(() => {
+    // Ensure the router is ready before accessing query parameters
+    if (routers.isReady) {
+      const { property } = routers.query; // Get the 'property' query parameter
+      
+      if (property) {
+        activateProeprty(property); // Call with the property value
+        setloop(false)
+      } else {
+        activateProeprty(false); // Call without argument if no property in the URL
+      }
+    }
+  }, [routers.isReady, routers.query]);
   return (
     <>
       <div className="wishbanner pb w-100">
         <div className="container-fluid">
           <div className="row dashboard-sales dashboard-sales-daily">
             <div className="pl-5 salesprops">
-              <SearchProperty from="daily" activateProeprty={activateProeprty} setloop={setloop} />
+              <SearchProperty from="daily" active={ELproperties?.id} activateProeprty={activateProeprty} setloop={setloop} />
            
              <div className="col-12 row p-relative row ">
                 <div className="actionbar">
@@ -335,18 +370,20 @@ const DashboardDaily = ({ router }, props) => {
                   </div>
 
                 </div>
+                {Object.keys(allOccuaranceData).length > 0 &&
                 <div className="col-12 d-flex bodyrow-2">
                   <div>
                     <Kpibox title="Sales - Last 7 days" withhead={true} theme="dark">
-                      <VerticalSignlechart data="daily-7-days" theme="light" datakey="TotalSale"  project={ELproperties?.attributes?.name}/>
+                      <VerticalSignlechart data="daily-7-days" theme="light" datakey="TotalSale"  project={allOccuaranceData}/>
                     </Kpibox>
                   </div>
                   <div>
                     <Kpibox title="Collection - Last 7 days" withhead={true} theme="dark">
-                      <VerticalSignlechart data="daily-7-days" theme="gold" datakey="Collection" project={ELproperties?.attributes?.name} />
+                      <VerticalSignlechart data="daily-7-days" theme="gold" datakey="Collection" project={allOccuaranceData} />
                     </Kpibox>
                   </div>
                 </div>
+}
                 <div className="col-12 mt-4">
                   <Kpibox withhead={false} theme="dark">
                     <div className="col-12 over-scroll">

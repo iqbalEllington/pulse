@@ -34,23 +34,21 @@ const SearchProperty = (props) => {
             toast(response?.data?.error || "Some thing went wrong.");
         }
     }
-    const [from,setFrom]=useState(false)
+    const [from, setFrom] = useState(false)
     useEffect(() => {
         getProperties("")
-        if(props.from!=undefined){
+        if (props.from != undefined) {
             setFrom(props.from)
         }
     }, [])
     return (<div className="searchbar">
         <div className="search-input">
             <div className="searchbox">
-            <input onFocus={() => Setisfocus(true)} onChange={(e) => filterSearch(e.target.value)} placeholder="Search" type="text" />
-            <IoSearch />
+                <input onFocus={() => Setisfocus(true)} onChange={(e) => filterSearch(e.target.value)} placeholder="Search" type="text" />
+                <IoSearch />
             </div>
-            <Link className="list-view" href="/dashboard/listview"><FaList/><span>List View</span></Link>
-               
+            <Link className="list-view" href="/dashboard/listview"><FaList /><span>List View</span></Link>
             <span className="result-count">Properties {property?.data?.length}</span>
-            
         </div>
         {(keyword || isfocus) &&
             <div className={"search-result"}>
@@ -60,34 +58,43 @@ const SearchProperty = (props) => {
                     </span>
                     {property?.data?.map((property) => {
                         return <div className="property-list">
-                            <Link href={"/dashboard"+(from!=false ? "/"+ from + "?property="+property.attributes.name : "?property="+property.id)}>
-                            <div className="search-l-body" onClick={()=>{props.activateProeprty(from==false ? property.id :property.attributes.name ),props.setloop(false),Setisfocus(false),SetKeyowrd("")}}>
-                                <div className="imageholder"><img src={process.env.NEXT_PUBLIC_IMAGE_URL +(property.attributes?.featuredImage?.data?.attributes?.url ? property.attributes?.featuredImage?.data?.attributes?.formats?.small?.url: "/uploads/small_imagenotfound_2b380da6d1.jpg")}></img></div>
-                                <div className="titles">
-                                    <div>
-                                        <h3>{property.attributes.name.toLowerCase()}</h3>
-                                        <p>{(property?.attributes?.emirates != null ? property?.attributes?.emirates : "UAE") + ", " + (property?.attributes?.city != null ? property?.attributes?.area : "")}</p>
+                            <Link href={"/dashboard" + (from != false ? "/" + from + "?property=" + property.id : "?property=" + property.id)}>
+                                <div className="search-l-body" onClick={() => { props.activateProeprty(from == false ? property.id : property.id), props.setloop(false), Setisfocus(false), SetKeyowrd("") }}>
+                                    <div className="imageholder"><img src={process.env.NEXT_PUBLIC_IMAGE_URL + (property.attributes?.featuredImage?.data?.attributes?.url ? property.attributes?.featuredImage?.data?.attributes?.formats?.small?.url : "/uploads/small_imagenotfound_2b380da6d1.jpg")}></img></div>
+                                    <div className="titles">
+                                        <div>
+                                            <h3>{property.attributes.name.toLowerCase()}</h3>
+                                            <p>{(property?.attributes?.emirates != null ? property?.attributes?.emirates : "UAE") + ", " + (property?.attributes?.city != null ? property?.attributes?.area : "")}</p>
+                                        </div>
+                                        <div className="kpi">
+                                            <span> Total Units: {property.attributes.totalUnits}</span>
+                                            <span className={(property.attributes.totalUnits > 0 && property.attributes.availableUnits == 0) ? "bg-dgreen" : (property.attributes.availableUnits > 50) ? "bg-lpink" : ""}> Units Available : {property.attributes.availableUnits}</span>
+                                        </div>
                                     </div>
-                                    <div className="kpi">
-                                        <span> Total Units: {property.attributes.totalUnits}</span>
-                                        <span className={(property.attributes.totalUnits>0 && property.attributes.availableUnits == 0) ? "bg-dgreen" : (property.attributes.availableUnits > 50) ? "bg-lpink" : ""}> Units Available : {property.attributes.availableUnits}</span>
+                                    <div className="summery">
+                                        <span style={{ color: "white" }}><span className="number">{property.attributes.AgeingTotal_default}</span> Ageing Defaults</span>
                                     </div>
                                 </div>
-                                <div className="summery">
-                                    <span style={{color:"white"}}><span className="number">{property.attributes.AgeingTotal_default}</span> Ageing Defaults</span>
-                                </div>
-                            </div>
                             </Link>
                         </div>
                     })}
                 </div>
             </div>
         }
-           <Link href={from=="daily" ? "/dashboard":"/dashboard/daily"}>
-              <button className="switchReport">
-              Switch to {from=="daily" ? "Collection Dashboard":"All-in-One Dashboard"}
-              </button>
-                </Link> 
+        {from == "daily" ?
+            <Link href={"/dashboard"+ (props.active!=undefined ? "?property="+props.active: "")}>
+               <button className="switchReport">
+                Switch to All-in-One Dashboard
+                </button>
+            </Link>
+            :
+            <Link href={"/dashboard/daily" + (props.active!=undefined ? "?property="+props.active: "" )}>
+             <button className="switchReport">
+                Switch to Daily Dashboard
+                </button>
+            </Link>
+        }
+
     </div>)
 }
 export default SearchProperty

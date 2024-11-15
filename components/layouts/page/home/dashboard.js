@@ -81,7 +81,14 @@ const index = ({ router }, props) => {
   }
   async function activateProeprty(id = false) {
     if (id == false) {
-      id = properties[propindex]?.['id']
+      var response3;
+      response3 = await getRequest({ API: API_URLS.GET_PROPERTIES + '?filters[name][$eq]=' + 'all project' });
+    
+      if (await response3?.status == 200) {
+         id = response3.data?.data[0]?.id
+      }else{
+         id = properties[propindex]?.['id']
+      }
     }
     if (propindex > properties.length) {
       setPropIndex(0)
@@ -159,6 +166,8 @@ const index = ({ router }, props) => {
       } else {
         activateProeprty(); // Call without argument if no property in the URL
       }
+    }else{
+      activateProeprty();
     }
   }, [routers.isReady, routers.query]);
   return (
@@ -167,7 +176,7 @@ const index = ({ router }, props) => {
         <div className="container-fluid">
           <div className="row dashboard-sales">
             <div className="pl-5 salesprops">
-              <SearchProperty activateProeprty={activateProeprty} setloop={setloop} />
+              <SearchProperty active={ELproperties.id} activateProeprty={activateProeprty} setloop={setloop} />
             <div className="actionbar">
                 <span className="last-updated">Latest Data as of:  {moment(ELproperties?.attributes?.LastUpdatedDate).format('DD MMM YYYY')} </span>
                 <button className="downloadPdf" onClick={() => generatePDF(getTargetElement, options)}> Download PDF <FaArrowDown /></button>
