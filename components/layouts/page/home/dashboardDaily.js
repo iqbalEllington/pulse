@@ -227,14 +227,8 @@ const DashboardDaily = ({ router }, props) => {
     }
   }
   const [properties, setproperties] = useState(false)
-  const [loop, setloop] = useState(true)
+  const [loop, setloop] = useState(false)
   const [propindex, setPropIndex] = useState("loading")
-
-  // useEffect(() => {
-  //   if (propindex != "loading") {
-  //     activateProeprty()
-  //   }
-  // }, [propindex])
 
   useEffect(() => {
     getuserdata()
