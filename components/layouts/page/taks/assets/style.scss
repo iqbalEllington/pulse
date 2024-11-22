@@ -1,0 +1,89 @@
+.tasks-board {
+    .popup.active{
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,.8);
+        top: 0;
+        left: 0;
+        display: flex;
+        align-items: center;
+        z-index: 999;
+    }
+    .header {
+        padding-top: 30px;
+        padding-left: 30px;
+
+        h1 {
+            font-family: 'AcuminBold';
+        }
+
+        p {
+            color: white;
+            font-size: 1.3rem;
+        }
+    }
+
+    .downloadPdf {
+        background: black;
+    }
+
+    .add-task {
+        background: black;
+        margin-left: 10px;
+    }
+
+    .form {
+        background: black;
+
+        .formbox {
+            padding: 20px;
+            color: white;
+
+            table {
+                width: 100%;
+                thead{
+                    tr{
+                        th{
+                            padding-bottom: 10px;
+                            padding-left: 10px;
+                            padding-right: 10px;
+                        }
+                    }
+                }
+                tbody{
+                    tr{
+                        td{
+                            background: #1E1E20;
+                            padding-left: 10px;
+                            padding-right: 10px;
+                            padding-top: 10px;
+                            padding-bottom: 10px;
+                            &.star{
+                                padding-left: 20px;
+                                svg{
+                                    color: #9E856F40;
+                                    font-size: 25px;
+                                   
+                                }
+                                
+                            }
+                            textarea{
+                                background: #000;
+                                border: 0px;
+                                height: 40px;
+                                padding: 7px 10px;
+                                width: 100%;
+                                min-width: 300px;
+                                resize: none;
+                                color: #ffffff80;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+
+}

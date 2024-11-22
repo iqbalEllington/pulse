@@ -83,11 +83,11 @@ const index = ({ router }, props) => {
     if (id == false) {
       var response3;
       response3 = await getRequest({ API: API_URLS.GET_PROPERTIES + '?filters[name][$eq]=' + 'all project' });
-    
+
       if (await response3?.status == 200) {
-         id = response3.data?.data[0]?.id
-      }else{
-         id = properties[propindex]?.['id']
+        id = response3.data?.data[0]?.id
+      } else {
+        id = properties[propindex]?.['id']
       }
     }
     if (propindex > properties.length) {
@@ -166,7 +166,7 @@ const index = ({ router }, props) => {
       } else {
         activateProeprty(); // Call without argument if no property in the URL
       }
-    }else{
+    } else {
       activateProeprty();
     }
   }, [routers.isReady, routers.query]);
@@ -177,7 +177,7 @@ const index = ({ router }, props) => {
           <div className="row dashboard-sales">
             <div className="pl-5 salesprops">
               <SearchProperty active={ELproperties.id} activateProeprty={activateProeprty} setloop={setloop} />
-            <div className="actionbar">
+              <div className="actionbar">
                 <span className="last-updated">Latest Data as of:  {moment(ELproperties?.attributes?.LastUpdatedDate).format('DD MMM YYYY')} </span>
                 <button className="downloadPdf" onClick={() => generatePDF(getTargetElement, options)}> Download PDF <FaArrowDown /></button>
                 <div className="playpause">
@@ -225,10 +225,10 @@ const index = ({ router }, props) => {
                 <div className="dashboard-body-left">
                   <div className="col-12 mob-m-10">
                     <div className="db-header">
-                      <h2>{ELproperties?.attributes?.name =="all project" ? "All Projects": ELproperties?.attributes?.name}</h2>
+                      <h2>{ELproperties?.attributes?.name == "all project" ? "All Projects" : ELproperties?.attributes?.name}</h2>
                       <div className="db-hdesc">
                         <span>{(ELproperties?.attributes?.emirates != null ? ELproperties?.attributes?.emirates : "UAE") + ", " + (ELproperties?.attributes?.area != null ? ELproperties?.attributes?.area : "")}</span>
-                       {ELproperties?.attributes?.name!="all project" && <span> Launch Month: {moment(ELproperties?.attributes?.launchDate).format('MMM YYYY')}</span>}
+                        {ELproperties?.attributes?.name != "all project" && <span> Launch Month: {moment(ELproperties?.attributes?.launchDate).format('MMM YYYY')}</span>}
                       </div>
                     </div>
                   </div>
@@ -267,9 +267,9 @@ const index = ({ router }, props) => {
                               Age
                             </span>
                             <span>
-                            {moment().diff(moment(ELproperties?.attributes?.launchDate), 'months') < 12 ? `${moment().diff(moment(ELproperties?.attributes?.launchDate), 'months')} months` : `${(moment().diff(moment(ELproperties?.attributes?.launchDate), 'months') / 12).toFixed(1)} years`}
+                              {moment().diff(moment(ELproperties?.attributes?.launchDate), 'months') < 12 ? `${moment().diff(moment(ELproperties?.attributes?.launchDate), 'months')} months` : `${(moment().diff(moment(ELproperties?.attributes?.launchDate), 'months') / 12).toFixed(1)} years`}
 
-                              </span>
+                            </span>
                           </div>
                         </div>
                       </div>
