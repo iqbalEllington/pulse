@@ -326,10 +326,10 @@ const index = ({ router }, props) => {
                               }} size={{ Width: "150px", Height: "150px" }} 
                               percentage={ELproperties?.attributes?.registrations * 100 / ELproperties?.attributes?.SalesProgressionGenerated} color="#00A171" />
                             </div>
-                            <div className="data-summery pt-4 pb-3">
+                            <div className="data-summery pt-4 pb-3" style={{flexWrap: "wrap"}}>
                               <div>
                                 <h3>SPA Generated</h3>
-                                <span className="fg-gold">{ELproperties?.attributes?.SalesProgressionGenerated} <b>({(ELproperties?.attributes?.SalesProgressionSigned && ELproperties?.attributes?.SalesProgressionGenerated)
+                                <span style={{color: "#9E856F"}} className="fg-gold">{ELproperties?.attributes?.SalesProgressionGenerated} <b>({(ELproperties?.attributes?.SalesProgressionSigned && ELproperties?.attributes?.SalesProgressionGenerated)
                                   ? (ELproperties.attributes.SalesProgressionGenerated * 100 / ELproperties.attributes.SalesProgressionGenerated).toFixed(2)
                                   : 0}%)</b></span>
                               </div>
