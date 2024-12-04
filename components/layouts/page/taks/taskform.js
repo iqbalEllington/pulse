@@ -16,8 +16,9 @@ import ResponisbleSearch from "./responisbleSearch";
 import ProjectForm from "./projectForm";
 import ResponsibleForm from "./responsibleForm";
 
-const Taskform = ({ router }, props) => {
+const Taskform = (props) => {
     const initialFormData = {
+        id: null,
         isStarred: false,
         Task: "",
         type: null,
@@ -27,15 +28,15 @@ const Taskform = ({ router }, props) => {
         responsible_leads: null,
         dueDate: null,
     };
-    
+
     const [fomrData, SetFormData] = useState(initialFormData)
 
     const [popupValue, SetPopupvalue] = useState(false)
-    const ClosepopupSwitch = async (e) => {
-        if (e.target.getAttribute("data-closepop") == 'true') {
-            setPopup(false);
-        }
-    };
+    // const ClosepopupSwitch = async (e) => {
+    //     if (e.target.getAttribute("data-closepop") == 'true') {
+    //         setPopup(false);
+    //     }
+    // };
     const [tab, SetTab] = useState("form")
     const [formData, setFormData] = useState({
 
@@ -50,23 +51,61 @@ const Taskform = ({ router }, props) => {
     const activateProeprty = async (value) => {
         setFormData((prevState) => ({
             ...prevState,
-            ["projects"]: eventKey,
+            ["projects"]: [value],
         }));
     }
     const activateEmployee = async (value) => {
         setFormData((prevState) => ({
             ...prevState,
-            ["responsible_leads"]: eventKey,
+            ["responsible_leads"]: [value],
         }));
     }
+    // useEffect(() => {
+    //     props.setFormOpen(props.formstatus)
+    // }, [props.formstatus])
+    useEffect(()=>{
+        if(props.updateDatas!==false){
+            var existngdata=props.updateDatas;
+            console.log("props.updateDatas",moment(existngdata.attributes["dueDate"]), "lets start")
+            // id: existngdata.id,
+            // isStarred: existngdata.attributes.isStarred,
+            // Task: "",
+            // type: null,
+            // status: null,
+            // priority: null,
+            // projects: null,
+            // responsible_leads: null,
+            // dueDate: null,
+            var dateString = existngdata.attributes["dueDate"];
+            const defaultDate = moment(dateString, "yyyy-MM-dd");
+            console.log(defaultDate)
+            setFormData((prevState) => ({
+                ...prevState,
+                ["id"]: [existngdata.id],
+                ["isStarred"]:existngdata.attributes.isStarred,
+                ["Task"]:existngdata.attributes.Task,
+                // ["dueDate"]:defaultDate,
+                ["status"]:existngdata.attributes["status"],
+                ["type"]:existngdata.attributes["type"]
+            }));
+        }else{
+            setFormData(initialFormData)
+        }
+    },[props.updateDatas])
     useEffect(() => {
-        setFormOpen(props.formstatus)
-    }, [props.formstatus])
-    const [formOpen, setFormOpen] = useState(false)
+        if (props.isUpdate != false) {
+            setFormData((prevState) => ({
+                ...prevState,
+            }));
+        }
+
+    }, [props.isUpdate])
+
+    // const [formOpen, setFormOpen] = useState(false)
+
     const [selectedValue, setSelectedValue] = useState('');
-    const [formStatus, setFormStatus] = useState('');
+    // const [formStatus, setFormStatus] = useState('');
     const [popup, setPopup] = useState(false);
-    const [isStarred, SetIsstarred] = useState(false)
     const handleSelect = (eventKey) => {
         setSelectedValue(eventKey); // Update the state with the selected value
         setFormData((prevState) => ({
@@ -75,7 +114,7 @@ const Taskform = ({ router }, props) => {
         }));
     };
     const handleStatus = (eventKey) => {
-        setFormStatus(eventKey); // Update the state with the selected value
+        // setFormStatus(eventKey); // Update the state with the selected value
         setFormData((prevState) => ({
             ...prevState,
             ["status"]: eventKey,
@@ -106,7 +145,7 @@ const Taskform = ({ router }, props) => {
             // formPayload.append("startDate", formData.startDate); // Ensure date is formatted correctly
             // formPayload.append("expectedCompletionDate", formData.expectedCompletionDate);
             // formPayload.append("area", formData.area);
-            let formDataProcess=formData
+            let formDataProcess = formData
             let formPayload = {
                 data: formDataProcess
             }
@@ -127,7 +166,8 @@ const Taskform = ({ router }, props) => {
                 setFormData((prevState) => ({
                     ...initialFormData,
                 }));
-                toast.success("Project created successfully!");
+                props.setForceload(`id-${Date.now()}`)
+                toast.success("Task/Alert created successfully!");
                 // props.Closepopup(); // Close form popup
             } else {
                 toast.error(`Failed to create project: ${response?.data?.message || "Unknown error"}`);
@@ -139,19 +179,19 @@ const Taskform = ({ router }, props) => {
     };
     return (
         <>
-            <div className={formOpen == true ? "form-active" : "form-hidden"}>
+            <div className={props.formstatus == true ? "form-active" : "form-hidden"}>
                 <div className="header-form">
                     <span className={tab == "form" ? "active" : ""} onClick={() => SetTab("form")}>Add or Edit</span>
                     <span className={tab == "Updates" ? "active" : ""} onClick={() => SetTab("Updates")}>Updates</span>
                 </div>
 
                 <div className={"formbox"}>
-                    <div className="absoulte-close-right" onClick={() => setFormOpen(!formOpen)}>Close</div>
-                    <div className={tab == "form" ? "" : "d-none"} >
+                    {props.formstatus &&
+                        <div className="absoulte-close-right" onClick={() => props.SetFormActive(!props.formstatus)}> {props.formstatus ? "Close X" : ""}</div>
+                    } <div className={tab == "form" ? "" : "d-none"} >
                         <form className="taskform" onSubmit={handleSubmit} action={"projects"}>
                             <table>
                                 <tbody>
-
                                     <tr>
                                         <td>
                                             <label>Type</label>
@@ -184,7 +224,7 @@ const Taskform = ({ router }, props) => {
                                         <td>
                                             <label>Project</label>
                                             <div>
-                                                <ProjectSearch popupSwitch={popupSwitch}  activateProeprty={() => activateProeprty} />
+                                                <ProjectSearch popupSwitch={popupSwitch} activateProeprty={activateProeprty} />
                                             </div>
                                         </td>
 
@@ -206,7 +246,7 @@ const Taskform = ({ router }, props) => {
                                             <label>Status</label>
                                             <Dropdown className="color-drop-multy hash" onSelect={handleStatus}>
                                                 <Dropdown.Toggle id="dropdown-basic">
-                                                    {formStatus || 'Select Type'}
+                                                    {formData.status || 'Select Type'}
                                                 </Dropdown.Toggle>
                                                 <Dropdown.Menu>
                                                     <Dropdown.Item eventKey="To Do">To Do</Dropdown.Item>
@@ -229,7 +269,7 @@ const Taskform = ({ router }, props) => {
                                         </td>
                                         <td>
                                             <label>Responsible</label>
-                                            <ResponisbleSearch popupSwitch={popupSwitch} activateEmployee={() => activateEmployee} />
+                                            <ResponisbleSearch popupSwitch={popupSwitch} activateEmployee={activateEmployee} />
                                         </td>
                                         <td>
                                             <input className="submit bg-white fg-black" type="submit" value={"Create"} />

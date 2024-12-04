@@ -24,6 +24,15 @@ const Tasks = ({ router }, props) => {
     useEffect(() => {
         getuserdata()
     }, [])
+
+    const[formActive, setFormActive] = useState(false)
+    const [updateDatas, SetUpdateDatas] = useState(false)
+    const SetUpdateData = (data) => {
+        SetUpdateDatas(data);
+        setFormActive(true)
+    }
+    const [ontop, SetOntop] = useState("Top Updates")
+    const [forceLoad, setForceload] = useState(false)
     const getTargetElement = () => document.getElementById('salesprops-body');
     const [userDetail, setUserDetails] = useState(false)
     async function getuserdata() {
@@ -75,6 +84,7 @@ const Tasks = ({ router }, props) => {
             }
         },
     };
+
     return (
         <>
             <div className="wishbanner tasks-board pb w-100">
@@ -88,7 +98,7 @@ const Tasks = ({ router }, props) => {
                         </div>
                         <div className="actionbar">
                             <button className="downloadPdf" onClick={() => generatePDF(getTargetElement, options)}> Download PDF <FaArrowDown /></button>
-                            <button className="add-task" onClick={() => generatePDF(getTargetElement, options)}> Add a task </button>
+                            <button className="add-task" onClick={() => {setFormActive(!formActive),SetUpdateDatas(false)}}> Add a task </button>
 
                             <Dropdown className="profile-user">
                                 <Dropdown.Toggle id="dropdown-basic">
@@ -106,7 +116,15 @@ const Tasks = ({ router }, props) => {
                         </div>
                     </div>
                     <div className="form">
-                        <Taskform formstatus={true} />
+                        <Taskform
+                            updateData={{
+                                a: "b"
+                            }}
+                            formstatus={formActive}
+                            SetFormActive={setFormActive}
+                            setForceload={setForceload}
+                            updateDatas={updateDatas}
+                        />
                     </div>
                     <div className="Task-List-body">
                         <div className="header">
@@ -114,31 +132,31 @@ const Tasks = ({ router }, props) => {
                                 <h2>Show me on Top</h2>
                                 <ul>
                                     <li className="top">
-                                        <Link href="/tasks/top-updates">
+                                        <Link onClick={() => SetOntop("Top Updates")} href="/tasks/top-updates">
                                             Top Updates
                                         </Link>
                                     </li>
-                                    <li className="today">
-                                        <Link href="/tasks/today">
+                                    <li className="today" >
+                                        <Link href="/tasks/today" onClick={() => SetOntop("Today")}>
                                             Today
                                         </Link>
                                     </li>
                                     <li className="priority">
-                                        <Link href="/tasks/top-priority">
+                                        <Link href="/tasks/top-priority" onClick={() => SetOntop("Top Priority")}>
                                             Top Priority
                                         </Link>
                                     </li>
                                     <li className="this-week">
-                                        <Link href="/tasks/this-week">
+                                        <Link href="/tasks/this-week" onClick={() => SetOntop("This Week")}>
                                             This Week
                                         </Link>
                                     </li>
                                     <li className="overdue">
-                                        <Link href="/tasks/overdue">
+                                        <Link href="/tasks/overdue" onClick={() => SetOntop("Overdue")}>
                                             Overdue
                                         </Link>
                                     </li>
-                                    <li className="completed">
+                                    <li className="completed" onClick={() => SetOntop("Completed")}>
                                         <Link href="/tasks/completed">
                                             Completed
                                         </Link>
@@ -146,18 +164,21 @@ const Tasks = ({ router }, props) => {
                                 </ul>
                             </div>
                             <div className="search">
-                                    <div>
-                                        <input type="text"  placeholder="search"/>
-                                    </div>
+                                <div>
+                                    <input type="text" placeholder="search" />
+                                </div>
                             </div>
                         </div>
                         <div className="show-me-top">
-                            <TagedTasks tag={{
-                                keyword: "Top Updates",
-                                type: "tag",
-                                filterValue: "Starred",
 
-                            }}/>
+                            <TagedTasks tag={{
+                                keyword: ontop,
+                                type: "tag",
+                                forceLoad: { forceLoad },
+                                filterValue: ontop
+                            }}
+                                SetUpdateData={SetUpdateData}
+                            />
                         </div>
 
                         <div className="Grouped">

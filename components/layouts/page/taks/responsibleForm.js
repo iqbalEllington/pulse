@@ -113,6 +113,7 @@ const ResponsibleForm = (props) => {
                         <tbody>
                             <tr>
                                 <td>
+                                <label>Name</label>
                                     <input
                                         type="text"
                                         placeholder="Project Name"
@@ -122,6 +123,7 @@ const ResponsibleForm = (props) => {
                                     />
                                 </td>
                                 <td>
+                                <label>Whatsapp</label>
                                 <IntlTelInput
                                         autoHideDialCode="false"
                                         onPhoneNumberChange={(b, n, c, number) => {
@@ -141,6 +143,7 @@ const ResponsibleForm = (props) => {
                                     />
                                 </td>
                                 <td>
+                                    <label>Mobile</label>
                                     <IntlTelInput
                                         autoHideDialCode="false"
                                         onPhoneNumberChange={(b, n, c, number) => {
@@ -161,6 +164,7 @@ const ResponsibleForm = (props) => {
                                 </td>
                                
                                 <td>
+                                <label>E-Mail</label>
                                     <input
                                         type="email"
                                         placeholder="email"
@@ -170,6 +174,7 @@ const ResponsibleForm = (props) => {
                                     />
                                 </td>
                                 <td>
+                                <label>Photo</label>
                                     <CustomFileInput onFileChange={handleFileChange} />
                                     {/* Assuming CustomFileInput triggers `onFileChange` with the selected file */}
                                 </td>

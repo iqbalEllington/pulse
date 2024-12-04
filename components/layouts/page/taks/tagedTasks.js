@@ -7,7 +7,7 @@ import { FaRegStar, FaStar } from "react-icons/fa";
 
 
 
-const tagedTasks = ({ router }, props) => {
+const tagedTasks = (props) => {
     const [tasks, setTasks] = useState({})
     async function getTagedTask(tag) {
         if (tag?.type == "date") {
@@ -47,12 +47,13 @@ const tagedTasks = ({ router }, props) => {
     useEffect(() => {
         getTagedTask(props.tag)
     }, [props.tag])
+  
     return (
         <>
             <div className="task-list-container">
                 <div className="header">
-                    <h3>
-                        {props.tag?.keyword}
+                    <h3 className="ontoptitle">
+                        {props.tag.keyword}
                     </h3>
                 </div>
                 <div className="body">
@@ -60,7 +61,7 @@ const tagedTasks = ({ router }, props) => {
                         {tasks.data?.map((task) => {
                             return <tr>
                                 <td className="star">
-                                    <div onClick={() => SetIsstarred(!isStarred)}>
+                                    <div onClick={() => SetIsstarred(!task.attributes.isStarred)}>
                                         {task.attributes.isStarred ?
                                             <FaStar />
                                             :
@@ -68,34 +69,39 @@ const tagedTasks = ({ router }, props) => {
                                         }
                                     </div>
                                 </td>
-                                <td>
+                                <td className="taskTitle">
                                     <h4>
                                         {task.attributes.Task}
                                     </h4>
                                 </td>
-                                <td>
+                                <td className="projectName">
                                     <div>
-                                        {task.attributes.projects?.data?.[0]?.["attributes"].name}
+                                        {task.attributes.projects?.data?.[0]?.attributes?.name}
                                     </div>
                                 </td>
-                                <td>
+                                <td className="type">
                                     <span>{task.attributes.type}</span>
                                 </td>
-                                <td>
+                                <td className="dueDate">
                                     <span>{task.attributes.dueDate}</span>
                                 </td>
-                                <td>
+                                <td className="status">
                                     <span>{task.attributes.status}</span>
                                 </td>
-                                <td>
+                                <td className="responsible">
                                     <div>
                                         <span>
-                                            {task.attributes.responsible_leads?.[0]?.["attributes"].Name}
+                                            {task.attributes.responsible_leads?.data?.[0]?.["attributes"].Name}
                                         </span>
                                         <span>
-                                            {task.attributes.responsible_leads?.[0]?.["attributes"].whatsapp}
+                                            {task.attributes.responsible_leads?.data?.[0]?.["attributes"].whatsapp}
                                         </span>
                                     </div>
+                                </td>
+                                <td>
+                                    <span onClick={()=>props.SetUpdateData(task)}>
+                                        Edit
+                                    </span>
                                 </td>
                                 {/*     <td>
                                     {JSON.stringify("Responses")}

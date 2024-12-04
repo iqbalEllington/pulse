@@ -515,6 +515,7 @@
             >h2 {
                 display: block;
                 font-size: 1rem;
+
             }
 
             ul {
@@ -603,20 +604,58 @@
         .header {
             h3 {
                 font-size: 1rem;
+                font-family: AcuminBold;
+
             }
         }
 
         .body {
+            padding-left: 20px;
             .tasks-list {
                 width: 100%;
 
                 td {
                     padding: 10px;
-                    text-align: center;
+                    text-align: left;
                 }
 
                 .star {
                     color: #9E856F;
+                    width: 30px;
+                    svg {
+                        font-size: 1.7rem;
+                    }
+                }
+                .taskTitle{
+                    h4{
+                        font-size: 1rem;
+                        margin: 0px;
+                        padding: 0px;
+                        word-break: break-all;
+                        white-space: break-spaces;
+                    }
+                    max-width: 300px;
+                    width:300px;
+                }
+                .projectName{
+                    width: 120px;
+                    font-size: 1rem;
+                }
+                .type{
+                    width: 100px;
+                    font-size: 1rem;
+                }
+                .dueDate{
+                    width: 60px;
+                    font-size: 1rem;
+                }
+                .status{
+                    width: 60px;
+                    font-size: 1rem;
+                }
+                .responsible{
+                    width:130px;
+                    font-size: 1rem;
                 }
             }
         }
