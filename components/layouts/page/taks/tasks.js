@@ -10,10 +10,17 @@ import { toast } from "react-toastify";
 import { FaRegStar } from "react-icons/fa";
 import { FaStar } from "react-icons/fa";
 import Taskform from "./taskform";
+import Link from "next/link";
+import TagedTasks from "./tagedTasks";
 
 
 
 const Tasks = ({ router }, props) => {
+
+
+
+
+
     useEffect(() => {
         getuserdata()
     }, [])
@@ -99,15 +106,68 @@ const Tasks = ({ router }, props) => {
                         </div>
                     </div>
                     <div className="form">
-                       <Taskform />
+                        <Taskform formstatus={true} />
                     </div>
-                    <div className="body">
+                    <div className="Task-List-body">
+                        <div className="header">
+                            <div className="filter">
+                                <h2>Show me on Top</h2>
+                                <ul>
+                                    <li className="top">
+                                        <Link href="/tasks/top-updates">
+                                            Top Updates
+                                        </Link>
+                                    </li>
+                                    <li className="today">
+                                        <Link href="/tasks/today">
+                                            Today
+                                        </Link>
+                                    </li>
+                                    <li className="priority">
+                                        <Link href="/tasks/top-priority">
+                                            Top Priority
+                                        </Link>
+                                    </li>
+                                    <li className="this-week">
+                                        <Link href="/tasks/this-week">
+                                            This Week
+                                        </Link>
+                                    </li>
+                                    <li className="overdue">
+                                        <Link href="/tasks/overdue">
+                                            Overdue
+                                        </Link>
+                                    </li>
+                                    <li className="completed">
+                                        <Link href="/tasks/completed">
+                                            Completed
+                                        </Link>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div className="search">
+                                    <div>
+                                        <input type="text"  placeholder="search"/>
+                                    </div>
+                            </div>
+                        </div>
+                        <div className="show-me-top">
+                            <TagedTasks tag={{
+                                keyword: "Top Updates",
+                                type: "tag",
+                                filterValue: "Starred",
 
+                            }}/>
+                        </div>
+
+                        <div className="Grouped">
+
+                        </div>
                     </div>
                 </div>
             </div>
             <div>
-                
+
             </div>
         </>
     );

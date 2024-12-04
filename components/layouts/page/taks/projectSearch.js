@@ -12,7 +12,7 @@ const projectSearch = (props) => {
         getProperties(value);
         SetKeyowrd(value);
     }
-
+  
     const [keyword, SetKeyowrd] = useState(null)
     const [isfocus, Setisfocus] = useState(false)
     const [loading, setIsLoading] = useState(false)
@@ -37,49 +37,49 @@ const projectSearch = (props) => {
             setFrom(props.from)
         }
     }, [])
-    return (<div className="searchbar">
+    return (<div className="searchbar-form">
         <div className="search-input">
             <div className="searchbox">
-                <input onFocus={() => Setisfocus(true)} onChange={(e) => filterSearch(e.target.value)} placeholder="Search" type="text" />
+                <input onFocus={() => Setisfocus(true)} onChange={(e) => filterSearch(e.target.value)} value={keyword} placeholder="Search" type="text" />
             </div>
 
         </div>
-        {(keyword || isfocus) &&
+        {(keyword && isfocus) &&
             <div className={"search-result"}>
                 <div className="searchlist">
-                    <span className="close" onClick={() => Setisfocus(false)}>
+
+                    {/* <span className="close" onClick={() => Setisfocus(false)}>
                         <MdClose />
-                    </span>
+                    </span> */}
                     {property?.data?.length > 0 ?
                         <>
                             {property?.data?.map((property) => {
                                 return <div className="property-list">
-                                    <Link href={"/dashboard" + (from != false ? "/" + from + "?property=" + property.id : "?property=" + property.id)}>
-                                        <div className="search-l-body" onClick={() => { props.activateProeprty(from == false ? property.id : property.id), props.setloop(false), Setisfocus(false), SetKeyowrd("") }}>
-                                            <div className="imageholder"><img src={process.env.NEXT_PUBLIC_IMAGE_URL + (property.attributes?.featuredImage?.data?.attributes?.url ? property.attributes?.featuredImage?.data?.attributes?.formats?.small?.url : "/uploads/small_imagenotfound_2b380da6d1.jpg")}></img></div>
-                                            <div className="titles">
-                                                <div>
-                                                    <h3>{property.attributes.name.toLowerCase()}</h3>
-                                                    <p>{(property?.attributes?.emirates != null ? property?.attributes?.emirates : "UAE") + ", " + (property?.attributes?.city != null ? property?.attributes?.area : "")}</p>
-                                                </div>
-                                                <div className="kpi">
-                                                    <span> Total Units: {property.attributes.totalUnits}</span>
-                                                    <span className={(property.attributes.totalUnits > 0 && property.attributes.availableUnits == 0) ? "bg-dgreen" : (property.attributes.availableUnits > 50) ? "bg-lpink" : ""}> Units Available : {property.attributes.availableUnits}</span>
-                                                </div>
-                                            </div>
-                                            <div className="summery">
-                                                <span style={{ color: "white" }}><span className="number">{property.attributes.AgeingTotal_default}</span> Ageing Defaults</span>
+                                    <div className="search-l-body" onClick={() => { props.activateProeprty(property.id), SetKeyowrd(property.attributes.name), Setisfocus(false) }}>
+                                        <div className="titles">
+                                            <div>
+                                                <h3>{property.attributes.name.toLowerCase()}</h3>
+                                                <p>{(property?.attributes?.area)}</p>
                                             </div>
                                         </div>
-                                    </Link>
+                                    </div>
                                 </div>
                             })}
                         </>
                         :
                         <div>
-                            <div onClick={() => props.popupSwitch("project")}>
-                            Create Project "{keyword}"
-                            </div>
+                            <div className="property-list">
+                                    <div className="search-l-body" onClick={() => {props.popupSwitch("project",keyword),Setisfocus(false), SetKeyowrd("")}}>
+                                        <div className="titles new-project">
+                                            <div>
+                                                <h3>Create Project <span>"{keyword}"</span></h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {/* <div onClick={() => props.popupSwitch("project")}>
+                                Create Project "{keyword}"
+                            </div> */}
                         </div>
                     }
                 </div>

@@ -304,6 +304,7 @@ const index = ({ router }, props) => {
                                 <span className="fg-lpink">{ELproperties?.attributes?.availableUnits}<b>({Math.round(ELproperties?.attributes?.availableUnits * 100 / ELproperties?.attributes?.totalUnits)}%)</b></span>
                               </div>
                             </div>
+                            
                           </div>
                         </Kpibox>
                       </div>
@@ -311,29 +312,34 @@ const index = ({ router }, props) => {
                         <Kpibox title="Sales Progression" withhead={true} theme="light">
                           <div className="vis-data">
                             <div className="p-4">
-                              <CircleChart kpiText="Generated" kpiValue={{
+                              <CircleChart kpiText="SPA Generated" kpiValue={{
                                 total: ELproperties?.attributes?.SalesProgressionGenerated,
                                 value1: {
-                                  "unit": "SPA Generated",
-                                  "value": ELproperties?.attributes?.SalesProgressionGenerated
+                                  "unit": "Registered",
+                                  "value": ELproperties?.attributes?.registrations
                                 },
                                 value2: {
-                                  "unit": "SPA Executed",
-                                  "value": ELproperties?.attributes?.SalesProgressionExecuted
+                                  "unit": "Not Registered",
+                                  "value": ELproperties?.attributes?.SalesProgressionGenerated - ELproperties?.attributes?.registrations
                                 },
                                 isamount: false
-                              }} size={{ Width: "150px", Height: "150px" }} percentage={ELproperties?.attributes?.SalesProgressionGenerated * 100 / ELproperties?.attributes?.SalesProgressionGenerated} color="#00A171" />
+                              }} size={{ Width: "150px", Height: "150px" }} 
+                              percentage={ELproperties?.attributes?.registrations * 100 / ELproperties?.attributes?.SalesProgressionGenerated} color="#00A171" />
                             </div>
-                            <div className="data-summery">
+                            <div className="data-summery pt-4 pb-3">
                               <div>
                                 <h3>SPA Generated</h3>
-                                <span className="fg-dgreen">{ELproperties?.attributes?.SalesProgressionGenerated} <b>({(ELproperties?.attributes?.SalesProgressionSigned && ELproperties?.attributes?.SalesProgressionGenerated)
+                                <span className="fg-gold">{ELproperties?.attributes?.SalesProgressionGenerated} <b>({(ELproperties?.attributes?.SalesProgressionSigned && ELproperties?.attributes?.SalesProgressionGenerated)
                                   ? (ELproperties.attributes.SalesProgressionGenerated * 100 / ELproperties.attributes.SalesProgressionGenerated).toFixed(2)
                                   : 0}%)</b></span>
                               </div>
                               <div>
                                 <h3>SPA Executed</h3>
                                 <span className="fg-lpink">{ELproperties?.attributes?.SalesProgressionExecuted} <b>({ELproperties?.attributes?.SalesProgressionExecuted > 0 ? (ELproperties?.attributes?.SalesProgressionExecuted * 100 / ELproperties?.attributes?.SalesProgressionGenerated).toFixed(2) + "%" : "0%"})</b></span>
+                              </div>
+                              <div>
+                                <h3>Registered <sup>New</sup></h3>
+                                <span className="fg-dgreen">{ELproperties?.attributes?.registrations} <b>({ELproperties?.attributes?.registrations > 0 ? (ELproperties?.attributes?.registrations * 100 / ELproperties?.attributes?.SalesProgressionGenerated).toFixed(2) + "%" : "0%"})</b></span>
                               </div>
                             </div>
                           </div>

@@ -75,7 +75,20 @@ export const updateAuthToken2 = (token = "") => {
     ...{ Authorization: `bearer ${token}` },
   };
 };
-
+export const postRequest_cms = ({ API = "", DATA = {}, HEADER = {}, PAYLOAD }) => {
+  return new Promise((resolve, reject) => {
+    instance
+      .post(apiWithAuth(API), DATA, {
+        ...(PAYLOAD ? PAYLOAD : { ...defaulHeader.headers, ...HEADER }),
+      })
+      .then((result) => {
+        resolve(result);
+      })
+      .catch((error) => {
+        resolve(error.response); // Change to reject(error.response) if you need proper error handling
+      });
+  });
+};
 export const postRequest = ({ API = "", DATA = {}, HEADER = {}, PAYLOAD }) => {
   return new Promise((resolve, reject) => {
     instance

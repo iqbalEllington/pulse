@@ -5,13 +5,20 @@ import DatePicker from "react-datepicker";
 import CustomFileInput from "components/modals/fileUpload";
 import { toast } from "react-toastify";
 import "react-datepicker/dist/react-datepicker.css";
-
-const ProjectForm = (props) => {
+import IntlTelInput from "react-intl-tel-input";
+import "react-intl-tel-input/dist/main.css";
+const ResponsibleForm = (props) => {
     const [formData, setFormData] = useState({
-        name: props.popupValue,
-        startDate: null,
-        expectedCompletionDate: null,
-        area: "",
+        Name: props.popupValue,
+        Whatsapp: null,
+        mobile: null,
+        email: "",
+        mobileCountry:"",
+        mobileCountryName:"",
+        whatsappCountry: "",
+        whatsappCountryName: "",
+        whatsapp:"",
+        Mobile:"",
         photos: null, // Single file or array depending on the implementation
     });
 
@@ -39,7 +46,7 @@ const ProjectForm = (props) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-    
+
         try {
             // Create FormData for multipart data
             // const formPayload = new FormData();
@@ -47,22 +54,25 @@ const ProjectForm = (props) => {
             // formPayload.append("startDate", formData.startDate); // Ensure date is formatted correctly
             // formPayload.append("expectedCompletionDate", formData.expectedCompletionDate);
             // formPayload.append("area", formData.area);
+            let formDataProcess=formData
+            formDataProcess["mobile"]=formData.mobileCountry + formData.mobile
+            formDataProcess["whatsapp"]=formData.whatsappCountry + formData.whatsapp
             let formPayload = {
-                data:formData
+                data: formDataProcess
             }
             // if (formData.photos) {
             //     formPayload.append("files.photos", formData.photos); // Strapi expects "files.[fieldname]"
             // }
-    
+
             // Make POST request
             const response = await postRequest_cms({
-                API: "/api/projects",
+                API: "/api/employees",
                 DATA: formPayload,
                 HEADER: {
                     "Content-Type": "multipart/form-data", // Required for file uploads
                 },
             });
-    
+
             if (response?.status === 200 || response?.status === 201) {
                 toast.success("Project created successfully!");
                 props.Closepopup(); // Close form popup
@@ -74,23 +84,29 @@ const ProjectForm = (props) => {
             toast.error("An error occurred while submitting the form.");
         }
     };
-    
+    const handleMobileNumber = ((key, value) => {
+        setFormData((prevState) => ({
+            ...prevState,
+            [key]: value,
+        }));
+    })
+
 
     return (
         <>
             <div className="formbox">
-                <div className="title">
-                    <h3>Create Project</h3>
+            <div className="title">
+                    <h3>Create Employee</h3>
                 </div>
                 <div className="body">
                 <form onSubmit={handleSubmit} action={"projects"}>
                     <table>
                         {/* <thead>
                             <tr>
-                                <th>Name</th>
-                                <th>Project Start Date</th>
-                                <th>Expected Completion Date</th>
-                                <th>Area</th>
+                                <th>Full Name</th>
+                                <th>Whatsapp</th>
+                                <th>Mobile</th>
+                                <th>Email</th>
                                 <th>Photo</th>
                             </tr>
                         </thead> */}
@@ -100,37 +116,56 @@ const ProjectForm = (props) => {
                                     <input
                                         type="text"
                                         placeholder="Project Name"
-                                        name="name"
-                                        value={formData.name}
+                                        name="Name"
+                                        value={formData.Name}
                                         onChange={handleInputChange}
                                     />
                                 </td>
                                 <td>
-                                    <DatePicker
-                                        className="white_input"
-                                        showYearDropdown
-                                        dateFormat="yyyy-MM-dd"
-                                        selected={formData.startDate}
-                                        onChange={(date) => handleDateChange("startDate", date)}
-                                        placeholderText="Start Date"
+                                <IntlTelInput
+                                        autoHideDialCode="false"
+                                        onPhoneNumberChange={(b, n, c, number) => {
+                                            handleMobileNumber("whatsappCountry", c.dialCode);
+                                            handleMobileNumber("whatsappCountryName", c.iso2);
+                                            handleMobileNumber("whatsapp", n);
+                                        }}
+                                        // value={formData.whatsapp}
+                                        onSelectFlag={(number, n) => {
+                                            handleMobileNumber("whatsappCountry", n.dialCode);
+                                            handleMobileNumber("whatsappCountryName", n.iso2);
+                                        }}
+                                        preferredCountries={['ae', 'gb', 'us']}
+                                        defaultCountry={"ae"}
+                                        containerclassName="intl-tel-input"
+                                        inputclassName="form-control"
                                     />
                                 </td>
                                 <td>
-                                    <DatePicker
-                                        className="white_input"
-                                        showYearDropdown
-                                        dateFormat="yyyy-MM-dd"
-                                        selected={formData.expectedCompletionDate}
-                                        onChange={(date) => handleDateChange("expectedCompletionDate", date)}
-                                        placeholderText="Completion Date"
+                                    <IntlTelInput
+                                        autoHideDialCode="false"
+                                        onPhoneNumberChange={(b, n, c, number) => {
+                                            handleMobileNumber("mobileCountry", c.dialCode);
+                                            handleMobileNumber("mobileCountryName", c.iso2);
+                                            handleMobileNumber("mobile", n);
+                                        }}
+                                        // value={formData.mobile}
+                                        onSelectFlag={(number, n) => {
+                                            handleMobileNumber("mobileCountry", n.dialCode);
+                                            handleMobileNumber("mobileCountryName", n.iso2);
+                                        }}
+                                        preferredCountries={['ae', 'gb', 'us']}
+                                        defaultCountry={"ae"}
+                                        containerclassName="intl-tel-input"
+                                        inputclassName="form-control"
                                     />
                                 </td>
+                               
                                 <td>
                                     <input
-                                        type="text"
-                                        placeholder="Area"
-                                        name="area"
-                                        value={formData.area}
+                                        type="email"
+                                        placeholder="email"
+                                        name="email"
+                                        value={formData.email}
                                         onChange={handleInputChange}
                                     />
                                 </td>
@@ -160,4 +195,4 @@ const ProjectForm = (props) => {
     );
 };
 
-export default ProjectForm;
+export default ResponsibleForm;

@@ -1,6 +1,11 @@
 .circleChart {
     transition: opacity 0.3s ease, z-index 0s 0.3s;
 
+    sup{
+        background: black;
+        display: inline-block;
+    }
+
     /* Smooth fade-in */
     .hoverlabel {
         background: #1E1E20;
@@ -109,5 +114,4 @@
             stroke-dasharray: 0, 100;
         }
     }
-
 }

@@ -1618,3 +1618,14 @@ body {
   border-radius: 15px;
   position: relative;
 }
+sup{
+  background: #000;
+  display: inline-flex;
+  color: white;
+  padding: 3px 5px;
+  font-size: 0.7rem;
+  border-radius: 5px;
+  line-height: 1;
+  align-items: center;
+  justify-content: center;
+}
