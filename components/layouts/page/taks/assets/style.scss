@@ -11,6 +11,26 @@
         z-index: 999;
     }
 
+    .GroupBySort {
+        display: flex;
+        align-items: center;
+        padding-left: 25px;
+        padding-top: 20px;
+
+        button {
+            background: transparent;
+            border: 0px;
+            color: #5873F9;
+            padding: 0px;
+
+            svg {
+                color: #5873F9;
+                padding-right: 10px;
+                font-size: 28px;
+            }
+        }
+    }
+
     .form-active {
         width: 600px;
         transition: width 0.5s ease;
@@ -19,8 +39,9 @@
 
     .form-hidden {
         width: 0px !important;
-        visibility: 0;
+        visibility: hidden;
         transition: width 0.2s ease;
+        overflow: hidden;
     }
 
     .header-form {
@@ -217,9 +238,17 @@
                                 padding-left: 20px;
 
                                 svg {
-                                    color: #9E856F40;
+                                    color: #9E856F;
                                     font-size: 25px;
+                                    opacity: .2;
 
+                                    &.active {
+                                        opacity: 1 !important;
+                                    }
+
+                                    &:hover {
+                                        opacity: 1 !important;
+                                    }
                                 }
 
                             }
@@ -232,7 +261,7 @@
                                 width: 100%;
                                 min-width: 300px;
                                 resize: none;
-                                color: #ffffff80;
+                                color: #ffffff;
                             }
                         }
                     }
@@ -506,6 +535,9 @@
     border: 1px solid #303033;
     border-radius: 8px;
     margin: 20px;
+    padding-bottom: 30px;
+    overflow: auto;
+    padding-right: 20px;
 
     .header {
         display: flex;
@@ -611,50 +643,90 @@
 
         .body {
             padding-left: 20px;
+
             .tasks-list {
                 width: 100%;
 
                 td {
-                    padding: 10px;
+                    background: #1E1E20;
+                    padding: 10px 15px;
                     text-align: left;
+                    border-right: 1px solid #151517;
+                    border-bottom: 1px solid #151517;
                 }
 
                 .star {
                     color: #9E856F;
                     width: 30px;
+
                     svg {
                         font-size: 1.7rem;
+                        opacity: .2;
+
+                        &.active {
+                            opacity: 1;
+                        }
+
+                        &:hover {
+                            opacity: 1;
+                        }
                     }
                 }
-                .taskTitle{
-                    h4{
+
+                .taskTitle {
+                    h4 {
                         font-size: 1rem;
                         margin: 0px;
                         padding: 0px;
                         word-break: break-all;
                         white-space: break-spaces;
                     }
+
                     max-width: 300px;
                     width:300px;
+                    min-width: 300px;
                 }
-                .projectName{
+
+                .projectName {
                     width: 120px;
+                    min-width: 180px;
                     font-size: 1rem;
+                    max-width: 180px;
+                    white-space: break-spaces;
                 }
-                .type{
-                    width: 100px;
+
+                .type {
+                    width: 115px;
+                    min-width: 115px;
+                    max-width: 115px;
                     font-size: 1rem;
+                    text-align: center;
+                    &.Task{
+                        background: #6458EA;
+                    }
+                    &.Alert{
+                        background: #D5A344;
+                    }  
+                    &.Notification{
+                        background: #2E66B9;
+                    }
                 }
-                .dueDate{
+
+                .dueDate {
                     width: 60px;
                     font-size: 1rem;
                 }
-                .status{
+
+                .status {
                     width: 60px;
                     font-size: 1rem;
                 }
-                .responsible{
-                    width:130px;
+
+                .responsible {
+                    width: 130px;
+                    max-width: 130px;
+                    min-width: 130px;
+                    white-space: break-spaces;
                     font-size: 1rem;
                 }
             }

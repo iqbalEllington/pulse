@@ -1,5 +1,5 @@
 
-import { getRequest, postRequest_cms } from "helper/api";
+import { getRequest, postRequest_cms, putRequest_cms } from "helper/api";
 import { API_URLS } from "helper/apiConstant";
 import moment from "moment";
 import React, { Component, useState, useEffect } from "react";
@@ -63,10 +63,10 @@ const Taskform = (props) => {
     // useEffect(() => {
     //     props.setFormOpen(props.formstatus)
     // }, [props.formstatus])
-    useEffect(()=>{
-        if(props.updateDatas!==false){
-            var existngdata=props.updateDatas;
-            console.log("props.updateDatas",moment(existngdata.attributes["dueDate"]), "lets start")
+    useEffect(() => {
+        if (props.updateDatas !== false) {
+            var existngdata = props.updateDatas;
+            // console.log("props.updateDatas",moment(existngdata.attributes["dueDate"]), "lets start")
             // id: existngdata.id,
             // isStarred: existngdata.attributes.isStarred,
             // Task: "",
@@ -77,21 +77,37 @@ const Taskform = (props) => {
             // responsible_leads: null,
             // dueDate: null,
             var dateString = existngdata.attributes["dueDate"];
-            const defaultDate = moment(dateString, "yyyy-MM-dd");
-            console.log(defaultDate)
+            const defaultDate = dateString != null ? new Date(dateString) : null;
+
+            // console.log(defaultDate)
             setFormData((prevState) => ({
                 ...prevState,
                 ["id"]: [existngdata.id],
-                ["isStarred"]:existngdata.attributes.isStarred,
-                ["Task"]:existngdata.attributes.Task,
-                // ["dueDate"]:defaultDate,
-                ["status"]:existngdata.attributes["status"],
-                ["type"]:existngdata.attributes["type"]
+                ["isStarred"]: existngdata.attributes.isStarred,
+                ["Task"]: existngdata.attributes.Task,
+                ["dueDate"]: defaultDate,
+                ["status"]: existngdata.attributes["status"],
+                ["type"]: existngdata.attributes["type"],
+                ["projects"]: existngdata.attributes.projects?.data?.[0]?.id,
+                ["responsible_leads"]: existngdata.attributes.responsible_leads?.data?.[0]?.id,
+                ["priority"]: existngdata.attributes["priority"]
             }));
-        }else{
+            if (existngdata.attributes.projects?.data?.[0]?.attributes["name"]) {
+
+                SetSelectedProject(existngdata.attributes.projects?.data?.[0]?.attributes["name"])
+            } else {
+                SetSelectedProject(null)
+            }
+            if (existngdata.attributes.responsible_leads?.data?.[0]?.attributes["Name"]) {
+                SetResponsible(existngdata.attributes.responsible_leads?.data?.[0]?.attributes["Name"])
+            } else {
+                SetResponsible(null)
+            }
+
+        } else {
             setFormData(initialFormData)
         }
-    },[props.updateDatas])
+    }, [props.updateDatas])
     useEffect(() => {
         if (props.isUpdate != false) {
             setFormData((prevState) => ({
@@ -100,7 +116,8 @@ const Taskform = (props) => {
         }
 
     }, [props.isUpdate])
-
+    const [selectedProject, SetSelectedProject] = useState(null)
+    const [Responsible, SetResponsible] = useState(null)
     // const [formOpen, setFormOpen] = useState(false)
 
     const [selectedValue, setSelectedValue] = useState('');
@@ -152,15 +169,27 @@ const Taskform = (props) => {
             // if (formData.photos) {
             //     formPayload.append("files.photos", formData.photos); // Strapi expects "files.[fieldname]"
             // }
-
+            let response;
             // Make POST request
-            const response = await postRequest_cms({
-                API: "/api/tasks",
-                DATA: formPayload,
-                HEADER: {
-                    "Content-Type": "multipart/form-data", // Required for file uploads
-                },
-            });
+            if (formData.id != null) {
+                response = await putRequest_cms({
+                    API: "/api/tasks",
+                    ID: formData.id,
+                    DATA: formPayload,
+                    HEADER: {
+                        "Content-Type": "multipart/form-data", // Required for file uploads
+                    },
+                });
+            } else {
+                response = await postRequest_cms({
+                    API: "/api/tasks",
+                    DATA: formPayload,
+                    HEADER: {
+                        "Content-Type": "multipart/form-data", // Required for file uploads
+                    },
+                });
+            }
+
 
             if (response?.status === 200 || response?.status === 201) {
                 setFormData((prevState) => ({
@@ -224,7 +253,7 @@ const Taskform = (props) => {
                                         <td>
                                             <label>Project</label>
                                             <div>
-                                                <ProjectSearch popupSwitch={popupSwitch} activateProeprty={activateProeprty} />
+                                                <ProjectSearch keyword={selectedProject} popupSwitch={popupSwitch} activateProeprty={activateProeprty} />
                                             </div>
                                         </td>
 
@@ -235,7 +264,7 @@ const Taskform = (props) => {
                                                     className="white_input"
                                                     showYearDropdown
                                                     dateFormat="yyyy-MM-dd"
-                                                    selected={formData.dueDate}
+                                                    selected={formData.dueDate != null ? formData.dueDate : null}
                                                     onChange={(date) => handleDateChange("dueDate", date)}
                                                     placeholderText="Start Date"
                                                 />
@@ -246,7 +275,7 @@ const Taskform = (props) => {
                                             <label>Status</label>
                                             <Dropdown className="color-drop-multy hash" onSelect={handleStatus}>
                                                 <Dropdown.Toggle id="dropdown-basic">
-                                                    {formData.status || 'Select Type'}
+                                                    {formData.status || 'Select Status'}
                                                 </Dropdown.Toggle>
                                                 <Dropdown.Menu>
                                                     <Dropdown.Item eventKey="To Do">To Do</Dropdown.Item>
@@ -261,18 +290,19 @@ const Taskform = (props) => {
                                             <label>Priority</label>
                                             <input
                                                 type="Number"
-                                                placeholder="Project Name"
+                                                placeholder="Priority in Number "
                                                 name="priority"
-                                                value={formData.Name}
+                                                value={formData.priority}
                                                 onChange={handleInputChange}
                                             />
                                         </td>
                                         <td>
                                             <label>Responsible</label>
-                                            <ResponisbleSearch popupSwitch={popupSwitch} activateEmployee={activateEmployee} />
+                                            <ResponisbleSearch keyword={Responsible} popupSwitch={popupSwitch} activateEmployee={activateEmployee} />
                                         </td>
                                         <td>
-                                            <input className="submit bg-white fg-black" type="submit" value={"Create"} />
+
+                                            <input className="submit bg-white fg-black" type="submit" value={formData.id != null ? "Update" : "Create"} />
                                         </td>
                                     </tr>
 

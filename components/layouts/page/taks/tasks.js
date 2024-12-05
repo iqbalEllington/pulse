@@ -12,20 +12,27 @@ import { FaStar } from "react-icons/fa";
 import Taskform from "./taskform";
 import Link from "next/link";
 import TagedTasks from "./tagedTasks";
+import { FaSortAmountDown } from "react-icons/fa";
 
 
 
 const Tasks = ({ router }, props) => {
 
-
-
-
-
     useEffect(() => {
         getuserdata()
     }, [])
+    const handleSelect = (eventKey) => {
+        if (eventKey == "Project") {
+            getProjects();
+            setSort(eventKey);
+        } else {
+            setSort(eventKey);
+        }
+        // Update the state with the selected value
 
-    const[formActive, setFormActive] = useState(false)
+    };
+    const [sort, setSort] = useState("Date")
+    const [formActive, setFormActive] = useState(false)
     const [updateDatas, SetUpdateDatas] = useState(false)
     const SetUpdateData = (data) => {
         SetUpdateDatas(data);
@@ -47,6 +54,19 @@ const Tasks = ({ router }, props) => {
             toast(response?.data?.error || "Some thing went wrong.");
         }
     }
+    async function getProjects(value) {
+        var response;
+        response = await getRequest({ API: API_URLS.GET_PROJECTS });
+        if (await response?.status === 200) {
+            // setIsLoading(false)
+            setProject(response.data)
+        } else if (response?.status === 401) {
+            toast("Unauthorize access please re-login.");
+        } else {
+            toast(response?.data?.error || "Some thing went wrong.");
+        }
+    }
+    const [projects, setProject] = useState(false)
     const options = {
         // default is `save`
         method: 'open',
@@ -84,7 +104,11 @@ const Tasks = ({ router }, props) => {
             }
         },
     };
-
+    const [search, SetSearch] = useState("")
+    const filterSearch = (value) => {
+        SetSearch(value)
+    };
+    const [sortDate, SetsortDate] = useState(["Today", "Tomorrow", "This Week", "This Month", "Other"]);
     return (
         <>
             <div className="wishbanner tasks-board pb w-100">
@@ -98,7 +122,7 @@ const Tasks = ({ router }, props) => {
                         </div>
                         <div className="actionbar">
                             <button className="downloadPdf" onClick={() => generatePDF(getTargetElement, options)}> Download PDF <FaArrowDown /></button>
-                            <button className="add-task" onClick={() => {setFormActive(!formActive),SetUpdateDatas(false)}}> Add a task </button>
+                            <button className="add-task" onClick={() => { setFormActive(!formActive), SetUpdateDatas(false) }}> Add a task </button>
 
                             <Dropdown className="profile-user">
                                 <Dropdown.Toggle id="dropdown-basic">
@@ -117,9 +141,6 @@ const Tasks = ({ router }, props) => {
                     </div>
                     <div className="form">
                         <Taskform
-                            updateData={{
-                                a: "b"
-                            }}
                             formstatus={formActive}
                             SetFormActive={setFormActive}
                             setForceload={setForceload}
@@ -165,24 +186,95 @@ const Tasks = ({ router }, props) => {
                             </div>
                             <div className="search">
                                 <div>
-                                    <input type="text" placeholder="search" />
+                                    <input type="text" value={search} onChange={(e) => filterSearch(e.target.value)} placeholder="search" />
                                 </div>
                             </div>
                         </div>
                         <div className="show-me-top">
-
                             <TagedTasks tag={{
                                 keyword: ontop,
                                 type: "tag",
+                                search: search,
                                 forceLoad: { forceLoad },
                                 filterValue: ontop
                             }}
+                                setForceload={setForceload}
                                 SetUpdateData={SetUpdateData}
                             />
                         </div>
 
                         <div className="Grouped">
+                            <div className="GroupBySort">
+                             
+                                <Dropdown className="color-drop-multy" onSelect={handleSelect}>
+                                    <Dropdown.Toggle id="dropdown-basic">
+                                    <FaSortAmountDown />   {sort || 'Group By'}
+                                    </Dropdown.Toggle>
 
+                                    <Dropdown.Menu>
+                                        <Dropdown.Item eventKey="Date">Date Ascending</Dropdown.Item>
+                                        <Dropdown.Item eventKey="Project">Latest Project</Dropdown.Item>
+                                        <Dropdown.Item eventKey="Priority">Priority</Dropdown.Item>
+                                    </Dropdown.Menu>
+                                </Dropdown>
+                            </div>
+
+                            <div>
+                                {sort == "Date" &&
+                                    <>
+                                        {sortDate.map((value) => {
+                                            return <div>
+                                                <TagedTasks tag={{
+                                                    keyword: value,
+                                                    search: search,
+                                                    type: sort,
+                                                    forceLoad: { forceLoad },
+                                                    filterValue: value
+                                                }}
+                                                    setForceload={setForceload}
+                                                    SetUpdateData={SetUpdateData}
+                                                />
+                                            </div>
+                                        })}
+                                    </>}
+                                {sort == "Project" &&
+                                    <>
+                                        {projects?.data?.length > 0 &&
+                                            // {JSON.stringify(typeof(projects?.data))}
+                                            <>
+                                                {Object.keys(projects?.data).map((value, key) => {
+                                                    return <div>
+                                                        <TagedTasks tag={{
+                                                            keyword: projects?.data[value]?.["attributes"]?.["name"],
+                                                            type: sort,
+                                                            search: search,
+                                                            forceLoad: { forceLoad },
+                                                            filterValue: projects?.data[value]?.["attributes"]?.["name"],
+                                                        }}
+                                                            setForceload={setForceload}
+                                                            SetUpdateData={SetUpdateData}
+                                                        />
+                                                    </div>
+                                                })}
+                                            </>
+                                        }
+                                    </>}
+                                {sort == "Priority" &&
+                                    <>
+                                        <div>
+                                            <TagedTasks tag={{
+                                                keyword: "Priority",
+                                                type: "Priority",
+                                                search: search,
+                                                forceLoad: { forceLoad },
+                                                filterValue: "Priority",
+                                            }}
+                                                setForceload={setForceload}
+                                                SetUpdateData={SetUpdateData}
+                                            />
+                                        </div>
+                                    </>}
+                            </div>
                         </div>
                     </div>
                 </div>

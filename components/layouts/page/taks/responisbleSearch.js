@@ -19,7 +19,10 @@ const ResponisbleSearch = (props) => {
             Setisfocus(false);
         }
     };
-
+    useEffect(() => {
+        console.log("props.keyword",props.keyword)
+        SetKeyowrd(props.keyword)
+     }, [props.keyword])
     useEffect(() => {
         // Add event listener to detect clicks outside the container
         document.addEventListener("mousedown", handleClickOutside);
@@ -62,11 +65,11 @@ const ResponisbleSearch = (props) => {
             <div className="search-input">
                 <div className="searchbox">
                     <input
-                        onFocus={() => Setisfocus(true)}
+                        onFocus={() => {Setisfocus(true),SetKeyowrd(" ")}}
                         onChange={(e) => filterSearch(e.target.value)}
                         placeholder="Search"
                         type="text"
-                        value={keyword}
+                        value={keyword==null ? "" : keyword}
                     />
                 </div>
             </div>
