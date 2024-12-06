@@ -31,6 +31,7 @@ const Tasks = ({ router }, props) => {
         // Update the state with the selected value
 
     };
+    const [formaction,SetFormaction]=useState("edit")
     const [sort, setSort] = useState("Date")
     const [formActive, setFormActive] = useState(false)
     const [updateDatas, SetUpdateDatas] = useState(false)
@@ -145,6 +146,7 @@ const Tasks = ({ router }, props) => {
                             SetFormActive={setFormActive}
                             setForceload={setForceload}
                             updateDatas={updateDatas}
+                            action={formaction}
                         />
                     </div>
                     <div className="Task-List-body">
@@ -198,6 +200,7 @@ const Tasks = ({ router }, props) => {
                                 forceLoad: { forceLoad },
                                 filterValue: ontop
                             }}
+                            SetFormaction={SetFormaction}
                                 setForceload={setForceload}
                                 SetUpdateData={SetUpdateData}
                             />

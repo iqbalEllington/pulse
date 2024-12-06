@@ -85,7 +85,7 @@ const ResponisbleSearch = (props) => {
                                     <div className="search-l-body" onClick={() => { props.activateEmployee(employee.id), SetKeyowrd(employee.attributes.Name), Setisfocus(false) }}>
                                         <div className="titles">
                                             <div>
-                                                <h3>{employee.attributes.Name.toLowerCase()}</h3>
+                                                <h3>{employee.attributes.Name}</h3>
 
                                             </div>
                                         </div>

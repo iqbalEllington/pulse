@@ -1,15 +1,19 @@
 
+import { Avatar, Tooltip } from "@mui/material";
 import { getRequest, putRequest_cms } from "helper/api";
 import { API_URLS } from "helper/apiConstant";
 import moment from "moment";
 import React, { Component, useState, useEffect } from "react";
-import { FaRegStar, FaStar } from "react-icons/fa";
+import { FaRegStar, FaStar, FaWhatsapp } from "react-icons/fa";
 import { IoMdStar } from "react-icons/io";
 
 
 
 const tagedTasks = (props) => {
     const [tasks, setTasks] = useState({})
+    const gettaskWhatsapp = (mobile, project, task) => {
+        return "https://wa.me/" + mobile + "?text=Hi%2C%0A%0AI%20am%20following%20up%20on%20the%20 *" + project + "* %2C%20specifically%20the%20 *" + task + "* %20Kindly%20share%20a%20status%20update%20at%20the%20earliest.%0A%0AThank%20you."
+    }
     const buildFilters = (filterType) => {
         let filter = "";
         const today = moment();
@@ -110,6 +114,39 @@ const tagedTasks = (props) => {
             toast(response?.data?.error || "Some thing went wrong.");
         }
     }
+    function stringToColor(string) {
+        let hash = 0;
+        let i;
+      
+        /* eslint-disable no-bitwise */
+        for (i = 0; i < string.length; i += 1) {
+          hash = string.charCodeAt(i) + ((hash << 5) - hash);
+        }
+      
+        let color = '#';
+      
+        for (i = 0; i < 3; i += 1) {
+          const value = (hash >> (i * 8)) & 0xff;
+          color += `00${value.toString(16)}`.slice(-2);
+        }
+        /* eslint-enable no-bitwise */
+      
+        return color;
+      }
+      
+      function stringAvatar(name) {
+        if(name){
+            return {
+                sx: {
+                  bgcolor: stringToColor(name),
+                },
+                children: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`,
+              };
+        }else{
+            return
+        }
+      
+      }
     async function SetIsstarred(value, id) {
         let formPayload = {
             data: {
@@ -148,15 +185,15 @@ const tagedTasks = (props) => {
                                 <td className="star">
                                     <div onClick={() => SetIsstarred(!task.attributes.isStarred, task.id)}>
                                         {task.attributes.isStarred ?
-                                            <IoMdStar className="active"/>
+                                            <IoMdStar className="active" />
                                             :
-                                            <IoMdStar/>
+                                            <IoMdStar />
                                             // <FaRegStar />
                                         }
                                     </div>
                                 </td>
                                 <td className="taskTitle">
-                                    <h4>
+                                    <h4 onClick={() => {props.SetUpdateData(task), props.SetFormaction("update")}}>
                                         {task.attributes.Task}
                                     </h4>
                                 </td>
@@ -165,7 +202,7 @@ const tagedTasks = (props) => {
                                         {task.attributes.projects?.data?.[0]?.attributes?.name}
                                     </div>
                                 </td>
-                                <td className={task.attributes.type +" type"}>
+                                <td className={task.attributes.type + " type"}>
                                     <span>{task.attributes.type}</span>
                                 </td>
                                 <td className="Priority">
@@ -174,22 +211,32 @@ const tagedTasks = (props) => {
                                 <td className="dueDate">
                                     <span>{task.attributes.dueDate}</span>
                                 </td>
-                                <td className="status">
+                                <td className={task.attributes.status.replace(" ", "") + " status"}>
                                     <span>{task.attributes.status}</span>
                                 </td>
                                 <td className="responsible">
                                     <div>
+                                    <Tooltip title={task.attributes.responsible_leads?.data?.[0]?.["attributes"]?.Name}>
                                         <span>
-                                            {task.attributes.responsible_leads?.data?.[0]?.["attributes"].Name}
+                                            <Avatar {...stringAvatar(task.attributes.responsible_leads?.data?.[0]?.["attributes"]?.Name)} />
+                                            {/* {task.attributes.responsible_leads?.data?.[0]?.["attributes"].Name} */}
                                         </span>
-                                        <span>
-                                            {task.attributes.responsible_leads?.data?.[0]?.["attributes"].whatsapp}
+                                        </Tooltip>
+                                        <span className="wahtsapp">
+                                            <a target="_blank" href={gettaskWhatsapp(task.attributes.responsible_leads?.data?.[0]?.["attributes"].whatsapp, task.attributes.projects?.data?.[0]?.attributes?.name, task.attributes.Task)}><FaWhatsapp /></a>
                                         </span>
                                     </div>
                                 </td>
-
+                                <td className="responses">
+                                    <span onClick={() => {props.SetUpdateData(task), props.SetFormaction("update")} }>
+                                        Responses
+                                        <sup>
+                                            8
+                                        </sup>
+                                    </span>
+                                </td>
                                 <td>
-                                    <span onClick={() => props.SetUpdateData(task)}>
+                                    <span onClick={() => {props.SetUpdateData(task), props.SetFormaction("edit")}}>
                                         Edit
                                     </span>
                                 </td>

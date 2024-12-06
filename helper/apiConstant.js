@@ -22,5 +22,6 @@ export const API_URLS = {
   GET_PROJECTS:'api/projects',
   GET_EMPLOYEES:'api/employees',
   GET_USER:'api/users/me',
-  GET_TASKS:'api/tasks'
+  GET_TASKS:'api/tasks',
+  GET_TASK:'api/task'
 };

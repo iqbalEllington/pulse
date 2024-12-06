@@ -76,7 +76,7 @@ const projectSearch = (props) => {
                                     <div className="search-l-body" onClick={() => { props.activateProeprty(property.id), SetKeyowrd(property.attributes.name), Setisfocus(false) }}>
                                         <div className="titles">
                                             <div>
-                                                <h3>{property.attributes.name.toLowerCase()}</h3>
+                                                <h3>{property.attributes.name}</h3>
                                                 <p>{(property?.attributes?.area)}</p>
                                             </div>
                                         </div>

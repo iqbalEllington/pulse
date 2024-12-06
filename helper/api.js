@@ -88,10 +88,25 @@ export const postRequest_cms = ({ API = "", DATA = {}, HEADER = {}, PAYLOAD }) =
         resolve(error.response); // Change to reject(error.response) if you need proper error handling
       });
   });
-};export const putRequest_cms = ({ API = "", ID, DATA = {}, HEADER = {}, PAYLOAD }) => {
+};
+export const putRequest_cms = ({ API = "", ID, DATA = {}, HEADER = {}, PAYLOAD }) => {
   return new Promise((resolve, reject) => {
     instance
       .put(`${apiWithAuth(API)}/${ID}`, DATA, {
+        ...(PAYLOAD ? PAYLOAD : { ...defaulHeader.headers, ...HEADER }),
+      })
+      .then((result) => {
+        resolve(result);
+      })
+      .catch((error) => {
+        resolve(error.response); // Change to reject(error.response) if you need proper error handling
+      });
+  });
+};
+export const patchRequest_cms = ({ API = "", ID, DATA = {}, HEADER = {}, PAYLOAD }) => {
+  return new Promise((resolve, reject) => {
+    instance
+      .patch(`${apiWithAuth(API)}/${ID}`, DATA, {
         ...(PAYLOAD ? PAYLOAD : { ...defaulHeader.headers, ...HEADER }),
       })
       .then((result) => {

@@ -36,7 +36,11 @@
         transition: width 0.5s ease;
         /* Smooth slide-in effect */
     }
-
+    .updates{
+        display: flex;
+        background: black;
+        margin: 0;
+    }
     .form-hidden {
         width: 0px !important;
         visibility: hidden;
@@ -66,6 +70,7 @@
     .header {
         padding-top: 30px;
         padding-left: 30px;
+        padding-bottom: 15px;
         height: auto;
 
         h1 {
@@ -89,10 +94,10 @@
 
     .absoulte-close-right {
         position: absolute;
-        left: -51px;
-        padding: 10px;
-        background: #1E1E20;
-        transform: rotate(-90deg);
+        right: 1px;
+        top: 0px;
+        padding: 15px;
+        // background: #1E1E20;
     }
 
     .form {
@@ -100,7 +105,10 @@
         background: #202125;
         position: absolute;
         right: 0;
-
+        z-index: 999;
+        overflow-x: auto;
+        height: 80%;
+    
         .intl-tel-input {
             .country-list {
                 li {
@@ -257,7 +265,7 @@
                                 background: #161719;
                                 border: 0px;
                                 height: 80px;
-                                padding: 7px 10px;
+                                padding: 15px 15px;
                                 width: 100%;
                                 min-width: 300px;
                                 resize: none;
@@ -269,6 +277,124 @@
             }
         }
 
+    }
+    .updates-list{
+        padding-left: 40px;
+        width: 100%;
+        display: block;
+        padding-top: 40px;
+        span{
+            display: block;
+        }
+        .line-break{
+            padding-left: 30px;
+            padding-top: 15px;
+            padding-bottom: 15px;
+        }
+        .update-data{
+            display: flex;
+            gap: 30px;
+            color: white;
+            align-items: center;
+            span{
+                display: block;
+                line-height: 1;
+                text-align: center;
+            }
+            .date{
+                width: 60px;
+                span{
+                    &:first-child{
+                        font-size: 2rem;
+                    }
+                }
+                font-family: AcuminBold;
+            }
+         
+            .update{
+                background: #0F0F0F;
+                border: 1px solid #3C3C3C;
+                padding: 25px 45px;
+                border-radius: 15px;
+            }
+        }
+    }
+    .updateForm {
+        display: flex;
+        padding-left: 15px;
+        width: 600px;
+        margin-top: 50px;
+        .input-box{
+            position: relative;
+        }
+        .react-datepicker-wrapper{
+            opacity: 0;
+        }
+        .selectedDate{
+            color: white;
+            font-size: 1rem;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            line-height: 1;
+
+            padding-left: 30px;
+            span{
+                text-align: center;
+                display: block;
+                width: 60px;
+            }
+            width: 60px;
+            span{
+                &:first-child{
+
+            font-family: acuminBlack;
+                    font-size: 2rem;
+                }
+            }
+        }
+
+        .date-pick{
+            font-size: 1.2rem !important;
+        }
+        .dateinput {
+            width: 120px;
+            height: auto;
+            white-space: break-spaces;
+            line-height: 1 !important;
+            font-family: AcuminBold;
+            font-size: 1.6rem;
+            // &::placeholder {
+            //     color: white;
+            //     font-size: 2rem;
+            //     font-family: AcuminBold;
+            //     white-space: break-spaces;
+            //     line-height: 1 !important;
+            //     display: block;
+            //     vertical-align: top;
+            // }
+        }
+        
+        textarea {
+            background: #0F0F0F;
+            width: auto;
+            border: 1px solid #3C3C3C;
+            min-width: 350px;
+            padding: 15px;
+            color: white !important;
+            border-radius: 15px;
+            resize: none;
+            height: 100px;
+        }
+
+        >button {
+            background: black;
+            color: white;
+            border: 0px;
+            margin-left: 15px;
+            padding: 15px;
+            border-radius: 15px;
+        }
     }
 
     .popup {
@@ -564,6 +690,7 @@
                         display: inline-block;
                         border-radius: 10px;
                         color: black;
+                        word-wrap:inherit;
                     }
 
                     &.top {
@@ -653,6 +780,22 @@
                     text-align: left;
                     border-right: 1px solid #151517;
                     border-bottom: 1px solid #151517;
+
+                    &.responses {
+                        span {
+                            display: inline-block;
+                            background: #32323A; // #9E856F;
+                            border-radius: 15px;
+                            padding: 6px 10px;
+                            position: relative;
+
+                            sup {
+                                position: absolute;
+                                background: #9E856F;
+                                ;
+                            }
+                        }
+                    }
                 }
 
                 .star {
@@ -682,6 +825,7 @@
                         white-space: break-spaces;
                     }
 
+                    padding-top: 10px;
                     max-width: 300px;
                     width:300px;
                     min-width: 300px;
@@ -701,13 +845,16 @@
                     max-width: 115px;
                     font-size: 1rem;
                     text-align: center;
-                    &.Task{
+
+                    &.Task {
                         background: #6458EA;
                     }
-                    &.Alert{
+
+                    &.Alert {
                         background: #D5A344;
-                    }  
-                    &.Notification{
+                    }
+
+                    &.Notification {
                         background: #2E66B9;
                     }
                 }
@@ -720,6 +867,35 @@
                 .status {
                     width: 60px;
                     font-size: 1rem;
+
+                    span {
+                        background: #32323A;
+                        padding: 10px 15px;
+                        border-radius: 10px;
+                        width: 100%;
+                        display: block;
+                        text-align: center;
+                        font-size: .8rem;
+                    }
+
+                    &.InProgress {
+                        span {
+                            color: #F0A15F;
+                        }
+                    }
+
+                    &.Completed {
+                        span {
+                            color: #A2E4B4;
+                        }
+                    }
+
+                    &.ToDo {
+                        span {
+                            color: #BBA6F7
+                        }
+                    }
+
                 }
 
                 .responsible {
@@ -728,6 +904,30 @@
                     min-width: 130px;
                     white-space: break-spaces;
                     font-size: 1rem;
+
+                    >div {
+                        display: flex;
+                        align-items: center;
+                    }
+
+                    .wahtsapp {
+                        a {
+                            background: #128c7e;
+                            color: white;
+                            display: inline-flex;
+                            align-items: center;
+                            text-align: center;
+                            width: 40px;
+                            justify-content: center;
+                            height: 40px;
+                            border-radius: 25px;
+                            margin: 10px;
+
+                            svg {
+                                font-size: 1.5rem;
+                            }
+                        }
+                    }
                 }
             }
         }

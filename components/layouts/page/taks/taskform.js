@@ -15,6 +15,7 @@ import DatePicker from "react-datepicker";
 import ResponisbleSearch from "./responisbleSearch";
 import ProjectForm from "./projectForm";
 import ResponsibleForm from "./responsibleForm";
+import UpdateForm from "./updateForm";
 
 const Taskform = (props) => {
     const initialFormData = {
@@ -206,37 +207,45 @@ const Taskform = (props) => {
             toast.error("An error occurred while submitting the form.");
         }
     };
+    useEffect(() => {
+        if (props.action == "update") {
+            SetTab("Updates")
+        } else {
+            SetTab("form")
+        }
+    }, [props.action])
     return (
         <>
             <div className={props.formstatus == true ? "form-active" : "form-hidden"}>
                 <div className="header-form">
                     <span className={tab == "form" ? "active" : ""} onClick={() => SetTab("form")}>Add or Edit</span>
                     <span className={tab == "Updates" ? "active" : ""} onClick={() => SetTab("Updates")}>Updates</span>
-                </div>
-
-                <div className={"formbox"}>
                     {props.formstatus &&
                         <div className="absoulte-close-right" onClick={() => props.SetFormActive(!props.formstatus)}> {props.formstatus ? "Close X" : ""}</div>
-                    } <div className={tab == "form" ? "" : "d-none"} >
-                        <form className="taskform" onSubmit={handleSubmit} action={"projects"}>
-                            <table>
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <label>Type</label>
-                                            <Dropdown className="color-drop-multy" onSelect={handleSelect}>
-                                                <Dropdown.Toggle id="dropdown-basic">
-                                                    {formData.type || 'Select Type'}
-                                                </Dropdown.Toggle>
+                    }
+                </div>
+                {tab == "form" &&
+                    <div className={"formbox"}>
+                        <div className={tab == "form" ? "" : "d-none"} >
+                            <form className="taskform" onSubmit={handleSubmit} action={"projects"}>
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <label>Type</label>
+                                                <Dropdown className="color-drop-multy" onSelect={handleSelect}>
+                                                    <Dropdown.Toggle id="dropdown-basic">
+                                                        {formData.type || 'Select Type'}
+                                                    </Dropdown.Toggle>
 
-                                                <Dropdown.Menu>
-                                                    <Dropdown.Item eventKey="Task">Task</Dropdown.Item>
-                                                    <Dropdown.Item eventKey="Notification">Notification</Dropdown.Item>
-                                                    <Dropdown.Item eventKey="Alert">Alert</Dropdown.Item>
-                                                </Dropdown.Menu>
-                                            </Dropdown>
-                                        </td>
-                                        {/* <td className="star">
+                                                    <Dropdown.Menu>
+                                                        <Dropdown.Item eventKey="Task">Task</Dropdown.Item>
+                                                        <Dropdown.Item eventKey="Notification">Notification</Dropdown.Item>
+                                                        <Dropdown.Item eventKey="Alert">Alert</Dropdown.Item>
+                                                    </Dropdown.Menu>
+                                                </Dropdown>
+                                            </td>
+                                            {/* <td className="star">
                                     <span>Task, Alert or Notification</span>
                                     <div onClick={() => SetIsstarred(!isStarred)}>
                                         {isStarred ?
@@ -246,92 +255,98 @@ const Taskform = (props) => {
                                         }
                                     </div>
                                 </td> */}
-                                        <td>
-                                            <label>Task, Alert or Notification</label>
-                                            <textarea onChange={handleInputChange} className="taskInput" value={formData.Task} name="Task" placeholder="Task, Alert, or Notification" />
-                                        </td>
-                                        <td>
-                                            <label>Project</label>
-                                            <div>
-                                                <ProjectSearch keyword={selectedProject} popupSwitch={popupSwitch} activateProeprty={activateProeprty} />
-                                            </div>
-                                        </td>
-
-                                        <td>
                                             <td>
-                                                <label>Due Date Estimation</label>
-                                                <DatePicker
-                                                    className="white_input"
-                                                    showYearDropdown
-                                                    dateFormat="yyyy-MM-dd"
-                                                    selected={formData.dueDate != null ? formData.dueDate : null}
-                                                    onChange={(date) => handleDateChange("dueDate", date)}
-                                                    placeholderText="Start Date"
+                                                <label>Task, Alert or Notification</label>
+                                                <textarea onChange={handleInputChange} className="taskInput" value={formData.Task} name="Task" placeholder="Task, Alert, or Notification" />
+                                            </td>
+                                            <td>
+                                                <label>Project</label>
+                                                <div>
+                                                    <ProjectSearch keyword={selectedProject} popupSwitch={popupSwitch} activateProeprty={activateProeprty} />
+                                                </div>
+                                            </td>
+
+                                            <td>
+                                                <td>
+                                                    <label>Due Date Estimation</label>
+                                                    <DatePicker
+                                                        className="white_input"
+                                                        showYearDropdown
+                                                        dateFormat="yyyy-MM-dd"
+                                                        selected={formData.dueDate != null ? formData.dueDate : null}
+                                                        onChange={(date) => handleDateChange("dueDate", date)}
+                                                        placeholderText="Start Date"
+                                                    />
+                                                </td>
+                                            </td>
+
+                                            <td>
+                                                <label>Status</label>
+                                                <Dropdown className="color-drop-multy hash" onSelect={handleStatus}>
+                                                    <Dropdown.Toggle id="dropdown-basic">
+                                                        {formData.status || 'Select Status'}
+                                                    </Dropdown.Toggle>
+                                                    <Dropdown.Menu>
+                                                        <Dropdown.Item eventKey="To Do">To Do</Dropdown.Item>
+                                                        <Dropdown.Item eventKey="In Progress">In Progress</Dropdown.Item>
+                                                        <Dropdown.Item eventKey="Completed">Completed</Dropdown.Item>
+                                                        <Dropdown.Item eventKey="On Hold">On Hold</Dropdown.Item>
+                                                    </Dropdown.Menu>
+                                                </Dropdown>
+                                            </td>
+                                            <td>
+
+                                                <label>Priority</label>
+                                                <input
+                                                    type="Number"
+                                                    placeholder="Priority in Number "
+                                                    name="priority"
+                                                    value={formData.priority}
+                                                    onChange={handleInputChange}
                                                 />
                                             </td>
-                                        </td>
+                                            <td>
+                                                <label>Responsible</label>
+                                                <ResponisbleSearch keyword={Responsible} popupSwitch={popupSwitch} activateEmployee={activateEmployee} />
+                                            </td>
+                                            <td>
 
-                                        <td>
-                                            <label>Status</label>
-                                            <Dropdown className="color-drop-multy hash" onSelect={handleStatus}>
-                                                <Dropdown.Toggle id="dropdown-basic">
-                                                    {formData.status || 'Select Status'}
-                                                </Dropdown.Toggle>
-                                                <Dropdown.Menu>
-                                                    <Dropdown.Item eventKey="To Do">To Do</Dropdown.Item>
-                                                    <Dropdown.Item eventKey="In Progress">In Progress</Dropdown.Item>
-                                                    <Dropdown.Item eventKey="Completed">Completed</Dropdown.Item>
-                                                    <Dropdown.Item eventKey="On Hold">On Hold</Dropdown.Item>
-                                                </Dropdown.Menu>
-                                            </Dropdown>
-                                        </td>
-                                        <td>
+                                                <input className="submit bg-white fg-black" type="submit" value={formData.id != null ? "Update" : "Create"} />
+                                            </td>
+                                        </tr>
 
-                                            <label>Priority</label>
-                                            <input
-                                                type="Number"
-                                                placeholder="Priority in Number "
-                                                name="priority"
-                                                value={formData.priority}
-                                                onChange={handleInputChange}
-                                            />
-                                        </td>
-                                        <td>
-                                            <label>Responsible</label>
-                                            <ResponisbleSearch keyword={Responsible} popupSwitch={popupSwitch} activateEmployee={activateEmployee} />
-                                        </td>
-                                        <td>
+                                    </tbody>
+                                </table>
 
-                                            <input className="submit bg-white fg-black" type="submit" value={formData.id != null ? "Update" : "Create"} />
-                                        </td>
-                                    </tr>
-
-                                </tbody>
-                            </table>
-
-                        </form>
-                        <div className={popup != false ? "popup active" : "popup notActive"}>
-                            {/* <span className="close-button" data-closepop={true} onClick={(e) => ClosepopupSwitch(e)}>
+                            </form>
+                            <div className={popup != false ? "popup active" : "popup notActive"}>
+                                {/* <span className="close-button" data-closepop={true} onClick={(e) => ClosepopupSwitch(e)}>
                     x
                 </span> */}
-                            {popup == "project" &&
-                                <>
-                                    <div className="col-12 row">
-                                        <ProjectForm popupValue={popupValue} Closepopup={Closepopup} />
-                                    </div>
-                                </>
-                            }
-                            {popup == "responisble" &&
-                                <>
-                                    <ResponsibleForm popupValue={popupValue} Closepopup={Closepopup} />
-                                </>
-                            }
+                                {popup == "project" &&
+                                    <>
+                                        <div className="col-12 row">
+                                            <ProjectForm popupValue={popupValue} Closepopup={Closepopup} />
+                                        </div>
+                                    </>
+                                }
+                                {popup == "responisble" &&
+                                    <>
+                                        <ResponsibleForm popupValue={popupValue} Closepopup={Closepopup} />
+                                    </>
+                                }
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div>
-                    <div style={{ width: "400px", display: "block" }}></div>
-                </div>
+                }
+                {tab == "Updates" &&
+                    <div className="updates"> 
+                        <div style={{ width: "400px", display: "block" }}>
+                            <UpdateForm id={formData.id} />
+
+                        </div>
+                    </div>
+                }
             </div>
         </>
     );
