@@ -16,7 +16,6 @@
         align-items: center;
         padding-left: 25px;
         padding-top: 20px;
-
         button {
             background: transparent;
             border: 0px;
@@ -34,12 +33,15 @@
     .form-active {
         width: 600px;
         transition: width 0.5s ease;
+
+        height: 100%;
         /* Smooth slide-in effect */
     }
     .updates{
         display: flex;
         background: black;
         margin: 0;
+        height: 100%;
     }
     .form-hidden {
         width: 0px !important;
