@@ -60,7 +60,7 @@ const tagedTasks = (props) => {
         return filter;
     };
     async function getTagedTask(tag) {
-        let filter;
+        let filter="";
         if (tag?.type == "Date") {
             filter = buildFilters(tag?.filterValue)
         } else if (tag?.type == "tag") {
@@ -102,10 +102,10 @@ const tagedTasks = (props) => {
         if (tag.search) {
             filter += "&filters[$or][0][projects][name][$containsi]=" + tag.search + "&filters[$or][1][Task][$containsi]=" + tag.search + "&filters[$or][2][responsible_leads][Name][$containsi]=" + tag.search
         }
-        console.log(tag.search, filter)
+
         var response;
-        response = await getRequest({ API: API_URLS.GET_TASKS + "?populate[]=responsible_leads&populate[]=projects" + filter });
-        var data = []
+        response = await getRequest({ API: API_URLS.GET_TASKS + "?populate[]=responsible_leads&populate[]=projects&populate[]=updates" + filter });
+        
         if (await response?.status === 200) {
             setTasks(response.data)
         } else if (response?.status === 401) {
@@ -113,40 +113,41 @@ const tagedTasks = (props) => {
         } else {
             toast(response?.data?.error || "Some thing went wrong.");
         }
+
     }
     function stringToColor(string) {
         let hash = 0;
         let i;
-      
+
         /* eslint-disable no-bitwise */
         for (i = 0; i < string.length; i += 1) {
-          hash = string.charCodeAt(i) + ((hash << 5) - hash);
+            hash = string.charCodeAt(i) + ((hash << 5) - hash);
         }
-      
+
         let color = '#';
-      
+
         for (i = 0; i < 3; i += 1) {
-          const value = (hash >> (i * 8)) & 0xff;
-          color += `00${value.toString(16)}`.slice(-2);
+            const value = (hash >> (i * 8)) & 0xff;
+            color += `00${value.toString(16)}`.slice(-2);
         }
         /* eslint-enable no-bitwise */
-      
+
         return color;
-      }
-      
-      function stringAvatar(name) {
-        if(name){
+    }
+
+    function stringAvatar(name) {
+        if (name) {
             return {
                 sx: {
-                  bgcolor: stringToColor(name),
+                    bgcolor: stringToColor(name),
                 },
                 children: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`,
-              };
-        }else{
+            };
+        } else {
             return
         }
-      
-      }
+
+    }
     async function SetIsstarred(value, id) {
         let formPayload = {
             data: {
@@ -193,7 +194,7 @@ const tagedTasks = (props) => {
                                     </div>
                                 </td>
                                 <td className="taskTitle">
-                                    <h4 onClick={() => {props.SetUpdateData(task), props.SetFormaction("update")}}>
+                                    <h4 onClick={() => { props.SetUpdateData(task), props.SetFormaction("update") }}>
                                         {task.attributes.Task}
                                     </h4>
                                 </td>
@@ -216,11 +217,11 @@ const tagedTasks = (props) => {
                                 </td>
                                 <td className="responsible">
                                     <div>
-                                    <Tooltip title={task.attributes.responsible_leads?.data?.[0]?.["attributes"]?.Name}>
-                                        <span>
-                                            <Avatar {...stringAvatar(task.attributes.responsible_leads?.data?.[0]?.["attributes"]?.Name)} />
-                                            {/* {task.attributes.responsible_leads?.data?.[0]?.["attributes"].Name} */}
-                                        </span>
+                                        <Tooltip title={task.attributes.responsible_leads?.data?.[0]?.["attributes"]?.Name}>
+                                            <span>
+                                                <Avatar {...stringAvatar(task.attributes.responsible_leads?.data?.[0]?.["attributes"]?.Name)} />
+                                                {/* {task.attributes.responsible_leads?.data?.[0]?.["attributes"].Name} */}
+                                            </span>
                                         </Tooltip>
                                         <span className="wahtsapp">
                                             <a target="_blank" href={gettaskWhatsapp(task.attributes.responsible_leads?.data?.[0]?.["attributes"].whatsapp, task.attributes.projects?.data?.[0]?.attributes?.name, task.attributes.Task)}><FaWhatsapp /></a>
@@ -228,15 +229,15 @@ const tagedTasks = (props) => {
                                     </div>
                                 </td>
                                 <td className="responses">
-                                    <span onClick={() => {props.SetUpdateData(task), props.SetFormaction("update")} }>
+                                    <span onClick={() => { props.SetUpdateData(task), props.SetFormaction("update") }}>
                                         Responses
                                         <sup>
-                                            8
+                                            {JSON.stringify(task.attributes?.updates.length)}
                                         </sup>
                                     </span>
                                 </td>
                                 <td>
-                                    <span onClick={() => {props.SetUpdateData(task), props.SetFormaction("edit")}}>
+                                    <span onClick={() => { props.SetUpdateData(task), props.SetFormaction("edit") }}>
                                         Edit
                                     </span>
                                 </td>

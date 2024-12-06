@@ -200,7 +200,7 @@ const Tasks = ({ router }, props) => {
                                 forceLoad: { forceLoad },
                                 filterValue: ontop
                             }}
-                            SetFormaction={SetFormaction}
+                                SetFormaction={SetFormaction}
                                 setForceload={setForceload}
                                 SetUpdateData={SetUpdateData}
                             />
@@ -234,6 +234,7 @@ const Tasks = ({ router }, props) => {
                                                     forceLoad: { forceLoad },
                                                     filterValue: value
                                                 }}
+                                                SetFormaction={SetFormaction}
                                                     setForceload={setForceload}
                                                     SetUpdateData={SetUpdateData}
                                                 />
@@ -254,6 +255,7 @@ const Tasks = ({ router }, props) => {
                                                             forceLoad: { forceLoad },
                                                             filterValue: projects?.data[value]?.["attributes"]?.["name"],
                                                         }}
+                                                        SetFormaction={SetFormaction}
                                                             setForceload={setForceload}
                                                             SetUpdateData={SetUpdateData}
                                                         />
@@ -272,6 +274,7 @@ const Tasks = ({ router }, props) => {
                                                 forceLoad: { forceLoad },
                                                 filterValue: "Priority",
                                             }}
+                                                SetFormaction={SetFormaction}
                                                 setForceload={setForceload}
                                                 SetUpdateData={SetUpdateData}
                                             />
