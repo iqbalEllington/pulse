@@ -211,7 +211,7 @@ const tagedTasks = (props) => {
                                 <td className="dueDate">
                                     <span>{task.attributes.dueDate}</span>
                                 </td>
-                                <td className={task.attributes.status.replace(" ", "") + " status"}>
+                                <td className={task.attributes?.status?.replace(" ", "") + " status"}>
                                     <span>{task.attributes.status}</span>
                                 </td>
                                 <td className="responsible">
