@@ -965,8 +965,27 @@
             table{
                 display: block;
                 tr{
+                    background: #101010;
                     display: block;
                     border: 1px solid #F3E0C140;
+                    border-radius: 10px;
+                    padding: 10px;
+                    td{
+                        display: block;
+                        border: 0px;
+                        background: unset !important;
+                        &.star{
+                            display: none;
+                        }
+                        &.taskTitle{
+                            h4{
+                                display: block;
+                                font-family: acuminBold;
+                                font-size: 1.3rem;
+                            }
+                           
+                        }
+                    }
                 }
             }
        }
