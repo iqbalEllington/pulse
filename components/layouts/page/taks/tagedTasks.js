@@ -197,6 +197,7 @@ const tagedTasks = (props) => {
                                 </td>
                                 <td className="projectName">
                                     <div>
+                                        <label className="mobile-view">Project: </label>
                                         {task.attributes.projects?.data?.[0]?.attributes?.name}
                                     </div>
                                 </td>

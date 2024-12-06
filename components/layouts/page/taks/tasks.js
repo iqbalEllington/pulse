@@ -17,7 +17,6 @@ import { FaSortAmountDown } from "react-icons/fa";
 
 
 const Tasks = ({ router }, props) => {
-
     useEffect(() => {
         getuserdata()
     }, [])
@@ -46,7 +45,6 @@ const Tasks = ({ router }, props) => {
     async function getuserdata() {
         var response;
         response = await getRequest({ API: API_URLS.GET_USER + '?populate[]=profilePhoto' });
-        var data = []
         if (await response?.status === 200) {
             setUserDetails(response.data)
         } else if (response?.status === 401) {

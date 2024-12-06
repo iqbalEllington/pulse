@@ -843,6 +843,9 @@
                     font-size: 1rem;
                     max-width: 180px;
                     white-space: break-spaces;
+                    label{
+                        display: none;
+                    }
                 }
 
                 .type {
@@ -942,7 +945,23 @@
 }
 
 @media screen and (max-width:768px) {
+    .Task-List-body{
+        padding: 0px;
+        margin: 0px;
+        background: #000000;
+        .body{
+            padding-left: 0px !important;
+            border: 0px;
+        }
+        .downloadPdf{
+            display: none;
+        }
+    }
     .tasks-board{
+        .container-fluid{
+            padding: 0px;
+            margin: 0px;
+        }
         .header{
             display: flex;
             flex-wrap: wrap;
@@ -964,7 +983,9 @@
        .body{
             table{
                 display: block;
+                padding: 10px;
                 tr{
+                    position: relative;
                     background: #101010;
                     display: block;
                     border: 1px solid #F3E0C140;
@@ -972,18 +993,56 @@
                     padding: 10px;
                     td{
                         display: block;
-                        border: 0px;
+                        border: 0px !important;
                         background: unset !important;
                         &.star{
                             display: none;
                         }
                         &.taskTitle{
+                            width: 100% !important;
+                            max-width: unset !important;
+                            min-width: none !important;
+                            padding-top: 30px !important;
                             h4{
                                 display: block;
                                 font-family: acuminBold;
-                                font-size: 1.3rem;
+                                font-size: 1.4rem;
+                              
                             }
                            
+                        }
+                        &.projectName{
+                            width: 100% !important;
+                            max-width: unset !important;
+                            min-width: none !important;
+                            color: #B9B9B9;
+                            label{
+                                display: inline !important;
+                            }
+                        }
+                        &.type{
+                            width: unset;
+                            min-width: unset;
+                            top: -20px;
+                            left: 0px;
+                            position: absolute;
+                            span{
+                                background: #000000;
+                                display: inline-block;
+                                padding: 3px 14px;
+                                border-radius: 39px;
+                            }
+                            &.task{
+                                span{
+                                border: 1px solid #EF9712;
+                                }
+                            }
+                            &.Alert{
+                                span{
+                                border: 1px solid #EF9712;
+                                }
+                            }
+                          
                         }
                     }
                 }
