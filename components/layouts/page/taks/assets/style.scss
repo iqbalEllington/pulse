@@ -781,10 +781,13 @@
                     background: #1E1E20;
                     padding: 10px 15px;
                     text-align: left;
-                    border-right: 1px solid #151517;
-                    border-bottom: 1px solid #151517;
-
+                    border-right: 2px solid black;
+                    border-bottom: 2px solid  black;
+                    &.Priority{
+                        width: 20px;
+                    }
                     &.responses {
+                        width: 100px;
                         span {
                             display: inline-block;
                             background: #32323A; // #9E856F;
