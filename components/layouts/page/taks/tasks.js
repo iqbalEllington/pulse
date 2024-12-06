@@ -284,9 +284,7 @@ const Tasks = ({ router }, props) => {
                         </div>
                     </div>
                 </div>
-            </div>
-            <div>
-
+             
             </div>
         </>
     );
