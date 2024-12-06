@@ -934,3 +934,27 @@
 
     }
 }
+
+@media screen and (max-width:768px) {
+    .tasks-board{
+        .header{
+            display: flex;
+            flex-wrap: wrap;
+            .filter{
+                ul{
+                    gap: 5px;
+                    flex-wrap: wrap;
+                    li{
+                        display: inline-flex;
+                        a{
+                            white-space: nowrap;
+                            font-size: .8rem;
+                            padding: 8px 9px;
+                        }
+                    }
+                }
+            }
+        }
+       
+    }
+}

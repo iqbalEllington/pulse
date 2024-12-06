@@ -36,21 +36,18 @@ const tagedTasks = (props) => {
                 break;
 
             case 'This Week':
-                filter = `&filters[dueDate][$gte]=${startOfWeek.format('YYYY-MM-DD')}` +
-                    `&filters[dueDate][$lte]=${endOfWeek.format('YYYY-MM-DD')}` +
-                    `&filters[dueDate][$ne]=${today.format('YYYY-MM-DD')}` + // Exclude today
-                    `&filters[dueDate][$ne]=${tomorrow.format('YYYY-MM-DD')}`; // Exclude tomorrow
+                filter =`&filters[dueDate][$lte]=${endOfWeek.format('YYYY-MM-DD')}` +
+                    `&filters[dueDate][$gt]=${tomorrow.format('YYYY-MM-DD')}`; // Exclude tomorrow
+                console.log(filter, "this week")
                 break;
 
             case 'This Month':
-                filter = `&filters[dueDate][$gte]=${startOfMonth.format('YYYY-MM-DD')}` +
-                    `&filters[dueDate][$lte]=${endOfMonth.format('YYYY-MM-DD')}` +
-                    `&filters[dueDate][$lt]=${startOfWeek.format('YYYY-MM-DD')}`; // Exclude this week
+                filter = `&filters[dueDate][$gte]=${endOfWeek.format('YYYY-MM-DD')}` +
+                    `&filters[dueDate][$lte]=${endOfMonth.format('YYYY-MM-DD')}` 
                 break;
 
             case 'Other':
-                filter = `&filters[dueDate][$lt]=${startOfMonth.format('YYYY-MM-DD')}` + // Before this month
-                    `&filters[dueDate][$gt]=${endOfMonth.format('YYYY-MM-DD')}`; // After this month
+                filter = `&filters[dueDate][$gt]=${endOfMonth.format('YYYY-MM-DD')}`; // After this month
                 break;
 
             default:
