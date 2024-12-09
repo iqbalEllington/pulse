@@ -201,8 +201,15 @@ const Tasks = ({ router }, props) => {
                                 SetFormaction={SetFormaction}
                                 setForceload={setForceload}
                                 SetUpdateData={SetUpdateData}
+                                SetFormActive={setFormActive}
+                                formActive={formActive}
                             />
                         </div>
+                        {/* formstatus={formActive}
+                          
+                            setForceload={setForceload}
+                            updateDatas={updateDatas}
+                            action={formaction} */}
 
                         <div className="Grouped">
                             <div className="GroupBySort">

@@ -67,9 +67,9 @@ const Taskform = (props) => {
     useEffect(() => {
         if (props.updateDatas !== false) {
             var existngdata = props.updateDatas;
-            // console.log("props.updateDatas",moment(existngdata.attributes["dueDate"]), "lets start")
-            // id: existngdata.id,
-            // isStarred: existngdata.attributes.isStarred,
+            // console.log("props.updateDatas",moment(existngdata?.attributes["dueDate"]), "lets start")
+            // id: existngdata?.id,
+            // isStarred: existngdata?.attributes.isStarred,
             // Task: "",
             // type: null,
             // status: null,
@@ -77,30 +77,30 @@ const Taskform = (props) => {
             // projects: null,
             // responsible_leads: null,
             // dueDate: null,
-            var dateString = existngdata.attributes["dueDate"];
+            var dateString = existngdata?.attributes["dueDate"];
             const defaultDate = dateString != null ? new Date(dateString) : null;
 
             // console.log(defaultDate)
             setFormData((prevState) => ({
                 ...prevState,
-                ["id"]: [existngdata.id],
-                ["isStarred"]: existngdata.attributes.isStarred,
-                ["Task"]: existngdata.attributes.Task,
+                ["id"]: [existngdata?.id],
+                ["isStarred"]: existngdata?.attributes.isStarred,
+                ["Task"]: existngdata?.attributes.Task,
                 ["dueDate"]: defaultDate,
-                ["status"]: existngdata.attributes["status"],
-                ["type"]: existngdata.attributes["type"],
-                ["projects"]: existngdata.attributes.projects?.data?.[0]?.id,
-                ["responsible_leads"]: existngdata.attributes.responsible_leads?.data?.[0]?.id,
-                ["priority"]: existngdata.attributes["priority"]
+                ["status"]: existngdata?.attributes["status"],
+                ["type"]: existngdata?.attributes["type"],
+                ["projects"]: existngdata?.attributes.projects?.data?.[0]?.id,
+                ["responsible_leads"]: existngdata?.attributes.responsible_leads?.data?.[0]?.id,
+                ["priority"]: existngdata?.attributes["priority"]
             }));
-            if (existngdata.attributes.projects?.data?.[0]?.attributes["name"]) {
+            if (existngdata?.attributes.projects?.data?.[0]?.attributes["name"]) {
 
-                SetSelectedProject(existngdata.attributes.projects?.data?.[0]?.attributes["name"])
+                SetSelectedProject(existngdata?.attributes.projects?.data?.[0]?.attributes["name"])
             } else {
                 SetSelectedProject(null)
             }
-            if (existngdata.attributes.responsible_leads?.data?.[0]?.attributes["Name"]) {
-                SetResponsible(existngdata.attributes.responsible_leads?.data?.[0]?.attributes["Name"])
+            if (existngdata?.attributes.responsible_leads?.data?.[0]?.attributes["Name"]) {
+                SetResponsible(existngdata?.attributes.responsible_leads?.data?.[0]?.attributes["Name"])
             } else {
                 SetResponsible(null)
             }
@@ -341,7 +341,7 @@ const Taskform = (props) => {
                 }
                 {tab == "Updates" &&
                     <div className="updates"> 
-                        <div style={{ width: "400px", display: "block" }}>
+                        <div style={{ width: "100%", display: "block" }}>
                             <UpdateForm id={formData.id} />
 
                         </div>

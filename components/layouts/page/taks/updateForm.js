@@ -43,7 +43,11 @@ const updateForm = (props) => {
             const sortedData = data.sort((a, b) => new Date(b.date) - new Date(a.date));
 
             setUpdates(response.data?.data?.attributes?.updates)
-            setUpdatesSorted(sortedData)
+            if(response.data?.data?.attributes?.updates){
+                setUpdatesSorted(sortedData)
+            }else{
+                setUpdatesSorted([])
+            }
         } else if (response?.status === 401) {
             toast("Unauthorize access please re-login.");
         } else {
@@ -124,7 +128,7 @@ const updateForm = (props) => {
                 <form className="updateForm" onSubmit={(e) => handleSubmit(e)}>
 
                     <div className="input-box">
-                    <div className="selectedDate">
+                        <div className="selectedDate">
                             {formData.date ?
                                 <>
                                     <span>
@@ -139,7 +143,7 @@ const updateForm = (props) => {
                                 </span>
                             }
                             <span>
-                            <FaAngleDown/>
+                                <FaAngleDown />
                             </span>
                             {/* // {formData.date ? moment(formData.date).format() : "Select Date"} */}
                         </div>
@@ -151,7 +155,7 @@ const updateForm = (props) => {
                             onChange={(date) => handleDateChange("date", date)}
                             placeholderText="Select Date"
                         />
-                      
+
                     </div>
                     <textarea onChange={handleInputChange} name="update" placeholder="Type your Update" value={formData.update} />
 
@@ -181,6 +185,11 @@ const updateForm = (props) => {
                                 </div>
                             </div>
                         })}
+                        {!updatesSorted.length &&
+                            <div className="noupdate">
+                                  There are no updates available for this task at the moment
+                            </div>
+                        }
                     </div>
                 </div>
             </div>

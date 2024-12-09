@@ -8,6 +8,7 @@ import { FaRegStar, FaStar, FaWhatsapp } from "react-icons/fa";
 import { IoMdStar } from "react-icons/io";
 
 import { FaChevronDown } from "react-icons/fa";
+import UpdateForm from "./updateForm";
 
 
 const tagedTasks = (props) => {
@@ -37,14 +38,14 @@ const tagedTasks = (props) => {
                 break;
 
             case 'This Week':
-                filter =`&filters[dueDate][$lte]=${endOfWeek.format('YYYY-MM-DD')}` +
+                filter = `&filters[dueDate][$lte]=${endOfWeek.format('YYYY-MM-DD')}` +
                     `&filters[dueDate][$gt]=${tomorrow.format('YYYY-MM-DD')}`; // Exclude tomorrow
                 console.log(filter, "this week")
                 break;
 
             case 'This Month':
                 filter = `&filters[dueDate][$gte]=${endOfWeek.format('YYYY-MM-DD')}` +
-                    `&filters[dueDate][$lte]=${endOfMonth.format('YYYY-MM-DD')}` 
+                    `&filters[dueDate][$lte]=${endOfMonth.format('YYYY-MM-DD')}`
                 break;
 
             case 'Other':
@@ -58,7 +59,7 @@ const tagedTasks = (props) => {
         return filter;
     };
     async function getTagedTask(tag) {
-        let filter="";
+        let filter = "";
         if (tag?.type == "Date") {
             filter = buildFilters(tag?.filterValue)
         } else if (tag?.type == "tag") {
@@ -103,7 +104,7 @@ const tagedTasks = (props) => {
 
         var response;
         response = await getRequest({ API: API_URLS.GET_TASKS + "?populate[]=responsible_leads&populate[]=projects&populate[]=updates" + filter });
-        
+
         if (await response?.status === 200) {
             setTasks(response.data)
         } else if (response?.status === 401) {
@@ -209,15 +210,15 @@ const tagedTasks = (props) => {
                                     <span>{task.attributes.priority}</span>
                                 </td>
                                 <td className="dueDate">
-                                <label className="mobile-view">Due Date</label>
+                                    <label className="mobile-view">Due Date</label>
                                     <span>{task.attributes.dueDate}</span>
                                 </td>
                                 <td className={task.attributes?.status?.replace(" ", "") + " status"}>
-                                <label className="mobile-view">Status</label>
+                                    <label className="mobile-view">Status</label>
                                     <span>{task.attributes.status}</span>
                                 </td>
                                 <td className="responsible">
-                                <label className="mobile-view">Responisble</label>
+                                    <label className="mobile-view">Responisble</label>
                                     <div>
                                         <Tooltip title={task.attributes.responsible_leads?.data?.[0]?.["attributes"]?.Name}>
                                             <span>
@@ -233,7 +234,7 @@ const tagedTasks = (props) => {
                                 <td className="responses">
                                     <span onClick={() => { props.SetUpdateData(task), props.SetFormaction("update") }}>
                                         <span className="ondesk">  Responses</span>
-                                        <span className="mobile-view"> Expand <FaChevronDown/></span>
+                                        <span className="mobile-view"> Updates <FaChevronDown /></span>
                                         <sup>
                                             {JSON.stringify(task.attributes?.updates.length)}
                                         </sup>
@@ -249,6 +250,10 @@ const tagedTasks = (props) => {
                                 </td>
                                 <td>
                                     {JSON.stringify("Read More")}
+                                </td> */}
+                                {/* <td>
+                                <UpdateForm id={task.id} />
+                                   
                                 </td> */}
                             </tr>
                         })}

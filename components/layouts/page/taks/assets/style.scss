@@ -107,7 +107,7 @@
 
     .form {
         min-height: 100vh;
-        background: #202125;
+        background: black;
         position: fixed;
         right: 0;
         z-index: 999;
@@ -331,6 +331,22 @@
                 padding: 25px 45px;
                 border-radius: 15px;
             }
+        }
+    }
+
+    .updates-list {
+        width: 100%;
+
+        .noupdate {
+            font-size: 3rem;
+            color: white;
+            opacity: .5;
+            width: 100%;
+            font-family: acuminBlack;
+            text-align: center;
+            line-height: 1;
+            padding: 30px;
+
         }
     }
 
@@ -790,11 +806,13 @@
             }
         }
 
+
         .body {
             padding-left: 20px;
 
+
             .tasks-list {
-                width: 100%;
+                width: 98%;
 
                 td {
                     background: #1E1E20;
@@ -821,6 +839,11 @@
                                 position: absolute;
                                 background: #9E856F;
                                 ;
+                            }
+
+                            &:hover {
+                                background: black;
+                                cursor: pointer;
                             }
                         }
                     }
@@ -944,7 +967,7 @@
 
                     .wahtsapp {
                         a {
-                            background: #128c7e;
+                            background: #00A171;
                             color: white;
                             display: inline-flex;
                             align-items: center;
@@ -964,7 +987,7 @@
             }
         }
 
-        .mobile-view{
+        .mobile-view {
             display: none;
         }
     }
@@ -987,6 +1010,17 @@
     .Task-List-body .task-list-container .header h3,
     .Task-List-body .task-list-container .header .h3 {
         font-size: 2rem !important;
+    }
+
+    .search {
+        width:100%;
+        padding-bottom: 0px !important;
+        >div{
+         width:100%;
+         }
+        input {
+            width: 100%;
+        }
     }
 
     .tasks-board {
@@ -1022,6 +1056,12 @@
             }
 
             .updates-list {
+                div:first-child {
+                    svg {
+                        display: none;
+                    }
+                }
+
                 div:last-child {
                     padding-bottom: 20px;
                 }
@@ -1029,10 +1069,21 @@
 
             .updates-list .update-data {
                 gap: 10px;
+
                 .update {
-                    padding: 8px 15px !important;
+                    padding: 15px 15px !important;
+                    text-align: left;
                 }
             }
+        }
+
+        .updates-list .update-data .date span:first-child {
+            font-size: 1.5rem;
+        }
+
+        .updates-list .line-break {
+            padding-top: 0 !important;
+            padding-bottom: 10px !important;
         }
 
         .header {
@@ -1043,18 +1094,41 @@
                 ul {
                     gap: 5px;
                     flex-wrap: wrap;
+                    padding-right: 10px;
 
                     li {
                         display: inline-flex;
 
                         a {
                             white-space: nowrap;
-                            font-size: .8rem;
+                            font-size: .9rem;
                             padding: 8px 9px;
                         }
                     }
                 }
             }
+
+
+        }
+
+
+
+        .updates {
+            height: 80%;
+        }
+
+        .noupdate {
+            font-size: 3rem;
+            color: white;
+            display: flex;
+            align-items: center;
+            opacity: .7;
+            text-align: center;
+            font-family: acuminBlack;
+            position: absolute;
+            height: 70%;
+            line-height: 1;
+            padding-right: 20px;
         }
 
         .body {
@@ -1069,6 +1143,8 @@
                     border: 1px solid #F3E0C140;
                     border-radius: 10px;
                     padding: 10px;
+
+                    margin-bottom: 25px;
 
                     td {
                         display: block;
@@ -1099,6 +1175,7 @@
                             max-width: unset !important;
                             min-width: none !important;
                             color: #B9B9B9;
+                            padding-bottom: 23px;
 
                             label {
                                 display: inline !important;
@@ -1167,6 +1244,19 @@
                                 display: block !important;
                                 background: #32323A;
                                 padding: 10px;
+                                border-top-left-radius: 8px;
+                                border-top-right-radius: 8px;
+                                text-align: left;
+                                font-size: .8rem;
+                            }
+
+                            .wahtsapp {
+                                background: #00A171;
+
+                                a {
+                                    border-radius: 0px;
+                                    display: block;
+                                }
                             }
 
                             span {
@@ -1199,8 +1289,9 @@
         }
     }
 }
+
 @media screen and (min-width:768px) {
-    .Task-List-body .task-list-container .mobile-view{
+    .Task-List-body .task-list-container .mobile-view {
         display: none !important;
     }
 }
