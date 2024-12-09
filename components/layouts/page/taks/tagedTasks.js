@@ -180,6 +180,8 @@ const tagedTasks = (props) => {
                 </div>
                 <div className="body">
                     <table className="tasks-list">
+                        {tasks.data?.length > 0 ?
+                        <>
                         {tasks.data?.map((task) => {
                             return <tr>
                                 <td className="star">
@@ -257,6 +259,13 @@ const tagedTasks = (props) => {
                                 </td> */}
                             </tr>
                         })}
+                        </>
+                        :
+                        <tr>
+                            <td>No Task Found for {props.tag.keyword}</td>
+
+                        </tr>
+}
 
                     </table>
                 </div>
