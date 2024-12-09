@@ -1007,19 +1007,70 @@
 
     }
 
+    .add-task {
+        position: fixed;
+        width: 60px;
+        height: 60px !important;
+        bottom: 20px;
+        right: 20px;
+        background: #9E856F !important;
+        z-index: 999;
+        border-radius: 100% !important;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: .8;
+
+        &:hover {
+            opacity: 1;
+        }
+
+        .ondesk {
+            display: none;
+        }
+
+        .mobile-view {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 999;
+            font-size: 2.4rem;
+            font-family: acuminBlack;
+            color: white;
+            padding-top: 3px;
+            line-height: 1 !important;
+        }
+    }
+
     .Task-List-body .task-list-container .header h3,
     .Task-List-body .task-list-container .header .h3 {
         font-size: 2rem !important;
     }
 
     .search {
-        width:100%;
+        width: 100%;
         padding-bottom: 0px !important;
-        >div{
-         width:100%;
-         }
+
+        >div {
+            width: 100%;
+        }
+
         input {
             width: 100%;
+        }
+    }
+
+    .GroupBySort {
+        padding-left: 10px !important;
+        flex-direction: row-reverse;
+        padding-right: 30px;
+        button {
+            color: white !important;
+            font-size: 1.4rem;
+        }
+
+        svg {
+            color: white !important;
         }
     }
 
@@ -1086,9 +1137,18 @@
             padding-bottom: 10px !important;
         }
 
+        .task-list-container {
+            .header {
+                padding-top: 10px !important;
+            }
+
+        }
+
         .header {
             display: flex;
             flex-wrap: wrap;
+            padding-left: 10px;
+            padding-right: 10px;
 
             .filter {
                 ul {

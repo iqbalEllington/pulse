@@ -115,13 +115,13 @@ const Tasks = ({ router }, props) => {
                     <div className="header">
                         <div className="welcome-message">
                             <h1>
-                                Hello Elie,
+                                Hello{userDetail.FullName != null ? " "+userDetail.FullName : ""},
                             </h1>
                             <p>Here are the top-priority Tasks & Alerts requiring your attention.</p>
                         </div>
                         <div className="actionbar">
                             <button className="downloadPdf" onClick={() => generatePDF(getTargetElement, options)}> Download PDF <FaArrowDown /></button>
-                            <button className="add-task" onClick={() => { setFormActive(!formActive), SetUpdateDatas(false) }}> Add a task </button>
+                            <button className="add-task" onClick={() => { setFormActive(!formActive), SetUpdateDatas(false) }}> <span className="ondesk"> Add a task </span> <span className="mobile-view">+</span></button>
 
                             <Dropdown className="profile-user">
                                 <Dropdown.Toggle id="dropdown-basic">
@@ -203,6 +203,7 @@ const Tasks = ({ router }, props) => {
                                 SetUpdateData={SetUpdateData}
                                 SetFormActive={setFormActive}
                                 formActive={formActive}
+                                updateDatas={updateDatas}
                             />
                         </div>
                         {/* formstatus={formActive}
