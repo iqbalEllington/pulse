@@ -7,6 +7,7 @@ import React, { Component, useState, useEffect } from "react";
 import { FaRegStar, FaStar, FaWhatsapp } from "react-icons/fa";
 import { IoMdStar } from "react-icons/io";
 
+import { FaChevronDown } from "react-icons/fa";
 
 
 const tagedTasks = (props) => {
@@ -208,12 +209,15 @@ const tagedTasks = (props) => {
                                     <span>{task.attributes.priority}</span>
                                 </td>
                                 <td className="dueDate">
+                                <label className="mobile-view">Due Date</label>
                                     <span>{task.attributes.dueDate}</span>
                                 </td>
                                 <td className={task.attributes?.status?.replace(" ", "") + " status"}>
+                                <label className="mobile-view">Status</label>
                                     <span>{task.attributes.status}</span>
                                 </td>
                                 <td className="responsible">
+                                <label className="mobile-view">Responisble</label>
                                     <div>
                                         <Tooltip title={task.attributes.responsible_leads?.data?.[0]?.["attributes"]?.Name}>
                                             <span>
@@ -228,13 +232,14 @@ const tagedTasks = (props) => {
                                 </td>
                                 <td className="responses">
                                     <span onClick={() => { props.SetUpdateData(task), props.SetFormaction("update") }}>
-                                        Responses
+                                        <span className="ondesk">  Responses</span>
+                                        <span className="mobile-view"> Expand <FaChevronDown/></span>
                                         <sup>
                                             {JSON.stringify(task.attributes?.updates.length)}
                                         </sup>
                                     </span>
                                 </td>
-                                <td>
+                                <td className="editAction">
                                     <span onClick={() => { props.SetUpdateData(task), props.SetFormaction("edit") }}>
                                         Edit
                                     </span>

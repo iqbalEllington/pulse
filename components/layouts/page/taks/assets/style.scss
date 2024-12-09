@@ -16,6 +16,7 @@
         align-items: center;
         padding-left: 25px;
         padding-top: 20px;
+
         button {
             background: transparent;
             border: 0px;
@@ -37,12 +38,14 @@
         height: 100%;
         /* Smooth slide-in effect */
     }
-    .updates{
+
+    .updates {
         display: flex;
         background: black;
         margin: 0;
         height: 100%;
     }
+
     .form-hidden {
         width: 0px !important;
         visibility: hidden;
@@ -111,7 +114,7 @@
         overflow-x: auto;
         height: 80%;
         top: 0;
-    
+
         .intl-tel-input {
             .country-list {
                 li {
@@ -281,40 +284,48 @@
         }
 
     }
-    .updates-list{
+
+    .updates-list {
         padding-left: 40px;
         width: 100%;
         display: block;
         padding-top: 40px;
-        span{
+
+        span {
             display: block;
         }
-        .line-break{
+
+        .line-break {
             padding-left: 30px;
             padding-top: 15px;
             padding-bottom: 15px;
         }
-        .update-data{
+
+        .update-data {
             display: flex;
             gap: 30px;
             color: white;
             align-items: center;
-            span{
+
+            span {
                 display: block;
                 line-height: 1;
                 text-align: center;
             }
-            .date{
+
+            .date {
                 width: 60px;
-                span{
-                    &:first-child{
+
+                span {
+                    &:first-child {
                         font-size: 2rem;
                     }
                 }
+
                 font-family: AcuminBold;
             }
-         
-            .update{
+
+            .update {
                 background: #0F0F0F;
                 border: 1px solid #3C3C3C;
                 padding: 25px 45px;
@@ -322,18 +333,22 @@
             }
         }
     }
+
     .updateForm {
         display: flex;
         padding-left: 15px;
         width: 600px;
         margin-top: 50px;
-        .input-box{
+
+        .input-box {
             position: relative;
         }
-        .react-datepicker-wrapper{
+
+        .react-datepicker-wrapper {
             opacity: 0;
         }
-        .selectedDate{
+
+        .selectedDate {
             color: white;
             font-size: 1rem;
             position: absolute;
@@ -342,24 +357,28 @@
             line-height: 1;
 
             padding-left: 30px;
-            span{
+
+            span {
                 text-align: center;
                 display: block;
                 width: 60px;
             }
-            width: 60px;
-            span{
-                &:first-child{
 
-            font-family: acuminBlack;
+            width: 60px;
+
+            span {
+                &:first-child {
+
+                    font-family: acuminBlack;
                     font-size: 2rem;
                 }
             }
         }
 
-        .date-pick{
+        .date-pick {
             font-size: 1.2rem !important;
         }
+
         .dateinput {
             width: 120px;
             height: auto;
@@ -377,7 +396,7 @@
             //     vertical-align: top;
             // }
         }
-        
+
         textarea {
             background: #0F0F0F;
             width: auto;
@@ -693,7 +712,7 @@
                         display: inline-block;
                         border-radius: 10px;
                         color: black;
-                        word-wrap:inherit;
+                        word-wrap: inherit;
                     }
 
                     &.top {
@@ -782,12 +801,15 @@
                     padding: 10px 15px;
                     text-align: left;
                     border-right: 2px solid black;
-                    border-bottom: 2px solid  black;
-                    &.Priority{
+                    border-bottom: 2px solid black;
+
+                    &.Priority {
                         width: 20px;
                     }
+
                     &.responses {
                         width: 100px;
+
                         span {
                             display: inline-block;
                             background: #32323A; // #9E856F;
@@ -843,7 +865,8 @@
                     font-size: 1rem;
                     max-width: 180px;
                     white-space: break-spaces;
-                    label{
+
+                    label {
                         display: none;
                     }
                 }
@@ -945,33 +968,83 @@
 }
 
 @media screen and (max-width:768px) {
-    .Task-List-body{
+    .Task-List-body {
         padding: 0px;
         margin: 0px;
         background: #000000;
-        .body{
+
+        .body {
             padding-left: 0px !important;
             border: 0px;
         }
-        .downloadPdf{
-            display: none;
-        }
+
+
     }
-    .tasks-board{
-        .container-fluid{
+
+    .Task-List-body .task-list-container .header h3,
+    .Task-List-body .task-list-container .header .h3 {
+        font-size: 2rem !important;
+    }
+
+    .tasks-board {
+        .container-fluid {
             padding: 0px;
             margin: 0px;
         }
-        .header{
+
+        .actionbar {
+            right: 10px !important;
+        }
+
+        .downloadPdf {
+            display: none !important;
+        }
+
+        .form .formbox {
+            min-width: 100% !important;
+        }
+
+        .form-active {
+            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            overflow: auto;
+            background: black;
+            z-index: 999;
+            padding-bottom: 30px;
+
+            .updateForm {
+                display: none;
+            }
+
+            .updates-list {
+                div:last-child {
+                    padding-bottom: 20px;
+                }
+            }
+
+            .updates-list .update-data {
+                gap: 10px;
+                .update {
+                    padding: 8px 15px !important;
+                }
+            }
+        }
+
+        .header {
             display: flex;
             flex-wrap: wrap;
-            .filter{
-                ul{
+
+            .filter {
+                ul {
                     gap: 5px;
                     flex-wrap: wrap;
-                    li{
+
+                    li {
                         display: inline-flex;
-                        a{
+
+                        a {
                             white-space: nowrap;
                             font-size: .8rem;
                             padding: 8px 9px;
@@ -980,73 +1053,146 @@
                 }
             }
         }
-       .body{
-            table{
+
+        .body {
+            table {
                 display: block;
                 padding: 10px;
-                tr{
+
+                tr {
                     position: relative;
                     background: #101010;
                     display: block;
                     border: 1px solid #F3E0C140;
                     border-radius: 10px;
                     padding: 10px;
-                    td{
+
+                    td {
                         display: block;
                         border: 0px !important;
                         background: unset !important;
-                        &.star{
+
+                        &.star {
                             display: none;
                         }
-                        &.taskTitle{
+
+                        &.taskTitle {
                             width: 100% !important;
                             max-width: unset !important;
                             min-width: none !important;
-                            padding-top: 30px !important;
-                            h4{
+                            padding-top: 50px !important;
+
+                            h4 {
                                 display: block;
                                 font-family: acuminBold;
-                                font-size: 1.4rem;
-                              
+                                font-size: 1.3rem !important;
+
                             }
-                           
+
                         }
-                        &.projectName{
+
+                        &.projectName {
                             width: 100% !important;
                             max-width: unset !important;
                             min-width: none !important;
                             color: #B9B9B9;
-                            label{
+
+                            label {
                                 display: inline !important;
                             }
                         }
-                        &.type{
+
+                        &.type {
                             width: unset;
                             min-width: unset;
                             top: -20px;
                             left: 0px;
                             position: absolute;
-                            span{
+
+                            span {
                                 background: #000000;
                                 display: inline-block;
                                 padding: 3px 14px;
                                 border-radius: 39px;
                             }
-                            &.task{
-                                span{
+
+
+                        }
+
+                        &.task {
+                            span {
                                 border: 1px solid #EF9712;
+                            }
+                        }
+
+                        &.Alert {
+                            span {
+                                border: 1px solid #EF9712;
+                            }
+                        }
+
+                        &.responses {
+                            position: absolute;
+                            top: -10px;
+                            right: 36px;
+
+                            .ondesk {
+                                display: none !important;
+                            }
+
+                            span {
+                                background: transparent !important;
+                            }
+
+                            sup {
+                                right: 15px;
+                            }
+                        }
+
+                        &.dueDate,
+                        &.status,
+                        &.responsible {
+                            padding: 0px !important;
+                            background: #000 !important;
+                            width: auto !important;
+                            border-radius: 10px !important;
+                            display: inline-block;
+                            height: 100px;
+                            margin-left: 5px;
+
+                            label.mobile-view {
+                                display: block;
+                                background: #32323A;
+                                padding: 10px;
+                            }
+
+                            span {
+                                display: block;
+                                padding: 10px;
+                                background: transparent !important;
+                            }
+
+                            background: #000000;
+
+                            .wahtsapp {
+                                padding: 0px !important;
+
+                                a {
+                                    margin: 0px !important;
                                 }
                             }
-                            &.Alert{
-                                span{
-                                border: 1px solid #EF9712;
-                                }
-                            }
-                          
+                        }
+
+                        &.Priority {
+                            display: none;
+                        }
+
+                        &.editAction {
+                            display: none;
                         }
                     }
                 }
             }
-       }
-    }   
+        }
+    }
 }
