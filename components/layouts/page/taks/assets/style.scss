@@ -1,9 +1,10 @@
 .tasks-board {
-    .error{
+    .error {
         color: #EB5E66;
         padding-top: 12px;
         display: block;
     }
+
     .popup.active {
         position: fixed;
         width: 100%;
@@ -781,21 +782,36 @@
         }
 
         .search {
+            position: relative;
             padding-right: 30px;
             display: flex;
             align-items: flex-end;
             padding-bottom: 15px;
 
-            input {
-                background: black;
-                border-radius: 9px;
-                border: 1px solid #202125;
-                padding: 10px;
-                color: white;
+            .search-box-task {
+                position: relative;
+
+                input {
+                    background: black;
+                    border-radius: 9px;
+                    border: 1px solid #202125;
+                    padding: 10px;
+                    color: white;
+                    padding-left: 40px;
+                }
+
+                svg {
+                    position: absolute;
+                    color: white;
+                    left: 0;
+                    top: 14px;
+                    left: 15px;
+                }
+
             }
-
-
         }
+
+
     }
 
     .tasks-list {
@@ -863,6 +879,7 @@
 
                 .editAction {
                     width: 30px;
+
                 }
 
                 .star {
@@ -904,7 +921,8 @@
                     font-size: 1rem;
                     max-width: 180px;
                     white-space: break-spaces;
-
+                    padding-bottom: 20px;
+                    padding-top: 20px;
                     label {
                         display: none;
                     }
@@ -941,12 +959,13 @@
                     }
 
                     &.Notification {
-                      span {
+                        span {
                             border: 1px solid #2E66B9;
                             padding: 8px 12px;
                             border-radius: 10px;
                             background: #2E66B930;
                         }
+
                         // background: #2E66B9;
                     }
                 }
@@ -972,20 +991,19 @@
 
                     &.InProgress {
                         // span {
-                            background: rgb(253, 188, 100);
+                        background: rgb(253, 188, 100);
                         // }
                     }
 
                     &.Completed {
                         // span {
-                            background: rgb(0, 200, 117);
+                        background: rgb(0, 200, 117);
                         // }
                     }
 
                     &.ToDo {
                         // span {
-                            background: #BBA6F7
-                        // }
+                        background: #BBA6F7 // }
                     }
 
                 }
@@ -1081,7 +1099,8 @@
 
     .Task-List-body .task-list-container .header h3,
     .Task-List-body .task-list-container .header .h3 {
-        font-size: 2rem !important;
+        font-size: 1.3rem !important;
+        text-transform: uppercase;
     }
 
     .search {
@@ -1099,8 +1118,13 @@
 
     .GroupBySort {
         padding-left: 10px !important;
-        flex-direction: row-reverse;
+        // flex-direction: row-reverse;
         padding-right: 30px;
+
+        label {
+            color: white !important;
+            padding-right: 10px;
+        }
 
         button {
             color: white !important;
@@ -1237,9 +1261,12 @@
             table {
                 display: block;
                 padding: 10px;
-                thead{
+                padding-top: 15px;
+
+                thead {
                     display: none;
                 }
+
                 tr {
                     position: relative;
                     background: #101010;
@@ -1263,7 +1290,7 @@
                             width: 100% !important;
                             max-width: unset !important;
                             min-width: none !important;
-                            padding-top: 50px !important;
+                            padding-top: 30px !important;
 
                             h4 {
                                 display: block;
@@ -1305,19 +1332,19 @@
 
                         &.Task {
                             span {
-                                border: 1px solid #6458EA !important;
+                                border: 1px solid #6458EA70 !important;
                             }
                         }
 
                         &.Notification {
                             span {
-                                border: 1px solid #2E66B9 !important;
+                                border: 1px solid #2E66B970 !important;
                             }
                         }
 
                         &.Alert {
                             span {
-                                border: 1px solid #EF9712 !important;
+                                border: 1px solid #EF971270 !important;
                             }
                         }
 
@@ -1338,9 +1365,11 @@
                                 right: 15px;
                             }
                         }
-                        &.responsesItem{
+
+                        &.responsesItem {
                             display: none;
                         }
+
                         &.dueDate,
                         &.status,
                         &.responsible {

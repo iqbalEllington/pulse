@@ -13,6 +13,7 @@ import Taskform from "./taskform";
 import Link from "next/link";
 import TagedTasks from "./tagedTasks";
 import { FaSortAmountDown } from "react-icons/fa";
+import { IoSearch } from "react-icons/io5";
 
 
 
@@ -186,8 +187,9 @@ const Tasks = ({ router }, props) => {
                                 </ul>
                             </div>
                             <div className="search">
-                                <div>
+                                <div className="search-box-task">
                                     <input type="text" value={search} onChange={(e) => filterSearch(e.target.value)} placeholder="search" />
+                                    <IoSearch/>
                                 </div>
                             </div>
                         </div>
@@ -215,7 +217,7 @@ const Tasks = ({ router }, props) => {
 
                         <div className="Grouped">
                             <div className="GroupBySort">
-                             
+                                <label>Group By: </label>
                                 <Dropdown className="color-drop-multy" onSelect={handleSelect}>
                                     <Dropdown.Toggle id="dropdown-basic">
                                     <FaSortAmountDown />   {sort || 'Group By'}
