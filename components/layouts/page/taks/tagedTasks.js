@@ -140,12 +140,12 @@ const tagedTasks = (props) => {
                 sx: {
                     bgcolor: stringToColor(name),
                 },
-                children: name.includes(' ') 
-                ? `${name.split(' ')[0][0]}${name.split(' ')[1][0]}` 
-                : name[0],
+                children: name.includes(' ')
+                    ? `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`
+                    : name[0],
             };
         } else {
-            return
+            return ""
         }
 
     }
@@ -182,114 +182,116 @@ const tagedTasks = (props) => {
                 </div>
                 <div className="body">
                     <table className="tasks-list">
-                       
+
                         {tasks.data?.length > 0 ?
-                        <>
-                         <thead>
-                            <tr>
-                                <th></th>
-                                <th>Task/Notification</th>
-                                <th>Project</th>
-                                <th>Priority</th>
+                            <>
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Task/Notification</th>
+                                        <th>Project</th>
+                                        <th>Priority</th>
 
-                                <th>Status</th>
-                                <th>Due Date</th>
+                                        <th>Status</th>
+                                        <th>Due Date</th>
 
-                                <th>Type</th>
-                                <th>Responisble</th>
-                                <th>Updates</th>
-                                <th>Action</th>
-                                <th>Last Update</th>
-                            </tr>
-                        </thead>
-                        {tasks.data?.map((task) => {
-                            return <tr>
-                                <td className="star">
-                                    <div onClick={() => SetIsstarred(!task.attributes.isStarred, task.id)}>
-                                        {task.attributes.isStarred ?
-                                            <IoMdStar className="active" />
-                                            :
-                                            <IoMdStar />
-                                            // <FaRegStar />
-                                        }
-                                    </div>
-                                </td>
-                                <td className="taskTitle">
-                                    <h4 onClick={() => { props.SetUpdateData(task), props.SetFormaction("update") }}>
-                                        {task.attributes.Task}
-                                    </h4>
-                                </td>
-                                <td className="projectName">
-                                    <div>
-                                        <label className="mobile-view">Project: </label>
-                                        {task.attributes.projects?.data?.[0]?.attributes?.name}
-                                    </div>
-                                </td>
-                            
-                                <td className={task.attributes?.status?.replace(" ", "") + " status"}>
-                                    <label className="mobile-view">Status</label>
-                                    <span>{task.attributes.status}</span>
-                                </td>
-                                <td className="Priority">
-                                    <span>{task.attributes.priority}</span>
-                                </td>
-                                <td className="dueDate">
-                                    <label className="mobile-view">Due Date</label>
-                                    <span>{task.attributes.dueDate}</span>
-                                </td>
-                                <td className={task.attributes.type + " type"}>
-                                    <span>{task.attributes.type}</span>
-                                </td>
-                                <td className="responsible">
-                                    <label className="mobile-view">Responisble</label>
-                                    <div>
-                                        <Tooltip title={task.attributes.responsible_leads?.data?.[0]?.["attributes"]?.Name}>
-                                            <span>
-                                                <Avatar {...stringAvatar(task.attributes.responsible_leads?.data?.[0]?.["attributes"]?.Name)} />
-                                                {/* {task.attributes.responsible_leads?.data?.[0]?.["attributes"].Name} */}
+                                        <th>Type</th>
+                                        <th>Responisble</th>
+                                        <th>Updates</th>
+                                        <th>Action</th>
+                                        <th>Last Update</th>
+                                    </tr>
+                                </thead>
+                                {tasks.data?.map((task) => {
+                                    return <tr>
+                                        <td className="star">
+                                            <div onClick={() => SetIsstarred(!task.attributes.isStarred, task.id)}>
+                                                {task.attributes.isStarred ?
+                                                    <IoMdStar className="active" />
+                                                    :
+                                                    <IoMdStar />
+                                                    // <FaRegStar />
+                                                }
+                                            </div>
+                                        </td>
+                                        <td className="taskTitle">
+                                            <h4 onClick={() => { props.SetUpdateData(task), props.SetFormaction("update") }}>
+                                                {task.attributes.Task}
+                                            </h4>
+                                        </td>
+                                        <td className="projectName">
+                                            <div>
+                                                <label className="mobile-view">Project: </label>
+                                                {task.attributes.projects?.data?.[0]?.attributes?.name}
+                                            </div>
+                                        </td>
+
+                                        <td className={task.attributes?.status?.replace(" ", "") + " status"}>
+                                            <label className="mobile-view">Status</label>
+                                            <span>{task.attributes.status}</span>
+                                        </td>
+                                        <td className="Priority">
+                                            <span>{task.attributes.priority}</span>
+                                        </td>
+                                        <td className="dueDate">
+                                            <label className="mobile-view">Due Date</label>
+                                            <span>{task.attributes.dueDate}</span>
+                                        </td>
+                                        <td className={task.attributes.type + " type"}>
+                                            <span>{task.attributes.type}</span>
+                                        </td>
+                                        <td className="responsible">
+                                            <label className="mobile-view">Responisble</label>
+                                            <div>
+                                                <Tooltip title={task.attributes.responsible_leads?.data?.[0]?.["attributes"]?.Name}>
+                                                    {task.attributes.responsible_leads?.data?.[0]?.["attributes"]?.Name &&
+                                                        <span>
+                                                            <Avatar {...stringAvatar(task.attributes.responsible_leads?.data?.[0]?.["attributes"]?.Name)} />
+                                                            {/* {task.attributes.responsible_leads?.data?.[0]?.["attributes"].Name} */}
+                                                        </span>
+                                                    }
+                                                </Tooltip>
+                                                <span className="wahtsapp">
+                                                    <a target="_blank" href={gettaskWhatsapp(task.attributes.responsible_leads?.data?.[0]?.["attributes"].whatsapp, task.attributes.projects?.data?.[0]?.attributes?.name, task.attributes.Task)}><FaWhatsapp /></a>
+                                                </span>
+                                            </div>
+                                        </td>
+                                        <td className="responses">
+                                            <span onClick={() => { props.SetUpdateData(task), props.SetFormaction("update") }}>
+                                                <span className="ondesk">  {task.attributes?.updates.length}</span>
+                                                <span className="mobile-view"> Updates <FaChevronDown /></span>
+                                                <sup className="mobile-view">
+                                                    {JSON.stringify(task.attributes?.updates.length)}
+                                                </sup>
                                             </span>
-                                        </Tooltip>
-                                        <span className="wahtsapp">
-                                            <a target="_blank" href={gettaskWhatsapp(task.attributes.responsible_leads?.data?.[0]?.["attributes"].whatsapp, task.attributes.projects?.data?.[0]?.attributes?.name, task.attributes.Task)}><FaWhatsapp /></a>
-                                        </span>
-                                    </div>
-                                </td>
-                                <td className="responses">
-                                    <span onClick={() => { props.SetUpdateData(task), props.SetFormaction("update") }}>
-                                        <span className="ondesk">  {task.attributes?.updates.length}</span>
-                                        <span className="mobile-view"> Updates <FaChevronDown /></span>
-                                        <sup className="mobile-view">
-                                            {JSON.stringify(task.attributes?.updates.length)}
-                                        </sup>
-                                    </span>
-                                </td>
-                                <td className="editAction">
-                                    <span onClick={() => { props.SetUpdateData(task), props.SetFormaction("edit") }}>
-                                       <FaRegEdit/> Edit
-                                    </span>
-                                </td>
-                                <td className="responsesItem">
-                                   {task.attributes?.updates?.[0]?.update}
-                                </td>
-                                {/*     <td>
+                                        </td>
+                                        <td className="editAction">
+                                            <span onClick={() => { props.SetUpdateData(task), props.SetFormaction("edit") }}>
+                                                <FaRegEdit /> Edit
+                                            </span>
+                                        </td>
+                                        <td className="responsesItem">
+                                            {task.attributes?.updates?.[0]?.update}
+                                        </td>
+                                        {/*     <td>
                                     {JSON.stringify("Responses")}
                                 </td>
                                 <td>
                                     {JSON.stringify("Read More")}
                                 </td> */}
-                                {/* <td>
+                                        {/* <td>
                                 <UpdateForm id={task.id} />
                                    
                                 </td> */}
-                            </tr>
-                        })}
-                        </>
-                        :
-                        <tr>
-                            <td>No Task Found for {props.tag.keyword}</td>
+                                    </tr>
+                                })}
+                            </>
+                            :
+                            <tr>
+                                <td>No Task Found for {props.tag.keyword}</td>
 
-                        </tr>
-}
+                            </tr>
+                        }
 
                     </table>
                 </div>
