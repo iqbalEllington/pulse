@@ -135,19 +135,24 @@ const tagedTasks = (props) => {
     }
 
     function stringAvatar(name) {
-        if (name) {
+        if (typeof name === 'string' && name.trim()) {
+            const trimmedName = name.trim();
             return {
                 sx: {
-                    bgcolor: stringToColor(name),
+                    bgcolor: stringToColor(trimmedName),
                 },
-                children: name.includes(' ')
-                    ? `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`
-                    : name[0],
+                children: trimmedName.includes(' ')
+                    ? `${trimmedName.split(' ')[0][0]}${trimmedName.split(' ')[1][0]}`
+                    : trimmedName[0],
             };
         } else {
-            return ""
+            return {
+                sx: {
+                    bgcolor: '#ccc', // Default background color
+                },
+                children: '?', // Default character
+            };
         }
-
     }
     async function SetIsstarred(value, id) {
         let formPayload = {
@@ -246,7 +251,9 @@ const tagedTasks = (props) => {
                                                 <Tooltip title={task.attributes.responsible_leads?.data?.[0]?.["attributes"]?.Name}>
                                                     {task.attributes.responsible_leads?.data?.[0]?.["attributes"]?.Name &&
                                                         <span>
-                                                            <Avatar {...stringAvatar(task.attributes.responsible_leads?.data?.[0]?.["attributes"]?.Name)} />
+                                                            <Avatar 
+                                                               {...stringAvatar(task.attributes.responsible_leads?.data?.[0]?.attributes?.Name || 'Not Assigned')} 
+                                                             />
                                                             {/* {task.attributes.responsible_leads?.data?.[0]?.["attributes"].Name} */}
                                                         </span>
                                                     }
