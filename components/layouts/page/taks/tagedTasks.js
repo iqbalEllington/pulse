@@ -248,19 +248,23 @@ const tagedTasks = (props) => {
                                         <td className="responsible">
                                             <label className="mobile-view">Responisble</label>
                                             <div>
+                                            {task.attributes.responsible_leads?.data?.[0]?.["attributes"]?.Name &&
+                                            <>
                                                 <Tooltip title={task.attributes.responsible_leads?.data?.[0]?.["attributes"]?.Name}>
-                                                    {task.attributes.responsible_leads?.data?.[0]?.["attributes"]?.Name &&
+                                                  
                                                         <span>
                                                             <Avatar 
                                                                {...stringAvatar(task.attributes.responsible_leads?.data?.[0]?.attributes?.Name || 'Not Assigned')} 
                                                              />
                                                             {/* {task.attributes.responsible_leads?.data?.[0]?.["attributes"].Name} */}
                                                         </span>
-                                                    }
+                                                    
                                                 </Tooltip>
                                                 <span className="wahtsapp">
                                                     <a target="_blank" href={gettaskWhatsapp(task.attributes.responsible_leads?.data?.[0]?.["attributes"].whatsapp, task.attributes.projects?.data?.[0]?.attributes?.name, task.attributes.Task)}><FaWhatsapp /></a>
                                                 </span>
+                                                </>
+                                }
                                             </div>
                                         </td>
                                         <td className="responses">
