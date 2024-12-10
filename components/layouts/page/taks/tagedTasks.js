@@ -49,7 +49,7 @@ const tagedTasks = (props) => {
                 break;
 
             case 'Other':
-                filter = `&filters[dueDate][$gt]=${endOfMonth.format('YYYY-MM-DD')}`; // After this month
+                filter = `&filters[$or][0][dueDate][$gt]=${endOfMonth.format('YYYY-MM-DD')}&filters[$or][1][dueDate][$null]=true`; // After this month
                 break;
 
             default:

@@ -91,19 +91,7 @@
     .downloadPdf {
         background: black;
     }
-    .add-task {
-        background: #9E856F;
-        padding: 10px 20px;
-        margin-left: 10px;
-        height: auto;
-        border: 0px;
-        color: white;
-        position: absolute;
-        right: 30px;
-        border-radius: 10px;
-        top: 110px;
-    }
-
+  
     
     .absoulte-close-right {
         position: absolute;
@@ -1373,4 +1361,18 @@
     .Task-List-body .task-list-container .mobile-view {
         display: none !important;
     }
+
+    .add-task {
+        background: #9E856F;
+        padding: 10px 20px;
+        margin-left: 10px;
+        height: auto;
+        border: 0px;
+        color: white;
+        position: absolute;
+        right: 30px;
+        border-radius: 10px;
+        top: 110px;
+    }
+
 }
