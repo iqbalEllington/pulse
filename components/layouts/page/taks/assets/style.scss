@@ -1,4 +1,9 @@
 .tasks-board {
+    .error{
+        color: #EB5E66;
+        padding-top: 12px;
+        display: block;
+    }
     .popup.active {
         position: fixed;
         width: 100%;
@@ -71,7 +76,7 @@
             cursor:pointer;
         }
     }
- 
+
     .header {
         padding-top: 30px;
         padding-left: 30px;
@@ -91,12 +96,13 @@
     .downloadPdf {
         background: black;
     }
-  
-    
+
+
     .absoulte-close-right {
         position: absolute;
         right: 1px;
         top: 0px;
+        color: white;
         padding: 15px;
         // background: #1E1E20;
     }
@@ -286,11 +292,13 @@
         width: 100%;
         display: block;
         padding-top: 40px;
-        .updated-head{
-            h4{
+
+        .updated-head {
+            h4 {
                 font-size: 1rem;
             }
         }
+
         span {
             display: block;
         }
@@ -763,7 +771,7 @@
 
                     &.completed {
                         a {
-                            background: #A2E4B4;
+                            background: rgb(0, 200, 117);
                         }
                     }
 
@@ -814,12 +822,12 @@
             .tasks-list {
                 width: 98%;
 
-                td {
-                    background: #1E1E20;
-                    padding: 10px 15px;
+                td,
+                th {
+                    background: rgb(44, 44, 44);
+                    padding: 4px 12px;
                     text-align: left;
-                    border-right: 2px solid black;
-                    border-bottom: 2px solid black;
+                    border: 1px solid #63626A;
 
                     &.Priority {
                         width: 20px;
@@ -847,6 +855,14 @@
                             }
                         }
                     }
+                }
+
+                th {
+                    padding: 10px 12px;
+                }
+
+                .editAction {
+                    width: 30px;
                 }
 
                 .star {
@@ -895,22 +911,43 @@
                 }
 
                 .type {
-                    width: 115px;
-                    min-width: 115px;
-                    max-width: 115px;
+                    width: 140px;
+                    min-width: 140px;
+                    max-width: 140px;
                     font-size: 1rem;
                     text-align: center;
+                    text-align: left;
 
                     &.Task {
-                        background: #6458EA;
+                        span {
+                            border: 1px solid #6458EA;
+                            padding: 8px 12px;
+                            border-radius: 10px;
+                            background: #6458EA30;
+                        }
+
+                        // background: #6458EA;
                     }
 
                     &.Alert {
-                        background: #D5A344;
+                        span {
+                            border: 1px solid #D5A344;
+                            padding: 8px 12px;
+                            border-radius: 10px;
+                            background: #D5A34430;
+                        }
+
+                        // background: #D5A344;
                     }
 
                     &.Notification {
-                        background: #2E66B9;
+                      span {
+                            border: 1px solid #2E66B9;
+                            padding: 8px 12px;
+                            border-radius: 10px;
+                            background: #2E66B930;
+                        }
+                        // background: #2E66B9;
                     }
                 }
 
@@ -923,32 +960,32 @@
                     width: 60px;
                     font-size: 1rem;
 
-                    span {
-                        background: #32323A;
-                        padding: 10px 15px;
-                        border-radius: 10px;
-                        width: 100%;
-                        display: block;
-                        text-align: center;
-                        font-size: .8rem;
-                    }
+                    // span {
+                    //     background: #32323A;
+                    //     padding: 10px 15px;
+                    //     border-radius: 10px;
+                    //     width: 100%;
+                    //     display: block;
+                    //     text-align: center;
+                    //     font-size: .8rem;
+                    // }
 
                     &.InProgress {
-                        span {
-                            color: #F0A15F;
-                        }
+                        // span {
+                            background: rgb(253, 188, 100);
+                        // }
                     }
 
                     &.Completed {
-                        span {
-                            color: #A2E4B4;
-                        }
+                        // span {
+                            background: rgb(0, 200, 117);
+                        // }
                     }
 
                     &.ToDo {
-                        span {
-                            color: #BBA6F7
-                        }
+                        // span {
+                            background: #BBA6F7
+                        // }
                     }
 
                 }
@@ -1064,6 +1101,7 @@
         padding-left: 10px !important;
         flex-direction: row-reverse;
         padding-right: 30px;
+
         button {
             color: white !important;
             font-size: 1.4rem;
@@ -1116,7 +1154,8 @@
                 div:last-child {
                     padding-bottom: 20px;
                 }
-                .noupdate{
+
+                .noupdate {
                     width: 80%;
                 }
             }
@@ -1198,7 +1237,9 @@
             table {
                 display: block;
                 padding: 10px;
-
+                thead{
+                    display: none;
+                }
                 tr {
                     position: relative;
                     background: #101010;
@@ -1253,9 +1294,9 @@
                             position: absolute;
 
                             span {
-                                background: #000000;
+                                background: #000000 !important;
                                 display: inline-block;
-                                padding: 3px 14px;
+                                padding: 3px 14px !important;
                                 border-radius: 39px;
                             }
 
@@ -1264,17 +1305,19 @@
 
                         &.Task {
                             span {
-                                border: 1px solid #6458EA;
+                                border: 1px solid #6458EA !important;
                             }
                         }
-                        &.Notification{
+
+                        &.Notification {
                             span {
-                                border: 1px solid #2E66B9;
+                                border: 1px solid #2E66B9 !important;
                             }
                         }
+
                         &.Alert {
                             span {
-                                border: 1px solid #EF9712;
+                                border: 1px solid #EF9712 !important;
                             }
                         }
 
@@ -1295,7 +1338,9 @@
                                 right: 15px;
                             }
                         }
-
+                        &.responsesItem{
+                            display: none;
+                        }
                         &.dueDate,
                         &.status,
                         &.responsible {

@@ -65,7 +65,7 @@ const updateForm = (props) => {
                 data: {
                     updates: [
                         ...updates,
-                        { update: formData.update, date: formData.date }
+                        { update: formData.update, date: formData.date ? formData.date : moment().format("YYYY-MM-DD") }
                     ]
                 }
             }
@@ -152,6 +152,7 @@ const updateForm = (props) => {
                             className="dateinput"
                             showYearDropdown
                             dateFormat="yyyy-MM-dd"
+                            maxDate={new Date()}
                             selected={formData.date != null ? formData.date : null}
                             onChange={(date) => handleDateChange("date", date)}
                             placeholderText="Select Date"

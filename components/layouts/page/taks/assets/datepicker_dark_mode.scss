@@ -67,7 +67,7 @@
   /* Remove the default triangle */
 }
 .react-datepicker__navigation{
-  top: 46px !important;
+  top: 50px !important;
   &.react-datepicker__navigation--previous{
     left: 10px;
   }
@@ -103,4 +103,8 @@
   display: block;
   color: white;
 }
+}
+
+.react-datepicker__day--disabled{
+  opacity: .4 !important;
 }

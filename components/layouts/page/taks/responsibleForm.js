@@ -74,10 +74,10 @@ const ResponsibleForm = (props) => {
             });
 
             if (response?.status === 200 || response?.status === 201) {
-                toast.success("Project created successfully!");
+                toast.success("Employee created successfully!");
                 props.Closepopup(); // Close form popup
             } else {
-                toast.error(`Failed to create project: ${response?.data?.message || "Unknown error"}`);
+                toast.error(`Failed to create Employee: ${response?.data?.message || "Unknown error"}`);
             }
         } catch (error) {
             console.error("Error submitting form:", error);

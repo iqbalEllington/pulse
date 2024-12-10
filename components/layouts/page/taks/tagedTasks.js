@@ -4,7 +4,7 @@ import { getRequest, putRequest_cms } from "helper/api";
 import { API_URLS } from "helper/apiConstant";
 import moment from "moment";
 import React, { Component, useState, useEffect } from "react";
-import { FaRegStar, FaStar, FaWhatsapp } from "react-icons/fa";
+import { FaRegEdit, FaRegStar, FaStar, FaWhatsapp } from "react-icons/fa";
 import { IoMdStar } from "react-icons/io";
 
 import { FaChevronDown } from "react-icons/fa";
@@ -182,8 +182,26 @@ const tagedTasks = (props) => {
                 </div>
                 <div className="body">
                     <table className="tasks-list">
+                       
                         {tasks.data?.length > 0 ?
                         <>
+                         <thead>
+                            <tr>
+                                <th></th>
+                                <th>Task/Notification</th>
+                                <th>Project</th>
+                                <th>Priority</th>
+
+                                <th>Status</th>
+                                <th>Due Date</th>
+
+                                <th>Type</th>
+                                <th>Responisble</th>
+                                <th>Updates</th>
+                                <th>Action</th>
+                                <th>Last Update</th>
+                            </tr>
+                        </thead>
                         {tasks.data?.map((task) => {
                             return <tr>
                                 <td className="star">
@@ -207,8 +225,10 @@ const tagedTasks = (props) => {
                                         {task.attributes.projects?.data?.[0]?.attributes?.name}
                                     </div>
                                 </td>
-                                <td className={task.attributes.type + " type"}>
-                                    <span>{task.attributes.type}</span>
+                            
+                                <td className={task.attributes?.status?.replace(" ", "") + " status"}>
+                                    <label className="mobile-view">Status</label>
+                                    <span>{task.attributes.status}</span>
                                 </td>
                                 <td className="Priority">
                                     <span>{task.attributes.priority}</span>
@@ -217,9 +237,8 @@ const tagedTasks = (props) => {
                                     <label className="mobile-view">Due Date</label>
                                     <span>{task.attributes.dueDate}</span>
                                 </td>
-                                <td className={task.attributes?.status?.replace(" ", "") + " status"}>
-                                    <label className="mobile-view">Status</label>
-                                    <span>{task.attributes.status}</span>
+                                <td className={task.attributes.type + " type"}>
+                                    <span>{task.attributes.type}</span>
                                 </td>
                                 <td className="responsible">
                                     <label className="mobile-view">Responisble</label>
@@ -237,17 +256,20 @@ const tagedTasks = (props) => {
                                 </td>
                                 <td className="responses">
                                     <span onClick={() => { props.SetUpdateData(task), props.SetFormaction("update") }}>
-                                        <span className="ondesk">  Responses</span>
+                                        <span className="ondesk">  {task.attributes?.updates.length}</span>
                                         <span className="mobile-view"> Updates <FaChevronDown /></span>
-                                        <sup>
+                                        <sup className="mobile-view">
                                             {JSON.stringify(task.attributes?.updates.length)}
                                         </sup>
                                     </span>
                                 </td>
                                 <td className="editAction">
                                     <span onClick={() => { props.SetUpdateData(task), props.SetFormaction("edit") }}>
-                                        Edit
+                                       <FaRegEdit/> Edit
                                     </span>
+                                </td>
+                                <td className="responsesItem">
+                                   {task.attributes?.updates?.[0]?.update}
                                 </td>
                                 {/*     <td>
                                     {JSON.stringify("Responses")}

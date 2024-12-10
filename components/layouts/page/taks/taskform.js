@@ -67,16 +67,6 @@ const Taskform = (props) => {
     useEffect(() => {
         if (props.updateDatas !== false) {
             var existngdata = props.updateDatas;
-            // console.log("props.updateDatas",moment(existngdata?.attributes["dueDate"]), "lets start")
-            // id: existngdata?.id,
-            // isStarred: existngdata?.attributes.isStarred,
-            // Task: "",
-            // type: null,
-            // status: null,
-            // priority: null,
-            // projects: null,
-            // responsible_leads: null,
-            // dueDate: null,
             var dateString = existngdata?.attributes["dueDate"];
             const defaultDate = dateString != null ? new Date(dateString) : null;
 
@@ -152,7 +142,7 @@ const Taskform = (props) => {
             [name]: value,
         }));
     };
-
+    const [showError, SetShowError]=useState(false)
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -164,6 +154,11 @@ const Taskform = (props) => {
             // formPayload.append("expectedCompletionDate", formData.expectedCompletionDate);
             // formPayload.append("area", formData.area);
             let formDataProcess = formData
+            if(formData["responsible_leads"]==null || formData["responsible_leads"]==""){
+                toast.error(`Please Select Responisble Person`);
+                SetShowError(true)
+                return
+            }
             let formPayload = {
                 data: formDataProcess
             }
@@ -308,6 +303,7 @@ const Taskform = (props) => {
                                             <td>
                                                 <label>Responsible</label>
                                                 <ResponisbleSearch keyword={Responsible} popupSwitch={popupSwitch} activateEmployee={activateEmployee} />
+                                                {showError && <span className="error">Please Select Responsible Person</span>}
                                             </td>
                                             <td>
 
