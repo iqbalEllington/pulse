@@ -120,9 +120,8 @@ const Tasks = ({ router }, props) => {
                             <p>Here are the top-priority Tasks & Alerts requiring your attention.</p>
                         </div>
                         <div className="actionbar">
-                            <button className="downloadPdf" onClick={() => generatePDF(getTargetElement, options)}> Download PDF <FaArrowDown /></button>
-                            <button className="add-task" onClick={() => { setFormActive(!formActive), SetUpdateDatas(false) }}> <span className="ondesk"> Add a task </span> <span className="mobile-view">+</span></button>
-
+                            {/* <button className="downloadPdf" onClick={() => generatePDF(getTargetElement, options)}> Download PDF <FaArrowDown /></button> */}
+                         
                             <Dropdown className="profile-user">
                                 <Dropdown.Toggle id="dropdown-basic">
                                     <div className="profile-image-holder">
@@ -137,6 +136,8 @@ const Tasks = ({ router }, props) => {
                                 </Dropdown.Menu>
                             </Dropdown>
                         </div>
+                        <button className="add-task" onClick={() => { setFormActive(!formActive), SetUpdateDatas(false) }}><span className="mobile-view">+</span> <span className="ondesk"> Add a task </span> </button>
+
                     </div>
                     <div className="form">
                         <Taskform

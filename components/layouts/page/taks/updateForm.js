@@ -25,6 +25,7 @@ const updateForm = (props) => {
 
     const [formData, setFormData] = useState(initialFormData)
     const [updates, setUpdates] = useState([])
+    const [task, setTask] = useState({})
     const [updatesSorted, setUpdatesSorted] = useState([])
     useEffect(() => {
         setFormData((prevState) => ({
@@ -37,15 +38,15 @@ const updateForm = (props) => {
 
     const getUpdates = async () => {
         let response = await getRequest({ API: API_URLS.GET_TASKS + "/" + props.id + "?populate[]=updates" });
-        console.log(response.data)
+
         if (await response?.status === 200) {
             var data = response.data?.data?.attributes?.updates;
             const sortedData = data.sort((a, b) => new Date(b.date) - new Date(a.date));
-
             setUpdates(response.data?.data?.attributes?.updates)
-            if(response.data?.data?.attributes?.updates){
+            setTask(response.data?.data?.attributes)
+            if (response.data?.data?.attributes?.updates) {
                 setUpdatesSorted(sortedData)
-            }else{
+            } else {
                 setUpdatesSorted([])
             }
         } else if (response?.status === 401) {
@@ -165,6 +166,11 @@ const updateForm = (props) => {
 
                 <div>
                     <div className="updates-list">
+                        <div className="updated-head">
+                            <h4> Latest Updates for the {task?.type} <b>{task?.Task}</b>
+                            </h4>
+
+                        </div>
                         {updatesSorted.map((key, value) => {
                             return <div>
                                 <span className="line-break">
@@ -187,7 +193,7 @@ const updateForm = (props) => {
                         })}
                         {!updatesSorted.length &&
                             <div className="noupdate">
-                                  There are no updates available for this task at the moment
+                                There are no updates available for this task at the moment
                             </div>
                         }
                     </div>

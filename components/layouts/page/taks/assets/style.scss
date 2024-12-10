@@ -71,7 +71,7 @@
             cursor:pointer;
         }
     }
-
+ 
     .header {
         padding-top: 30px;
         padding-left: 30px;
@@ -91,12 +91,20 @@
     .downloadPdf {
         background: black;
     }
-
     .add-task {
-        background: black;
+        background: #9E856F;
+        padding: 10px 20px;
         margin-left: 10px;
+        height: auto;
+        border: 0px;
+        color: white;
+        position: absolute;
+        right: 30px;
+        border-radius: 10px;
+        top: 110px;
     }
 
+    
     .absoulte-close-right {
         position: absolute;
         right: 1px;
@@ -290,7 +298,11 @@
         width: 100%;
         display: block;
         padding-top: 40px;
-
+        .updated-head{
+            h4{
+                font-size: 1rem;
+            }
+        }
         span {
             display: block;
         }
@@ -1116,6 +1128,9 @@
                 div:last-child {
                     padding-bottom: 20px;
                 }
+                .noupdate{
+                    width: 80%;
+                }
             }
 
             .updates-list .update-data {
@@ -1259,12 +1274,16 @@
 
                         }
 
-                        &.task {
+                        &.Task {
                             span {
-                                border: 1px solid #EF9712;
+                                border: 1px solid #6458EA;
                             }
                         }
-
+                        &.Notification{
+                            span {
+                                border: 1px solid #2E66B9;
+                            }
+                        }
                         &.Alert {
                             span {
                                 border: 1px solid #EF9712;
