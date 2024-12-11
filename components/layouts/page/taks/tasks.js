@@ -48,7 +48,7 @@ const Tasks = ({ router }, props) => {
     }
     const [ontop, SetOntop] = useState("Top Updates")
     const [forceLoad, setForceload] = useState(false)
-    const getTargetElement = () => document.getElementById('salesprops-body');
+    const getTargetElement = () => document.getElementById('grouped');
     const [userDetail, setUserDetails] = useState(false)
     async function getuserdata() {
         var response;
@@ -129,7 +129,8 @@ const Tasks = ({ router }, props) => {
                         </div>
                         <div className="actionbar">
                             {/* <button className="downloadPdf" onClick={() => generatePDF(getTargetElement, options)}> Download PDF <FaArrowDown /></button> */}
-                         
+                            <button className="downloadPdf" onClick={() => generatePDF(getTargetElement, options)}> Download PDF <FaArrowDown /></button>
+              
                             <Dropdown className="profile-user">
                                 <Dropdown.Toggle id="dropdown-basic">
                                     <div className="profile-image-holder">
@@ -222,7 +223,7 @@ const Tasks = ({ router }, props) => {
                             updateDatas={updateDatas}
                             action={formaction} */}
 
-                        <div className="Grouped">
+                        <div className="Grouped" >
                             <div className="GroupBySort">
                                 <label>Group By: </label>
                                 <Dropdown className="color-drop-multy" onSelect={handleSelect}>
@@ -238,10 +239,10 @@ const Tasks = ({ router }, props) => {
                                 </Dropdown>
                             </div>
 
-                            <div id="grouped" ref={groupedRef} >
+                            <div id="grouped" ref={groupedRef} style={{backgroundColor: 'black'}}>
                                 {sort == "Date" &&
                                     <>
-                                     <div>
+                                     <div className="pages">
                                                 <TagedTasks tag={{
                                                     keyword: "Overdue",
                                                     search: search,
@@ -255,7 +256,7 @@ const Tasks = ({ router }, props) => {
                                                 />
                                             </div>
                                         {sortDate.map((value) => {
-                                            return <div>
+                                            return <div className="pages">
                                                 <TagedTasks tag={{
                                                     keyword: value,
                                                     search: search,

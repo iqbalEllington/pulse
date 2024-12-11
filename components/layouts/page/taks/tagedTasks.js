@@ -59,7 +59,9 @@ const tagedTasks = (props) => {
 
         return filter;
     };
+    const [loading, SetLoading] = useState(false)
     async function getTagedTask(tag) {
+        SetLoading(true)
         let filter = "";
         if (tag?.type == "Date") {
             filter = buildFilters(tag?.filterValue)
@@ -108,6 +110,7 @@ const tagedTasks = (props) => {
 
         if (await response?.status === 200) {
             setTasks(response.data)
+            SetLoading(false)
         } else if (response?.status === 401) {
             toast("Unauthorize access please re-login.");
         } else {
@@ -181,21 +184,24 @@ const tagedTasks = (props) => {
         const publishedDate = new Date(publishedAt);
         const dueDateObj = new Date(dueDate);
         const today = new Date();
-      
+
         // Ensure today is within the range of publishedAt and dueDate
         if (today < publishedDate) return 0;
         if (today > dueDateObj) return 100;
-      
+
         const totalDays = (dueDateObj - publishedDate) / (1000 * 60 * 60 * 24); // Total days in range
         const completedDays = (today - publishedDate) / (1000 * 60 * 60 * 24); // Days completed until today
-      
+
         const percentage = (completedDays / totalDays) * 100;
-      
+
         return percentage.toFixed(2); // Return percentage with 2 decimal places
-      }
+    }
     return (
         <>
             <div className="task-list-container">
+                {loading == true && <div className="loading" id="loader">
+                    <div className="spinner"> </div>
+                </div>}
                 <div className="header">
                     <h3 className="ontoptitle">
                         {props.tag.keyword}
@@ -257,9 +263,9 @@ const tagedTasks = (props) => {
                                         <td className="dueDate">
                                             <label className="mobile-view">Due Date</label>
                                             <span>{task.attributes.dueDate}</span>
-                                        <span className="theprogressline">
-                                           <LineProgress length={100} thick={1} color={calculateDaysPercentage(task.attributes.publishedAt,task.attributes.dueDate) > 75? "#FF9191":"#FFF1DF"} percentage={calculateDaysPercentage(task.attributes.publishedAt,task.attributes.dueDate)} start="begining" />
-                                           </span>
+                                            <span className="theprogressline">
+                                                <LineProgress length={100} thick={1} color={calculateDaysPercentage(task.attributes.publishedAt, task.attributes.dueDate) > 75 ? "#FF9191" : "#FFF1DF"} percentage={calculateDaysPercentage(task.attributes.publishedAt, task.attributes.dueDate)} start="begining" />
+                                            </span>
                                         </td>
                                         <td className={task.attributes.type + " type"}>
                                             <span>{task.attributes.type}</span>
@@ -267,23 +273,23 @@ const tagedTasks = (props) => {
                                         <td className="responsible">
                                             <label className="mobile-view">Responisble</label>
                                             <div>
-                                            {task.attributes.responsible_leads?.data?.[0]?.["attributes"]?.Name &&
-                                            <>
-                                                <Tooltip title={task.attributes.responsible_leads?.data?.[0]?.["attributes"]?.Name}>
-                                                  
-                                                        <span>
-                                                            <Avatar 
-                                                               {...stringAvatar(task.attributes.responsible_leads?.data?.[0]?.attributes?.Name || 'Not Assigned')} 
-                                                             />
-                                                            {/* {task.attributes.responsible_leads?.data?.[0]?.["attributes"].Name} */}
+                                                {task.attributes.responsible_leads?.data?.[0]?.["attributes"]?.Name &&
+                                                    <>
+                                                        <Tooltip title={task.attributes.responsible_leads?.data?.[0]?.["attributes"]?.Name}>
+
+                                                            <span>
+                                                                <Avatar
+                                                                    {...stringAvatar(task.attributes.responsible_leads?.data?.[0]?.attributes?.Name || 'Not Assigned')}
+                                                                />
+                                                                {/* {task.attributes.responsible_leads?.data?.[0]?.["attributes"].Name} */}
+                                                            </span>
+
+                                                        </Tooltip>
+                                                        <span className="wahtsapp">
+                                                            <a target="_blank" href={gettaskWhatsapp(task.attributes.responsible_leads?.data?.[0]?.["attributes"].whatsapp, task.attributes.projects?.data?.[0]?.attributes?.name, task.attributes.Task)}><FaWhatsapp /></a>
                                                         </span>
-                                                    
-                                                </Tooltip>
-                                                <span className="wahtsapp">
-                                                    <a target="_blank" href={gettaskWhatsapp(task.attributes.responsible_leads?.data?.[0]?.["attributes"].whatsapp, task.attributes.projects?.data?.[0]?.attributes?.name, task.attributes.Task)}><FaWhatsapp /></a>
-                                                </span>
-                                                </>
-                                }
+                                                    </>
+                                                }
                                             </div>
                                         </td>
                                         <td className="responses">
