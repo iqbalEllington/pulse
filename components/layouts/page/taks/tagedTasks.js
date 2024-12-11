@@ -199,15 +199,16 @@ const tagedTasks = (props) => {
     return (
         <>
             <div className="task-list-container">
-                {loading == true && <div className="loading" id="loader">
-                    <div className="spinner"> </div>
-                </div>}
+               
                 <div className="header">
                     <h3 className="ontoptitle">
                         {props.tag.keyword}
                     </h3>
                 </div>
                 <div className="body">
+                {loading == true && <div className="loading" id="loader">
+                    <div className="spinner"> </div>
+                </div>}
                     <table className="tasks-list">
 
                         {tasks.data?.length > 0 ?

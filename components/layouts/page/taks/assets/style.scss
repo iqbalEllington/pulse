@@ -833,13 +833,14 @@
             h3 {
                 font-size: 1rem;
                 font-family: AcuminBold;
-
+                text-transform: uppercase;
             }
         }
 
 
         .body {
 
+            position: relative;
 
             .tasks-list {
                 width: 100%;
@@ -1284,6 +1285,7 @@
         }
 
         .body {
+            position: relative;
             table {
                 display: block;
                 padding: 10px;
@@ -1506,12 +1508,12 @@
     left: 50%;
     top: 50%;
     z-index: 1;
-    width: 100px;
-    height: 100px;
+    width: 30px;
+    height: 30px;
     margin: -76px 0 0 -76px;
-    border: 8px solid #f3f3f3;
+    border: 3px solid #f3f3f3;
     border-radius: 50%;
-    border-top: 8px solid #9E856F;
+    border-top: 3px solid #9E856F;
     -webkit-animation: spin 2s linear infinite;
     animation: spin 2s linear infinite;
 }

@@ -239,7 +239,7 @@ const Tasks = ({ router }, props) => {
                                 </Dropdown>
                             </div>
 
-                            <div id="grouped" ref={groupedRef} style={{backgroundColor: 'black'}}>
+                            <div id="grouped" ref={groupedRef} style={{backgroundColor: '#111'}}>
                                 {sort == "Date" &&
                                     <>
                                      <div className="pages">
