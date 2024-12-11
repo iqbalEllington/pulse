@@ -241,6 +241,19 @@ const Tasks = ({ router }, props) => {
                             <div id="grouped" ref={groupedRef} >
                                 {sort == "Date" &&
                                     <>
+                                     <div>
+                                                <TagedTasks tag={{
+                                                    keyword: "Overdue",
+                                                    search: search,
+                                                    type: sort,
+                                                    forceLoad: { forceLoad },
+                                                    filterValue: "Overdue"
+                                                }}
+                                                SetFormaction={SetFormaction}
+                                                    setForceload={setForceload}
+                                                    SetUpdateData={SetUpdateData}
+                                                />
+                                            </div>
                                         {sortDate.map((value) => {
                                             return <div>
                                                 <TagedTasks tag={{
