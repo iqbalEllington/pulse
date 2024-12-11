@@ -894,7 +894,15 @@
                     width: 30px;
 
                 }
-
+                .responsesItem{
+                    white-space: break-spaces;
+                    padding-right: 2px;
+                    div{
+                        max-height: 140px;
+                        overflow: auto;
+                    }
+                   
+                }
                 .star {
                     color: #9E856F;
                     width: 30px;

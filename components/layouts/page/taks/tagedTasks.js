@@ -308,7 +308,7 @@ const tagedTasks = (props) => {
                                             </span>
                                         </td>
                                         <td className="responsesItem">
-                                            {task.attributes?.updates?.[0]?.update}
+                                           <div>{task.attributes?.updates?.[0]?.update}</div> 
                                         </td>
                                         {/*     <td>
                                     {JSON.stringify("Responses")}
