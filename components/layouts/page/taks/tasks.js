@@ -2,7 +2,7 @@
 import { getRequest } from "helper/api";
 import { API_URLS } from "helper/apiConstant";
 import moment from "moment";
-import React, { Component, useState, useEffect } from "react";
+import React, { Component, useState, useEffect, useRef } from "react";
 import Dropdown from 'react-bootstrap/Dropdown';
 import { FaArrowDown } from "react-icons/fa";
 import generatePDF, { Resolution, Margin } from 'react-to-pdf';
@@ -21,6 +21,8 @@ const Tasks = ({ router }, props) => {
     useEffect(() => {
         getuserdata()
     }, [])
+    const groupedRef = useRef(null);
+
     const handleSelect = (eventKey) => {
         if (eventKey == "Project") {
             getProjects();
@@ -28,6 +30,11 @@ const Tasks = ({ router }, props) => {
         } else {
             setSort(eventKey);
         }
+        groupedRef.current.scrollIntoView({
+            behavior: "smooth",
+            block: "start", // Ensures the section starts at the top of the page
+          });
+
         // Update the state with the selected value
 
     };
@@ -231,7 +238,7 @@ const Tasks = ({ router }, props) => {
                                 </Dropdown>
                             </div>
 
-                            <div>
+                            <div id="grouped" ref={groupedRef} >
                                 {sort == "Date" &&
                                     <>
                                         {sortDate.map((value) => {

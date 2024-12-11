@@ -9,6 +9,7 @@ import { IoMdStar } from "react-icons/io";
 
 import { FaChevronDown } from "react-icons/fa";
 import UpdateForm from "./updateForm";
+import LineProgress from "components/modals/LineProgress";
 
 
 const tagedTasks = (props) => {
@@ -176,7 +177,22 @@ const tagedTasks = (props) => {
     useEffect(() => {
         getTagedTask(props.tag)
     }, [props.tag])
-
+    function calculateDaysPercentage(publishedAt, dueDate) {
+        const publishedDate = new Date(publishedAt);
+        const dueDateObj = new Date(dueDate);
+        const today = new Date();
+      
+        // Ensure today is within the range of publishedAt and dueDate
+        if (today < publishedDate) return 0;
+        if (today > dueDateObj) return 100;
+      
+        const totalDays = (dueDateObj - publishedDate) / (1000 * 60 * 60 * 24); // Total days in range
+        const completedDays = (today - publishedDate) / (1000 * 60 * 60 * 24); // Days completed until today
+      
+        const percentage = (completedDays / totalDays) * 100;
+      
+        return percentage.toFixed(2); // Return percentage with 2 decimal places
+      }
     return (
         <>
             <div className="task-list-container">
@@ -241,6 +257,9 @@ const tagedTasks = (props) => {
                                         <td className="dueDate">
                                             <label className="mobile-view">Due Date</label>
                                             <span>{task.attributes.dueDate}</span>
+                                        <span className="theprogressline">
+                                           <LineProgress length={100} thick={1} color={calculateDaysPercentage(task.attributes.publishedAt,task.attributes.dueDate) > 75? "#FF9191":"#FFF1DF"} percentage={calculateDaysPercentage(task.attributes.publishedAt,task.attributes.dueDate)} start="begining" />
+                                           </span>
                                         </td>
                                         <td className={task.attributes.type + " type"}>
                                             <span>{task.attributes.type}</span>
@@ -299,7 +318,7 @@ const tagedTasks = (props) => {
                             </>
                             :
                             <tr>
-                                <td>No Task Found for {props.tag.keyword}</td>
+                                <td className="notfound-tasks"> No Task Found for {props.tag.keyword}</td>
 
                             </tr>
                         }
