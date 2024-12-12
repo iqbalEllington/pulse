@@ -14,6 +14,7 @@ import Link from "next/link";
 import TagedTasks from "./tagedTasks";
 import { FaSortAmountDown } from "react-icons/fa";
 import { IoSearch } from "react-icons/io5";
+import EscapeKeyListener from "components/utility/EscapeKeyListener";
 
 
 
@@ -33,12 +34,12 @@ const Tasks = ({ router }, props) => {
         groupedRef.current.scrollIntoView({
             behavior: "smooth",
             block: "start", // Ensures the section starts at the top of the page
-          });
+        });
 
         // Update the state with the selected value
 
     };
-    const [formaction,SetFormaction]=useState("edit")
+    const [formaction, SetFormaction] = useState("edit")
     const [sort, setSort] = useState("Date")
     const [formActive, setFormActive] = useState(false)
     const [updateDatas, SetUpdateDatas] = useState(false)
@@ -116,21 +117,25 @@ const Tasks = ({ router }, props) => {
         SetSearch(value)
     };
     const [sortDate, SetsortDate] = useState(["Today", "Tomorrow", "This Week", "This Month", "Other"]);
+    const handleEscape = () => {
+        setFormActive(false)
+    };
     return (
         <>
+            <EscapeKeyListener onEscape={handleEscape} />
             <div className="wishbanner tasks-board pb w-100">
                 <div className="container-fluid">
                     <div className="header">
                         <div className="welcome-message">
                             <h1>
-                                Hello{userDetail.FullName != null ? " "+userDetail.FullName : ""},
+                                Hello{userDetail.FullName != null ? " " + userDetail.FullName : ""},
                             </h1>
                             <p>Here are the top-priority Tasks & Alerts requiring your attention.</p>
                         </div>
                         <div className="actionbar">
                             {/* <button className="downloadPdf" onClick={() => generatePDF(getTargetElement, options)}> Download PDF <FaArrowDown /></button> */}
                             <button className="downloadPdf" onClick={() => generatePDF(getTargetElement, options)}> Download PDF <FaArrowDown /></button>
-              
+
                             <Dropdown className="profile-user">
                                 <Dropdown.Toggle id="dropdown-basic">
                                     <div className="profile-image-holder">
@@ -197,7 +202,7 @@ const Tasks = ({ router }, props) => {
                             <div className="search">
                                 <div className="search-box-task">
                                     <input type="text" value={search} onChange={(e) => filterSearch(e.target.value)} placeholder="search" />
-                                    <IoSearch/>
+                                    <IoSearch />
                                 </div>
                             </div>
                         </div>
@@ -228,7 +233,7 @@ const Tasks = ({ router }, props) => {
                                 <label>Group By: </label>
                                 <Dropdown className="color-drop-multy" onSelect={handleSelect}>
                                     <Dropdown.Toggle id="dropdown-basic">
-                                    <FaSortAmountDown />   {sort || 'Group By'}
+                                        <FaSortAmountDown />   {sort || 'Group By'}
                                     </Dropdown.Toggle>
 
                                     <Dropdown.Menu>
@@ -239,22 +244,22 @@ const Tasks = ({ router }, props) => {
                                 </Dropdown>
                             </div>
 
-                            <div id="grouped" ref={groupedRef} style={{backgroundColor: '#111'}}>
+                            <div id="grouped" ref={groupedRef} style={{ backgroundColor: '#111' }}>
                                 {sort == "Date" &&
                                     <>
-                                     <div className="pages">
-                                                <TagedTasks tag={{
-                                                    keyword: "Overdue",
-                                                    search: search,
-                                                    type: sort,
-                                                    forceLoad: { forceLoad },
-                                                    filterValue: "Overdue"
-                                                }}
+                                        <div className="pages">
+                                            <TagedTasks tag={{
+                                                keyword: "Overdue",
+                                                search: search,
+                                                type: sort,
+                                                forceLoad: { forceLoad },
+                                                filterValue: "Overdue"
+                                            }}
                                                 SetFormaction={SetFormaction}
-                                                    setForceload={setForceload}
-                                                    SetUpdateData={SetUpdateData}
-                                                />
-                                            </div>
+                                                setForceload={setForceload}
+                                                SetUpdateData={SetUpdateData}
+                                            />
+                                        </div>
                                         {sortDate.map((value) => {
                                             return <div className="pages">
                                                 <TagedTasks tag={{
@@ -264,7 +269,7 @@ const Tasks = ({ router }, props) => {
                                                     forceLoad: { forceLoad },
                                                     filterValue: value
                                                 }}
-                                                SetFormaction={SetFormaction}
+                                                    SetFormaction={SetFormaction}
                                                     setForceload={setForceload}
                                                     SetUpdateData={SetUpdateData}
                                                 />
@@ -285,7 +290,7 @@ const Tasks = ({ router }, props) => {
                                                             forceLoad: { forceLoad },
                                                             filterValue: projects?.data[value]?.["attributes"]?.["name"],
                                                         }}
-                                                        SetFormaction={SetFormaction}
+                                                            SetFormaction={SetFormaction}
                                                             setForceload={setForceload}
                                                             SetUpdateData={SetUpdateData}
                                                         />
@@ -314,7 +319,7 @@ const Tasks = ({ router }, props) => {
                         </div>
                     </div>
                 </div>
-             
+
             </div>
         </>
     );
