@@ -142,7 +142,7 @@ const Taskform = (props) => {
             [name]: value,
         }));
     };
-    const [showError, SetShowError]=useState(false)
+    const [showError, SetShowError] = useState(false)
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -155,7 +155,7 @@ const Taskform = (props) => {
             // formPayload.append("area", formData.area);
             SetShowError(false)
             let formDataProcess = formData
-            if(formData["responsible_leads"]==null || formData["responsible_leads"]==""){
+            if (formData["responsible_leads"] == null || formData["responsible_leads"] == "") {
                 toast.error(`Please Select Responisble Person`);
                 SetShowError(true)
                 return
@@ -180,7 +180,7 @@ const Taskform = (props) => {
             } else {
                 response = await postRequest_cms({
                     API: "/api/tasks",
-                    DATA: formPayload,
+                    // DATA: .,
                     HEADER: {
                         "Content-Type": "multipart/form-data", // Required for file uploads
                     },
@@ -197,6 +197,47 @@ const Taskform = (props) => {
                 // props.Closepopup(); // Close form popup
             } else {
                 toast.error(`Failed to create project: ${response?.data?.message || "Unknown error"}`);
+            }
+        } catch (error) {
+            console.error("Error submitting form:", error);
+            toast.error("An error occurred while submitting the form.");
+        }
+    };
+
+    const handleDelete = async (e) => {
+        e.preventDefault();
+
+        try {
+            // Create FormData for multipart data
+            // const formPayload = new FormData();
+            // formPayload.append("name", formData.name);
+            // formPayload.append("startDate", formData.startDate); // Ensure date is formatted correctly
+            // formPayload.append("expectedCompletionDate", formData.expectedCompletionDate);
+            // formPayload.append("area", formData.area);
+            SetShowError(false)
+            var data={
+                data:{
+                    "publishedAt" : null
+                }
+            }
+            var response = await putRequest_cms({
+                API: "/api/tasks",
+                ID: formData.id,
+                DATA: data,
+                HEADER: {
+                    "Content-Type": "multipart/form-data", // Required for file uploads
+                },
+            });
+
+
+            if (response?.status === 200 || response?.status === 201) {
+               
+                props.setForceload(`id-${Date.now()}`)
+                toast.success((formData?.type? formData?.type : "Task/Alert") +" deleted successfully!");
+                props.SetFormActive(false)
+                // props.Closepopup(); // Close form popup
+            } else {
+                toast.error(`Failed to deleted the Task/Alert: ${response?.data?.message || "Unknown error"}`);
             }
         } catch (error) {
             console.error("Error submitting form:", error);
@@ -309,6 +350,12 @@ const Taskform = (props) => {
                                             <td>
 
                                                 <input className="submit bg-white fg-black" type="submit" value={formData.id != null ? "Update" : "Create"} />
+                                                 
+                                            </td>
+                                            <td>
+
+                                                 <input onClick={(e)=>handleDelete(e)} className="submit bg-black fg-white" type="button" value={"Delete"} />
+                                                
                                             </td>
                                         </tr>
 
@@ -337,10 +384,9 @@ const Taskform = (props) => {
                     </div>
                 }
                 {tab == "Updates" &&
-                    <div className="updates"> 
+                    <div className="updates">
                         <div style={{ width: "100%", display: "block" }}>
                             <UpdateForm id={formData.id} />
-
                         </div>
                     </div>
                 }
