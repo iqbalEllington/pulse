@@ -12,6 +12,7 @@ const ProjectForm = (props) => {
         startDate: null,
         expectedCompletionDate: null,
         area: "",
+        plotNum:"",
         photos: null, // Single file or array depending on the implementation
     });
 
@@ -131,6 +132,15 @@ const ProjectForm = (props) => {
                                         placeholder="Area"
                                         name="area"
                                         value={formData.area}
+                                        onChange={handleInputChange}
+                                    />
+                                </td>
+                                <td>
+                                    <input
+                                        type="text"
+                                        placeholder="Plot Number"
+                                        name="plotNum"
+                                        value={formData.plotNum}
                                         onChange={handleInputChange}
                                     />
                                 </td>

@@ -163,6 +163,7 @@ const Taskform = (props) => {
             let formPayload = {
                 data: formDataProcess
             }
+            console.log(formPayload)
             // if (formData.photos) {
             //     formPayload.append("files.photos", formData.photos); // Strapi expects "files.[fieldname]"
             // }
@@ -180,7 +181,7 @@ const Taskform = (props) => {
             } else {
                 response = await postRequest_cms({
                     API: "/api/tasks",
-                    // DATA: .,
+                    DATA: formPayload,
                     HEADER: {
                         "Content-Type": "multipart/form-data", // Required for file uploads
                     },
@@ -352,17 +353,14 @@ const Taskform = (props) => {
                                                 <input className="submit bg-white fg-black" type="submit" value={formData.id != null ? "Update" : "Create"} />
                                                  
                                             </td>
-                                            <td>
-
-                                                 <input onClick={(e)=>handleDelete(e)} className="submit bg-black fg-white" type="button" value={"Delete"} />
-                                                
-                                            </td>
                                         </tr>
 
                                     </tbody>
                                 </table>
 
                             </form>
+                            <input onClick={(e)=>handleDelete(e)} className="submit bg-black fg-white" type="button" value={"Delete"} />
+                                              
                             <div className={popup != false ? "popup active" : "popup notActive"}>
                                 {/* <span className="close-button" data-closepop={true} onClick={(e) => ClosepopupSwitch(e)}>
                     x
