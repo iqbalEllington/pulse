@@ -823,12 +823,13 @@
 
     .tasks-list {
         width: 1400px;
-        overflow: hidden;
+        overflow: auto;
     }
 
     .task-list-container {
         color: white;
         position: relative;
+
         .header {
             h3 {
                 font-size: 1rem;
@@ -894,15 +895,18 @@
                     width: 30px;
 
                 }
-                .responsesItem{
+
+                .responsesItem {
                     white-space: break-spaces;
                     padding-right: 2px;
-                    div{
+
+                    div {
                         max-height: 140px;
                         overflow: auto;
                     }
-                   
+
                 }
+
                 .star {
                     color: #9E856F;
                     width: 30px;
@@ -1011,9 +1015,11 @@
                 }
 
                 .status {
-                    width: 60px;
                     font-size: 1rem;
-
+                    padding: 0px !important;
+                    position: relative;
+                    min-width: 148px;
+                    max-width: 148px;
                     // span {
                     //     background: #32323A;
                     //     padding: 10px 15px;
@@ -1038,7 +1044,70 @@
 
                     &.ToDo {
                         // span {
-                        background: #BBA6F7 // }
+                        background: #BBA6F7; // }
+                    }
+
+                    &.OnHold {
+                        background: rgb(121, 126, 147);
+                    }
+
+                    .color-drop-multy {
+                        height: 100%;
+                        width: 100%;
+                        position: absolute;
+                        top: 0;
+
+                        button {
+                            text-align: center;
+                            height: 100%;
+                            padding: 0px;
+                            width: 100%;
+                            justify-content: center;
+                            background: transparent !important;
+                            border: 0px;
+                            &::after{
+                                display: none;
+                            }
+                        }
+
+                        .dropdown-menu {
+                            background: rgb(44, 44, 44);
+                            padding: 30px;
+                        }
+
+                        a {
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            padding: 8px 6px;
+                            color: white;
+                            border-radius: 0px !important;
+                            box-shadow: none;
+                            height: 50px;
+                            min-width: 170px;
+                            font-size: 1rem !important;
+                            margin-bottom: 10px;
+
+                            &.todo {
+                                background: #BBA6F7;
+
+
+                            }
+
+                            &.progress {
+                                background: rgb(253, 188, 100);
+
+                            }
+
+                            &.Completed {
+                                background: rgb(0, 200, 117);
+
+                            }
+
+                            &.Hold {
+                                background: rgb(121, 126, 147);
+                            }
+                        }
                     }
 
                 }
@@ -1294,6 +1363,7 @@
 
         .body {
             position: relative;
+
             table {
                 display: block;
                 padding: 10px;
@@ -1456,6 +1526,38 @@
 
                         }
 
+                        &.status {
+                            min-width: 114px  !important;
+    max-width: 115px  !important;
+                            .color-drop-multy {
+                                top: 16px !important;
+                            }
+
+                            &.InProgress {
+                                // span {
+                                background: rgb(253, 188, 100) !important;
+                                // }
+                            }
+
+                            &.Completed {
+                                // span {
+                                background: rgb(0, 200, 117)  !important;
+                                // }
+                            }
+
+                            &.ToDo {
+                                // span {
+                                background: #BBA6F7  !important; // }
+                            }
+
+                            &.OnHold {
+                                background: rgb(121, 126, 147)  !important;
+                            }
+                            button::after{
+                                display: none !important;
+                            }
+                        }
+
                         &.dueDate {
                             .theprogressline {
                                 display: block !important;
@@ -1499,8 +1601,9 @@
     }
 
 }
-#loader{
-    background:rgba(0,0,0,.8);
+
+#loader {
+    background: rgba(0, 0, 0, .8);
     display: block;
     position: absolute;
     left: 0;
@@ -1512,6 +1615,7 @@
     justify-content: center;
     z-index: 999;
 }
+
 #loader .spinner {
     left: 50%;
     top: 50%;

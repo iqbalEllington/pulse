@@ -10,6 +10,8 @@ import { IoMdStar } from "react-icons/io";
 import { FaChevronDown } from "react-icons/fa";
 import UpdateForm from "./updateForm";
 import LineProgress from "components/modals/LineProgress";
+import { Dropdown } from "react-bootstrap";
+import { toast } from "react-toastify";
 
 
 const tagedTasks = (props) => {
@@ -118,6 +120,59 @@ const tagedTasks = (props) => {
         }
 
     }
+    const handleChanges = async (values,id) => {
+        // e.preventDefault();
+
+        try {
+            // Create FormData for multipart data
+            // const formPayload = new FormData();
+            // formPayload.append("name", formData.name);
+            // formPayload.append("startDate", formData.startDate); // Ensure date is formatted correctly
+            // formPayload.append("expectedCompletionDate", formData.expectedCompletionDate);
+            // formPayload.append("area", formData.area);
+            // SetShowError(false)
+            let formDataProcess = values
+            
+            let formPayload = {
+                data: formDataProcess
+            }
+            // if (formData.photos) {
+            //     formPayload.append("files.photos", formData.photos); // Strapi expects "files.[fieldname]"
+            // }
+            let response;
+            // Make POST request
+            response = await putRequest_cms({
+                API: "/api/tasks",
+                ID: id,
+                DATA: formPayload,
+                HEADER: {
+                    "Content-Type": "multipart/form-data", // Required for file uploads
+                },
+            });
+
+
+            if (response?.status === 200 || response?.status === 201) {
+               toast.success("Updated successfully!");
+               props.setForceload(`id-${Date.now()}`)
+                // props.Closepopup(); // Close form popup
+            } else {
+                toast.error(`Failed to create project: ${response?.data?.message || "Unknown error"}`);
+            }
+        } catch (error) {
+            console.error("Error submitting form:", error);
+            toast.error("An error occurred while submitting the form.");
+        }
+    };
+    const handleStatus = (value, id) => {
+        // console.log(eventKey, id)
+        var data={status: value}
+        handleChanges(data, id); // Update the state with the selected value
+        // setFormData((prevState) => ({
+        //     ...prevState,
+        //     ["status"]: eventKey,
+        // }));
+        // handleChanges()
+    };
     function stringToColor(string) {
         let hash = 0;
         let i;
@@ -196,6 +251,7 @@ const tagedTasks = (props) => {
 
         return percentage.toFixed(2); // Return percentage with 2 decimal places
     }
+  
     return (
         <>
             <div className="task-list-container">
@@ -218,9 +274,8 @@ const tagedTasks = (props) => {
                                         <th></th>
                                         <th>Task/Notification</th>
                                         <th>Project</th>
-                                        <th>Priority</th>
-
                                         <th>Status</th>
+                                        <th>Priority</th>
                                         <th>Due Date</th>
 
                                         <th>Type</th>
@@ -256,7 +311,18 @@ const tagedTasks = (props) => {
 
                                         <td className={task.attributes?.status?.replace(" ", "") + " status"}>
                                             <label className="mobile-view">Status</label>
-                                            <span>{task.attributes.status}</span>
+                                            <Dropdown className="color-drop-multy hash" onSelect={((e)=>handleStatus(e,task.id))}>
+                                                    <Dropdown.Toggle id="dropdown-basic">
+                                                        {task.attributes?.status || 'Select Status'}
+                                                    </Dropdown.Toggle>
+                                                    <Dropdown.Menu>
+                                                        <Dropdown.Item eventKey="To Do" className="todo">To Do</Dropdown.Item>
+                                                        <Dropdown.Item eventKey="In Progress" className="progress">In Progress</Dropdown.Item>
+                                                        <Dropdown.Item eventKey="Completed" className="Completed">Completed</Dropdown.Item>
+                                                        <Dropdown.Item eventKey="On Hold" className="Hold">On Hold</Dropdown.Item>
+                                                    </Dropdown.Menu>
+                                                </Dropdown>
+                                            {/* <span onClick={(e)=>showstatusPop(e,task)}>{task.attributes.status}</span> */}
                                         </td>
                                         <td className="Priority">
                                             <span>{task.attributes.priority}</span>
