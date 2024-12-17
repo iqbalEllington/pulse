@@ -1066,7 +1066,8 @@
                             justify-content: center;
                             background: transparent !important;
                             border: 0px;
-                            &::after{
+
+                            &::after {
                                 display: none;
                             }
                         }
@@ -1528,8 +1529,9 @@
                         }
 
                         &.status {
-                            min-width: 114px  !important;
-    max-width: 115px  !important;
+                            min-width: 114px !important;
+                            max-width: 115px !important;
+
                             .color-drop-multy {
                                 top: 16px !important;
                             }
@@ -1542,19 +1544,20 @@
 
                             &.Completed {
                                 // span {
-                                background: rgb(0, 200, 117)  !important;
+                                background: rgb(0, 200, 117) !important;
                                 // }
                             }
 
                             &.ToDo {
                                 // span {
-                                background: #BBA6F7  !important; // }
+                                background: #BBA6F7 !important; // }
                             }
 
                             &.OnHold {
-                                background: rgb(121, 126, 147)  !important;
+                                background: rgb(121, 126, 147) !important;
                             }
-                            button::after{
+
+                            button::after {
                                 display: none !important;
                             }
                         }
@@ -1582,6 +1585,31 @@
         }
     }
 }
+
+// .popup.active.conform-delete {
+//     position: fixed;
+//     left: 0;
+//     top: 0;
+//     background: black;
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//     text-align: center;
+//     z-index: 999;
+//     div.form{
+//         background: white;
+//         width: 300px;
+//         height: 200px;
+//         max-height: 200px;
+//         display: block;
+//         flex-wrap: wrap;
+//         min-height: 200px;
+//         text-align: center;
+//         h3{
+//             color: black;
+//         }
+//     }
+// }
 
 @media screen and (min-width:768px) {
     .Task-List-body .task-list-container .mobile-view {

@@ -95,6 +95,44 @@ const updateForm = (props) => {
             toast.error("An error occurred while submitting the form.");
         }
     };
+    const deleteme = async (key) => {
+        try {
+           
+            var updatedArray = updates.filter(item => item.id !== key);
+            console.log(updatedArray, "updatesupdatesupdates",key);
+            let formPayload = {
+                data: {
+                    updates: [
+                        ...updatedArray,
+                    ]
+                }
+            }
+            let response = await putRequest_cms({
+                API: "/api/tasks",
+                ID: formData.id,
+                DATA: formPayload,
+                HEADER: {
+                    "Content-Type": "multipart/form-data", // Required for file uploads
+                },
+            });
+
+
+            if (response?.status === 200 || response?.status === 201) {
+                toast.success("Deleted the update successfully!");
+                getUpdates()
+                setFormData((prevState) => ({
+                    ...prevState,
+                    ["update"]: "",
+                    ["date"]: false,
+                }));
+            } else {
+                toast.error(`Failed to create project: ${response?.data?.message || "Unknown error"}`);
+            }
+        } catch (error) {
+            console.error("Error submitting form:", error);
+            toast.error("An error occurred while submitting the form.");
+        }
+    }
     const handleDateChange = (key, date) => {
         setFormData((prevState) => ({
             ...prevState,
@@ -189,6 +227,9 @@ const updateForm = (props) => {
                                     <span className="update">
                                         {key.update}
                                     </span>
+
+
+                                    <sup onClick={() => deleteme(key.id)}>Delete</sup>
                                 </div>
                             </div>
                         })}
@@ -200,6 +241,12 @@ const updateForm = (props) => {
                     </div>
                 </div>
             </div>
+            {/* <div className="popup active conform-delete">
+                        <div className="form">
+                                <h3>Are you sure you want to delete?</h3>
+                                <button>Yes</button>  <button>No</button>
+                        </div>
+            </div> */}
         </>
     );
 };
