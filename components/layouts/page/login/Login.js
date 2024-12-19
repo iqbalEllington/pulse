@@ -27,6 +27,7 @@ const Login = () => {
   const dispatch = useDispatch();
   const loginInpiut = useSelector((state) => state.authReducer.loginInpiut);
   const isLoading = useSelector((state) => state.authReducer.isLoading);
+  cosnt [isOtpPressed,setIsOtpPressed] = useState(false)
   const isLogging = useSelector((state) => state.authReducer.isLogging);
   const userData = useSelector((state) => state.authReducer.userData);
   const [error, setError] = useState(false)
@@ -70,6 +71,7 @@ const Login = () => {
         }
       }));
     } else {
+      setIsOtpPressed(true)
       Login2factor(e)
     }
   };
@@ -86,13 +88,16 @@ const Login = () => {
         .then(response => {
           if (!response.ok) {  // Check if the response status is not 200-299
             setErrorMessage("Email or Password is not matching")
+            setIsOtpPressed(false)
           } else {
+            setIsOtpPressed(false)
             setErrorMessage(false)
             SetIsOtp(true)
           }
           return response.json();
         })
         .catch(error => {
+          setIsOtpPressed(false)
           console.error('Error:', error); // Log the error for debugging
           if (error.message.includes('Status: 400')) {
             setErrorMessage("Bad Request - Please check your input.")
@@ -103,6 +108,7 @@ const Login = () => {
           }
         });
     } catch (error) {
+      setIsOtpPressed(false)
       setErrorMessage("Network Error, Please Try Again Later")
       showToast("error", "Network Error, Please Fix this!");
       dispatch({ type: Types.AUTH_LOGIN_CHECK, payload: false });
@@ -252,7 +258,7 @@ const Login = () => {
                             <FormError error={error} />
                           }
                           <div className="d-flex justify-content-left mt-5">
-                            {!isLoading && (
+                            {(!isLoading || !isOtpPressed) && (
                               <a className="col-12 d-block">
                                 {" "}
                                 <Button variant="success" className="col-12 bg-white el-login" type="submit">
@@ -260,7 +266,7 @@ const Login = () => {
                                 </Button>
                               </a>
                             )}
-                            {isLoading && (
+                            {(isLoading || isOtpPressed) && (
                               <a className="col-12 d-block">
                                 {" "}
                                 <Button
