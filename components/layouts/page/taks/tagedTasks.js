@@ -120,7 +120,7 @@ const tagedTasks = (props) => {
         }
 
     }
-    const handleChanges = async (values,id) => {
+    const handleChanges = async (values, id) => {
         // e.preventDefault();
 
         try {
@@ -132,7 +132,7 @@ const tagedTasks = (props) => {
             // formPayload.append("area", formData.area);
             // SetShowError(false)
             let formDataProcess = values
-            
+
             let formPayload = {
                 data: formDataProcess
             }
@@ -152,8 +152,8 @@ const tagedTasks = (props) => {
 
 
             if (response?.status === 200 || response?.status === 201) {
-               toast.success("Updated successfully!");
-               props.setForceload(`id-${Date.now()}`)
+                toast.success("Updated successfully!");
+                props.setForceload(`id-${Date.now()}`)
                 // props.Closepopup(); // Close form popup
             } else {
                 toast.error(`Failed to create project: ${response?.data?.message || "Unknown error"}`);
@@ -165,7 +165,7 @@ const tagedTasks = (props) => {
     };
     const handleStatus = (value, id) => {
         // console.log(eventKey, id)
-        var data={status: value}
+        var data = { status: value }
         handleChanges(data, id); // Update the state with the selected value
         // setFormData((prevState) => ({
         //     ...prevState,
@@ -251,20 +251,20 @@ const tagedTasks = (props) => {
 
         return percentage.toFixed(2); // Return percentage with 2 decimal places
     }
-  
+
     return (
         <>
             <div className="task-list-container">
-               
+
                 <div className="header">
                     <h3 className="ontoptitle">
                         {props.tag.keyword}
                     </h3>
                 </div>
                 <div className="body">
-                {loading == true && <div className="loading" id="loader">
-                    <div className="spinner"> </div>
-                </div>}
+                    {loading == true && <div className="loading" id="loader">
+                        <div className="spinner"> </div>
+                    </div>}
                     <table className="tasks-list">
 
                         {tasks.data?.length > 0 ?
@@ -306,23 +306,23 @@ const tagedTasks = (props) => {
                                             <div>
                                                 <label className="mobile-view">Project: </label>
                                                 {task.attributes.projects?.data?.[0]?.attributes?.name}
-                                              {task.attributes.projects?.data?.[0]?.attributes?.plotNum && <div>Plot No: {task.attributes.projects?.data?.[0]?.attributes?.plotNum}</div>}
+                                                {task.attributes.projects?.data?.[0]?.attributes?.plotNum && <div>Plot No: {task.attributes.projects?.data?.[0]?.attributes?.plotNum}</div>}
                                             </div>
                                         </td>
 
                                         <td className={task.attributes?.status?.replace(" ", "") + " status"}>
                                             <label className="mobile-view">Status</label>
-                                            <Dropdown className="color-drop-multy hash" onSelect={((e)=>handleStatus(e,task.id))}>
-                                                    <Dropdown.Toggle id="dropdown-basic">
-                                                        {task.attributes?.status || 'Select Status'}
-                                                    </Dropdown.Toggle>
-                                                    <Dropdown.Menu>
-                                                        <Dropdown.Item eventKey="To Do" className="todo">To Do</Dropdown.Item>
-                                                        <Dropdown.Item eventKey="In Progress" className="progress">In Progress</Dropdown.Item>
-                                                        <Dropdown.Item eventKey="Completed" className="Completed">Completed</Dropdown.Item>
-                                                        <Dropdown.Item eventKey="On Hold" className="Hold">On Hold</Dropdown.Item>
-                                                    </Dropdown.Menu>
-                                                </Dropdown>
+                                            <Dropdown className="color-drop-multy hash" onSelect={((e) => handleStatus(e, task.id))}>
+                                                <Dropdown.Toggle id="dropdown-basic">
+                                                    {task.attributes?.status || 'Select Status'}
+                                                </Dropdown.Toggle>
+                                                <Dropdown.Menu>
+                                                    <Dropdown.Item eventKey="To Do" className="todo">To Do</Dropdown.Item>
+                                                    <Dropdown.Item eventKey="In Progress" className="progress">In Progress</Dropdown.Item>
+                                                    <Dropdown.Item eventKey="Completed" className="Completed">Completed</Dropdown.Item>
+                                                    <Dropdown.Item eventKey="On Hold" className="Hold">On Hold</Dropdown.Item>
+                                                </Dropdown.Menu>
+                                            </Dropdown>
                                             {/* <span onClick={(e)=>showstatusPop(e,task)}>{task.attributes.status}</span> */}
                                         </td>
                                         <td className="Priority">
@@ -375,7 +375,7 @@ const tagedTasks = (props) => {
                                             </span>
                                         </td>
                                         <td className="responsesItem">
-                                           <div>{task.attributes?.updates?.[0]?.update}</div> 
+                                            <div>{task.attributes?.updates?.[0]?.update}</div>
                                         </td>
                                         {/*     <td>
                                     {JSON.stringify("Responses")}

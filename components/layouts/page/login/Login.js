@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Button,
   Card,
 } from "react-bootstrap";
 import { Row, Col } from "react-bootstrap";
+import { showToast } from "/components/master/Helper/ToastHelper";
+import { toast } from "react-toastify";
 
 import Form from "react-bootstrap/Form";
 import Link from "next/link";
@@ -18,7 +20,6 @@ import { useRouter } from "next/router";
 import FormError from "../../../errors/FormError";
 import Cookies from "js-cookie";
 import { updateAuthToken, updateAuthToken2 } from "helper/api";
-import { toast } from "react-toastify";
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
 
@@ -27,14 +28,25 @@ const Login = () => {
   const loginInpiut = useSelector((state) => state.authReducer.loginInpiut);
   const isLoading = useSelector((state) => state.authReducer.isLoading);
   const isLogging = useSelector((state) => state.authReducer.isLogging);
+  const userData = useSelector((state) => state.authReducer.userData);
   const [error, setError] = useState(false)
+  const [isOtp, SetIsOtp] = useState(false)
+  const [errorMessage, setErrorMessage] = useState(false)
   // const { formState: { errors } } = useForm();
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm();
-
+  useEffect(() => {
+    if (userData?.role?.name === "Task Managers") {
+      window.location.href = "/tasks";
+    } else if (userData?.id) {
+      window.location.href = "/dashboard";
+    } else {
+      // Optional: Do nothing or handle the default case
+    }
+  }, [userData]);
   // const { register, handleSubmit, errors, setValue } = useForm();
 
   const handleLoginInputChange = (name, value) => {
@@ -42,19 +54,62 @@ const Login = () => {
   };
 
   const handleLogin = (e) => {
-    dispatch(loginAction(e, (response, user) => {
-      if (user.email != undefined) {
-        updateAuthToken(response);
-        updateAuthToken2(response);
-        setError(false)
-        router.push("/dashboard");
-      } else {
-        if (user == false) {
-          setError("Username or password is incorrect")
+    if (isOtp == true) {
+      dispatch(loginAction(e, async (response, user) => {
+        setErrorMessage(response)
+        await response
+        if (user.email != undefined) {
+          updateAuthToken(response);
+          updateAuthToken2(response)
+          setError(false)
+        } else {
+          if (user == false) {
+            setError("Username or password is incorrect")
+          }
+          toast("Username or password is incorrect")
         }
-        toast("Username or password is incorrect")
-      }
-    }));
+      }));
+    } else {
+      Login2factor(e)
+    }
+  };
+
+  const Login2factor = (loginData) => {
+    const URL = `${process.env.NEXT_PUBLIC_API_SERVER_URL}api/auth/login`;
+    try {
+      const options = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(loginData)
+      };
+      fetch(URL, options)
+        .then(response => {
+          if (!response.ok) {  // Check if the response status is not 200-299
+            setErrorMessage("Email or Password is not matching")
+          } else {
+            setErrorMessage(false)
+            SetIsOtp(true)
+          }
+          return response.json();
+        })
+        .catch(error => {
+          console.error('Error:', error); // Log the error for debugging
+          if (error.message.includes('Status: 400')) {
+            setErrorMessage("Bad Request - Please check your input.")
+            showToast("Bad Request - Please check your input.");
+          } else {
+            setErrorMessage("Network Error, Please Try Again Later")
+            showToast("Network Error, Please Fix this!");
+          }
+        });
+    } catch (error) {
+      setErrorMessage("Network Error, Please Try Again Later")
+      showToast("error", "Network Error, Please Fix this!");
+      dispatch({ type: Types.AUTH_LOGIN_CHECK, payload: false });
+      callback(false, false);
+      return;
+    }
+    return
   };
   const [showPassword, setShowPassword] = useState(false);
   const togglePasswordVisibility = () => {
@@ -106,6 +161,9 @@ const Login = () => {
                           <h3>Sign in to Pulse</h3>
                           <p>Your Centralized Reporting for Sales, Updates, and Inventory</p>
                         </div>
+                        {errorMessage &&
+                          <div className="errorBox-login"> {errorMessage}</div>
+                        }
                         <form
                           onSubmit={handleSubmit(handleLogin)}
                           method="post"
@@ -113,7 +171,7 @@ const Login = () => {
                           className="mt-5"
                           encType="multipart/form-data"
                         >
-                          <Form.Group controlId="formBasicEmail">
+                          <Form.Group controlId="formBasicEmail" className={isOtp ? "hidden hidden-form" : ""}>
                             <Form.Label>Email</Form.Label>
                             <Form.Control
                               type="email"
@@ -139,38 +197,57 @@ const Login = () => {
                               )}
                           </Form.Group>
 
-                          <Form.Group controlId="formBasicPassword" className="pt-4">
+
+                          <Form.Group controlId="formBasicPassword" className={isOtp ? "hidden hidden-form" : "pt-4"}>
                             <Form.Label>Password</Form.Label>
                             <div className="formgroup">
-                            <Form.Control
-                              autocorrect="off"
-                              spellcheck="false"
-                              autocomplete="off"
-                              type={showPassword ? 'text' : 'password'}
-                              placeholder="Enter Password"
-                              name="password"
-                              // value={loginInpiut && loginInpiut.password}
-                              // onChange={(e) =>
-                              //   handleLoginInputChange(
-                              //     "password",
-                              //     e.target.value
-                              //   )
-                              // }
-                              {...register('password', {
-                                required: true,
-                              })}
-                              className={`form-control ${errors.password ? "is-invalid" : ""
-                                }`}
-                            />
-                           <span onClick={(e)=>{togglePasswordVisibility(),e.preventDefault()}} className="eye-icon">  {showPassword ?   <FaEye/> : <FaEyeSlash/>}
-                           </span>
-                           </div>
+                              <Form.Control
+                                autocorrect="off"
+                                spellcheck="false"
+                                autocomplete="off"
+                                type={showPassword ? 'text' : 'password'}
+                                placeholder="Enter Password"
+                                name="password"
+                                // value={loginInpiut && loginInpiut.password}
+                                // onChange={(e) =>
+                                //   handleLoginInputChange(
+                                //     "password",
+                                //     e.target.value
+                                //   )
+                                // }
+                                {...register('password', {
+                                  required: true,
+                                })}
+                                className={`form-control ${errors.password ? "is-invalid" : ""
+                                  }`}
+                              />
+                              <span onClick={(e) => { togglePasswordVisibility(), e.preventDefault() }} className="eye-icon">  {showPassword ? <FaEye /> : <FaEyeSlash />}
+                              </span>
+                            </div>
                             {errors.password &&
                               errors.password.type === "required" && (
                                 <FormError error="Password is empty" />
                               )}
                           </Form.Group>
 
+                          <Form.Group controlId="formBasicEmail" className={!isOtp ? "hidden hidden-form" : "pt-4"}>
+                            <Form.Label>OTP</Form.Label>
+                            <Form.Control
+                              type="text"
+                              autocorrect="off" spellcheck="false" autocomplete="off"
+                              name="otp"
+                              placeholder="Please Enter OTP send to WhatsApp / Email"
+                              className={`form-control ${errors.email ? "is-invalid" : ""
+                                }`}
+                              {...register('otp', {
+                                required: false,
+                              })}
+                            />
+                            {errors.otp &&
+                              errors.email.type === "required" && (
+                                <FormError error="Email is empty" />
+                              )}
+                          </Form.Group>
                           {error != false &&
                             <FormError error={error} />
                           }
@@ -179,7 +256,7 @@ const Login = () => {
                               <a className="col-12 d-block">
                                 {" "}
                                 <Button variant="success" className="col-12 bg-white el-login" type="submit">
-                                Sign in to Pulse
+                                  Sign in to Pulse
                                 </Button>
                               </a>
                             )}
@@ -197,7 +274,7 @@ const Login = () => {
                                     role="status"
                                     aria-hidden="true"
                                   ></span>{" "}
-                                 Loading... 
+                                  Loading...
                                 </Button>
                               </a>
                             )}

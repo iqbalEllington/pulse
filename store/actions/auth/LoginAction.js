@@ -27,39 +27,47 @@ export const loginAction = (loginData, callback) => (dispatch) => {
     loginMessage: "",
     isLoading: true,
   };
-  const URL = `${process.env.NEXT_PUBLIC_API_SERVER_URL}api/auth/local?populate[]=profilePhoto`;
+  const URL = `${process.env.NEXT_PUBLIC_API_SERVER_URL}api/auth/verify-otp`;
   try {
     const options = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(loginData)
     };
-    fetch(`${process.env.NEXT_PUBLIC_API_SERVER_URL}api/auth/local?populate[]=profilePhoto`, options)
+    fetch(`${URL}`, options)
       .then(response => response.json())
       .then(response => {
         const data = response;
-        if (data == undefined) {
+    
+        if (data?.error?.status) {
           dispatch({ type: Types.AUTH_LOGIN_CHECK, payload: false });
-          callback(false,false)
-          return
+          callback(data?.error?.message, false)
+          return 
         } else {
-          response.userData = data.user;
-          response.tokenData = data.jwt;
-          response.isLoading = false;
-          response.isLoggedIn = true;
-          response.loginMessage = "Success";
-          response.isLogging = true;
-          Cookies.set("token", data.jwt)
-          Cookies.set("userDetail", JSON.stringify(data.user))
-          dispatch({ type: Types.AUTH_LOGIN_CHECK, payload: response });
-          if (callback) {
-            callback(data.jwt, data.user);
-            return
-          } else {
+          if (data == undefined) {
+            dispatch({ type: Types.AUTH_LOGIN_CHECK, payload: false });
             callback(false, false)
             return
+          } else {
+            response.userData = data.user;
+            response.tokenData = data.token;
+            response.isLoading = false;
+            response.isLoggedIn = true;
+            response.loginMessage = "Success";
+            response.isLogging = true;
+            Cookies.set("token", data.token)
+            Cookies.set("userDetail", JSON.stringify(data.user))
+            dispatch({ type: Types.AUTH_LOGIN_CHECK, payload: response });
+            if (callback) {
+              callback(data.message, data.user);
+              return
+            } else {
+              callback(false, false)
+              return
+            }
           }
         }
+
       })
       .catch(error => {
         const responseLog = error;
@@ -138,7 +146,7 @@ function checkTokenExpired() {
   }
   if (current_time > jwt.exp) {
     return true;
-  }else{
+  } else {
     return false;
   }
 }
@@ -172,10 +180,10 @@ function getLoginData() {
   ) {
     loginData = JSON.parse(loginData);
     return {
-      loginData:loginData,
-      token:token,
+      loginData: loginData,
+      token: token,
     };
-  }else{
+  } else {
     return loginData;
   }
 }

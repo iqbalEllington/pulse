@@ -54,6 +54,7 @@ const Tasks = ({ router }, props) => {
     async function getuserdata() {
         var response;
         response = await getRequest({ API: API_URLS.GET_USER + '?populate[]=profilePhoto' });
+        console.log(response,  "700937700937700937700937700937700937")
         if (await response?.status === 200) {
             setUserDetails(response.data)
         } else if (response?.status === 401) {
