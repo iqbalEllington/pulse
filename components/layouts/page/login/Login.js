@@ -27,7 +27,7 @@ const Login = () => {
   const dispatch = useDispatch();
   const loginInpiut = useSelector((state) => state.authReducer.loginInpiut);
   const isLoading = useSelector((state) => state.authReducer.isLoading);
-  cosnt [isOtpPressed,setIsOtpPressed] = useState(false)
+  const [isOtpPressed,setIsOtpPressed] = useState(false)
   const isLogging = useSelector((state) => state.authReducer.isLogging);
   const userData = useSelector((state) => state.authReducer.userData);
   const [error, setError] = useState(false)
@@ -258,7 +258,7 @@ const Login = () => {
                             <FormError error={error} />
                           }
                           <div className="d-flex justify-content-left mt-5">
-                            {(!isLoading || !isOtpPressed) && (
+                            {(!isLoading && !isOtpPressed) && (
                               <a className="col-12 d-block">
                                 {" "}
                                 <Button variant="success" className="col-12 bg-white el-login" type="submit">
