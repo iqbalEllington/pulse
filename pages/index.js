@@ -9,7 +9,7 @@ function Home(props) {
 export const getServerSideProps = async (context) => {
   const { res } = context;
   let resolvedUrl = context.resolvedUrl.split("/")
-  res.writeHead(301, { location: "/login" });
+  res.writeHead(301, { location: "/dashboard" });
   res.end();
 }
 
