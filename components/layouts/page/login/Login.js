@@ -6,6 +6,8 @@ import {
 import { Row, Col } from "react-bootstrap";
 import { showToast } from "/components/master/Helper/ToastHelper";
 import { toast } from "react-toastify";
+import { getRequest, postRequest_cms } from "helper/api";
+import { API_URLS } from "helper/apiConstant";
 
 import Form from "react-bootstrap/Form";
 import Link from "next/link";
@@ -40,6 +42,7 @@ const Login = () => {
     handleSubmit,
   } = useForm();
   useEffect(() => {
+   console.log(isLogging, "userDatauserDatauserData")
     if (userData?.role?.name === "Task Managers") {
       window.location.href = "/tasks";
     } else if (userData?.id) {
@@ -49,7 +52,13 @@ const Login = () => {
     }
   }, [userData]);
   // const { register, handleSubmit, errors, setValue } = useForm();
-
+  useEffect(()=>{
+    if(router?.pathname=="/login"){
+      getuserdata()
+    }
+    // console.log(router.pathname,"routerrouterrouterrouter")
+    // getuserdata()
+  },[])
   const handleLoginInputChange = (name, value) => {
     dispatch(handleLoginInput(name, value));
   };
@@ -75,7 +84,25 @@ const Login = () => {
       Login2factor(e)
     }
   };
+  async function getuserdata() {
+    var response;
 
+    response = await getRequest({ API: API_URLS.GET_USER});
+    var data = []
+    if (await response?.status === 200) {
+      if(response?.data?.redirect){
+        window.location.href = response?.data?.redirect
+      }else{
+        window.location.href = "/dashboard"
+      }
+      // window.location.href = response?.data?.data?.redirect
+      console.log(response?.data?.redirect, "response.dataresponse.dataresponse.data")
+    } else if (response?.status === 401) {
+      toast("Unauthorize access please re-login.");
+    } else {
+      toast(response?.data?.error || "Some thing went wrong.");
+    }
+  }
   const Login2factor = (loginData) => {
     const URL = `${process.env.NEXT_PUBLIC_API_SERVER_URL}api/auth/login`;
     try {
