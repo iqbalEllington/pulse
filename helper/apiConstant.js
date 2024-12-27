@@ -19,6 +19,7 @@ export const API_URLS = {
 
 
   GET_PROPERTIES:'api/properties',
+  GET_MARKETING_PROPERTIES:'api/dashboard-marketings',
   GET_PROJECTS:'api/projects',
   GET_EMPLOYEES:'api/employees',
   GET_USER:'api/users/me',

@@ -1,0 +1,23 @@
+.marketingDashboard {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+
+    .invbox {
+        width: 300px;
+        color: white;
+        background: #2D2D2E;
+        padding: 10px;
+        overflow: hidden;
+
+        .imageHolder {
+            width: 100%;
+            overflow: hidden;
+            height: 350px;
+            border-radius: 15px;
+            img{
+                height: 100%;
+            }
+        }
+    }
+}
