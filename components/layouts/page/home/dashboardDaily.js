@@ -140,6 +140,7 @@ const DashboardDaily = ({ router }, props) => {
     var occuarance=[
       "All Time",
       "This Year",
+      "Last Year",
       "Last Month",
       "This Month",
       "Last Week",
@@ -421,6 +422,7 @@ const DashboardDaily = ({ router }, props) => {
 
                           <CompareTableRow allOccuaranceData={allOccuaranceData} base="Last Month" isCompare={false} />
                           <CompareTableRow allOccuaranceData={allOccuaranceData} base="This Year" isCompare={false} />
+                          <CompareTableRow allOccuaranceData={allOccuaranceData} base="Last Year" isCompare={false} />
                           <CompareTableRow allOccuaranceData={allOccuaranceData} base="All Time" isCompare={false} />
                         </tbody>
                       </table>

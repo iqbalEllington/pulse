@@ -24,6 +24,11 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import { FaList } from "react-icons/fa6";
 import styles from './assets/dashboard.module.scss'
+import Elcirc2 from "components/modals/elcirc2";
+import { CiLocationOn } from "react-icons/ci";
+import { IoSearch } from "react-icons/io5";
+import PolarAreaChart from './PolarAreaChart';
+
 const index = ({ router }, props) => {
   const [loading, setIsLoading] = useState(false)
   const [ELproperties, setELproperties] = useState([]);
@@ -113,9 +118,13 @@ const index = ({ router }, props) => {
       toast(response?.data?.error || "Some thing went wrong.");
     }
   }
-  async function getroeprties() {
+  async function getroeprties(search = false) {
     var response;
-    response = await getRequest({ API: API_URLS.GET_MARKETING_PROPERTIES + "?populate[]=featuredImage" });
+    var filters = "";
+    if (search) {
+      filters = "&filters[name][$containsi]=" + search
+    }
+    response = await getRequest({ API: API_URLS.GET_MARKETING_PROPERTIES + "?populate[]=featuredImage" + filters });
     var data = []
     if (await response?.status === 200) {
       setIsLoading(false)
@@ -156,6 +165,9 @@ const index = ({ router }, props) => {
   useEffect(() => {
     getuserdata()
   }, [])
+  async function filterSearch(value) {
+    getroeprties(value)
+  }
   useEffect(() => {
     // Ensure the router is ready before accessing query parameters
     if (routers.isReady) {
@@ -172,93 +184,152 @@ const index = ({ router }, props) => {
   }, [routers.isReady, routers.query]);
   return (
     <>
-      <div className="wishbanner pb w-100">
-        <div className="container-fluid">
-          <div className="row dashboard-sales">
-            <div className="pl-5 salesprops">
-              <SearchProperty active={ELproperties.id} activateProeprty={activateProeprty} setloop={setloop} />
-              <div className="actionbar">
-                <span className="last-updated">Latest Data as of:  {moment(ELproperties?.attributes?.LastUpdatedDate).format('DD MMM YYYY')} </span>
-                <button className="downloadPdf" onClick={() => generatePDF(getTargetElement, options)}> Download PDF <FaArrowDown /></button>
-
-                <Dropdown className="profile-user">
-                  <Dropdown.Toggle id="dropdown-basic">
-                    <div className="profile-image-holder">
-                      <img src={process.env.NEXT_PUBLIC_IMAGE_URL + userDetail?.profilePhoto?.url} />
-                    </div>
-                  </Dropdown.Toggle>
-
-                  <Dropdown.Menu>
-                    <Dropdown.Item href="/logout">Logout</Dropdown.Item>
-                    {/* <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-                    <Dropdown.Item href="#/action-3">Something else</Dropdown.Item> */}
-                  </Dropdown.Menu>
-                </Dropdown>
-              </div>
-              <div className={styles.marketingDashboard} id="marketingDashboard">
-                {Object.keys(properties).map((key) => {
-                  return <div className={styles.invbox}>
-
-                    <div className={styles.imageHolder}>
-                      <img src={process.env.NEXT_PUBLIC_IMAGE_URL + properties[key]["attributes"]["featuredImage"]["data"]?.["attributes"]["url"]} />
-                      <div className="project_title">
-                        {properties[key]["attributes"]["name"]}
-                        <p>
-                          {properties[key]["attributes"]["community"] + ", " + properties[key]["attributes"]["city"]}
-                        </p>
-
-                        <div>
-                          {properties[key]["attributes"]["launchDate"]}
-                        </div>
-                      </div>
-                      <div className="project_construction_status">
-
-                        {properties[key]["attributes"]["completionProgress"]}
-                      </div>
-                      <div className="project_sold">90%</div>
-                      <div className="project_Handover">
-                        <div className="cal-box">
-                          <span className="title">
-                            ESTIMATED
-                            COMPLETION
-                          </span>
-                          <span className="date">
-                            {properties[key]["attributes"]["launchDate"] != null ? moment(properties[key]["attributes"]["launchDate"]).format('MMM YYYY') : "TBA ..."}
-                            {/* // Jun 2024 */}
-                          </span>
-                        </div>
-
-
-                      </div>
-                    </div>
-                    <div className="summery">
-                      <div className="data-bl-box">
-                        <span>AVAILABLE</span>
-                        <span>264</span>
-                      </div>
-                      <div className="data-bl-box">
-
-                        <span>SOLD</span>
-                        <span>264</span>
-                      </div>
-                      <div className="data-bl-box">
-
-                        <span>Blocked</span>
-                        <span>264</span>
-                      </div>
-
-                    </div>
+      <div className={styles.marketingDashboardContain}>
+        <div className="wishbanner pb w-100">
+          <div className="container-fluid ">
+            <div className="row">
+              <div className="pl-5 salesprops">
+                <div className="search-input">
+                  <div className={styles.search + " searchbox"}>
+                    <input onChange={(e) => filterSearch(e.target.value)} placeholder="Search" type="text" />
+                    <IoSearch />
                   </div>
-                })}
-                {/* {properties?.map((proeprty)=>{
+
+                  {/* <span className="result-count">Properties {property?.data?.length}</span> */}
+                </div>
+                {/* <SearchProperty active={ELproperties.id} activateProeprty={activateProeprty} setloop={setloop} /> */}
+                <div className={styles.loginbar + " actionbar"}>
+                  <span className="last-updated">Latest Data as of:  {moment(ELproperties?.attributes?.LastUpdatedDate).format('DD MMM YYYY')} </span>
+                  <button className="downloadPdf" onClick={() => generatePDF(getTargetElement, options)}> Download PDF <FaArrowDown /></button>
+
+                  <Dropdown className="profile-user">
+                    <Dropdown.Toggle id="dropdown-basic">
+                      <div className="profile-image-holder">
+                        <img src={process.env.NEXT_PUBLIC_IMAGE_URL + userDetail?.profilePhoto?.url} />
+                      </div>
+                    </Dropdown.Toggle>
+
+                    <Dropdown.Menu>
+                      <Dropdown.Item href="/logout">Logout</Dropdown.Item>
+                      {/* <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+                    <Dropdown.Item href="#/action-3">Something else</Dropdown.Item> */}
+                    </Dropdown.Menu>
+                  </Dropdown>
+                </div>
+                <div id="marketingDashboard" className={styles.marketingDashboard}>
+                  {Object.keys(properties).map((key) => {
+                    return <div className={styles.invbox}>
+
+                      <div className={styles.imageHolder}>
+                        <img src={process.env.NEXT_PUBLIC_IMAGE_URL + properties[key]["attributes"]?.["featuredImage"]?.["data"]?.["attributes"]["url"]} />
+                        <div className={styles.project_title}>
+                          <div>
+                            <CiLocationOn />
+                          </div>
+                          <div>
+                            <h3>{properties[key]["attributes"]["name"]}</h3>
+                            <p>
+                              {properties[key]["attributes"]["community"] + ", " + properties[key]["attributes"]["city"]}
+                            </p>
+
+                          </div>
+
+                          <div className={styles.howold}>
+                            <div >
+
+                              {moment().diff(moment(properties[key]["attributes"]["launchDate"]), 'months') > 12 ?
+                                <div>
+                                  <span>
+                                    {(moment().diff(moment(properties[key]["attributes"]["launchDate"]), 'months') / 12).toFixed(1)}
+                                  </span>
+                                  <span>Years</span>
+                                </div>
+                                :
+                                <div>
+                                  <span>
+                                    {moment().diff(moment(properties[key]["attributes"]["launchDate"]), 'months')}
+                                  </span>
+                                  <span>Months</span>
+                                </div>
+                              }
+                            </div>
+
+                            {/* {properties[key]["attributes"]["launchDate"]} */}
+                          </div>
+                        </div>
+                        <div className={styles.project_construction_status}>
+                          <Elcirc2 kpiText="Construction" kpiValue={{
+                            total: properties[key]["attributes"]["completionProgress"],
+                            value1: {
+                              "unit": "Completed",
+                              "value": properties[key]["attributes"]["completionProgress"]
+                            },
+                            value2: {
+                              "unit": "Under Construction",
+                              "value": properties[key]["attributes"]["completionProgress"]
+                            },
+                            isamount: false
+                          }} size={{ Width: "100px", Height: "100px" }} percentage={properties[key]["attributes"]["completionProgress"]} color="#EDEAE3" />
+                          {/* {properties[key]["attributes"]["completionProgress"]} */}
+                        </div>
+                        <div className={styles.project_sold}>
+                          <Elcirc2 kpiText="Sold" kpiValue={{
+                            total: (properties[key]["attributes"]["soldUnits"] * 100) / properties[key]["attributes"]["totalUnits"],
+                            value1: {
+                              "unit": "Sold",
+                              "value": properties[key]["attributes"]["soldUnits"]
+                            },
+                            value2: {
+                              "unit": "Available",
+                              "value": properties[key]["attributes"]["totalUnits"]
+                            },
+                            isamount: false
+                          }} size={{ Width: "100px", Height: "100px" }} 
+                          percentage={properties[key]["attributes"]["soldUnits"] * 100 / properties[key]["attributes"]["totalUnits"]} color="#EDEAE3" />
+                        </div>
+                        <div className={styles.projectHandover}>
+                          <div className="cal-box">
+                            <span className="title">
+                              ESTIMATED
+                              COMPLETION
+                            </span>
+                            <span className="date">
+                              {properties[key]["attributes"]["launchDate"] != null ? moment(properties[key]["attributes"]["launchDate"]).format('MMM YYYY') : "TBA ..."}
+                              <span>{moment(properties[key]["attributes"]["launchDate"]).diff(moment(), 'months') > 0 ? moment(properties[key]["attributes"]["launchDate"]).diff(moment(), 'months') + " onths" : ""}</span>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="summery">
+                        <div className={styles.dataBlBox}>
+                          <span>AVAILABLE</span>
+                          <span className={styles.available}>{properties[key]["attributes"]["availableUnits"]}</span>
+                        </div>
+                        <div className={styles.dataBlBox}>
+
+                          <span>SOLD</span>
+                          <span className={styles.sold}>{properties[key]["attributes"]["soldUnits"]}</span>
+                        </div>
+                        <div className={styles.dataBlBox}>
+
+                          <span>Blocked</span>
+                          <span className={styles.blocked}>{properties[key]["attributes"]["blockedUnits"] >0 ? properties[key]["attributes"]["blockedUnits"] : 0}</span>
+                        </div>
+
+                      </div>
+                    </div>
+                  })}
+                  {/* {properties?.map((proeprty)=>{
                     return <div>{JSON.stringify(proeprty)}</div>
                 })} */}
 
-                {/* {JSON.stringify(properties)} */}
-              </div>
+                  {/* {JSON.stringify(properties)} */}
+                </div>
 
+              </div>
             </div>
           </div>
+          {/* <PolarAreaChart data={properties}/> */}
         </div>
       </div>
     </>
