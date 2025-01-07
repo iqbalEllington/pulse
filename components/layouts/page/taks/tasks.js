@@ -121,7 +121,7 @@ const Tasks = ({ router }, props) => {
     const handleEscape = () => {
         setFormActive(false)
     };
-    const [hideElements, setHideElements] = useState(true);
+    const [hideElements, setHideElements] = useState(false);
     function wait(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
       }
@@ -134,30 +134,6 @@ const Tasks = ({ router }, props) => {
        
         await wait(1000); 
         const customStyle = document.createElement('style');
-        // customStyle.innerHTML = `
-        //     #grouped{
-        //     font-size: 7px;
-        //     color:black;
-        //     }
-        //     .task-list-container .header h3{
-        //         font-size: 7px;
-        //         color:black;
-        //     }
-        //         table{
-        //         width:100%;
-        //         color:black;
-        //         }
-        //     table tr td,table tr th {
-        //         font-size: 7px;
-        //         color:black;
-        //     }
-        //    table tr td h4,table tr td label,table tr td h4,table tr td div, table tr td span, table tr th {
-        //         font-size: 7px;
-        //         color:black;
-        //     }
-        // `;
-        // document.head.appendChild(customStyle);
-
         const doc = new jsPDF(
             {
                 orientation: "landscape",    
