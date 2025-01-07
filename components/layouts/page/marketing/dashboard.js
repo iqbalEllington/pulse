@@ -221,7 +221,11 @@ const index = ({ router }, props) => {
                     return <div className={styles.invbox}>
 
                       <div className={styles.imageHolder}>
+                        {properties[key]["attributes"]?.["featuredImage"]?.["data"]?.["attributes"]["url"] ?
                         <img src={process.env.NEXT_PUBLIC_IMAGE_URL + properties[key]["attributes"]?.["featuredImage"]?.["data"]?.["attributes"]["url"]} />
+                  :
+                  <img src={"https://strapi.ellington.ae/uploads/dd_87bfa85455.jpg"} />
+                  }
                         <div className={styles.project_title}>
                           <div>
                             <CiLocationOn />

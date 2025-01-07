@@ -29,7 +29,7 @@ const Login = () => {
   const dispatch = useDispatch();
   const loginInpiut = useSelector((state) => state.authReducer.loginInpiut);
   const isLoading = useSelector((state) => state.authReducer.isLoading);
-  const [isOtpPressed,setIsOtpPressed] = useState(false)
+  const [isOtpPressed, setIsOtpPressed] = useState(false)
   const isLogging = useSelector((state) => state.authReducer.isLogging);
   const userData = useSelector((state) => state.authReducer.userData);
   const [error, setError] = useState(false)
@@ -41,24 +41,33 @@ const Login = () => {
     formState: { errors },
     handleSubmit,
   } = useForm();
-  useEffect(() => {
-   console.log(isLogging, "userDatauserDatauserData")
+  function wait(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+  async function redirect(){
     if (userData?.role?.name === "Task Managers") {
+
+      await wait(1000); 
       window.location.href = "/tasks";
     } else if (userData?.id) {
+   
+      await wait(1000); 
       window.location.href = "/dashboard";
     } else {
       // Optional: Do nothing or handle the default case
     }
+  }
+  useEffect(() => {
+    redirect();
   }, [userData]);
   // const { register, handleSubmit, errors, setValue } = useForm();
-  useEffect(()=>{
-    if(router?.pathname=="/login"){
+  useEffect(() => {
+    if (router?.pathname == "/login") {
       getuserdata()
     }
     // console.log(router.pathname,"routerrouterrouterrouter")
     // getuserdata()
-  },[])
+  }, [])
   const handleLoginInputChange = (name, value) => {
     dispatch(handleLoginInput(name, value));
   };
@@ -69,8 +78,11 @@ const Login = () => {
         setErrorMessage(response)
         await response
         if (user.email != undefined) {
-          updateAuthToken(response);
-          updateAuthToken2(response)
+          await new Promise((resolve) => {
+            updateAuthToken(response);
+            updateAuthToken2(response)
+            resolve();
+          });
           setError(false)
         } else {
           if (user == false) {
@@ -87,12 +99,12 @@ const Login = () => {
   async function getuserdata() {
     var response;
 
-    response = await getRequest({ API: API_URLS.GET_USER});
+    response = await getRequest({ API: API_URLS.GET_USER });
     var data = []
     if (await response?.status === 200) {
-      if(response?.data?.redirect){
+      if (response?.data?.redirect) {
         window.location.href = response?.data?.redirect
-      }else{
+      } else {
         window.location.href = "/dashboard"
       }
       // window.location.href = response?.data?.data?.redirect

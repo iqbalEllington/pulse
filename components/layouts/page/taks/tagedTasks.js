@@ -257,7 +257,7 @@ const tagedTasks = (props) => {
             <div className="task-list-container">
 
                 <div className="header">
-                    <h3 className="ontoptitle">
+                    <h3 className="ontoptitle" >
                         {props.tag.keyword}
                     </h3>
                 </div>
@@ -271,32 +271,43 @@ const tagedTasks = (props) => {
                             <>
                                 <thead>
                                     <tr>
-                                        <th></th>
+                                        {!props.hideElements &&
+                                            <th></th>
+                                        }
                                         <th>Task/Notification</th>
                                         <th>Project</th>
                                         <th>Status</th>
                                         <th>Priority</th>
                                         <th>Due Date</th>
-
+                                        {!props.hideElements &&
                                         <th>Type</th>
-                                        <th>Responisble</th>
-                                        <th>Updates</th>
-                                        <th>Action</th>
-                                        <th>Last Update</th>
+}
+                                        {!props.hideElements &&
+                                            <th >Responisble</th>
+                                        }
+                                        {!props.hideElements &&
+                                            <th>Updates</th>
+                                        }
+                                        {!props.hideElements &&
+                                            <th >Action</th>
+                                        }
+                                        <th >Last Update</th>
                                     </tr>
                                 </thead>
                                 {tasks.data?.map((task) => {
-                                    return <tr>
-                                        <td className="star">
-                                            <div onClick={() => SetIsstarred(!task.attributes.isStarred, task.id)}>
-                                                {task.attributes.isStarred ?
-                                                    <IoMdStar className="active" />
-                                                    :
-                                                    <IoMdStar />
-                                                    // <FaRegStar />
-                                                }
-                                            </div>
-                                        </td>
+                                    return <tr className="page-break">
+                                        {!props.hideElements &&
+                                            <td className="star">
+                                                <div onClick={() => SetIsstarred(!task.attributes.isStarred, task.id)}>
+                                                    {task.attributes.isStarred ?
+                                                        <IoMdStar className="active" />
+                                                        :
+                                                        <IoMdStar />
+                                                        // <FaRegStar />
+                                                    }
+                                                </div>
+                                            </td>
+                                        }
                                         <td className="taskTitle">
                                             <h4 onClick={() => { props.SetUpdateData(task), props.SetFormaction("update") }}>
                                                 {task.attributes.Task}
@@ -312,9 +323,11 @@ const tagedTasks = (props) => {
 
                                         <td className={task.attributes?.status?.replace(" ", "") + " status"}>
                                             <label className="mobile-view">Status</label>
+                                          
+                                            {!props.hideElements ?
                                             <Dropdown className="color-drop-multy hash" onSelect={((e) => handleStatus(e, task.id))}>
                                                 <Dropdown.Toggle id="dropdown-basic">
-                                                    {task.attributes?.status || 'Select Status'}
+                                                    {task.attributes?.status || ''}
                                                 </Dropdown.Toggle>
                                                 <Dropdown.Menu>
                                                     <Dropdown.Item eventKey="To Do" className="todo">To Do</Dropdown.Item>
@@ -323,6 +336,9 @@ const tagedTasks = (props) => {
                                                     <Dropdown.Item eventKey="On Hold" className="Hold">On Hold</Dropdown.Item>
                                                 </Dropdown.Menu>
                                             </Dropdown>
+                                            :
+                                            <span style={{color: "black"}}>{task.attributes?.status}</span>
+                                }
                                             {/* <span onClick={(e)=>showstatusPop(e,task)}>{task.attributes.status}</span> */}
                                         </td>
                                         <td className="Priority">
@@ -335,47 +351,56 @@ const tagedTasks = (props) => {
                                                 <LineProgress length={100} thick={1} color={calculateDaysPercentage(task.attributes.publishedAt, task.attributes.dueDate) > 75 ? "#FF9191" : "#FFF1DF"} percentage={calculateDaysPercentage(task.attributes.publishedAt, task.attributes.dueDate)} start="begining" />
                                             </span>
                                         </td>
+                                        {!props.hideElements &&
                                         <td className={task.attributes.type + " type"}>
                                             <span>{task.attributes.type}</span>
                                         </td>
-                                        <td className="responsible">
-                                            <label className="mobile-view">Responisble</label>
-                                            <div>
-                                                {task.attributes.responsible_leads?.data?.[0]?.["attributes"]?.Name &&
-                                                    <>
-                                                        <Tooltip title={task.attributes.responsible_leads?.data?.[0]?.["attributes"]?.Name}>
+                                }
+                                        {!props.hideElements &&
+                                            <td className="responsible no-print">
+                                                <label className="mobile-view">Responisble </label>
+                                                <div>
+                                                    {task.attributes.responsible_leads?.data?.[0]?.["attributes"]?.Name &&
+                                                        <>
+                                                            <Tooltip title={task.attributes.responsible_leads?.data?.[0]?.["attributes"]?.Name}>
 
-                                                            <span>
-                                                                <Avatar
-                                                                    {...stringAvatar(task.attributes.responsible_leads?.data?.[0]?.attributes?.Name || 'Not Assigned')}
-                                                                />
-                                                                {/* {task.attributes.responsible_leads?.data?.[0]?.["attributes"].Name} */}
+                                                                <span>
+                                                                    <Avatar
+                                                                        {...stringAvatar(task.attributes.responsible_leads?.data?.[0]?.attributes?.Name || 'Not Assigned')}
+                                                                    />
+                                                                    {/* {task.attributes.responsible_leads?.data?.[0]?.["attributes"].Name} */}
+                                                                </span>
+
+                                                            </Tooltip>
+                                                            <span className="wahtsapp">
+                                                                <a target="_blank" href={gettaskWhatsapp(task.attributes.responsible_leads?.data?.[0]?.["attributes"].whatsapp, task.attributes.projects?.data?.[0]?.attributes?.name, task.attributes.Task)}><FaWhatsapp /></a>
                                                             </span>
-
-                                                        </Tooltip>
-                                                        <span className="wahtsapp">
-                                                            <a target="_blank" href={gettaskWhatsapp(task.attributes.responsible_leads?.data?.[0]?.["attributes"].whatsapp, task.attributes.projects?.data?.[0]?.attributes?.name, task.attributes.Task)}><FaWhatsapp /></a>
-                                                        </span>
-                                                    </>
-                                                }
-                                            </div>
-                                        </td>
-                                        <td className="responses">
-                                            <span onClick={() => { props.SetUpdateData(task), props.SetFormaction("update") }}>
-                                                <span className="ondesk">  {task.attributes?.updates.length}</span>
-                                                <span className="mobile-view"> Updates <FaChevronDown /></span>
-                                                <sup className="mobile-view">
-                                                    {JSON.stringify(task.attributes?.updates.length)}
-                                                </sup>
-                                            </span>
-                                        </td>
-                                        <td className="editAction">
+                                                        </>
+                                                    }
+                                                </div>
+                                            </td>
+                                        }
+                                        {!props.hideElements &&
+                                            <td className="responses no-print">
+                                                <span onClick={() => { props.SetUpdateData(task), props.SetFormaction("update") }}>
+                                                    <span className="ondesk">  {task.attributes?.updates.length}</span>
+                                                    <span className="mobile-view"> Updates <FaChevronDown /></span>
+                                                    <sup className="mobile-view">
+                                                        {JSON.stringify(task.attributes?.updates.length)}
+                                                    </sup>
+                                                </span>
+                                            </td>
+                                        }
+                                         {!props.hideElements &&
+                                        <td className="editAction no-print">
                                             <span onClick={() => { props.SetUpdateData(task), props.SetFormaction("edit") }}>
                                                 <FaRegEdit /> Edit
                                             </span>
                                         </td>
+                                }
                                         <td className="responsesItem">
                                             <div>{task.attributes?.updates?.[0]?.update}</div>
+
                                         </td>
                                         {/*     <td>
                                     {JSON.stringify("Responses")}

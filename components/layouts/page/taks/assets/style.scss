@@ -1717,15 +1717,138 @@
     page-break-after: always;
 }
 
-@media print {
+.White-Theme {
+    background: white;
+    max-width: 900px !important;
+    width: 900px;
+    .page-break {
+        page-break-before:always;
+    }
+    overflow: hidden;
     .pages {
-        page-break-before: always;
-        /* Start a new page for each .pages section */
+        background: white;
+    }
+    table, tr, td, th {
+        page-break-inside: avoid;
+    }
+    .tasks-list td,
+    .tasks-list th {
+        background: white !important;
+        button{
+            color: black;
+        }
+        border: 1px solid black;
+        padding: 10px;
+        .type{
+            color: black;
+        }
+    }
+    table{
+        max-width: 900px !important;
+        width: 900px;
+        min-width: 100%;
+        max-width: 100% !important;
+        td{
+            border: 1px solid black;
+        }
+    }
+
+    .task-list-container {
+        background: white;
+        color: black;
+        .body .tasks-list .taskTitle{
+            h4,span,div,label{
+                color: black;
+                font-size: 1rem;
+                font-weight: bold;
+            }
+        }
+        .body .tasks-list{
+            h4,span,div,label{
+                color: black;
+            }
+            .dueDate span{
+                color: black;
+            }
+        }
+    }
+
+    .no-print {
+        display: none;
     }
 
     .tasks-list tr {
         page-break-inside: avoid;
         /* Prevent rows from breaking across pages */
+    }
+
+    .responsible {
+        display: none;
+    }
+
+    .task-list-container {
+        page-break-inside: avoid;
+        /* Avoid breaking the entire task container */
+    }
+
+    /* Optional: Style adjustments to improve print readability */
+    .mobile-view{
+        display: none !important;
+    }
+    .ontoptitle{
+        color: black;
+        font-size: 18px;
+        padding-top: 10px;
+    }
+    .body{
+        margin-top: 0px;
+        padding-top: 0px;
+    }
+    .header{
+        height: auto;
+    }
+}
+
+@media print {
+    .task-list-container {
+        h3 {
+            font-size: .5px;
+        }
+    }
+    .task-list-container .body .tasks-list .taskTitle{
+        h4{
+            color: black;
+        }
+    }
+    .Grouped {
+        background: white;
+    }
+
+    .pages {
+        background: white;
+    }
+
+    .Task-List-body .task-list-container .body .tasks-list td,
+    .Task-List-body .task-list-container .body .tasks-list th {
+        background: white;
+    }
+
+    .task-list-container {
+        background: white;
+        color: black;
+    }
+
+    .no-print {
+        display: none;
+    }
+
+    .tasks-list tr {
+        page-break-inside: avoid;
+        /* Prevent rows from breaking across pages */
+    }
+
+    .responsible {
+        display: none;
     }
 
     .task-list-container {
@@ -1735,7 +1858,11 @@
 
     /* Optional: Style adjustments to improve print readability */
     body {
-        color: #000;
+        color: #fff;
         background-color: #fff;
+    }
+
+    .ontoptitle {
+        color: black;
     }
 }

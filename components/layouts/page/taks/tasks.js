@@ -16,6 +16,7 @@ import { FaSortAmountDown } from "react-icons/fa";
 import { IoSearch } from "react-icons/io5";
 import EscapeKeyListener from "components/utility/EscapeKeyListener";
 
+import jsPDF from 'jspdf';
 
 
 const Tasks = ({ router }, props) => {
@@ -54,7 +55,6 @@ const Tasks = ({ router }, props) => {
     async function getuserdata() {
         var response;
         response = await getRequest({ API: API_URLS.GET_USER + '?populate[]=profilePhoto' });
-        console.log(response,  "700937700937700937700937700937700937")
         if (await response?.status === 200) {
             setUserDetails(response.data)
         } else if (response?.status === 401) {
@@ -96,7 +96,7 @@ const Tasks = ({ router }, props) => {
         },
         canvas: {
             // default is 'image/jpeg' for better size performance
-            mimeType: 'image/png',
+            mimeType: 'image/jpeg',
             qualityRatio: 1
         },
         // Customize any value passed to the jsPDF instance and html2canvas
@@ -121,6 +121,130 @@ const Tasks = ({ router }, props) => {
     const handleEscape = () => {
         setFormActive(false)
     };
+    const [hideElements, setHideElements] = useState(true);
+    function wait(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+    const handleGeneratePdf = async () => {
+        // Hide elements before PDF generation
+        await new Promise((resolve) => {
+            setHideElements(true);
+            resolve();
+        });
+
+        await wait(1000);
+        const customStyle = document.createElement('style');
+        // customStyle.innerHTML = `
+        //     #grouped{
+        //     font-size: 7px;
+        //     color:black;
+        //     }
+        //     .task-list-container .header h3{
+        //         font-size: 7px;
+        //         color:black;
+        //     }
+        //         table{
+        //         width:100%;
+        //         color:black;
+        //         }
+        //     table tr td,table tr th {
+        //         font-size: 7px;
+        //         color:black;
+        //     }
+        //    table tr td h4,table tr td label,table tr td h4,table tr td div, table tr td span, table tr th {
+        //         font-size: 7px;
+        //         color:black;
+        //     }
+        // `;
+        // document.head.appendChild(customStyle);
+
+        const doc = new jsPDF(
+            {
+                orientation: "landscape",
+                unit: "px",
+                autoPaging: true,
+                html2canvas: { scale: 0.69 },
+            });
+        const tables = groupedRef.current.querySelectorAll(".pages"); // Get all tables inside groupedRef
+        console.log(tables)
+        let currentY = 10;
+        // tables.forEach((table, index) => {
+        //     doc.html(table, {
+        //         callback: function (pdfDoc) {
+        //             // Add a new page after every table except the last one
+        //             console.log(pdfDoc)
+        //             if (index < tables.length - 1) {
+        //                 pdfDoc.addPage();
+        //             }
+        //         },
+        //         x: 10, // Adjust X position
+        //         y: currentY, // Adjust Y position
+        //         margin: [4, 4, 4, 4], // Adjust margins if needed
+        //     });
+        // });
+        // Helper function to process tables sequentially
+        // Helper function to process tables sequentially
+        doc.text("This is the first page", 10, 10);
+        doc.addPage();
+        doc.text("This is the second page", 10, 10);
+        doc.addPage();
+        doc.text("This is the second page", 10, 10);
+        doc.addPage();
+        doc.text("This is the second page", 10, 10);
+        doc.addPage();
+
+        const processTable = async (index) => {
+            if (index >= tables.length) {
+                // Save the document after processing all tables
+                doc.save("document.pdf");
+                return;
+            }
+            await doc.html(tables[index], {
+                callback: function (doc) {
+                    doc.addPage();
+                }
+            })
+
+            // Adjust the Y position for the next table
+            // let nextY = currentY + doc.internal.pageSize.height;
+
+            // Process the next table
+            processTable(index + 1);
+        };
+
+        processTable(0);
+
+        // doc.save("document.pdf");
+
+        // doc.html(groupedRef.current, {
+        //     // 'pt', 'px', 'cm', 'in'
+        //     // format: 'a4',
+        //     callback: function (doc) {
+        //         const pageHeight = doc.internal.pageSize.height;
+        //         let currentY = 10;
+        //         const contentHeight = groupedRef.current.offsetHeight;
+
+        //         if (contentHeight > pageHeight - currentY) {
+        //             doc.addPage();
+        //             currentY = 70; // Reset Y position
+        //         }
+        //         doc.save('document.pdf');
+        //         // document.head.removeChild(customStyle);
+        //     },
+        //     autoPaging: true,
+        //     html2canvas: {
+        //         debug: true,
+        //         scale: .69, // Adjust scale to shrink or expand content
+        //     },
+
+        //     margin: [4, 4, 14, 4],
+
+        //     x: 0, // Adjust x-axis position
+        //     y: 0, // Adjust y-axis position
+        // });
+        // generatePDF(getTargetElement, options)
+        setHideElements(false);
+    };
     return (
         <>
             <EscapeKeyListener onEscape={handleEscape} />
@@ -135,7 +259,7 @@ const Tasks = ({ router }, props) => {
                         </div>
                         <div className="actionbar">
                             {/* <button className="downloadPdf" onClick={() => generatePDF(getTargetElement, options)}> Download PDF <FaArrowDown /></button> */}
-                            <button className="downloadPdf" onClick={() => generatePDF(getTargetElement, options)}> Download PDF <FaArrowDown /></button>
+                            <button className="downloadPdf" onClick={() => handleGeneratePdf()}> Download PDF <FaArrowDown /></button>
 
                             <Dropdown className="profile-user">
                                 <Dropdown.Toggle id="dropdown-basic">
@@ -215,6 +339,7 @@ const Tasks = ({ router }, props) => {
                                 forceLoad: { forceLoad },
                                 filterValue: ontop
                             }}
+                                hideElements={hideElements}
                                 SetFormaction={SetFormaction}
                                 setForceload={setForceload}
                                 SetUpdateData={SetUpdateData}
@@ -245,7 +370,7 @@ const Tasks = ({ router }, props) => {
                                 </Dropdown>
                             </div>
 
-                            <div id="grouped" ref={groupedRef} style={{ backgroundColor: '#111' }}>
+                            <div id="grouped" className={!hideElements ? "" : "White-Theme"} ref={groupedRef} >
                                 {sort == "Date" &&
                                     <>
                                         <div className="pages">
@@ -256,11 +381,13 @@ const Tasks = ({ router }, props) => {
                                                 forceLoad: { forceLoad },
                                                 filterValue: "Overdue"
                                             }}
+                                                hideElements={hideElements}
                                                 SetFormaction={SetFormaction}
                                                 setForceload={setForceload}
                                                 SetUpdateData={SetUpdateData}
                                             />
                                         </div>
+                                        <div className="page-break"></div>
                                         {sortDate.map((value) => {
                                             return <div className="pages">
                                                 <TagedTasks tag={{
@@ -270,10 +397,12 @@ const Tasks = ({ router }, props) => {
                                                     forceLoad: { forceLoad },
                                                     filterValue: value
                                                 }}
+                                                    hideElements={hideElements}
                                                     SetFormaction={SetFormaction}
                                                     setForceload={setForceload}
                                                     SetUpdateData={SetUpdateData}
                                                 />
+                                                <div className="page-break"></div>
                                             </div>
                                         })}
                                     </>}
@@ -291,6 +420,7 @@ const Tasks = ({ router }, props) => {
                                                             forceLoad: { forceLoad },
                                                             filterValue: projects?.data[value]?.["attributes"]?.["name"],
                                                         }}
+                                                            hideElements={hideElements}
                                                             SetFormaction={SetFormaction}
                                                             setForceload={setForceload}
                                                             SetUpdateData={SetUpdateData}
@@ -310,6 +440,7 @@ const Tasks = ({ router }, props) => {
                                                 forceLoad: { forceLoad },
                                                 filterValue: "Priority",
                                             }}
+                                                hideElements={hideElements}
                                                 SetFormaction={SetFormaction}
                                                 setForceload={setForceload}
                                                 SetUpdateData={SetUpdateData}
