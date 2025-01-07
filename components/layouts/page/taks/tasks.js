@@ -124,15 +124,15 @@ const Tasks = ({ router }, props) => {
     const [hideElements, setHideElements] = useState(true);
     function wait(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
-    }
+      }
     const handleGeneratePdf = async () => {
         // Hide elements before PDF generation
         await new Promise((resolve) => {
             setHideElements(true);
             resolve();
         });
-
-        await wait(1000);
+       
+        await wait(1000); 
         const customStyle = document.createElement('style');
         // customStyle.innerHTML = `
         //     #grouped{
@@ -160,88 +160,37 @@ const Tasks = ({ router }, props) => {
 
         const doc = new jsPDF(
             {
-                orientation: "landscape",
+                orientation: "landscape",    
                 unit: "px",
                 autoPaging: true,
-                html2canvas: { scale: 0.69 },
+                // html2canvas: { scale: 3 },
             });
-        const tables = groupedRef.current.querySelectorAll(".pages"); // Get all tables inside groupedRef
-        console.log(tables)
-        let currentY = 10;
-        // tables.forEach((table, index) => {
-        //     doc.html(table, {
-        //         callback: function (pdfDoc) {
-        //             // Add a new page after every table except the last one
-        //             console.log(pdfDoc)
-        //             if (index < tables.length - 1) {
-        //                 pdfDoc.addPage();
-        //             }
-        //         },
-        //         x: 10, // Adjust X position
-        //         y: currentY, // Adjust Y position
-        //         margin: [4, 4, 4, 4], // Adjust margins if needed
-        //     });
-        // });
-        // Helper function to process tables sequentially
-        // Helper function to process tables sequentially
-        doc.text("This is the first page", 10, 10);
-        doc.addPage();
-        doc.text("This is the second page", 10, 10);
-        doc.addPage();
-        doc.text("This is the second page", 10, 10);
-        doc.addPage();
-        doc.text("This is the second page", 10, 10);
-        doc.addPage();
-
-        const processTable = async (index) => {
-            if (index >= tables.length) {
-                // Save the document after processing all tables
-                doc.save("document.pdf");
-                return;
-            }
-            await doc.html(tables[index], {
-                callback: function (doc) {
+        
+        doc.html(groupedRef.current, {
+            // 'pt', 'px', 'cm', 'in'
+            // format: 'a4',
+            callback: function (doc) {
+                const pageHeight = doc.internal.pageSize.height;
+                let currentY = 10;
+                const contentHeight = groupedRef.current.offsetHeight;
+        
+                if (contentHeight > pageHeight - currentY) {
                     doc.addPage();
+                    currentY = 30; // Reset Y position
                 }
-            })
-
-            // Adjust the Y position for the next table
-            // let nextY = currentY + doc.internal.pageSize.height;
-
-            // Process the next table
-            processTable(index + 1);
-        };
-
-        processTable(0);
-
-        // doc.save("document.pdf");
-
-        // doc.html(groupedRef.current, {
-        //     // 'pt', 'px', 'cm', 'in'
-        //     // format: 'a4',
-        //     callback: function (doc) {
-        //         const pageHeight = doc.internal.pageSize.height;
-        //         let currentY = 10;
-        //         const contentHeight = groupedRef.current.offsetHeight;
-
-        //         if (contentHeight > pageHeight - currentY) {
-        //             doc.addPage();
-        //             currentY = 70; // Reset Y position
-        //         }
-        //         doc.save('document.pdf');
-        //         // document.head.removeChild(customStyle);
-        //     },
-        //     autoPaging: true,
-        //     html2canvas: {
-        //         debug: true,
-        //         scale: .69, // Adjust scale to shrink or expand content
-        //     },
-
-        //     margin: [4, 4, 14, 4],
-
-        //     x: 0, // Adjust x-axis position
-        //     y: 0, // Adjust y-axis position
-        // });
+                doc.save('document.pdf');
+                // document.head.removeChild(customStyle);
+            },
+            autoPaging: true,
+            html2canvas: {
+                scale: .69, // Adjust scale to shrink or expand content
+            },
+            
+            margin: [4, 4, 14, 4],
+          
+            x: 0, // Adjust x-axis position
+            y: 0, // Adjust y-axis position
+        });
         // generatePDF(getTargetElement, options)
         setHideElements(false);
     };
@@ -397,12 +346,12 @@ const Tasks = ({ router }, props) => {
                                                     forceLoad: { forceLoad },
                                                     filterValue: value
                                                 }}
-                                                    hideElements={hideElements}
+                                                hideElements={hideElements}
                                                     SetFormaction={SetFormaction}
                                                     setForceload={setForceload}
                                                     SetUpdateData={SetUpdateData}
                                                 />
-                                                <div className="page-break"></div>
+                                                 <div className="page-break"></div>
                                             </div>
                                         })}
                                     </>}
@@ -420,7 +369,7 @@ const Tasks = ({ router }, props) => {
                                                             forceLoad: { forceLoad },
                                                             filterValue: projects?.data[value]?.["attributes"]?.["name"],
                                                         }}
-                                                            hideElements={hideElements}
+                                                        hideElements={hideElements}
                                                             SetFormaction={SetFormaction}
                                                             setForceload={setForceload}
                                                             SetUpdateData={SetUpdateData}
@@ -440,7 +389,7 @@ const Tasks = ({ router }, props) => {
                                                 forceLoad: { forceLoad },
                                                 filterValue: "Priority",
                                             }}
-                                                hideElements={hideElements}
+                                            hideElements={hideElements}
                                                 SetFormaction={SetFormaction}
                                                 setForceload={setForceload}
                                                 SetUpdateData={SetUpdateData}
