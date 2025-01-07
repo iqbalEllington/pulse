@@ -1742,6 +1742,9 @@
         .type{
             color: black;
         }
+        word-break: break-all;
+        word-wrap: break-word;
+        white-space: wrap;
     }
     table{
         max-width: 900px !important;

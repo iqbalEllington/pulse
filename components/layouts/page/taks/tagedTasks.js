@@ -252,6 +252,21 @@ const tagedTasks = (props) => {
         return percentage.toFixed(2); // Return percentage with 2 decimal places
     }
 
+    function getlastUpdates(data) {
+        let updates = data
+        console.log(updates, "updatesupdates")
+        if (updates.length) {
+            const latestUpdate = updates.reduce((latest, current) => {
+                return new Date(current.date) > new Date(latest.date) ? current : latest;
+            });
+            return latestUpdate.update
+            // console.log(latestUpdate.update)
+            // return latestUpdate
+        } else {
+            return ""
+        }
+
+    }
     return (
         <>
             <div className="task-list-container">
@@ -280,8 +295,8 @@ const tagedTasks = (props) => {
                                         <th>Priority</th>
                                         <th>Due Date</th>
                                         {!props.hideElements &&
-                                        <th>Type</th>
-}
+                                            <th>Type</th>
+                                        }
                                         {!props.hideElements &&
                                             <th >Responisble</th>
                                         }
@@ -323,22 +338,22 @@ const tagedTasks = (props) => {
 
                                         <td className={task.attributes?.status?.replace(" ", "") + " status"}>
                                             <label className="mobile-view">Status</label>
-                                          
+
                                             {!props.hideElements ?
-                                            <Dropdown className="color-drop-multy hash" onSelect={((e) => handleStatus(e, task.id))}>
-                                                <Dropdown.Toggle id="dropdown-basic">
-                                                    {task.attributes?.status || ''}
-                                                </Dropdown.Toggle>
-                                                <Dropdown.Menu>
-                                                    <Dropdown.Item eventKey="To Do" className="todo">To Do</Dropdown.Item>
-                                                    <Dropdown.Item eventKey="In Progress" className="progress">In Progress</Dropdown.Item>
-                                                    <Dropdown.Item eventKey="Completed" className="Completed">Completed</Dropdown.Item>
-                                                    <Dropdown.Item eventKey="On Hold" className="Hold">On Hold</Dropdown.Item>
-                                                </Dropdown.Menu>
-                                            </Dropdown>
-                                            :
-                                            <span style={{color: "black"}}>{task.attributes?.status}</span>
-                                }
+                                                <Dropdown className="color-drop-multy hash" onSelect={((e) => handleStatus(e, task.id))}>
+                                                    <Dropdown.Toggle id="dropdown-basic">
+                                                        {task.attributes?.status || ''}
+                                                    </Dropdown.Toggle>
+                                                    <Dropdown.Menu>
+                                                        <Dropdown.Item eventKey="To Do" className="todo">To Do</Dropdown.Item>
+                                                        <Dropdown.Item eventKey="In Progress" className="progress">In Progress</Dropdown.Item>
+                                                        <Dropdown.Item eventKey="Completed" className="Completed">Completed</Dropdown.Item>
+                                                        <Dropdown.Item eventKey="On Hold" className="Hold">On Hold</Dropdown.Item>
+                                                    </Dropdown.Menu>
+                                                </Dropdown>
+                                                :
+                                                <span style={{ color: "black" }}>{task.attributes?.status}</span>
+                                            }
                                             {/* <span onClick={(e)=>showstatusPop(e,task)}>{task.attributes.status}</span> */}
                                         </td>
                                         <td className="Priority">
@@ -352,10 +367,10 @@ const tagedTasks = (props) => {
                                             </span>
                                         </td>
                                         {!props.hideElements &&
-                                        <td className={task.attributes.type + " type"}>
-                                            <span>{task.attributes.type}</span>
-                                        </td>
-                                }
+                                            <td className={task.attributes.type + " type"}>
+                                                <span>{task.attributes.type}</span>
+                                            </td>
+                                        }
                                         {!props.hideElements &&
                                             <td className="responsible no-print">
                                                 <label className="mobile-view">Responisble </label>
@@ -391,15 +406,15 @@ const tagedTasks = (props) => {
                                                 </span>
                                             </td>
                                         }
-                                         {!props.hideElements &&
-                                        <td className="editAction no-print">
-                                            <span onClick={() => { props.SetUpdateData(task), props.SetFormaction("edit") }}>
-                                                <FaRegEdit /> Edit
-                                            </span>
-                                        </td>
-                                }
+                                        {!props.hideElements &&
+                                            <td className="editAction no-print">
+                                                <span onClick={() => { props.SetUpdateData(task), props.SetFormaction("edit") }}>
+                                                    <FaRegEdit /> Edit
+                                                </span>
+                                            </td>
+                                        }
                                         <td className="responsesItem">
-                                            <div>{task.attributes?.updates?.[0]?.update}</div>
+                                            <div>{getlastUpdates(task.attributes?.updates)}</div>
 
                                         </td>
                                         {/*     <td>
