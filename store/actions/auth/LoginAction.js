@@ -55,8 +55,8 @@ export const loginAction = (loginData, callback) => (dispatch) => {
             response.isLoggedIn = true;
             response.loginMessage = "Success";
             response.isLogging = true;
-            Cookies.set("token", data.token)
             Cookies.set("userDetail", JSON.stringify(data.user))
+            Cookies.set("token", data.token, { secure: true, sameSite: 'Strict', expires: 14 });
             dispatch({ type: Types.AUTH_LOGIN_CHECK, payload: response });
             if (callback) {
               callback(data.message, data.user);

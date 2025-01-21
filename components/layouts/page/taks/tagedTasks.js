@@ -254,14 +254,11 @@ const tagedTasks = (props) => {
 
     function getlastUpdates(data) {
         let updates = data
-        console.log(updates, "updatesupdates")
         if (updates.length) {
             const latestUpdate = updates.reduce((latest, current) => {
                 return new Date(current.date) > new Date(latest.date) ? current : latest;
             });
             return latestUpdate.update
-            // console.log(latestUpdate.update)
-            // return latestUpdate
         } else {
             return ""
         }
@@ -269,8 +266,8 @@ const tagedTasks = (props) => {
     }
     return (
         <>
+            <div className="page-break"></div>
             <div className="task-list-container">
-
                 <div className="header">
                     <h3 className="ontoptitle" >
                         {props.tag.keyword}
@@ -289,11 +286,14 @@ const tagedTasks = (props) => {
                                         {!props.hideElements &&
                                             <th></th>
                                         }
-                                        <th>Task/Notification</th>
-                                        <th>Project</th>
-                                        <th>Status</th>
-                                        <th>Priority</th>
-                                        <th>Due Date</th>
+                                        <th className="task-head">Task/Notification</th>
+                                        <th className="project-head">Project</th>
+                                        <th className="status-head">Status</th>
+                                        {!props.hideElements &&
+                                            <th>Priority</th>
+                                        }  {!props.hideElements &&
+                                            <th className="due-head">Due Date</th>
+                                        }
                                         {!props.hideElements &&
                                             <th>Type</th>
                                         }
@@ -306,11 +306,11 @@ const tagedTasks = (props) => {
                                         {!props.hideElements &&
                                             <th >Action</th>
                                         }
-                                        <th >Last Update</th>
+                                        <th className="updates-head">Last Update</th>
                                     </tr>
                                 </thead>
                                 {tasks.data?.map((task) => {
-                                    return <tr className="page-break">
+                                    return <tr>
                                         {!props.hideElements &&
                                             <td className="star">
                                                 <div onClick={() => SetIsstarred(!task.attributes.isStarred, task.id)}>
@@ -352,20 +352,30 @@ const tagedTasks = (props) => {
                                                     </Dropdown.Menu>
                                                 </Dropdown>
                                                 :
-                                                <span style={{ color: "black" }}>{task.attributes?.status}</span>
+                                                <div>
+                                                    <span style={{ color: "black" }}>{task.attributes?.status}</span>
+                                                    <div>
+                                                        <label className="mobile-view">Due Date</label>
+                                                        <span>{moment(task.attributes.dueDate).format('DD MMM YYYY')}</span>
+                                                    </div>
+                                                </div>
                                             }
                                             {/* <span onClick={(e)=>showstatusPop(e,task)}>{task.attributes.status}</span> */}
                                         </td>
-                                        <td className="Priority">
-                                            <span>{task.attributes.priority}</span>
-                                        </td>
-                                        <td className="dueDate">
-                                            <label className="mobile-view">Due Date</label>
-                                            <span>{task.attributes.dueDate}</span>
-                                            <span className="theprogressline">
-                                                <LineProgress length={100} thick={1} color={calculateDaysPercentage(task.attributes.publishedAt, task.attributes.dueDate) > 75 ? "#FF9191" : "#FFF1DF"} percentage={calculateDaysPercentage(task.attributes.publishedAt, task.attributes.dueDate)} start="begining" />
-                                            </span>
-                                        </td>
+                                        {!props.hideElements &&
+                                            <td className="Priority">
+                                                <span>{task.attributes.priority}</span>
+                                            </td>
+                                        }
+                                        {!props.hideElements &&
+                                            <td className="dueDate">
+                                                <label className="mobile-view">Due Date</label>
+                                                <span>{moment(task.attributes.dueDate).format('DD MMM YYYY')}</span>
+                                                <span className="theprogressline">
+                                                    <LineProgress length={100} thick={1} color={calculateDaysPercentage(task.attributes.publishedAt, task.attributes.dueDate) > 75 ? "#FF9191" : "#FFF1DF"} percentage={calculateDaysPercentage(task.attributes.publishedAt, task.attributes.dueDate)} start="begining" />
+                                                </span>
+                                            </td>
+                                        }
                                         {!props.hideElements &&
                                             <td className={task.attributes.type + " type"}>
                                                 <span>{task.attributes.type}</span>
@@ -401,7 +411,7 @@ const tagedTasks = (props) => {
                                                     <span className="ondesk">  {task.attributes?.updates.length}</span>
                                                     <span className="mobile-view"> Updates <FaChevronDown /></span>
                                                     <sup className="mobile-view">
-                                                        {JSON.stringify(task.attributes?.updates.length)}
+                                                        {(task.attributes?.updates.length)}
                                                     </sup>
                                                 </span>
                                             </td>
@@ -414,8 +424,25 @@ const tagedTasks = (props) => {
                                             </td>
                                         }
                                         <td className="responsesItem">
-                                            <div>{getlastUpdates(task.attributes?.updates)}</div>
-
+                                            {!props.hideElements ?
+                                                <div>{getlastUpdates(task.attributes?.updates)}</div>
+                                                :
+                                                <>{task.attributes?.updates?.length > 1 &&
+                                                    <ul>
+                                                        {task.attributes?.updates.map((value) => {
+                                                            return <li>
+                                                                <span>
+                                                                    {moment(value?.date).format('DD MMM YYYY')}
+                                                                </span>
+                                                                <span>
+                                                                    {value?.update}
+                                                                </span>
+                                                            </li>
+                                                        })}
+                                                    </ul>
+                                                }
+                                                </>
+                                            }
                                         </td>
                                         {/*     <td>
                                     {JSON.stringify("Responses")}

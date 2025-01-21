@@ -1718,153 +1718,394 @@
 }
 
 .White-Theme {
-    background: white;
-    max-width: 900px !important;
-    width: 900px;
-    .page-break {
-        page-break-before:always;
-    }
-    overflow: hidden;
-    .pages {
-        background: white;
-    }
-    table, tr, td, th {
-        page-break-inside: avoid;
-    }
-    .tasks-list td,
-    .tasks-list th {
-        background: white !important;
-        button{
-            color: black;
-        }
-        border: 1px solid black;
-        padding: 10px;
-        .type{
-            color: black;
-        }
-        word-wrap: break-word;
-        white-space: wrap;
-    }
-    table{
-        max-width: 900px !important;
-        width: 900px;
-        min-width: 100%;
-        max-width: 100% !important;
-        td{
-            border: 1px solid black;
+    background: #FBFBFB;
+    width: 620px;
+    margin: auto;
+
+    .task-list-container {
+        .header {
+            height: 40px;
+            min-height: unset;
+            width: 580px;
+            margin: auto;
+            margin-bottom: 0px !important;
+            padding: 0px !important;
+            h3 {
+                font-size: 12px;
+                margin-bottom: 0px !important;
+                padding: 0px !important;
+                color: #000;
+            }
         }
     }
 
-    .task-list-container {
-        background: white;
-        color: black;
-        .body .tasks-list .taskTitle{
-            h4,span,div,label{
+    .body {
+        overflow: hidden;
+    }
+
+    .tasks-list {
+        width: 580px;
+        margin: auto;
+        background: #FFFFFF;
+        border: 1px solid #E7E6E0;
+        thead {
+            padding-bottom: 10px !important;
+        }
+
+        tr {
+            th {
+                background: #fff !important;
+                border: 0px !important;
                 color: black;
-                font-size: 1rem;
                 font-weight: bold;
+                border-bottom: 1px solid #E7E6E0 !important;
+                font-size: 12px;
+                padding: 10px !important
+            }
+
+            td {
+                word-wrap: break-word;
+                white-space: wrap;
+                background: white !important;
+                border: 0px !important;
+                border-right: 1px solid #DEDEDE !important;
+                font-size: 12px;
+                padding: 10px !important;
+                &:last-child {
+                    border-right: 0px;
+                }
+
+                h3,
+                h4,
+                span,
+                label,
+                div {
+                    color: black !important;
+                    background: white;
+                    word-wrap: break-word;
+                    white-space: wrap;
+                    font-size: 12px;
+                }
+
+                &.taskTitle {
+                    width: 187px;
+                }
+
+                &.responsesItem {
+                    width: 160px;
+
+                    table {
+                        width: 150px;
+                        background: white;
+
+                        tr td {
+                            background: white !important;
+                        }
+                    }
+                }
+            }
+
+            &:nth-child(odd) {
+                td {
+                    background: #E7E6E0 !important;
+
+                    h3,
+                    h4,
+                    span,
+                    label,
+                    div {
+                        color: black !important;
+                        background: #E7E6E0;
+                        word-wrap: break-word;
+                        white-space: wrap;
+                    }
+                }
             }
         }
-        .body .tasks-list{
-            h4,span,div,label{
-                color: black;
-            }
-            .dueDate span{
-                color: black;
-            }
-        }
     }
 
-    .no-print {
-        display: none;
-    }
+    // background: white;
+    // max-width: 900px !important;
+    // width: 900px;
+    // font-family: AcuminPro;
 
-    .tasks-list tr {
-        page-break-inside: avoid;
-        /* Prevent rows from breaking across pages */
-    }
+    // .pages {
+    //     display: block;
+    //     min-height: 100%;
+    //     page-break-after: always;
+    //     page-break-before: always;
+    //     /* Forces a page break before the element */
+    //     page-break-after: always;
+    //     /* Forces a page break after the element */
+    //     page-break-inside: avoid;
+    // }
 
-    .responsible {
-        display: none;
-    }
+    // overflow: hidden;
 
-    .task-list-container {
-        page-break-inside: avoid;
-        /* Avoid breaking the entire task container */
-    }
+    // .pages {
+    //     background: white;
+    // }
 
-    /* Optional: Style adjustments to improve print readability */
-    .mobile-view{
-        display: none !important;
-    }
-    .ontoptitle{
-        color: black;
-        font-size: 18px;
-        padding-top: 10px;
-    }
-    .body{
-        margin-top: 0px;
-        padding-top: 0px;
-    }
-    .header{
-        height: auto;
-    }
+    //     table,
+    //     tr,
+    //     td,
+    //     th {
+    //         page-break-inside: avoid;
+
+    //     }
+
+    //     .tasks-list th {
+    //         background: #E7E6E0 !important;
+    //     }
+    //     table{
+    //         width: 900px;
+    //     }
+    //     tr{
+    //         width: 100%;
+    //         clear: both;
+    //         float: left;
+    //         border-bottom: 1px solid #ccc;
+    //     }
+    //     .tasks-list td,
+    //     .tasks-list th {
+    //         border: 0px !important;
+    //         border-right: 1px solid #6C6B68 !important;
+    //         font-family: 'Acumin-Pro', 'AcuminPro', "Arial";
+    //         float: left;
+    //         &.projectName,
+    //         &.taskTitle,
+    //         &.dueDate {
+    //             background: white !important;
+    //         }
+
+    //         &.taskTitle,
+    //         &.task-head {
+    //             width: 200px !important;
+    //             min-width: 200px !important;
+    //             max-width: 200px !important;
+    //             max-width: 120px !important;
+    //         }
+
+    //         &.projectName,
+    //         &.project-head {
+    //             width: 160px !important;
+    //             min-width: 160px !important;
+    //             max-width: 160px !important;
+    //         }
+
+    //         &.dueDate,
+    //         &.due-head {
+    //             width: 140px !important;
+    //         }
+
+    //         &.InProgress {
+    //             padding: 10px !important;
+
+    //         }
+
+    //         &.status-head,
+    //         &.status {
+    //             width: 90px;
+    //             height: 100%;
+    //             min-height: 100%;
+    //         }
+
+    //         // background: white !important;
+    //         button {
+    //             color: black;
+    //         }
+
+    //         &.updates-head,
+    //         &.responsesItem {
+    //             width: 160px;
+    //             background: white;
+    //             table{
+    //                 width: 150px;
+    //                 background: white;
+    //                 display: table;
+    //                 tr td{
+    //                     display: table;
+    //                     background: white !important;
+    //                 }
+    //             }
+    //         }
+
+    //         padding: 10px;
+
+    //         .type {
+    //             color: black;
+    //         }
+
+    //         word-wrap: break-word;
+    //         white-space: wrap;
+    //     }
+
+
+
+    //     .task-list-container {
+    //         background: white;
+    //         color: black;
+
+    //         .body .tasks-list .taskTitle {
+
+    //             h4,
+    //             span,
+    //             div,
+    //             label {
+    //                 color: black;
+    //                 font-size: .7rem;
+    //             }
+    //         }
+
+    //         .body .tasks-list {
+
+    //             h4,
+    //             span,
+    //             div,
+    //             label {
+    //                 color: black;
+    //             }
+
+    //             .dueDate span {
+    //                 color: black;
+    //             }
+    //         }
+    //     }
+
+    //     table {
+    //         tr td {
+    //             page-break-inside: avoid !important;
+    //             ;
+    //         }
+
+    //         tr th {
+    //             page-break-inside: avoid !important;
+    //             ;
+    //         }
+
+    //         tr {
+    //             page-break-inside: avoid !important;
+    //             ;
+    //         }
+    //     }
+
+    //     .no-print {
+    //         display: none;
+    //     }
+
+    //     .tasks-list tr {
+    //         page-break-inside: avoid;
+    //         /* Prevent rows from breaking across pages */
+    //     }
+
+    //     .responsible {
+    //         display: none;
+    //     }
+
+    //     .task-list-container {
+    //         page-break-inside: avoid;
+    //         /* Avoid breaking the entire task container */
+    //     }
+
+    //     /* Optional: Style adjustments to improve print readability */
+    //     .mobile-view {
+    //         display: none !important;
+    //     }
+
+    //     .ontoptitle {
+    //         color: black;
+    //         font-size: 18px;
+    //         padding-top: 10px;
+    //     }
+
+    //     .body {
+    //         margin-top: 0px;
+    //         padding-top: 0px;
+    //     }
+
+    //     .header {
+    //         height: auto;
+    //     }
+    // }
+
+    // @media print {
+
+    //     .pages {
+    //         display: block;
+    //         min-height: 100%;
+    //         page-break-after: always;
+    //         page-break-before: always;
+    //         /* Forces a page break before the element */
+    //         page-break-after: always;
+    //         /* Forces a page break after the element */
+    //         page-break-inside: avoid;
+    //     }
+
+    //     table {
+    //         tr td {
+    //             page-break-inside: avoid;
+    //         }
+
+    //         tr th {
+    //             page-break-inside: avoid;
+    //         }
+    //     }
 }
 
-@media print {
-    .task-list-container {
-        h3 {
-            font-size: .5px;
-        }
-    }
-    .task-list-container .body .tasks-list .taskTitle{
-        h4{
-            color: black;
-        }
-    }
-    .Grouped {
-        background: white;
-    }
+// @media print {
+//     .task-list-container {
+//         h3 {
+//             font-size: .5px;
+//         }
+//     }
+//     .task-list-container .body .tasks-list .taskTitle{
+//         h4{
+//             color: black;
+//         }
+//     }
+//     .Grouped {
+//         background: white;
+//     }
 
-    .pages {
-        background: white;
-    }
+//     .pages {
+//         background: white;
+//     }
 
-    .Task-List-body .task-list-container .body .tasks-list td,
-    .Task-List-body .task-list-container .body .tasks-list th {
-        background: white;
-    }
+//     .Task-List-body .task-list-container .body .tasks-list td,
+//     .Task-List-body .task-list-container .body .tasks-list th {
+//         background: white;
+//     }
 
-    .task-list-container {
-        background: white;
-        color: black;
-    }
+//     .task-list-container {
+//         background: white;
+//         color: black;
+//     }
 
-    .no-print {
-        display: none;
-    }
+//     .no-print {
+//         display: none;
+//     }
 
-    .tasks-list tr {
-        page-break-inside: avoid;
-        /* Prevent rows from breaking across pages */
-    }
+//     .tasks-list tr {
+//         page-break-inside: avoid;
+//         /* Prevent rows from breaking across pages */
+//     }
 
-    .responsible {
-        display: none;
-    }
+//     .responsible {
+//         display: none;
+//     }
 
-    .task-list-container {
-        page-break-inside: avoid;
-        /* Avoid breaking the entire task container */
-    }
+//     .task-list-container {
+//         page-break-inside: avoid;
+//         /* Avoid breaking the entire task container */
+//     }
 
-    /* Optional: Style adjustments to improve print readability */
-    body {
-        color: #fff;
-        background-color: #fff;
-    }
+//     /* Optional: Style adjustments to improve print readability */
+//     body {
+//         color: #fff;
+//         background-color: #fff;
+//     }
 
-    .ontoptitle {
-        color: black;
-    }
-}
+//     .ontoptitle {
+//         color: black;
+//     }
+// }

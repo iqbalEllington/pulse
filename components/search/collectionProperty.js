@@ -7,7 +7,7 @@ import { MdClose } from "react-icons/md";
 import Link from "next/link";
 import { FaList } from "react-icons/fa";
 
-const SearchProperty = (props) => {
+const CollectionProperty = (props) => {
     let filterSearch = (value) => {
         getProperties(value);
         SetKeyowrd(value);
@@ -47,7 +47,7 @@ const SearchProperty = (props) => {
                 <input onFocus={() => Setisfocus(true)} onChange={(e) => filterSearch(e.target.value)} placeholder="Search" type="text" />
                 <IoSearch />
             </div>
-            <Link className="list-view" href="/collection/listview"><FaList /><span>List View</span></Link>
+            <Link className="list-view" href="/dashboard/listview"><FaList /><span>List View</span></Link>
             <span className="result-count">Properties {property?.data?.length}</span>
         </div>
         {(keyword || isfocus) &&
@@ -58,7 +58,7 @@ const SearchProperty = (props) => {
                     </span>
                     {property?.data?.map((property) => {
                         return <div className="property-list">
-                            <Link href={"/collection" + (from != false ? "/" + from + "?property=" + property.id : "?property=" + property.id)}>
+                            <Link href={"/dashboard" + (from != false ? "/" + from + "?property=" + property.id : "?property=" + property.id)}>
                                 <div className="search-l-body" onClick={() => { props.activateProeprty(from == false ? property.id : property.id), props.setloop(false), Setisfocus(false), SetKeyowrd("") }}>
                                     <div className="imageholder"><img src={process.env.NEXT_PUBLIC_IMAGE_URL + (property.attributes?.featuredImage?.data?.attributes?.url ? property.attributes?.featuredImage?.data?.attributes?.formats?.small?.url : "/uploads/small_imagenotfound_2b380da6d1.jpg")}></img></div>
                                     <div className="titles">
@@ -82,13 +82,13 @@ const SearchProperty = (props) => {
             </div>
         }
         {from == "daily" ?
-            <Link href={"/collection"+ (props.active!=undefined ? "?property="+props.active: "")}>
+            <Link href={"/dashboard"+ (props.active!=undefined ? "?property="+props.active: "")}>
                <button className="switchReport">
                 Switch to All-in-One Dashboard
                 </button>
             </Link>
             :
-            <Link href={"/collection/daily" + (props.active!=undefined ? "?property="+props.active: "" )}>
+            <Link href={"/dashboard/daily" + (props.active!=undefined ? "?property="+props.active: "" )}>
              <button className="switchReport">
                 Switch to Daily Dashboard
                 </button>
@@ -97,4 +97,4 @@ const SearchProperty = (props) => {
 
     </div>)
 }
-export default SearchProperty
+export default CollectionProperty

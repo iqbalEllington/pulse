@@ -24,7 +24,6 @@ import Cookies from "js-cookie";
 import { updateAuthToken, updateAuthToken2 } from "helper/api";
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
-
 const Login = () => {
   const dispatch = useDispatch();
   const loginInpiut = useSelector((state) => state.authReducer.loginInpiut);
@@ -98,8 +97,8 @@ const Login = () => {
   };
   async function getuserdata() {
     var response;
-
     response = await getRequest({ API: API_URLS.GET_USER });
+    console.log(response)
     var data = []
     if (await response?.status === 200) {
       if (response?.data?.redirect) {

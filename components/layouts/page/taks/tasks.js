@@ -15,7 +15,7 @@ import TagedTasks from "./tagedTasks";
 import { FaSortAmountDown } from "react-icons/fa";
 import { IoSearch } from "react-icons/io5";
 import EscapeKeyListener from "components/utility/EscapeKeyListener";
-
+import accumin from "./customfont.js"
 import jsPDF from 'jspdf';
 
 
@@ -121,7 +121,7 @@ const Tasks = ({ router }, props) => {
     const handleEscape = () => {
         setFormActive(false)
     };
-    const [hideElements, setHideElements] = useState(false);
+    const [hideElements, setHideElements] = useState(true);
     function wait(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
       }
@@ -131,7 +131,17 @@ const Tasks = ({ router }, props) => {
             setHideElements(true);
             resolve();
         });
+        // var callAddFont = function () {
+        //     this.addFileToVFS('Acumin-RPro-normal.ttf', font);
+        //     this.addFont('Acumin-RPro-normal.ttf', 'Acumin-RPro', 'normal');
+        //     };
        
+        const content = document.getElementById("grouped");
+        const contentHeight = content.scrollHeight;
+        // jsPDF.API.events.push(['addFonts', callAddFont])
+        const pdfWidth = 210; 
+        const ratio = content.offsetWidth / pdfWidth;
+        const pdfHeight = contentHeight / ratio;
         await wait(1000); 
         const customStyle = document.createElement('style');
         const doc = new jsPDF(
@@ -139,27 +149,17 @@ const Tasks = ({ router }, props) => {
                 orientation: "landscape",    
                 unit: "px",
                 autoPaging: true,
+                format: 'a4',
                 // html2canvas: { scale: 3 },
             });
-        
-        doc.html(groupedRef.current, {
-            // 'pt', 'px', 'cm', 'in'
-            // format: 'a4',
+        doc.html(content, {
+            format: 'a4',
             callback: function (doc) {
-                const pageHeight = doc.internal.pageSize.height;
-                let currentY = 10;
-                const contentHeight = groupedRef.current.offsetHeight;
-        
-                if (contentHeight > pageHeight - currentY) {
-                    doc.addPage();
-                    currentY = 30; // Reset Y position
-                }
                 doc.save('document.pdf');
-                // document.head.removeChild(customStyle);
             },
             autoPaging: true,
             html2canvas: {
-                scale: .69, // Adjust scale to shrink or expand content
+                scale: 1, // Adjust scale to shrink or expand content
             },
             
             margin: [4, 4, 14, 4],
@@ -167,8 +167,6 @@ const Tasks = ({ router }, props) => {
             x: 0, // Adjust x-axis position
             y: 0, // Adjust y-axis position
         });
-        // generatePDF(getTargetElement, options)
-        setHideElements(false);
     };
     return (
         <>
