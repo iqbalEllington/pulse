@@ -45,13 +45,14 @@ const Login = () => {
   }
   async function redirect(){
     if (userData?.role?.name === "Task Managers") {
-
-      await wait(1000); 
-      window.location.href = "/tasks";
-    } else if (userData?.id) {
-   
-      await wait(1000); 
-      window.location.href = "/dashboard";
+      router.push("/tasks")
+      // window.location.href = "/tasks";
+    } else if(userData?.role?.name === "collection"){
+      router.push("/collection")
+      // window.location.href = "/collection";
+    }else if (userData?.id) {
+      router.push("/dashboard")
+      // window.location.href = "/dashboard";
     } else {
       // Optional: Do nothing or handle the default case
     }
