@@ -18,12 +18,12 @@ import Login from "./page/login/Login";
 import { getAuthData } from "store/actions/auth/LoginAction";
 import { toast } from "react-toastify";
 import Link from "next/link";
+import Page403 from "./page/access/page403";
 
 function horizontalLayout(props) {
   const [menus, setMenus] = useState(false)
   const dispatch = useDispatch()
   const router = useRouter();
-
   const changeMenutype = (value) => {
     dispatch(setIsMini(value))
   }
@@ -77,33 +77,43 @@ function horizontalLayout(props) {
       {(props.isLogedIn == false || props.isLogedIn == undefined) ? <>
         <Login />
       </> : <>
-        <Loader />
-        <Hsidebar changeMenutype={changeMenutype} active={props.activated} menus={menus} />
+        {router.asPath.split('/')[1] != "collection" && !props.userData.role.name.includes("collection") ?
+        <>
+          <Hsidebar changeMenutype={changeMenutype} active={props.activated} menus={menus} />
+          <Page403 />
+          <FooterMain />
+          </>
+          :
+        <>    
+          <Loader />
+          <Hsidebar changeMenutype={changeMenutype} active={props.activated} menus={menus} />
 
-        {/* <Hrhea der changeMenutype={changeMenutype} refreshmenu={refreshmenu} userData={props.userData} SetActive={SetActives} active={props.activated} /> */}
-        <main className="main-content el-dashbaord menumini">
-          <Head>
-            <Link legacyBehavior rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />            {/* <Link legacyBehavior rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+          {/* <Hrhea der changeMenutype={changeMenutype} refreshmenu={refreshmenu} userData={props.userData} SetActive={SetActives} active={props.activated} /> */}
+          <main className="main-content el-dashbaord menumini">
+            <Head>
+              <Link legacyBehavior rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />            {/* <Link legacyBehavior rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
            */}
-          </Head>
-          {/* <div className={`iq-banner default position-relative `}> */}
-          {props.children}
-          {/* </div> */}
-        </main>
+            </Head>
+            {/* <div className={`iq-banner default position-relative `}> */}
+            {props.children}
+            {/* </div> */}
+          </main>
 
-        <ToastContainer
-          position="top-right"
-          autoClose={3000}
-          hideProgressBar={false}
-          newestOnTop={true}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="light"
-        />
-        <FooterMain />
+          <ToastContainer
+            position="top-right"
+            autoClose={3000}
+            hideProgressBar={false}
+            newestOnTop={true}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+          />
+          <FooterMain />
+        </>
+}
       </>
       }
     </>

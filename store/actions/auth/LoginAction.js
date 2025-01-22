@@ -171,7 +171,6 @@ function getLoginData() {
 
   let loginData = Cookies.get("userDetail");
   let token = Cookies.get("token");
-
   if (
     loginData !== null &&
     loginData !== undefined &&
