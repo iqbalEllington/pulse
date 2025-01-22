@@ -121,7 +121,7 @@ const Tasks = ({ router }, props) => {
     const handleEscape = () => {
         setFormActive(false)
     };
-    const [hideElements, setHideElements] = useState(true);
+    const [hideElements, setHideElements] = useState(false);
     function wait(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
       }
