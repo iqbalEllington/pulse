@@ -77,7 +77,7 @@ function horizontalLayout(props) {
       {(props.isLogedIn == false || props.isLogedIn == undefined) ? <>
         <Login />
       </> : <>
-        {router.asPath.split('/')[1] != "collection" && !props.userData.role.name.includes("collection") ?
+        {router.asPath.split('/')[1] != "collection" && props.userData.role.name.includes("collection") ?
         <>
           <Hsidebar changeMenutype={changeMenutype} active={props.activated} menus={menus} />
           <Page403 />
