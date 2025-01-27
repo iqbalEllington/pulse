@@ -79,7 +79,6 @@ const Login = () => {
         const result = dispatch(loginAction(e, async (response, user) => {
           await response; // Ensure response is awaited
           setErrorMessage(response);
-          console.log(user?.email, user, "user?.emailuser?.emailuser?.emailuser?.emailuser?.email")
           if (user?.email) {
             redirect();
             // return result;
