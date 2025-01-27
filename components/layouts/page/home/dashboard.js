@@ -109,6 +109,7 @@ const index = ({ router }, props) => {
       }
     } else if (response?.status === 401) {
       toast("Unauthorize access please re-login.");
+      location.reload();
     } else {
       toast(response?.data?.error || "Some thing went wrong.");
     }
@@ -125,6 +126,7 @@ const index = ({ router }, props) => {
       }
     } else if (response?.status === 401) {
       toast("Unauthorize access please re-login.");
+      location.reload();
     } else {
       toast(response?.data?.error || "Some thing went wrong.");
     }
@@ -137,6 +139,7 @@ const index = ({ router }, props) => {
       setUserDetails(response.data)
     } else if (response?.status === 401) {
       toast("Unauthorize access please re-login.");
+      location.reload();
     } else {
       toast(response?.data?.error || "Some thing went wrong.");
     }
