@@ -63,18 +63,18 @@ export const postRequestNoAuth = ({ API = "", DATA = {}, HEADER = {}, PAYLOAD, C
   });
 };
 
-export const updateAuthToken = (token = "") => {
-  instance.defaults.headers = {
-    ...instance.defaults.headers,
-    ...{ Authorization: `bearer ${token}` },
-  };
-};
-export const updateAuthToken2 = (token = "") => {
-  instance2.defaults.headers = {
-    ...instance.defaults.headers,
-    ...{ Authorization: `bearer ${token}` },
-  };
-};
+// export const updateAuthToken = (token = "") => {
+//   instance.defaults.headers = {
+//     ...instance.defaults.headers,
+//     ...{ Authorization: `bearer ${token}` },
+//   };
+// };
+// export const updateAuthToken2 = (token = "") => {
+//   instance2.defaults.headers = {
+//     ...instance.defaults.headers,
+//     ...{ Authorization: `bearer ${token}` },
+//   };
+// };
 export const postRequest_cms = ({ API = "", DATA = {}, HEADER = {}, PAYLOAD }) => {
   return new Promise((resolve, reject) => {
     instance

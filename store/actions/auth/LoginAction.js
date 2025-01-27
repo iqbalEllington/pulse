@@ -16,86 +16,55 @@ export const handleLoginInput = (name, value) => (dispatch) => {
   };
   dispatch({ type: Types.CHANGE_LOGIN_INPUT_FIELD, payload: formData });
 };
-
-//Login
-export const loginAction = (loginData, callback) => (dispatch) => {
+// Updated loginAction for better callback handling
+export const loginAction = (loginData, callback) => async (dispatch) => {
   let response = {
     userData: {},
-    tokenData: {},
+    tokenData: "",
     isLoggedIn: false,
-    isLogging: false,
-    loginMessage: "",
     isLoading: true,
   };
+
   const URL = `${process.env.NEXT_PUBLIC_API_SERVER_URL}api/auth/verify-otp`;
+
   try {
     const options = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(loginData)
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(loginData),
     };
-    fetch(`${URL}`, options)
-      .then(response => response.json())
-      .then(response => {
-        const data = response;
-    
-        if (data?.error?.status) {
-          dispatch({ type: Types.AUTH_LOGIN_CHECK, payload: false });
-          callback(data?.error?.message, false)
-          return 
-        } else {
-          if (data == undefined) {
-            dispatch({ type: Types.AUTH_LOGIN_CHECK, payload: false });
-            callback(false, false)
-            return
-          } else {
-            response.userData = data.user;
-            response.tokenData = data.token;
-            response.isLoading = false;
-            response.isLoggedIn = true;
-            response.loginMessage = "Success";
-            response.isLogging = true;
-            Cookies.set("userDetail", JSON.stringify(data.user))
-            Cookies.set("token", data.token, { secure: true, sameSite: 'Strict', expires: 14 });
-            dispatch({ type: Types.AUTH_LOGIN_CHECK, payload: response });
-            if (callback) {
-              callback(data.message, data.user);
-              return
-            } else {
-              callback(false, false)
-              return
-            }
-          }
-        }
 
-      })
-      .catch(error => {
-        const responseLog = error;
-        response.isLoading = false;
-        if (typeof responseLog !== undefined) {
-          if (responseLog?.status == 400) {
-            showToast("error", "Email or Password is not matching");
-          } else {
-            showToast("error", "something Went Wrong Please try again later");
-          }
-          dispatch({ type: Types.AUTH_LOGIN_CHECK, payload: response });
-          callback(false, false)
-          return
-        } else {
-          showToast("error", "something Went Wrong Please try again later");
-          dispatch({ type: Types.AUTH_LOGIN_CHECK, payload: false });
-          callback(false, false)
-          return
-        }
-      });
+    const res = await fetch(URL, options);
+    const data = await res.json();
+
+    if (data?.error?.status) {
+      dispatch({ type: Types.AUTH_LOGIN_CHECK, payload: false });
+      callback(data?.error?.message, false);
+    } else if (!data) {
+      dispatch({ type: Types.AUTH_LOGIN_CHECK, payload: false });
+      callback(false, false);
+    } else {
+      // Successful login
+      response.userData = data.user;
+      response.tokenData = data.token;
+      response.isLoggedIn = true;
+      response.isLoading = false;
+
+      Cookies.set("userDetail", JSON.stringify(data.user));
+      Cookies.set("token", data.token, { secure: true, sameSite: "Strict", expires: 14 });
+
+      dispatch({ type: Types.AUTH_LOGIN_CHECK, payload: response });
+
+      if (callback) {
+        callback(data.message, data.user);
+      }
+    }
   } catch (error) {
-    response.isLoading = false;
-    showToast("error", "Network Error, Please Fix this !");
+    console.error("Error during login:", error);
+    showToast("error", "Network Error, Please try again later.");
     dispatch({ type: Types.AUTH_LOGIN_CHECK, payload: false });
-    callback(false, false)
-    return
+    callback(false, false);
   }
-  return
 };
 
 export const emptyDispatch = () => (dispatch) => {

@@ -30,6 +30,7 @@ const Login = () => {
   const isLoading = useSelector((state) => state.authReducer.isLoading);
   const [isOtpPressed, setIsOtpPressed] = useState(false)
   const isLogging = useSelector((state) => state.authReducer.isLogging);
+  const tokenData = useSelector((state) => state.authReducer.tokenData);
   const userData = useSelector((state) => state.authReducer.userData);
   const [error, setError] = useState(false)
   const [isOtp, SetIsOtp] = useState(false)
@@ -43,23 +44,23 @@ const Login = () => {
   function wait(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
-  async function redirect(){
-    if (userData?.role?.name === "Task Managers") {
-      router.push("/tasks")
-      // window.location.href = "/tasks";
-    } else if(userData?.role?.name === "collection"){
-      router.push("/collection")
-      // window.location.href = "/collection";
-    }else if (userData?.id) {
-      router.push("/dashboard")
-      // window.location.href = "/dashboard";
+  async function redirect() {
+    // Ensure tokenData and userData are valid before routing
+    if (tokenData && userData?.role?.name) {
+      if (userData.role.name === "Task Managers") {
+        router.push("/tasks");
+      } else if (userData.role.name === "collection") {
+        router.push("/collection");
+      } else {
+        router.push("/dashboard");
+      }
     } else {
-      // Optional: Do nothing or handle the default case
+      console.error("Invalid user or token data, unable to redirect.");
     }
   }
   useEffect(() => {
     redirect();
-  }, [userData]);
+  }, []);
   // const { register, handleSubmit, errors, setValue } = useForm();
   useEffect(() => {
     if (router?.pathname == "/login") {
@@ -72,28 +73,45 @@ const Login = () => {
     dispatch(handleLoginInput(name, value));
   };
 
-  const handleLogin = (e) => {
-    if (isOtp == true) {
-      dispatch(loginAction(e, async (response, user) => {
-        setErrorMessage(response)
-        await response
-        if (user.email != undefined) {
-          await new Promise((resolve) => {
-            updateAuthToken(response);
-            updateAuthToken2(response)
-            resolve();
-          });
-          setError(false)
-        } else {
-          if (user == false) {
-            setError("Username or password is incorrect")
+  const handleLogin = async (e) => {
+    try {
+      if (isOtp) {
+        const result = dispatch(loginAction(e, async (response, user) => {
+          await response; // Ensure response is awaited
+          setErrorMessage(response);
+          console.log(user?.email, user, "user?.emailuser?.emailuser?.emailuser?.emailuser?.email")
+          if (user?.email) {
+            redirect();
+            // return result;
+            if (user.role.name === "Task Managers") {
+              router.push("/tasks");
+            } else if (user.role.name === "collection") {
+              router.push("/collection");
+            } else {
+              router.push("/dashboard");
+            }
+            // try {
+            //   // Sequential token updates
+            //   // await updateAuthToken(response.token);
+            //   // await updateAuthToken2(response.token);
+            //   // Redirect after tokens are updated
+            //   redirect();
+            //   setError(false);
+            // } catch (error) {
+            //   console.error("Error during authentication:", error);
+            // }
+          } else {
+            setError("Username or password is incorrect");
+            toast("Username or password is incorrect");
+            return
           }
-          toast("Username or password is incorrect")
-        }
-      }));
-    } else {
-      setIsOtpPressed(true)
-      Login2factor(e)
+        }));
+      } else {
+        setIsOtpPressed(true);
+        Login2factor(e);
+      }
+    } catch (error) {
+      console.error("Error during authentication:", error);
     }
   };
   async function getuserdata() {
@@ -108,7 +126,6 @@ const Login = () => {
         window.location.href = "/dashboard"
       }
       // window.location.href = response?.data?.data?.redirect
-      console.log(response?.data?.redirect, "response.dataresponse.dataresponse.data")
     } else if (response?.status === 401) {
       toast("Unauthorize access please re-login.");
     } else {
