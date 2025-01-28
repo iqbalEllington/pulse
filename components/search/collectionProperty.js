@@ -47,7 +47,7 @@ const CollectionProperty = (props) => {
                 <input onFocus={() => Setisfocus(true)} onChange={(e) => filterSearch(e.target.value)} placeholder="Search" type="text" />
                 <IoSearch />
             </div>
-            <Link className="list-view" href="/dashboard/listview"><FaList /><span>List View</span></Link>
+            <Link className="list-view" href="/collection/listview"><FaList /><span>List View</span></Link>
             <span className="result-count">Properties {property?.data?.length}</span>
         </div>
         {(keyword || isfocus) &&
@@ -58,7 +58,7 @@ const CollectionProperty = (props) => {
                     </span>
                     {property?.data?.map((property) => {
                         return <div className="property-list">
-                            <Link href={"/dashboard" + (from != false ? "/" + from + "?property=" + property.id : "?property=" + property.id)}>
+                            <Link href={"/collection" + (from != false ? "/" + from + "?property=" + property.id : "?property=" + property.id)}>
                                 <div className="search-l-body" onClick={() => { props.activateProeprty(from == false ? property.id : property.id), props.setloop(false), Setisfocus(false), SetKeyowrd("") }}>
                                     <div className="imageholder"><img src={process.env.NEXT_PUBLIC_IMAGE_URL + (property.attributes?.featuredImage?.data?.attributes?.url ? property.attributes?.featuredImage?.data?.attributes?.formats?.small?.url : "/uploads/small_imagenotfound_2b380da6d1.jpg")}></img></div>
                                     <div className="titles">
