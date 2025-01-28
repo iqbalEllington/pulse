@@ -82,13 +82,13 @@ const SearchProperty = (props) => {
             </div>
         }
         {from == "daily" ?
-            <Link href={"/collection"+ (props.active!=undefined ? "?property="+props.active: "")}>
+            <Link href={"/dashboard"+ (props.active!=undefined ? "?property="+props.active: "")}>
                <button className="switchReport">
                 Switch to All-in-One Dashboard
                 </button>
             </Link>
             :
-            <Link href={"/collection/daily" + (props.active!=undefined ? "?property="+props.active: "" )}>
+            <Link href={"/dashboard/daily" + (props.active!=undefined ? "?property="+props.active: "" )}>
              <button className="switchReport">
                 Switch to Daily Dashboard
                 </button>

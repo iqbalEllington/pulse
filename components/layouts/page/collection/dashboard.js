@@ -1,4 +1,4 @@
-import CollectionProperty from "components/search/property";
+import CollectionProperty from "components/search/collectionProperty";
 import { getRequest } from "helper/api";
 import React, { Component, useState, useEffect } from "react";
 // import ProfileSideBar from "../myprofile/profileSideBar";
