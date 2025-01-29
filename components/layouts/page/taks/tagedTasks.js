@@ -117,6 +117,13 @@ const tagedTasks = (props) => {
         response = await getRequest({ API: API_URLS.GET_TASKS + "?populate[]=responsible_leads&populate[]=projects&populate[]=updates" + filter });
 
         if (await response?.status === 200) {
+          
+            // const data = await response.json();
+
+            // Sort updates in descending order by date
+            response.data.data.forEach(task => {
+              task.attributes.updates.sort((a, b) => new Date(b.date) - new Date(a.date)); // Descending order
+            })
             setTasks(response.data)
             SetLoading(false)
         } else if (response?.status === 401) {
@@ -442,11 +449,11 @@ const tagedTasks = (props) => {
                                                     <ul>
                                                         {task.attributes?.updates.map((value) => {
                                                             return <li>
-                                                                <span className="date">
-                                                                    {moment(value?.date).format('DD MMM YYYY')}:
-                                                                </span>
+                                                            
                                                                 <span>
-                                                                    &nbsp;{value?.update}
+                                                                <b>
+                                                                    {moment(value?.date).format('DD MMM YYYY')}:
+                                                                </b>  &nbsp;{value?.update}
                                                                 </span>
                                                             </li>
                                                         })}

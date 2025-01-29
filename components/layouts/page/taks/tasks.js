@@ -126,23 +126,16 @@ const Tasks = ({ router }, props) => {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
     const handleGeneratePdf = async () => {
-        // Hide elements before PDF generation
         await new Promise((resolve) => {
             setHideElements(true);
             resolve();
         });
-        var callAddFont = function () {
-            this.addFileToVFS('Acumin-RPro-normal.ttf', font);
-            this.addFont('Acumin-RPro-normal.ttf', 'AcuminBold', 'normal');
-        };
-
         const content = document.getElementById("grouped");
         const contentHeight = content.scrollHeight;
-        jsPDF.API.events.push(['addFonts', callAddFont])
         const pdfWidth = 210;
         const ratio = content.offsetWidth / pdfWidth;
         const pdfHeight = contentHeight / ratio;
-        await wait(1000);
+        await wait(4000);
         const customStyle = document.createElement('style');
         const doc = new jsPDF(
             {
