@@ -12,9 +12,15 @@ import UpdateForm from "./updateForm";
 import LineProgress from "components/modals/LineProgress";
 import { Dropdown } from "react-bootstrap";
 import { toast } from "react-toastify";
+import ProjectForm from "./projectForm";
 
 
 const tagedTasks = (props) => {
+    const [popup, setPopup] = useState(false)
+    const Closepopup = async (e) => {
+        setPopup(false);
+    };
+
     const [tasks, setTasks] = useState({})
     const gettaskWhatsapp = (mobile, project, task) => {
         return "https://wa.me/" + mobile + "?text=Hi%2C%0A%0AI%20am%20following%20up%20on%20the%20 *" + project + "* %2C%20specifically%20the%20 *" + task + "* %20Kindly%20share%20a%20status%20update%20at%20the%20earliest.%0A%0AThank%20you."
@@ -232,6 +238,11 @@ const tagedTasks = (props) => {
         }
 
     }
+    function projectUpdateForm(id) {
+        setPopupValue(id)
+        setPopup("Project")
+    }
+    const [popupValue, setPopupValue] = useState(8)
     useEffect(() => {
         getTagedTask(props.tag)
     }, [props.tag])
@@ -270,7 +281,7 @@ const tagedTasks = (props) => {
             <div className="task-list-container">
                 <div className="header">
                     <h3 className="ontoptitle" >
-                        {props.tag.keyword}
+                        Tasks & Alerts for {props.tag.keyword}
                     </h3>
                 </div>
                 <div className="body">
@@ -329,7 +340,7 @@ const tagedTasks = (props) => {
                                             </h4>
                                         </td>
                                         <td className="projectName">
-                                            <div>
+                                            <div onDoubleClick={() => projectUpdateForm(task.attributes.projects?.data?.[0]?.id)}>
                                                 <label className="mobile-view">Project: </label>
                                                 {task.attributes.projects?.data?.[0]?.attributes?.name}
                                                 {task.attributes.projects?.data?.[0]?.attributes?.plotNum && <div>Plot No: {task.attributes.projects?.data?.[0]?.attributes?.plotNum}</div>}
@@ -352,11 +363,11 @@ const tagedTasks = (props) => {
                                                     </Dropdown.Menu>
                                                 </Dropdown>
                                                 :
-                                                <div>
+                                                <div className="status-due">
                                                     <span style={{ color: "black" }}>{task.attributes?.status}</span>
                                                     <div>
-                                                        <label className="mobile-view">Due Date</label>
-                                                        <span>{moment(task.attributes.dueDate).format('DD MMM YYYY')}</span>
+                                                        <label className="title">Estimated Date</label>
+                                                        <span className="bold">{moment(task.attributes.dueDate).format('DD MMM YYYY')}</span>
                                                     </div>
                                                 </div>
                                             }
@@ -431,11 +442,11 @@ const tagedTasks = (props) => {
                                                     <ul>
                                                         {task.attributes?.updates.map((value) => {
                                                             return <li>
-                                                                <span>
-                                                                    {moment(value?.date).format('DD MMM YYYY')}
+                                                                <span className="date">
+                                                                    {moment(value?.date).format('DD MMM YYYY')}:
                                                                 </span>
                                                                 <span>
-                                                                    {value?.update}
+                                                                    &nbsp;{value?.update}
                                                                 </span>
                                                             </li>
                                                         })}
@@ -465,6 +476,18 @@ const tagedTasks = (props) => {
                         }
 
                     </table>
+                </div>
+                <div className="projectEdit">
+                    <div className={popup != false ? "popup active" : "popup notActive"}>
+
+                        {popup == "Project" &&
+                            <>
+                                <div className="col-12 row">
+                                    <ProjectForm setForceload={props.setForceload} id={popupValue} Closepopup={Closepopup} />
+                                </div>
+                            </>
+                        }
+                    </div>
                 </div>
             </div>
         </>

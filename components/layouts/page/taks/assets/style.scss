@@ -1716,12 +1716,48 @@
     page-break-inside: avoid; // Prevent breaking within elements
     page-break-after: always;
 }
-
+.projectEdit .formbox table tbody tr td{
+    padding-left: 0px;
+    padding-right: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    display: block;
+    width: 100%;
+    input{
+        display: block;
+        width: 100%;
+    }
+    .react-datepicker-wrapper{
+        width: 100%;
+    }
+}
 .White-Theme {
-    background: #FBFBFB;
+    background: #DEECF9;
     width: 620px;
     margin: auto;
-
+    padding: 0px;
+    font-family: Helvetica;
+    .header-top{
+        background: white;
+        padding-top: 6px !important;
+        padding-bottom: 6px !important;
+        img{
+            height: 40px;
+        }
+        .asof{
+            text-align: right;
+            h3{
+                color: black;
+                font-size: 12px;
+                padding-bottom: 0px;
+                margin-bottom: 0px;
+            }
+            p{
+                font-size: 11px;
+            }
+        }
+    }
+  
     .task-list-container {
         .header {
             height: 40px;
@@ -1730,28 +1766,39 @@
             margin: auto;
             margin-bottom: 0px !important;
             padding: 0px !important;
+            line-height: 0px;
+            text-align: center  !important;
+            align-items: center;
+            justify-content: center;
             h3 {
                 font-size: 12px;
                 margin-bottom: 0px !important;
-                padding: 0px !important;
+                padding-top: 20px !important;
                 color: #000;
+                text-align: center !important;
             }
         }
     }
-
+    .pages{
+        padding: 5px;
+    }
     .body {
         overflow: hidden;
+        padding: 10px;
+        background: #fff;
+    }
+    .ontoptitle{
+        font-family: Helvetica;
     }
 
     .tasks-list {
         width: 580px;
         margin: auto;
         background: #FFFFFF;
-        border: 1px solid #E7E6E0;
         thead {
             padding-bottom: 10px !important;
         }
-
+        padding: 10px;
         tr {
             th {
                 background: #fff !important;
@@ -1759,22 +1806,31 @@
                 color: black;
                 font-weight: bold;
                 border-bottom: 1px solid #E7E6E0 !important;
-                font-size: 12px;
-                padding: 10px !important
+                font-size: 8px;
+                padding: 10px 0px 5px 0px !important
             }
-
+            td[rowspan] {
+                vertical-align: top;
+                text-align: left;
+              }
+            border-bottom: 1px solid #cfcfcf;
             td {
+                vertical-align: top;
+                text-align: left;
                 word-wrap: break-word;
                 white-space: wrap;
                 background: white !important;
                 border: 0px !important;
-                border-right: 1px solid #DEDEDE !important;
-                font-size: 12px;
-                padding: 10px !important;
+                border-bottom: 1px solid #E7E6E0 !important;
+                // border-right: 1px solid #DEDEDE !important;
+                font-size: 8px;
+                padding: 4px 0px !important;
                 &:last-child {
                     border-right: 0px;
                 }
-
+                .mobile-view{
+                    display: none;
+                }
                 h3,
                 h4,
                 span,
@@ -1784,13 +1840,59 @@
                     background: white;
                     word-wrap: break-word;
                     white-space: wrap;
-                    font-size: 12px;
+                    font-size: 8px;
                 }
-
+                ul{
+                    list-style: none;
+                    padding: 0px;
+                    margin: 0px;
+                    li{
+                        padding-bottom: 6px;
+                        .date{
+                            font-weight: bold;
+                            font-weight: 900;
+                            font-family: Helvetica-Bold;
+                        }
+                    }
+                }
                 &.taskTitle {
                     width: 187px;
                 }
+                &.status{
+                    min-width: 88px !important;
+    max-width: 88px !important;
+    width: 88px !important;
+                    .mobile-view{
+                        display: none;
+                    }
+                }
+                 &.projectName {
+                    width: 100px;
+                    min-width: 100px;
+                }
 
+                .status-due{
+                    background: #82E2AA;
+                    width: 80px;
+                    padding: 7px;
+                    border-radius: 7px;
+                    span{
+                        display: block;
+                        background: #82E2AA;
+                        &:first-child{
+                            border-bottom: 1px solid #C1F0D5;
+                            padding-bottom: 2px;
+                            margin-bottom: 2px;
+                        }
+                        &.bold{
+                            font-family: Helvetica-Bold;
+                        }
+                    }
+                    .title{
+                        background: #82E2AA;
+                        display: block;
+                    }
+                }
                 &.responsesItem {
                     width: 160px;
 
@@ -1805,22 +1907,22 @@
                 }
             }
 
-            &:nth-child(odd) {
-                td {
-                    background: #E7E6E0 !important;
+            // &:nth-child(odd) {
+            //     td {
+            //         // background: #E7E6E0 !important;
 
-                    h3,
-                    h4,
-                    span,
-                    label,
-                    div {
-                        color: black !important;
-                        background: #E7E6E0;
-                        word-wrap: break-word;
-                        white-space: wrap;
-                    }
-                }
-            }
+            //         h3,
+            //         h4,
+            //         span,
+            //         label,
+            //         div {
+            //             color: black !important;
+            //             // background: #E7E6E0;
+            //             word-wrap: break-word;
+            //             white-space: wrap;
+            //         }
+            //     }
+            // }
         }
     }
 

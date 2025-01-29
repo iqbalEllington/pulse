@@ -124,29 +124,29 @@ const Tasks = ({ router }, props) => {
     const [hideElements, setHideElements] = useState(false);
     function wait(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
-      }
+    }
     const handleGeneratePdf = async () => {
         // Hide elements before PDF generation
         await new Promise((resolve) => {
             setHideElements(true);
             resolve();
         });
-        // var callAddFont = function () {
-        //     this.addFileToVFS('Acumin-RPro-normal.ttf', font);
-        //     this.addFont('Acumin-RPro-normal.ttf', 'Acumin-RPro', 'normal');
-        //     };
-       
+        var callAddFont = function () {
+            this.addFileToVFS('Acumin-RPro-normal.ttf', font);
+            this.addFont('Acumin-RPro-normal.ttf', 'AcuminBold', 'normal');
+        };
+
         const content = document.getElementById("grouped");
         const contentHeight = content.scrollHeight;
-        // jsPDF.API.events.push(['addFonts', callAddFont])
-        const pdfWidth = 210; 
+        jsPDF.API.events.push(['addFonts', callAddFont])
+        const pdfWidth = 210;
         const ratio = content.offsetWidth / pdfWidth;
         const pdfHeight = contentHeight / ratio;
-        await wait(1000); 
+        await wait(1000);
         const customStyle = document.createElement('style');
         const doc = new jsPDF(
             {
-                orientation: "landscape",    
+                orientation: "landscape",
                 unit: "px",
                 autoPaging: true,
                 format: 'a4',
@@ -161,12 +161,13 @@ const Tasks = ({ router }, props) => {
             html2canvas: {
                 scale: 1, // Adjust scale to shrink or expand content
             },
-            
-            margin: [4, 4, 14, 4],
-          
+
+            margin: [0, 0, 14, 0],
+
             x: 0, // Adjust x-axis position
             y: 0, // Adjust y-axis position
         });
+        setHideElements(false)
     };
     return (
         <>
@@ -294,6 +295,17 @@ const Tasks = ({ router }, props) => {
                             </div>
 
                             <div id="grouped" className={!hideElements ? "" : "White-Theme"} ref={groupedRef} >
+                                {hideElements &&
+                                    <div className="header-top row m-0 p-0">
+                                        <div className="col-6">
+                                            <img src="https://strapi.ellington.ae/uploads/ellington_black_logo_9efa3b5ef1.jpg" />
+                                        </div>
+                                        <div className="col-6 text-right asof">
+                                            <h3>Tasks & Alerts from <b>Pulse</b></h3>
+                                            <p>as of {moment().format('DD MMM YYYY')}</p>
+                                        </div>
+                                    </div>
+                                }
                                 {sort == "Date" &&
                                     <>
                                         <div className="pages">
@@ -320,12 +332,12 @@ const Tasks = ({ router }, props) => {
                                                     forceLoad: { forceLoad },
                                                     filterValue: value
                                                 }}
-                                                hideElements={hideElements}
+                                                    hideElements={hideElements}
                                                     SetFormaction={SetFormaction}
                                                     setForceload={setForceload}
                                                     SetUpdateData={SetUpdateData}
                                                 />
-                                                 <div className="page-break"></div>
+                                                <div className="page-break"></div>
                                             </div>
                                         })}
                                     </>}
@@ -343,7 +355,7 @@ const Tasks = ({ router }, props) => {
                                                             forceLoad: { forceLoad },
                                                             filterValue: projects?.data[value]?.["attributes"]?.["name"],
                                                         }}
-                                                        hideElements={hideElements}
+                                                            hideElements={hideElements}
                                                             SetFormaction={SetFormaction}
                                                             setForceload={setForceload}
                                                             SetUpdateData={SetUpdateData}
@@ -363,7 +375,7 @@ const Tasks = ({ router }, props) => {
                                                 forceLoad: { forceLoad },
                                                 filterValue: "Priority",
                                             }}
-                                            hideElements={hideElements}
+                                                hideElements={hideElements}
                                                 SetFormaction={SetFormaction}
                                                 setForceload={setForceload}
                                                 SetUpdateData={SetUpdateData}
@@ -374,7 +386,6 @@ const Tasks = ({ router }, props) => {
                         </div>
                     </div>
                 </div>
-
             </div>
         </>
     );

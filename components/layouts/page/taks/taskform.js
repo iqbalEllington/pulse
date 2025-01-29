@@ -163,7 +163,6 @@ const Taskform = (props) => {
             let formPayload = {
                 data: formDataProcess
             }
-            console.log(formPayload)
             // if (formData.photos) {
             //     formPayload.append("files.photos", formData.photos); // Strapi expects "files.[fieldname]"
             // }
@@ -368,7 +367,7 @@ const Taskform = (props) => {
                                 {popup == "project" &&
                                     <>
                                         <div className="col-12 row">
-                                            <ProjectForm popupValue={popupValue} Closepopup={Closepopup} />
+                                            <ProjectForm id={false} popupValue={popupValue} Closepopup={Closepopup} />
                                         </div>
                                     </>
                                 }
